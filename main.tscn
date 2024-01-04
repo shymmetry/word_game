@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://baa8d6aagspdl"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_jlh2b"]
+[ext_resource type="Script" path="res://TileGrid.gd" id="2_6t4qq"]
+[ext_resource type="Script" path="res://ScoreArea.gd" id="3_334nt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
+size = Vector2(430, 430)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fqtkm"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4v2q"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_j1hmb"]
+font_size = 24
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_jlh2b")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+clip_contents = true
+offset_left = 25.0
+offset_top = 265.0
+offset_right = 455.0
+offset_bottom = 695.0
+mouse_filter = 2
+
+[node name="TileGrid" type="Area2D" parent="ReferenceRect"]
+z_index = 2
+script = ExtResource("2_6t4qq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReferenceRect/TileGrid"]
+position = Vector2(215, 215)
+shape = SubResource("RectangleShape2D_cgcgr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 480.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[node name="ScoreArea" type="Node2D" parent="."]
+script = ExtResource("3_334nt")
+
+[node name="Score" type="Label" parent="ScoreArea"]
+offset_left = 35.0
+offset_top = 180.0
+offset_right = 106.0
+offset_bottom = 214.0
+text = "Score:"
+label_settings = SubResource("LabelSettings_fqtkm")
+
+[node name="ScoreNumber" type="Label" parent="ScoreArea"]
+offset_left = 175.0
+offset_top = 180.0
+offset_right = 215.0
+offset_bottom = 214.0
+text = "0"
+label_settings = SubResource("LabelSettings_l4v2q")
+
+[node name="Swaps" type="Label" parent="ScoreArea"]
+offset_left = 35.0
+offset_top = 220.0
+offset_right = 167.0
+offset_bottom = 254.0
+text = "Swaps Left:"
+label_settings = SubResource("LabelSettings_fqtkm")
+
+[node name="SwapsNumber" type="Label" parent="ScoreArea"]
+offset_left = 175.0
+offset_top = 220.0
+offset_right = 215.0
+offset_bottom = 254.0
+text = "0"
+label_settings = SubResource("LabelSettings_l4v2q")
+
+[node name="Words" type="Label" parent="ScoreArea"]
+offset_left = 240.0
+offset_top = 35.0
+offset_right = 445.0
+offset_bottom = 250.0
+label_settings = SubResource("LabelSettings_j1hmb")
+horizontal_alignment = 2
+vertical_alignment = 2
