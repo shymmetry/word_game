@@ -19,7 +19,7 @@ font_size = 24
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jlh2b")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="."]
+[node name="TileGridContainer" type="ReferenceRect" parent="."]
 clip_contents = true
 offset_left = 25.0
 offset_top = 265.0
@@ -27,11 +27,11 @@ offset_right = 455.0
 offset_bottom = 695.0
 mouse_filter = 2
 
-[node name="TileGrid" type="Area2D" parent="ReferenceRect"]
+[node name="TileGrid" type="Area2D" parent="TileGridContainer"]
 z_index = 2
 script = ExtResource("2_6t4qq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ReferenceRect/TileGrid"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileGridContainer/TileGrid"]
 position = Vector2(215, 215)
 shape = SubResource("RectangleShape2D_cgcgr")
 

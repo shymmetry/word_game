@@ -10,7 +10,7 @@ const tile_size = 60
 const padding = 10
 const min_word_length = 4
 
-var letter_picker = []
+var letter_picker_freq_total = 0
 var words = EnglishDict.new().words
 var tiles = []
 var exploding_points = {}
@@ -21,11 +21,8 @@ var idle = false
 func _init():
 	# Populate letter probability selector
 	for letter in Letters.letter_freq:
-		var letter_array = []
-		var freq = ceil(Letters.letter_freq[letter])
-		for i in range(0, freq):
-			letter_array.append(letter)
-		letter_picker += letter_array
+		var freq = Letters.letter_freq[letter]
+		letter_picker_freq_total += freq
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,6 +49,7 @@ var swap_position = null
 var swap_direction = null
 
 func _input_event(viewport, event, shape_idx):
+	# Handle mouse for picking up a tile
 	if event is InputEventMouseButton:
 		var can_swap = idle and $"../../ScoreArea".can_swap()
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and can_swap:
@@ -60,7 +58,7 @@ func _input_event(viewport, event, shape_idx):
 			lifted_position = lifted.position
 
 func _unhandled_input(event):
-	# Handle mouse down
+	# Handle mouse for putting down a tile
 	if event is InputEventMouseButton and not event.pressed:
 		if !swap_tile: return
 		var xdif = get_local_mouse_position().x - lifted_point.x
@@ -84,7 +82,7 @@ func _unhandled_input(event):
 		lifted = null; lifted_point = null; lifted_position = null
 		swap_tile = null; swap_position = null; swap_direction = null
 	
-	# Handle mouse movement
+	# Handle mouse movement for dragging tiles
 	if lifted and event is InputEventMouseMotion:
 		var xdif = get_local_mouse_position().x - lifted_point.x
 		var ydif = get_local_mouse_position().y - lifted_point.y
@@ -142,7 +140,6 @@ func remove_all_words():
 	var strs = []
 	exploding_points = {}
 	for word in found_words:
-		print(word.str)
 		strs.append(word.str)
 		$"../../ScoreArea".score_word(word.str)
 		for point in word.points:
@@ -156,6 +153,7 @@ func remove_all_words():
 			exploding_tiles_done += 1
 			tiles[point.x][point.y] = null
 	else:
+		# The effective end of the word checking loop.
 		idle = true
 
 func explode_finished():
@@ -171,6 +169,8 @@ func explode_finished():
 		drop_tiles(exploding_points, new_tiles)
 
 func populate_tiles(removed_points: Dictionary):
+	# Adds new tiles for each given removed point. The created tiles are placed
+	# in new negative y rows.
 	var col_totals = []; col_totals.resize(cols); col_totals.fill(0)
 	for removed_point in removed_points:
 		col_totals[removed_point.x] += 1
@@ -231,6 +231,7 @@ func drop_finished():
 		remove_all_words()
 
 func get_all_words():
+	# Gets all the words on the board starting from any letter
 	var found = []
 	for col in range(0, cols):
 		for row in range(0, rows):
@@ -240,6 +241,8 @@ func get_all_words():
 	return found
 
 func get_word(x: int, y: int, xdif: int, ydif: int):
+	# Gets the longest word starting at a given point and going in a given 
+	# direction. If no word is found null is returned.
 	var str = ""
 	var points = []
 	var xrange 
@@ -278,7 +281,16 @@ func is_word(word: String):
 	return words.has(word.to_lower())
 
 func rand_char():
-	return letter_picker[randi() % len(letter_picker)]
+	var rand_num = randi() % letter_picker_freq_total
+	var sum = 0
+	var selected_letter = "?"
+	for letter in Letters.letter_freq:
+		sum += Letters.letter_freq[letter]
+		if sum >= rand_num:
+			selected_letter = letter
+			break
+	
+	return selected_letter
 
 func create_tile(col: int, row: int, new: bool = false):
 	var tile = tile_scene.instantiate()
@@ -289,7 +301,9 @@ func create_tile(col: int, row: int, new: bool = false):
 	else: y = padding*(row + 1) + row*tile_size
 	
 	tile.position = Vector2(x, y)
-	tile.get_node("Letter").text = rand_char()
+	var char = rand_char()
+	tile.get_node("Letter").text = char
+	tile.get_node("Score").text = str(Letters.letter_scores.get(char))
 	tile.col = col
 	tile.row = row
 
