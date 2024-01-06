@@ -1,6 +1,7 @@
 extends Area2D
 
 const tile_scene = preload("res://tile.tscn")
+const word_pop = preload("res://word_pop.tscn")
 const EnglishDict = preload("res://scripts/dict.gd")
 const Letters = preload("res://const/letters.gd")
 
@@ -137,11 +138,20 @@ func remove_all_words():
 	print("Checking for words")
 	idle = false
 	var found_words = get_all_words()
-	var strs = []
 	exploding_points = {}
 	for word in found_words:
-		strs.append(word.str)
 		$"../../ScoreArea".score_word(word.str)
+		
+		var new_word_pop = word_pop.instantiate()
+		new_word_pop.update_word(word.str)
+		# Need to add the parents position since the CanvasLayer of the 
+		# word_pop doesn't have (0,0) as it's parents position
+		var center = center_of_points(word.points)
+		var parent_pos = get_parent().position
+		new_word_pop.set_position(center + parent_pos)
+		
+		add_child(new_word_pop)
+		
 		for point in word.points:
 			exploding_points[point] = null
 	
@@ -155,6 +165,17 @@ func remove_all_words():
 	else:
 		# The effective end of the word checking loop.
 		idle = true
+
+func center_of_points(points):
+	var point1 = points[0]
+	var point2 = points[points.size()-1]
+	# Get the average of the first and last nodes to get the middle. Add
+	# 1 to center the point.
+	# Subtract half of size from the end to center
+	# Add half of padding to account for sides of tile grid
+	var x = (abs(point1.x+point2.x+1)/2.0)*(tile_size+padding)-40+padding/2
+	var y = (abs(point1.y+point2.y+1)/2.0)*(tile_size+padding)-20+padding/2
+	return Vector2(x, y)
 
 func explode_finished():
 	exploding_tiles_done -= 1
