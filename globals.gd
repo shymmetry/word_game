@@ -11,3 +11,7 @@ var idle = false
 var tiles = []
 var score = 0
 var swaps = 1
+
+# Player variables
+var high_score = 0
+var completed_levels = []

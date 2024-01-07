@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqyfnnndmmbcb"]
+
+[ext_resource type="Script" path="res://StartButton.gd" id="1_v5q3h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lrdmq"]
+font_size = 48
+
+[node name="Menu" type="ColorRect"]
+offset_right = 480.0
+offset_bottom = 720.0
+color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.5
+offset_top = -33.5
+offset_right = 122.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Word Turd"
+label_settings = SubResource("LabelSettings_lrdmq")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 40.0
+offset_right = 60.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Start"
+script = ExtResource("1_v5q3h")
+
+[node name="Settings" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="HowTo" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "How To Play
+"

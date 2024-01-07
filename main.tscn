@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://TileGrid.gd" id="2_6t4qq"]
 [ext_resource type="Script" path="res://ScoreArea.gd" id="3_334nt"]
 [ext_resource type="Script" path="res://RestartButton.gd" id="4_d4s1m"]
+[ext_resource type="StyleBox" uid="uid://47m8f88slmqa" path="res://tres/button.tres" id="5_qldg1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
@@ -20,18 +21,6 @@ font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_2lkm2"]
 font_size = 48
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wiqil"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jlh2b")
@@ -160,6 +149,6 @@ offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_wiqil")
+theme_override_styles/normal = ExtResource("5_qldg1")
 text = "RESTART"
 script = ExtResource("4_d4s1m")

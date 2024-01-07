@@ -42,7 +42,6 @@ func reset():
 	get_tree().reload_current_scene()
 
 func remove_all_words():
-	print("Checking for words")
 	Globals.idle = false
 	var found_words = get_all_words()
 	exploding_points = {}
