@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cv7jfmoypci2l"]
 
-[ext_resource type="Script" path="res://WordPop.gd" id="2_vhes7"]
+[ext_resource type="Script" path="res://scenes/game/word_pop/WordPop.gd" id="2_vhes7"]
 
 [sub_resource type="GDScript" id="GDScript_o31ft"]
 script/source = "extends CanvasLayer

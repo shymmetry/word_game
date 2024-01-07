@@ -1,7 +1,7 @@
 extends Area2D
 
-const tile_scene = preload("res://tile.tscn")
-const word_pop = preload("res://word_pop.tscn")
+const tile_scene = preload("res://scenes/game/tile.tscn")
+const word_pop = preload("res://scenes/game/word_pop/word_pop.tscn")
 const EnglishDict = preload("res://scripts/dict.gd")
 const Letters = preload("res://const/letters.gd")
 

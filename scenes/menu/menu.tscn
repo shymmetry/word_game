@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cqyfnnndmmbcb"]
 
-[ext_resource type="Script" path="res://StartButton.gd" id="1_v5q3h"]
+[ext_resource type="Script" path="res://scenes/menu/StartButton.gd" id="1_jnaxd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lrdmq"]
 font_size = 48
@@ -43,7 +43,7 @@ grow_vertical = 2
 [node name="Start" type="Button" parent="Buttons"]
 layout_mode = 2
 text = "Start"
-script = ExtResource("1_v5q3h")
+script = ExtResource("1_jnaxd")
 
 [node name="Settings" type="Button" parent="Buttons"]
 layout_mode = 2

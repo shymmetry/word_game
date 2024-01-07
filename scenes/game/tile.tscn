@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cjn0ohfkaqqbp"]
 
-[ext_resource type="Script" path="res://tile.gd" id="1_waqph"]
+[ext_resource type="Script" path="res://scenes/game/tile.gd" id="1_wmhhy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x1tu2"]
 font_size = 32
@@ -48,7 +48,7 @@ offset_right = 60.0
 offset_bottom = 60.0
 pivot_offset = Vector2(30, 30)
 mouse_filter = 2
-script = ExtResource("1_waqph")
+script = ExtResource("1_wmhhy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
