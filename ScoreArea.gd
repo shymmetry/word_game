@@ -2,8 +2,6 @@ extends Node2D
 
 const Letters = preload("res://const/letters.gd")
 
-var score = 0
-var swaps = 5
 var matched_words = []
 var swap_bonus = {
 	4: 1,
@@ -18,8 +16,8 @@ var word_length_score_multiplier = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$ScoreNumber.text = str(score)
-	$SwapsNumber.text = str(swaps)
+	$ScoreNumber.text = str(Globals.score)
+	$SwapsNumber.text = str(Globals.swaps)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -31,14 +29,14 @@ func score_word(word: String):
 	for char in word:
 		score_up += Letters.letter_scores.get(char)
 	score_up = score_up * word_length_score_multiplier.get(word.length())
-	score += score_up
-	$ScoreNumber.text = str(score)
+	Globals.score += score_up
+	$ScoreNumber.text = str(Globals.score)
 	
 	# Update swap count
 	var bonus = swap_bonus.get(word.length())
 	assert(bonus)
-	swaps += bonus
-	$SwapsNumber.text = str(swaps)
+	Globals.swaps += bonus
+	$SwapsNumber.text = str(Globals.swaps)
 	
 	# Update words display
 	var new_matched_words = [word]
@@ -50,8 +48,5 @@ func score_word(word: String):
 	$Words.text = display_words
 
 func count_swap():
-	swaps -= 1
-	$SwapsNumber.text = str(swaps)
-
-func can_swap():
-	return swaps > 0
+	Globals.swaps -= 1
+	$SwapsNumber.text = str(Globals.swaps)

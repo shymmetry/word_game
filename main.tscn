@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://baa8d6aagspdl"]
+[gd_scene load_steps=12 format=3 uid="uid://baa8d6aagspdl"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_jlh2b"]
+[ext_resource type="Script" path="res://TileGridContainer.gd" id="2_4y57n"]
 [ext_resource type="Script" path="res://TileGrid.gd" id="2_6t4qq"]
 [ext_resource type="Script" path="res://ScoreArea.gd" id="3_334nt"]
+[ext_resource type="Script" path="res://RestartButton.gd" id="4_d4s1m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
@@ -16,24 +18,23 @@ font_size = 24
 [sub_resource type="LabelSettings" id="LabelSettings_j1hmb"]
 font_size = 24
 
+[sub_resource type="LabelSettings" id="LabelSettings_2lkm2"]
+font_size = 48
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wiqil"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jlh2b")
-
-[node name="TileGridContainer" type="ReferenceRect" parent="."]
-clip_contents = true
-offset_left = 25.0
-offset_top = 265.0
-offset_right = 455.0
-offset_bottom = 695.0
-mouse_filter = 2
-
-[node name="TileGrid" type="Area2D" parent="TileGridContainer"]
-z_index = 2
-script = ExtResource("2_6t4qq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileGridContainer/TileGrid"]
-position = Vector2(215, 215)
-shape = SubResource("RectangleShape2D_cgcgr")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 480.0
@@ -41,10 +42,28 @@ offset_bottom = 720.0
 mouse_filter = 2
 color = Color(0.313726, 0.313726, 0.313726, 1)
 
-[node name="ScoreArea" type="Node2D" parent="."]
+[node name="TileGridContainer" type="ReferenceRect" parent="ColorRect"]
+clip_contents = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 265.0
+offset_right = 455.0
+offset_bottom = 695.0
+mouse_filter = 2
+script = ExtResource("2_4y57n")
+
+[node name="TileGrid" type="Area2D" parent="ColorRect/TileGridContainer"]
+z_index = 2
+script = ExtResource("2_6t4qq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/TileGridContainer/TileGrid"]
+position = Vector2(215, 215)
+shape = SubResource("RectangleShape2D_cgcgr")
+
+[node name="ScoreArea" type="Node2D" parent="ColorRect"]
 script = ExtResource("3_334nt")
 
-[node name="Score" type="Label" parent="ScoreArea"]
+[node name="Score" type="Label" parent="ColorRect/ScoreArea"]
 offset_left = 35.0
 offset_top = 180.0
 offset_right = 106.0
@@ -52,7 +71,7 @@ offset_bottom = 214.0
 text = "Score:"
 label_settings = SubResource("LabelSettings_fqtkm")
 
-[node name="ScoreNumber" type="Label" parent="ScoreArea"]
+[node name="ScoreNumber" type="Label" parent="ColorRect/ScoreArea"]
 offset_left = 175.0
 offset_top = 180.0
 offset_right = 215.0
@@ -60,7 +79,7 @@ offset_bottom = 214.0
 text = "0"
 label_settings = SubResource("LabelSettings_l4v2q")
 
-[node name="Swaps" type="Label" parent="ScoreArea"]
+[node name="Swaps" type="Label" parent="ColorRect/ScoreArea"]
 offset_left = 35.0
 offset_top = 220.0
 offset_right = 167.0
@@ -68,7 +87,7 @@ offset_bottom = 254.0
 text = "Swaps Left:"
 label_settings = SubResource("LabelSettings_fqtkm")
 
-[node name="SwapsNumber" type="Label" parent="ScoreArea"]
+[node name="SwapsNumber" type="Label" parent="ColorRect/ScoreArea"]
 offset_left = 175.0
 offset_top = 220.0
 offset_right = 215.0
@@ -76,7 +95,7 @@ offset_bottom = 254.0
 text = "0"
 label_settings = SubResource("LabelSettings_l4v2q")
 
-[node name="Words" type="Label" parent="ScoreArea"]
+[node name="Words" type="Label" parent="ColorRect/ScoreArea"]
 offset_left = 240.0
 offset_top = 35.0
 offset_right = 445.0
@@ -84,3 +103,63 @@ offset_bottom = 250.0
 label_settings = SubResource("LabelSettings_j1hmb")
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="GameOverCL" type="CanvasLayer" parent="ColorRect"]
+layer = 100
+
+[node name="GameOver" type="ColorRect" parent="ColorRect/GameOverCL"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.862745)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/GameOverCL/GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -68.0
+offset_right = 138.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GOLabel" type="Label" parent="ColorRect/GameOverCL/GameOver/VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_2lkm2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="ColorRect/GameOverCL/GameOver/VBoxContainer"]
+layout_mode = 2
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node2D" type="Control" parent="ColorRect/GameOverCL/GameOver/VBoxContainer"]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="ColorRect/GameOverCL/GameOver/VBoxContainer/Node2D"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_right = 60.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_wiqil")
+text = "RESTART"
+script = ExtResource("4_d4s1m")

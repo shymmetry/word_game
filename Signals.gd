@@ -2,3 +2,5 @@ extends Node
 
 signal ExplodeFinished
 signal DropFinished
+signal StartGame
+signal FindAndRemoveWords
