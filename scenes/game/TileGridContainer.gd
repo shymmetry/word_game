@@ -52,7 +52,7 @@ func _unhandled_input(event):
 		var ydif = get_local_mouse_position().y - lifted_point.y
 		if abs(xdif) > abs(ydif):
 			if xdif > 0: #right
-				if lifted.col == Globals.cols - 1: return
+				if lifted.col == Globals.level_data.cols - 1: return
 				if swap_direction != "right":
 					swap_direction = "right"
 					if swap_tile:
@@ -73,7 +73,7 @@ func _unhandled_input(event):
 			swap_tile.position.x = swap_position.x - move
 		else:
 			if ydif > 0: #down
-				if lifted.row == Globals.rows - 1: return
+				if lifted.row == Globals.level_data.rows - 1: return
 				if swap_direction != "down":
 					swap_direction = "down"
 					if swap_tile:
@@ -96,5 +96,5 @@ func _unhandled_input(event):
 func get_tile_at_point(position):
 	var col = floor((position.x-Globals.padding/2) / (Globals.tile_size+Globals.padding))
 	var row = floor((position.y-Globals.padding/2) / (Globals.tile_size+Globals.padding))
-	assert(col < Globals.cols and row < Globals.rows)
+	assert(col < Globals.level_data.cols and row < Globals.level_data.rows)
 	return Globals.tiles[col][row]

@@ -1,6 +1,26 @@
 extends Node
 class_name Letters
 
+var letter_picker_freq_total = 0
+
+func _init():
+	# Populate letter probability selector
+	for letter in Letters.letter_freq:
+		var freq = Letters.letter_freq[letter]
+		letter_picker_freq_total += freq
+
+func rand_char():
+	var rand_num = randi() % letter_picker_freq_total
+	var sum = 0
+	var selected_letter = "?"
+	for letter in letter_freq:
+		sum += letter_freq[letter]
+		if sum >= rand_num:
+			selected_letter = letter
+			break
+	
+	return selected_letter
+
 const letter_scores = {
 	"E": 1,
 	"T": 1,

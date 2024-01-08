@@ -5,17 +5,11 @@ const word_pop = preload("res://scenes/game/word_pop/word_pop.tscn")
 const EnglishDict = preload("res://scripts/dict.gd")
 const Letters = preload("res://const/letters.gd")
 
-var letter_picker_freq_total = 0
+var letters = Letters.new()
 var words = EnglishDict.new().words
 var exploding_points = {}
 var exploding_tiles_done = 0
 var dropping_tiles_done = 0
-
-func _init():
-	# Populate letter probability selector
-	for letter in Letters.letter_freq:
-		var freq = Letters.letter_freq[letter]
-		letter_picker_freq_total += freq
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,10 +22,10 @@ func _ready():
 
 func init_tiles():
 	Globals.tiles = []
-	for col in range(0, Globals.cols):
+	for col in range(0, Globals.level_data.cols):
 		var tile_col = []
 		
-		for row in range(0, Globals.rows):
+		for row in range(0, Globals.level_data.rows):
 			var tile = create_tile(col, row)
 			tile_col.append(tile)
 			
@@ -101,12 +95,12 @@ func explode_finished():
 func populate_tiles(removed_points: Dictionary):
 	# Adds new tiles for each given removed point. The created tiles are placed
 	# in new negative y rows.
-	var col_totals = []; col_totals.resize(Globals.cols); col_totals.fill(0)
+	var col_totals = []; col_totals.resize(Globals.level_data.cols); col_totals.fill(0)
 	for removed_point in removed_points:
 		col_totals[removed_point.x] += 1
 	
 	var new_tiles = []
-	for col in Globals.cols:
+	for col in Globals.level_data.cols:
 		var new_tiles_col = []
 		for row in range(0, col_totals[col]):
 			var tile = create_tile(col, row, true)
@@ -119,8 +113,8 @@ func populate_tiles(removed_points: Dictionary):
 func drop_tiles(removed_points: Dictionary, new_tiles: Array):
 	# 2D array of the number of spaces each tile needs to drop
 	var drops = []
-	for i in range(0, Globals.cols):
-		var col = []; col.resize(Globals.rows); col.fill(0)
+	for i in range(0, Globals.level_data.cols):
+		var col = []; col.resize(Globals.level_data.rows); col.fill(0)
 		drops.append(col)
 	
 	# Calculate the number of spaces each tile must fall.
@@ -131,8 +125,8 @@ func drop_tiles(removed_points: Dictionary, new_tiles: Array):
 	
 	# Drop the tiles
 	dropping_tiles_done = 0
-	for col in range(0, Globals.cols):
-		for row in range(Globals.rows-1, -1, -1):
+	for col in range(0, Globals.level_data.cols):
+		for row in range(Globals.level_data.rows-1, -1, -1):
 			var drop = drops[col][row]
 			var tile = Globals.tiles[col][row]
 			
@@ -163,8 +157,8 @@ func drop_finished():
 func get_all_words():
 	# Gets all the words on the board starting from any letter
 	var found = []
-	for col in range(0, Globals.cols):
-		for row in range(0, Globals.rows):
+	for col in range(0, Globals.level_data.cols):
+		for row in range(0, Globals.level_data.rows):
 			for dif in [[1,0],[-1,0],[0,1],[0,-1]]:
 				var word = get_word(row, col, dif[0], dif[1])
 				if word: found.append(word)
@@ -180,11 +174,11 @@ func get_word(x: int, y: int, xdif: int, ydif: int):
 	match xdif:
 		-1: xrange = range(x, -1, -1)
 		0: xrange = [x]
-		1: xrange = range(x, Globals.cols)
+		1: xrange = range(x, Globals.level_data.cols)
 	match ydif:
 		-1: yrange = range(y, -1, -1)
 		0: yrange = [y]
-		1: yrange = range(y, Globals.rows)
+		1: yrange = range(y, Globals.level_data.rows)
 	for col in xrange:
 		for row in yrange:
 			str += get_letter(col, row)
@@ -210,18 +204,6 @@ func get_longest_word(str: String):
 func is_word(word: String):
 	return words.has(word.to_lower())
 
-func rand_char():
-	var rand_num = randi() % letter_picker_freq_total
-	var sum = 0
-	var selected_letter = "?"
-	for letter in Letters.letter_freq:
-		sum += Letters.letter_freq[letter]
-		if sum >= rand_num:
-			selected_letter = letter
-			break
-	
-	return selected_letter
-
 func create_tile(col: int, row: int, new: bool = false):
 	var tile = tile_scene.instantiate()
 	
@@ -231,7 +213,7 @@ func create_tile(col: int, row: int, new: bool = false):
 	else: y = Globals.padding*(row + 1) + row*Globals.tile_size
 	
 	tile.position = Vector2(x, y)
-	var char = rand_char()
+	var char = letters.rand_char()
 	tile.get_node("Letter").text = char
 	tile.get_node("Score").text = str(Letters.letter_scores.get(char))
 	tile.col = col
@@ -242,9 +224,9 @@ func create_tile(col: int, row: int, new: bool = false):
 
 func print_tiles():
 	var tile_letters = []
-	for col in range(0, Globals.cols):
+	for col in range(0, Globals.level_data.cols):
 		var tile_letters_col = []
-		for row in range(0, Globals.rows):
+		for row in range(0, Globals.level_data.rows):
 			tile_letters_col.append(get_letter(col, row))
 		tile_letters.append(tile_letters_col)
 	print(tile_letters)

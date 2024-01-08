@@ -5,4 +5,5 @@ func _ready():
 	pressed.connect(self._button_pressed)
 
 func _button_pressed():
-	get_tree().change_scene_to_file("res://main.tscn")
+	Globals.set_current_level(1)
+	get_tree().change_scene_to_file("res://scenes/game/game.tscn")
