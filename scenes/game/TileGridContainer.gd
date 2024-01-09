@@ -8,31 +8,31 @@ var swap_position = null
 var swap_direction = null
 
 # Handles all mouse input for the TileGrid
-
 func _unhandled_input(event):
 	# Handle mouse for putting down a tile
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and not event.pressed:
-		if !swap_tile: return
-		var xdif = get_local_mouse_position().x - lifted_point.x
-		var ydif = get_local_mouse_position().y - lifted_point.y
-		var max_dif = max(abs(xdif), abs(ydif))
-		var min_dist = (Globals.level_data.tile_size + Globals.level_data.padding) / 2
-		if max_dif > min_dist:
-			var lifted_col = lifted.col
-			var lifted_row = lifted.row
-			Globals.tiles[lifted_col][lifted_row] = swap_tile
-			Globals.tiles[swap_tile.col][swap_tile.row] = lifted
-			lifted.col = swap_tile.col; lifted.row = swap_tile.row
-			swap_tile.col = lifted_col; swap_tile.row = lifted_row
-			lifted.position = swap_position
-			swap_tile.position = lifted_position
-			$"../ScoreArea".count_swap()
-			Signals.emit_signal("FindAndRemoveWords")
-		else:
-			lifted.position = lifted_position
-			swap_tile.position = swap_position
+		# If there is a swap tile perform the swap. Else just clear.
+		if swap_tile: 
+			var xdif = get_local_mouse_position().x - lifted_point.x
+			var ydif = get_local_mouse_position().y - lifted_point.y
+			var max_dif = max(abs(xdif), abs(ydif))
+			var min_dist = (Globals.level_data.tile_size + Globals.level_data.padding) / 2
+			if max_dif > min_dist:
+				var lifted_col = lifted.col
+				var lifted_row = lifted.row
+				Globals.tiles[lifted_col][lifted_row] = swap_tile
+				Globals.tiles[swap_tile.col][swap_tile.row] = lifted
+				lifted.col = swap_tile.col; lifted.row = swap_tile.row
+				swap_tile.col = lifted_col; swap_tile.row = lifted_row
+				lifted.position = swap_position
+				swap_tile.position = lifted_position
+				$"../ScoreArea".count_swap()
+				Signals.emit_signal("FindAndRemoveWords")
+			else:
+				lifted.position = lifted_position
+				swap_tile.position = swap_position
 		lifted = null; lifted_point = null; lifted_position = null
 		swap_tile = null; swap_position = null; swap_direction = null
 	
