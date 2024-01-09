@@ -1,9 +1,5 @@
 extends Node
 
-const tile_size = 60
-const padding = 10
-const min_word_length = 4
-
 # Game variables
 var tiles = []
 var score = 0

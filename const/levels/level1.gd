@@ -10,10 +10,14 @@ enum WIN_TYPES {
 
 const rows = 6
 const cols = 6
+const tile_size = 60
+const padding = 10
 
 const win_type = WIN_TYPES.SCORE
 const win_threshold = 100
-const starting_swaps = 1
+const win_text = "Get over 100 points"
+const starting_swaps = 3
+const min_word_length = 4
 
 const swap_bonus = {
 	4: 1,

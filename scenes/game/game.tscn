@@ -84,12 +84,28 @@ label_settings = SubResource("LabelSettings_l4v2q")
 
 [node name="Words" type="Label" parent="ColorRect/ScoreArea"]
 offset_left = 240.0
-offset_top = 35.0
+offset_top = 80.0
 offset_right = 445.0
 offset_bottom = 250.0
 label_settings = SubResource("LabelSettings_j1hmb")
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="Goal" type="Label" parent="ColorRect/ScoreArea"]
+offset_left = 40.0
+offset_top = 15.0
+offset_right = 440.0
+offset_bottom = 38.0
+text = "Goal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect/ScoreArea"]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 440.0
+offset_bottom = 67.0
+step = 1.0
 
 [node name="GameOverCL" type="CanvasLayer" parent="ColorRect"]
 layer = 100

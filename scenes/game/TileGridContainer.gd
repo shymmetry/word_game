@@ -18,7 +18,7 @@ func _unhandled_input(event):
 		var xdif = get_local_mouse_position().x - lifted_point.x
 		var ydif = get_local_mouse_position().y - lifted_point.y
 		var max_dif = max(abs(xdif), abs(ydif))
-		var min_dist = (Globals.tile_size + Globals.padding) / 2
+		var min_dist = (Globals.level_data.tile_size + Globals.level_data.padding) / 2
 		if max_dif > min_dist:
 			var lifted_col = lifted.col
 			var lifted_row = lifted.row
@@ -67,7 +67,7 @@ func _unhandled_input(event):
 						swap_tile.position = swap_position
 					swap_tile = Globals.tiles[lifted.col-1][lifted.row]
 					swap_position = swap_tile.position
-			var move = min(abs(xdif), Globals.tile_size + Globals.padding) * sign(xdif)
+			var move = min(abs(xdif), Globals.level_data.tile_size + Globals.level_data.padding) * sign(xdif)
 			lifted.position.x = lifted_position.x + move
 			lifted.position.y = lifted_position.y
 			swap_tile.position.x = swap_position.x - move
@@ -88,13 +88,13 @@ func _unhandled_input(event):
 						swap_tile.position = swap_position
 					swap_tile = Globals.tiles[lifted.col][lifted.row-1]
 					swap_position = swap_tile.position
-			var move = min(abs(ydif), Globals.tile_size + Globals.padding) * sign(ydif)
+			var move = min(abs(ydif), Globals.level_data.tile_size + Globals.level_data.padding) * sign(ydif)
 			lifted.position.x = lifted_position.x
 			lifted.position.y = lifted_position.y + move
 			swap_tile.position.y = swap_position.y - move
 
 func get_tile_at_point(position):
-	var col = floor((position.x-Globals.padding/2) / (Globals.tile_size+Globals.padding))
-	var row = floor((position.y-Globals.padding/2) / (Globals.tile_size+Globals.padding))
+	var col = floor((position.x-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding))
+	var row = floor((position.y-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding))
 	assert(col < Globals.level_data.cols and row < Globals.level_data.rows)
 	return Globals.tiles[col][row]

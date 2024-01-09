@@ -11,14 +11,20 @@ var exploding_points = {}
 var exploding_tiles_done = 0
 var dropping_tiles_done = 0
 
-# Called when the node enters the scene tree for the first time.
+func _init():
+	if !Globals.level_data:
+		Globals.set_current_level(1)
+	
+	Globals.swaps = Globals.level_data.starting_swaps
+	Globals.score = 0
+
 func _ready():
 	init_tiles()
-	remove_all_words()
+	find_and_remove_words()
 	Signals.connect('ExplodeFinished', explode_finished)
 	Signals.connect('DropFinished', drop_finished)
 	Signals.connect('StartGame', reset)
-	Signals.connect('FindAndRemoveWords', remove_all_words)
+	Signals.connect('FindAndRemoveWords', find_and_remove_words)
 
 func init_tiles():
 	Globals.tiles = []
@@ -35,7 +41,7 @@ func reset():
 	$"../../GameOverCL/GameOver".hide()
 	get_tree().reload_current_scene()
 
-func remove_all_words():
+func find_and_remove_words():
 	Globals.idle = false
 	var found_words = get_all_words()
 	exploding_points = {}
@@ -76,8 +82,8 @@ func center_of_points(points):
 	# 1 to center the point.
 	# Subtract half of size from the end to center
 	# Add half of padding to account for sides of tile grid
-	var x = (abs(point1.x+point2.x+1)/2.0)*(Globals.tile_size+Globals.padding)-40+Globals.padding/2
-	var y = (abs(point1.y+point2.y+1)/2.0)*(Globals.tile_size+Globals.padding)-20+Globals.padding/2
+	var x = (abs(point1.x+point2.x+1)/2.0)*(Globals.level_data.tile_size+Globals.level_data.padding)-40+Globals.level_data.padding/2
+	var y = (abs(point1.y+point2.y+1)/2.0)*(Globals.level_data.tile_size+Globals.level_data.padding)-20+Globals.level_data.padding/2
 	return Vector2(x, y)
 
 func explode_finished():
@@ -131,7 +137,7 @@ func drop_tiles(removed_points: Dictionary, new_tiles: Array):
 			var tile = Globals.tiles[col][row]
 			
 			if tile and drop > 0: 
-				tile.drop(drop*(Globals.tile_size+Globals.padding))
+				tile.drop(drop*(Globals.level_data.tile_size+Globals.level_data.padding))
 				dropping_tiles_done += 1
 				tile.row = row+drop
 				Globals.tiles[col][row] = null
@@ -140,7 +146,7 @@ func drop_tiles(removed_points: Dictionary, new_tiles: Array):
 		var new_tiles_col = new_tiles[col]
 		for i in range(0, new_tiles_col.size()):
 			var new_tile = new_tiles_col[i]
-			new_tile.drop(new_tiles_col.size()*(Globals.tile_size+Globals.padding))
+			new_tile.drop(new_tiles_col.size()*(Globals.level_data.tile_size+Globals.level_data.padding))
 			dropping_tiles_done += 1
 			
 			var row = new_tiles_col.size()-1-i
@@ -152,7 +158,7 @@ func drop_finished():
 	dropping_tiles_done -= 1
 	if dropping_tiles_done == 0:
 		# Loop word removal
-		remove_all_words()
+		find_and_remove_words()
 
 func get_all_words():
 	# Gets all the words on the board starting from any letter
@@ -194,8 +200,8 @@ func get_letter(x: int, y: int):
 	return Globals.tiles[x][y].get_node("Letter").text
 
 func get_longest_word(str: String):
-	if str.length() < Globals.min_word_length: return null
-	for len in range(str.length(), Globals.min_word_length-1, -1):
+	if str.length() < Globals.level_data.min_word_length: return null
+	for len in range(str.length(), Globals.level_data.min_word_length-1, -1):
 		var word = str.substr(0, len)
 		if is_word(word):
 			return word
@@ -207,10 +213,10 @@ func is_word(word: String):
 func create_tile(col: int, row: int, new: bool = false):
 	var tile = tile_scene.instantiate()
 	
-	var x = Globals.padding*(col + 1) + col*Globals.tile_size
+	var x = Globals.level_data.padding*(col + 1) + col*Globals.level_data.tile_size
 	var y = 0
-	if new: y = -1 * (Globals.padding*(row) + (row + 1)*Globals.tile_size)
-	else: y = Globals.padding*(row + 1) + row*Globals.tile_size
+	if new: y = -1 * (Globals.level_data.padding*(row) + (row + 1)*Globals.level_data.tile_size)
+	else: y = Globals.level_data.padding*(row + 1) + row*Globals.level_data.tile_size
 	
 	tile.position = Vector2(x, y)
 	var char = letters.rand_char()

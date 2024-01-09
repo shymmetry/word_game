@@ -15,13 +15,12 @@ var word_length_score_multiplier = {
 }
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _process(delta):
 	$ScoreNumber.text = str(Globals.score)
 	$SwapsNumber.text = str(Globals.swaps)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	$Goal.text = str(Globals.level_data.win_text)
+	$ProgressBar.max_value = Globals.level_data.win_threshold
+	$ProgressBar.value = Globals.score
 
 func score_word(word: String):
 	# Update score
@@ -30,17 +29,15 @@ func score_word(word: String):
 		score_up += Letters.letter_scores.get(char)
 	score_up = score_up * word_length_score_multiplier.get(word.length())
 	Globals.score += score_up
-	$ScoreNumber.text = str(Globals.score)
 	
 	# Update swap count
 	var bonus = swap_bonus.get(word.length())
 	assert(bonus)
 	Globals.swaps += bonus
-	$SwapsNumber.text = str(Globals.swaps)
 	
 	# Update words display
 	var new_matched_words = [word]
-	new_matched_words.append_array(matched_words.slice(0, 5))
+	new_matched_words.append_array(matched_words.slice(0, 4))
 	matched_words = new_matched_words
 	var display_words = ""
 	for matched_word in matched_words:
