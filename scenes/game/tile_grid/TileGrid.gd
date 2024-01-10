@@ -35,9 +35,12 @@ func _process(delta):
 			if !Globals.completed_levels.has(Globals.current_level):
 				Globals.completed_levels[Globals.current_level] = {}
 			$"../../WinScreenCL".show()
-		elif Globals.swaps <= 0 and get_all_words().size() == 0:
-			$"../../GameOverCL/GameOver/VBoxContainer/Score".text = "Score: %s" % Globals.score
-			$"../../GameOverCL".show()
+		elif Globals.swaps <= 0:
+			var all_words = get_all_words()
+			print(all_words)
+			if all_words.size() == 0:
+				$"../../GameOverCL/GameOver/VBoxContainer/Score".text = "Score: %s" % Globals.score
+				$"../../GameOverCL".show()
 		Globals.board_changed = false
 
 func has_won():
@@ -81,10 +84,10 @@ func find_and_remove_words():
 func remove_words(words_to_remove):
 	exploding_tiles = {}
 	for word in words_to_remove:
-		$"../../ScoreArea".score_word(word.str)
+		var score = $"../../ScoreArea".score_word(word.str)
 		
 		var new_word_pop = word_pop.instantiate()
-		new_word_pop.update_word(word.str)
+		new_word_pop.update_text(word.str, score)
 		# Need to add the parents position since the CanvasLayer of the 
 		# word_pop doesn't have (0,0) as it's parents position
 		var center = center_of_points(word.tiles)

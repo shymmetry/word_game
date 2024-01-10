@@ -37,7 +37,7 @@ func _unhandled_input(event):
 			clicked_tile = get_tile_at_point(get_local_mouse_position())
 	
 	# Handle mouse movement for dragging tiles
-	if clicked_tile and event is InputEventMouseMotion:
+	if clicked_tile and event is InputEventMouseMotion and !Globals.selected_tile:
 		var hover_tile = get_tile_at_point(get_local_mouse_position())
 		if hover_tile != last_hover_tile:
 			last_hover_tile = hover_tile

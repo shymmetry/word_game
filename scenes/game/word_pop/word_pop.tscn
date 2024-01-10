@@ -5,8 +5,8 @@
 [sub_resource type="GDScript" id="GDScript_o31ft"]
 script/source = "extends CanvasLayer
 
-func update_word(word: String):
-	$\"WordPop/Word\".text = word
+func update_text(word: String, score: int):
+	$\"WordPop/Word\".text = \"%s\\n+%s\" % [word, score]
 
 func set_position(point):
 	$WordPop.position.x = point.x

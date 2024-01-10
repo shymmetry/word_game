@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqyfnnndmmbcb"]
+[gd_scene load_steps=5 format=3 uid="uid://cqyfnnndmmbcb"]
 
-[ext_resource type="Script" path="res://scenes/menu/StartButton.gd" id="1_jnaxd"]
+[ext_resource type="Script" path="res://scenes/menu/main/StartButton.gd" id="1_jnaxd"]
+[ext_resource type="Script" path="res://scenes/menu/main/HowTo.gd" id="2_6ki0b"]
+[ext_resource type="Script" path="res://scenes/menu/main/Settings.gd" id="2_ib353"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lrdmq"]
 font_size = 48
@@ -49,8 +51,10 @@ script = ExtResource("1_jnaxd")
 layout_mode = 2
 text = "Settings
 "
+script = ExtResource("2_ib353")
 
 [node name="HowTo" type="Button" parent="Buttons"]
 layout_mode = 2
 text = "How To Play
 "
+script = ExtResource("2_6ki0b")

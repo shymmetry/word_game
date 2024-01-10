@@ -36,6 +36,8 @@ func score_word(word: String):
 	for matched_word in matched_words:
 		display_words = matched_word + "\n" + display_words
 	$Words.text = display_words
+	
+	return score_up
 
 func count_swap():
 	Globals.swaps -= 1
