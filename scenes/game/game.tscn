@@ -1,12 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=19 format=3 uid="uid://c44ljnngpj6ii"]
 
-[ext_resource type="Script" path="res://scenes/game/TileGridContainer.gd" id="1_c2goi"]
-[ext_resource type="Script" path="res://scenes/game/TileGrid.gd" id="2_1ocn6"]
-[ext_resource type="Script" path="res://scenes/game/ScoreArea.gd" id="3_vlwa8"]
+[ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
+[ext_resource type="Script" path="res://scenes/game/tile_grid/TileGrid.gd" id="2_1ocn6"]
+[ext_resource type="Script" path="res://scenes/game/score_area/ScoreArea.gd" id="3_vlwa8"]
 [ext_resource type="StyleBox" uid="uid://47m8f88slmqa" path="res://tres/button.tres" id="4_d6ar4"]
-[ext_resource type="Script" path="res://scenes/game/game_over/RestartButton.gd" id="5_yumyw"]
-[ext_resource type="Script" path="res://scenes/game/win_screen/MenuButton.gd" id="6_5mfqa"]
-[ext_resource type="Script" path="res://scenes/game/win_screen/NextButton.gd" id="7_myglu"]
+[ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://tres/hamburger.tres" id="4_f7i5n"]
+[ext_resource type="Texture2D" uid="uid://b50uc5r7wm45g" path="res://icons/TripleBar.png" id="4_gthw2"]
+[ext_resource type="Script" path="res://scenes/game/InGameMenuButton.gd" id="5_7btuc"]
+[ext_resource type="Script" path="res://scenes/game/RestartButton.gd" id="5_yumyw"]
+[ext_resource type="Script" path="res://scenes/game/MainMenuButton.gd" id="8_86xcu"]
+[ext_resource type="Script" path="res://scenes/game/menu/BackButton.gd" id="8_ubqv6"]
+[ext_resource type="Script" path="res://scenes/game/win_screen/NextLevelButton.gd" id="10_g3fo3"]
+[ext_resource type="Script" path="res://scenes/game/game_start/GameStart.gd" id="12_wh0dg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
@@ -18,7 +23,10 @@ font_size = 24
 font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_j1hmb"]
-font_size = 24
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_fmmef"]
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_2lkm2"]
 font_size = 48
@@ -86,28 +94,49 @@ label_settings = SubResource("LabelSettings_l4v2q")
 
 [node name="Words" type="Label" parent="ColorRect/ScoreArea"]
 offset_left = 240.0
-offset_top = 80.0
+offset_top = 130.0
 offset_right = 445.0
 offset_bottom = 250.0
 label_settings = SubResource("LabelSettings_j1hmb")
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Goal" type="Label" parent="ColorRect/ScoreArea"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/ScoreArea"]
 offset_left = 40.0
-offset_top = 15.0
+offset_top = 60.0
 offset_right = 440.0
-offset_bottom = 38.0
+offset_bottom = 114.0
+
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect/ScoreArea/VBoxContainer"]
+layout_mode = 2
+step = 1.0
+
+[node name="Goal" type="Label" parent="ColorRect/ScoreArea/VBoxContainer"]
+layout_mode = 2
 text = "Goal"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="ColorRect/ScoreArea"]
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 440.0
-offset_bottom = 67.0
-step = 1.0
+[node name="InGameMenuButton" type="Button" parent="ColorRect/ScoreArea"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 26.0
+offset_bottom = 26.0
+scale = Vector2(2.5, 2.5)
+theme_override_styles/normal = ExtResource("4_f7i5n")
+theme_override_styles/hover = ExtResource("4_f7i5n")
+theme_override_styles/pressed = ExtResource("4_f7i5n")
+theme_override_styles/focus = ExtResource("4_f7i5n")
+icon = ExtResource("4_gthw2")
+script = ExtResource("5_7btuc")
+
+[node name="Title" type="Label" parent="ColorRect/ScoreArea"]
+offset_right = 480.0
+offset_bottom = 60.0
+text = "WORD TURD"
+label_settings = SubResource("LabelSettings_fmmef")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GameOverCL" type="CanvasLayer" parent="ColorRect"]
 layer = 100
@@ -169,6 +198,29 @@ theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "RESTART"
 script = ExtResource("5_yumyw")
 
+[node name="RestartButton2" type="Button" parent="ColorRect/GameOverCL/GameOver/VBoxContainer/Node2D"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_right = 60.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("4_d6ar4")
+text = "RESTART"
+script = ExtResource("5_yumyw")
+
+[node name="MainMenuButton" type="Button" parent="ColorRect/GameOverCL/GameOver/VBoxContainer/Node2D"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("8_86xcu")
+
 [node name="WinScreenCL" type="CanvasLayer" parent="ColorRect"]
 visible = false
 
@@ -195,24 +247,120 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="WinLabel" type="Label" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
+[node name="WinScreenLabel" type="Label" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
 text = "YOU WON!"
 label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MenuButton" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
-text = "MENU
-"
-script = ExtResource("6_5mfqa")
+text = "MAIN MENU"
+script = ExtResource("8_86xcu")
 
-[node name="NextButton" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
+[node name="NextLevelButton" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "NEXT LEVEL"
-script = ExtResource("7_myglu")
+script = ExtResource("10_g3fo3")
+
+[node name="MenuCL" type="CanvasLayer" parent="ColorRect"]
+visible = false
+
+[node name="Menu" type="ColorRect" parent="ColorRect/MenuCL"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.862745)
+
+[node name="VBoxContainer" type="GridContainer" parent="ColorRect/MenuCL/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -96.5
+offset_right = 76.0
+offset_bottom = 96.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuLabel" type="Label" parent="ColorRect/MenuCL/Menu/VBoxContainer"]
+layout_mode = 2
+text = "MENU"
+label_settings = SubResource("LabelSettings_2lkm2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="ColorRect/MenuCL/Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("4_d6ar4")
+text = "MAIN MENU"
+script = ExtResource("8_86xcu")
+
+[node name="RestartButton" type="Button" parent="ColorRect/MenuCL/Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("4_d6ar4")
+text = "RESTART"
+script = ExtResource("5_yumyw")
+
+[node name="BackButton" type="Button" parent="ColorRect/MenuCL/Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("4_d6ar4")
+text = "BACK"
+script = ExtResource("8_ubqv6")
+
+[node name="GameStartCL" type="CanvasLayer" parent="ColorRect"]
+
+[node name="GameStart" type="ColorRect" parent="ColorRect/GameStartCL"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.862745)
+
+[node name="VBoxContainer" type="GridContainer" parent="ColorRect/GameStartCL/GameStart"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -96.5
+offset_right = 76.0
+offset_bottom = 96.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_wh0dg")
+
+[node name="MenuLabel" type="Label" parent="ColorRect/GameStartCL/GameStart/VBoxContainer"]
+layout_mode = 2
+text = "Level X"
+label_settings = SubResource("LabelSettings_2lkm2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Goal" type="Label" parent="ColorRect/GameStartCL/GameStart/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="ColorRect/GameStartCL/GameStart/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("4_d6ar4")
+text = "START"
+script = ExtResource("8_ubqv6")

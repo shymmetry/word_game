@@ -4,13 +4,16 @@ const Letters = preload("res://const/letters.gd")
 
 var matched_words = []
 
+func _ready():
+	$Title.text = "Level %s" % Globals.current_level
+
 # Called when the node enters the scene tree for the first time.
 func _process(delta):
 	$ScoreNumber.text = str(Globals.score)
 	$SwapsNumber.text = str(Globals.swaps)
-	$Goal.text = str(Globals.level_data.win_text)
-	$ProgressBar.max_value = Globals.level_data.win_threshold
-	$ProgressBar.value = Globals.score
+	$"VBoxContainer/Goal".text = Globals.level_data.win_text
+	$"VBoxContainer/ProgressBar".max_value = Globals.level_data.win_threshold
+	$"VBoxContainer/ProgressBar".value = Globals.score
 
 func score_word(word: String):
 	# Update score
