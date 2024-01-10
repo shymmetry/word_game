@@ -13,13 +13,13 @@ config_version=5
 config/name="Word Merge"
 run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
 
 [autoload]
 
 Signals="*res://const/Signals.gd"
 Globals="*res://const/globals.gd"
 E="*res://const/enums.gd"
+Levels="*res://const/levels.gd"
 
 [display]
 

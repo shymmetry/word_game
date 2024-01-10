@@ -13,7 +13,7 @@ var dropping_tiles_done = 0
 
 func _init():
 	if !Globals.level_data:
-		Globals.set_current_level(1)
+		Levels.set_current_level(1)
 	
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.score = 0

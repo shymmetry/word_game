@@ -12,9 +12,6 @@ var dragged_tiles = []
 # Session variables
 var current_level = 0
 var level_data = null
-func set_current_level(level: int):
-	current_level = level
-	level_data = load("res://const/levels/level%s.gd" % level)
 
 # Player variables
 var high_score = 0
