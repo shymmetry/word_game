@@ -3,16 +3,6 @@ extends Node2D
 const Letters = preload("res://const/letters.gd")
 
 var matched_words = []
-var swap_bonus = {
-	4: 1,
-	5: 2,
-	6: 5,
-}
-var word_length_score_multiplier = {
-	4: 1,
-	5: 2,
-	6: 5,
-}
 
 # Called when the node enters the scene tree for the first time.
 func _process(delta):
@@ -26,12 +16,12 @@ func score_word(word: String):
 	# Update score
 	var score_up = 0
 	for char in word:
-		score_up += Letters.letter_scores.get(char)
-	score_up = score_up * word_length_score_multiplier.get(word.length())
+		score_up += Globals.level_data.letter_scores.get(char)
+	score_up = score_up * Globals.level_data.word_length_score_multiplier.get(word.length())
 	Globals.score += score_up
 	
 	# Update swap count
-	var bonus = swap_bonus.get(word.length())
+	var bonus = Globals.level_data.swap_bonus.get(word.length())
 	assert(bonus)
 	Globals.swaps += bonus
 	

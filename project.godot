@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Signals="*res://const/Signals.gd"
 Globals="*res://const/globals.gd"
+E="*res://const/enums.gd"
 
 [display]
 

@@ -6,6 +6,10 @@ extends Panel
 var row = -1
 var col = -1
 
+var tile_style = preload("res://tres/tile.tres")
+var tile_clicked_style = preload("res://tres/tile_clicked.tres")
+var tile_dragged_style = preload("res://tres/tile_dragged.tres")
+
 func set_letter(char: String):
 	$Letter.text = char
 
@@ -25,10 +29,15 @@ func explode_finished():
 func destroy():
 	queue_free()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	var stylebox = self.get_theme_stylebox("panel")
+	if Globals.selected_tile == self:
+		if stylebox != tile_clicked_style:
+			self.add_theme_stylebox_override("panel", tile_clicked_style)
+	elif Globals.dragged_tiles.has(self):
+		if stylebox != tile_dragged_style:
+			self.add_theme_stylebox_override("panel", tile_dragged_style)
+	else:
+		if stylebox != tile_style:
+			self.add_theme_stylebox_override("panel", tile_style)

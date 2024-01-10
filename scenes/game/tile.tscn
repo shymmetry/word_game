@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjn0ohfkaqqbp"]
+[gd_scene load_steps=7 format=3 uid="uid://cjn0ohfkaqqbp"]
 
+[ext_resource type="StyleBox" uid="uid://cumsb3w1jkw7v" path="res://tres/tile_dragged.tres" id="1_cfqcs"]
 [ext_resource type="Script" path="res://scenes/game/tile.gd" id="1_wmhhy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x1tu2"]
@@ -48,19 +49,8 @@ offset_right = 60.0
 offset_bottom = 60.0
 pivot_offset = Vector2(30, 30)
 mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_cfqcs")
 script = ExtResource("1_wmhhy")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(30, 30)
-mouse_filter = 2
-color = Color(0.870588, 0.721569, 0.529412, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="Letter" type="Label" parent="."]
 modulate = Color(0, 0, 0, 1)

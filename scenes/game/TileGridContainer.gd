@@ -1,11 +1,7 @@
 extends ReferenceRect
 
-var lifted = null
-var lifted_point = null
-var lifted_position = null
-var swap_tile = null
-var swap_position = null
-var swap_direction = null
+var clicked_tile = null
+var last_hover_tile = null
 
 # Handles all mouse input for the TileGrid
 func _unhandled_input(event):
@@ -13,88 +9,73 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and not event.pressed:
-		# If there is a swap tile perform the swap. Else just clear.
-		if swap_tile: 
-			var xdif = get_local_mouse_position().x - lifted_point.x
-			var ydif = get_local_mouse_position().y - lifted_point.y
-			var max_dif = max(abs(xdif), abs(ydif))
-			var min_dist = (Globals.level_data.tile_size + Globals.level_data.padding) / 2
-			if max_dif > min_dist:
-				var lifted_col = lifted.col
-				var lifted_row = lifted.row
-				Globals.tiles[lifted_col][lifted_row] = swap_tile
-				Globals.tiles[swap_tile.col][swap_tile.row] = lifted
-				lifted.col = swap_tile.col; lifted.row = swap_tile.row
-				swap_tile.col = lifted_col; swap_tile.row = lifted_row
-				lifted.position = swap_position
-				swap_tile.position = lifted_position
-				$"../ScoreArea".count_swap()
-				Signals.emit_signal("FindAndRemoveWords")
+		var end_tile = get_tile_at_point(get_local_mouse_position())
+		
+		# A tile was selected already for swapping
+		if Globals.selected_tile:
+			# Only handle if the tile to swap to was clicked and adjacent
+			if end_tile == clicked_tile \
+					and is_adjacent(Globals.selected_tile, end_tile) \
+					and Globals.swaps > 0:
+				swap_tiles(Globals.selected_tile, end_tile)
+			Globals.selected_tile = null
+		else:
+			# A single tile was selected for swapping
+			if end_tile == clicked_tile:
+				Globals.selected_tile = end_tile
+			# A different tile was selected for word guess
 			else:
-				lifted.position = lifted_position
-				swap_tile.position = swap_position
-		lifted = null; lifted_point = null; lifted_position = null
-		swap_tile = null; swap_position = null; swap_direction = null
+				if Globals.dragged_tiles.size() >= Globals.level_data.min_word_length:
+					Signals.emit_signal("GuessWord")
+		clicked_tile = null; last_hover_tile = null; Globals.dragged_tiles = []
 	
-	# Handle mouse for picking up a tile
+	# Handle mouse for clicking a tile
 	if event is InputEventMouseButton \
-			and event.button_index == MOUSE_BUTTON_LEFT \
-			and event.pressed:
-		var can_swap = Globals.idle and Globals.swaps > 0
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and can_swap:
-			lifted_point = get_local_mouse_position()
-			lifted = get_tile_at_point(lifted_point)
-			lifted_position = lifted.position
+		and event.button_index == MOUSE_BUTTON_LEFT \
+		and event.pressed \
+		and Globals.idle:
+			clicked_tile = get_tile_at_point(get_local_mouse_position())
 	
 	# Handle mouse movement for dragging tiles
-	if lifted and event is InputEventMouseMotion:
-		var xdif = get_local_mouse_position().x - lifted_point.x
-		var ydif = get_local_mouse_position().y - lifted_point.y
-		if abs(xdif) > abs(ydif):
-			if xdif > 0: #right
-				if lifted.col == Globals.level_data.cols - 1: return
-				if swap_direction != "right":
-					swap_direction = "right"
-					if swap_tile:
-						swap_tile.position = swap_position
-					swap_tile = Globals.tiles[lifted.col+1][lifted.row]
-					swap_position = swap_tile.position
-			else: #left
-				if lifted.col == 0: return
-				if swap_direction != "left":
-					swap_direction = "left"
-					if swap_tile:
-						swap_tile.position = swap_position
-					swap_tile = Globals.tiles[lifted.col-1][lifted.row]
-					swap_position = swap_tile.position
-			var move = min(abs(xdif), Globals.level_data.tile_size + Globals.level_data.padding) * sign(xdif)
-			lifted.position.x = lifted_position.x + move
-			lifted.position.y = lifted_position.y
-			swap_tile.position.x = swap_position.x - move
-		else:
-			if ydif > 0: #down
-				if lifted.row == Globals.level_data.rows - 1: return
-				if swap_direction != "down":
-					swap_direction = "down"
-					if swap_tile:
-						swap_tile.position = swap_position
-					swap_tile = Globals.tiles[lifted.col][lifted.row+1]
-					swap_position = swap_tile.position
-			else: #up
-				if lifted.row == 0: return
-				if swap_direction != "up":
-					swap_direction = "up"
-					if swap_tile:
-						swap_tile.position = swap_position
-					swap_tile = Globals.tiles[lifted.col][lifted.row-1]
-					swap_position = swap_tile.position
-			var move = min(abs(ydif), Globals.level_data.tile_size + Globals.level_data.padding) * sign(ydif)
-			lifted.position.x = lifted_position.x
-			lifted.position.y = lifted_position.y + move
-			swap_tile.position.y = swap_position.y - move
+	if clicked_tile and event is InputEventMouseMotion:
+		var hover_tile = get_tile_at_point(get_local_mouse_position())
+		if hover_tile != last_hover_tile:
+			last_hover_tile = hover_tile
+			var samecol = hover_tile.col == clicked_tile.col
+			var samerow = hover_tile.row == clicked_tile.row
+			
+			if samecol != samerow:
+				var dragged_tiles = []
+				for col in range(min(hover_tile.col, clicked_tile.col), max(hover_tile.col, clicked_tile.col) + 1):
+					for row in range(min(hover_tile.row, clicked_tile.row), max(hover_tile.row, clicked_tile.row) + 1):
+						dragged_tiles.append(Globals.tiles[col][row])
+				Globals.dragged_tiles = dragged_tiles
+			else:
+				# If dragged to an invalid tile, clear
+				Globals.dragged_tiles = []
+
+func swap_tiles(tile1, tile2):
+	var tile1_col = tile1.col; var tile1_row = tile1.row
+	var tile1_position = tile1.position
+	Globals.tiles[tile1_col][tile1_row] = tile2
+	Globals.tiles[tile2.col][tile2.row] = tile1
+	tile1.col = tile2.col; tile1.row = tile2.row
+	tile2.col = tile1_col; tile2.row = tile1_row
+	$"../ScoreArea".count_swap()
+	
+	# Perform visual swap (prevent other actions while this is happening)
+	Globals.idle = false
+	var tween = create_tween()
+	tween.tween_property(tile1, "position", tile2.position, 0.25)
+	tween.parallel().tween_property(tile2, "position", tile1_position, 0.25)
+	tween.tween_callback(func(): Globals.idle = true)
+
+func is_adjacent(tile1, tile2):
+	var coldif = abs(tile1.col - tile2.col)
+	var rowdif = abs(tile1.row - tile2.row)
+	return coldif + rowdif == 1
 
 func get_tile_at_point(position):
 	var col = floor((position.x-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding))
 	var row = floor((position.y-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding))
-	assert(col < Globals.level_data.cols and row < Globals.level_data.rows)
-	return Globals.tiles[col][row]
+	return Globals.tiles[min(col, Globals.level_data.cols-1)][min(row, Globals.level_data.rows-1)]
