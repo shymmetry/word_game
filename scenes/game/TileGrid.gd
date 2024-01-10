@@ -32,10 +32,12 @@ func _process(delta):
 	# Perform any necessary checks when the state of the board changes
 	if Globals.board_changed:
 		if has_won():
-			$"../../WinScreenCL/WinScreen".show()
+			if !Globals.completed_levels.has(Globals.current_level):
+				Globals.completed_levels[Globals.current_level] = {}
+			$"../../WinScreenCL".show()
 		elif Globals.swaps <= 0 and get_all_words().size() == 0:
 			$"../../GameOverCL/GameOver/VBoxContainer/Score".text = "Score: %s" % Globals.score
-			$"../../GameOverCL/GameOver".show()
+			$"../../GameOverCL".show()
 		Globals.board_changed = false
 
 func has_won():
@@ -56,7 +58,8 @@ func init_tiles():
 		Globals.tiles.append(tile_col)
 
 func reset():
-	$"../../GameOverCL/GameOver".hide()
+	$"../../GameOverCL".hide()
+	$"../../WinScreenCL".hide()
 	get_tree().reload_current_scene()
 
 func guess_word():
@@ -114,7 +117,7 @@ func explode_finished():
 	if exploding_tiles_done == 0:
 		# Remove exploded tiles
 		for removed_tile in exploding_tiles:
-			Globals.tiles[removed_tile.col][removed_tile.row] == null
+			Globals.tiles[removed_tile.col][removed_tile.row] = null
 		
 		# Add tiles to top
 		var new_tiles = populate_tiles(exploding_tiles)
@@ -181,6 +184,7 @@ func drop_finished():
 	dropping_tiles_done -= 1
 	if dropping_tiles_done == 0:
 		# Allow for actions
+		Globals.board_changed = true
 		Globals.idle = true
 
 func get_all_words():

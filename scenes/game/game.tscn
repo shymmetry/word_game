@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=13 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/TileGrid.gd" id="2_1ocn6"]
 [ext_resource type="Script" path="res://scenes/game/ScoreArea.gd" id="3_vlwa8"]
 [ext_resource type="StyleBox" uid="uid://47m8f88slmqa" path="res://tres/button.tres" id="4_d6ar4"]
-[ext_resource type="Script" path="res://scenes/game/RestartButton.gd" id="5_yumyw"]
+[ext_resource type="Script" path="res://scenes/game/game_over/RestartButton.gd" id="5_yumyw"]
+[ext_resource type="Script" path="res://scenes/game/win_screen/MenuButton.gd" id="6_5mfqa"]
+[ext_resource type="Script" path="res://scenes/game/win_screen/NextButton.gd" id="7_myglu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
@@ -109,9 +111,9 @@ step = 1.0
 
 [node name="GameOverCL" type="CanvasLayer" parent="ColorRect"]
 layer = 100
+visible = false
 
 [node name="GameOver" type="ColorRect" parent="ColorRect/GameOverCL"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -168,6 +170,7 @@ text = "RESTART"
 script = ExtResource("5_yumyw")
 
 [node name="WinScreenCL" type="CanvasLayer" parent="ColorRect"]
+visible = false
 
 [node name="WinScreen" type="ColorRect" parent="ColorRect/WinScreenCL"]
 anchors_preset = 15
@@ -177,7 +180,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/WinScreenCL/WinScreen"]
+[node name="VBoxContainer" type="HFlowContainer" parent="ColorRect/WinScreenCL/WinScreen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -199,42 +202,17 @@ label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MenuButton" type="Control" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
+[node name="MenuButton" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
-
-[node name="Button" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer/MenuButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_right = 60.0
-offset_bottom = 38.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
-text = "RESTART"
-script = ExtResource("5_yumyw")
+text = "MENU
+"
+script = ExtResource("6_5mfqa")
 
-[node name="NextLevelButton" type="Control" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
+[node name="NextButton" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
-
-[node name="Button" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer/NextLevelButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_right = 60.0
-offset_bottom = 38.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
-text = "RESTART"
-script = ExtResource("5_yumyw")
+text = "NEXT LEVEL"
+script = ExtResource("7_myglu")

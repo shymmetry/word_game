@@ -68,7 +68,7 @@ func swap_tiles(tile1, tile2):
 	var tween = create_tween()
 	tween.tween_property(tile1, "position", tile2.position, 0.25)
 	tween.parallel().tween_property(tile2, "position", tile1_position, 0.25)
-	tween.tween_callback(func(): Globals.idle = true)
+	tween.tween_callback(func(): Globals.idle = true; Globals.board_changed = true)
 
 func is_adjacent(tile1, tile2):
 	var coldif = abs(tile1.col - tile2.col)

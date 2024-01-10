@@ -6,8 +6,8 @@ const tile_size = 60
 const padding = 10
 
 const win_type = E.WIN_TYPES.SCORE
-const win_threshold = 10
-const win_text = "Get over 10 points"
+const win_threshold = 50
+const win_text = "Get over 50 points"
 const starting_swaps = 3
 const min_word_length = 4
 

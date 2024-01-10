@@ -18,7 +18,7 @@ func set_current_level(level: int):
 
 # Player variables
 var high_score = 0
-var completed_levels = []
+var completed_levels = {}
 
 const default_letter_scores = {
 	"E": 1,
