@@ -17,13 +17,14 @@ var padding = 10
 var win_type = E.WIN_TYPES.SCORE
 var win_threshold = 1
 var win_text = "Get over 1 points"
-var starting_swaps = 3
+var starting_swaps = 1
 var min_word_length = 4
+var word_drag_type = E.WORD_DRAG.ADJACENT
 
 var swap_bonus = {
-	4: 1,
-	5: 2,
-	6: 5,
+	4: 0,
+	5: 1,
+	6: 2,
 }
 
 var word_length_score_multiplier = {

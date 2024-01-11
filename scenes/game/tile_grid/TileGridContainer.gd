@@ -44,12 +44,19 @@ func _unhandled_input(event):
 			var samecol = hover_tile.col == clicked_tile.col
 			var samerow = hover_tile.row == clicked_tile.row
 			
-			if samecol != samerow:
+			if hover_tile == clicked_tile and Globals.dragged_tiles.size() == 0:
+				Globals.dragged_tiles.append(hover_tile)
+			elif Globals.level_data.word_drag_type == E.WORD_DRAG.LINE \
+					and samecol != samerow:
 				var dragged_tiles = []
 				for col in range(min(hover_tile.col, clicked_tile.col), max(hover_tile.col, clicked_tile.col) + 1):
 					for row in range(min(hover_tile.row, clicked_tile.row), max(hover_tile.row, clicked_tile.row) + 1):
 						dragged_tiles.append(Globals.tiles[col][row])
 				Globals.dragged_tiles = dragged_tiles
+			elif Globals.level_data.word_drag_type == E.WORD_DRAG.ADJACENT \
+					and is_adjacent(Globals.dragged_tiles.back(), hover_tile) \
+					and !Globals.dragged_tiles.has(hover_tile):
+				Globals.dragged_tiles.append(hover_tile)
 			else:
 				# If dragged to an invalid tile, clear
 				Globals.dragged_tiles = []
@@ -71,6 +78,7 @@ func swap_tiles(tile1, tile2):
 	tween.tween_callback(func(): Globals.idle = true; Globals.board_changed = true)
 
 func is_adjacent(tile1, tile2):
+	if tile1 == null or tile2 == null: return false
 	var coldif = abs(tile1.col - tile2.col)
 	var rowdif = abs(tile1.row - tile2.row)
 	return coldif + rowdif == 1

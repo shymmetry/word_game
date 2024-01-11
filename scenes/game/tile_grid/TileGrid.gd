@@ -35,12 +35,11 @@ func _process(delta):
 			if !Globals.completed_levels.has(Globals.current_level):
 				Globals.completed_levels[Globals.current_level] = {}
 			$"../../WinScreenCL".show()
-		elif Globals.swaps <= 0:
-			var all_words = get_all_words()
-			print(all_words)
-			if all_words.size() == 0:
-				$"../../GameOverCL/GameOver/VBoxContainer/Score".text = "Score: %s" % Globals.score
-				$"../../GameOverCL".show()
+		elif Globals.swaps <= 0 \
+				and get_all_line_words().size() == 0 \
+				and Globals.level_data.word_drag_type == E.WORD_DRAG.LINE:
+			$"../../GameOverCL/GameOver/VBoxContainer/Score".text = "Score: %s" % Globals.score
+			$"../../GameOverCL".show()
 		Globals.board_changed = false
 
 func has_won():
@@ -77,10 +76,6 @@ func guess_word():
 	elif is_word(word2):
 		remove_words([{"str": word2, "tiles": Globals.dragged_tiles}])
 
-func find_and_remove_words():
-	Globals.idle = false
-	remove_words(get_all_words())
-	
 func remove_words(words_to_remove):
 	exploding_tiles = {}
 	for word in words_to_remove:
@@ -190,8 +185,8 @@ func drop_finished():
 		Globals.board_changed = true
 		Globals.idle = true
 
-func get_all_words():
-	# Gets all the words on the board starting from any letter
+func get_all_line_words():
+	# Gets all the words on the board starting from any letter 
 	var found = []
 	for col in range(0, Globals.level_data.cols):
 		for row in range(0, Globals.level_data.rows):

@@ -25,8 +25,7 @@ func score_word(word: String):
 	
 	# Update swap count
 	var bonus = Globals.level_data.swap_bonus.get(word.length())
-	assert(bonus)
-	Globals.swaps += bonus
+	Globals.swaps += bonus if bonus != null else 0
 	
 	# Update words display
 	var new_matched_words = [word]

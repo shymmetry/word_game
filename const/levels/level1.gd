@@ -1,4 +1,4 @@
 extends Node
 
-const win_threshold = 20
-const win_text = "Get over 20 points"
+const win_threshold = 50
+const win_text = "Get over 50 points"

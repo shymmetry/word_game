@@ -18,11 +18,11 @@ offset_left = 40.0
 offset_top = 40.0
 offset_right = 440.0
 offset_bottom = 340.0
-text = "* Find and explode words containing 4 or more letters to get points
-* Select word by dragging over a line of letters
-* You can swap the positions of adjacent letters by clicking them
-* There are a limited number of swaps, although for every word found more swaps will be rewarded based on the length of the word
-* Each letter is worth a different amount of points. The points awarded for a word is the sum of the letters points multiplied by a word length bonus"
+text = "- Find and explode words containing 4 or more letters to get points
+- Select a word by dragging over letters in any path without reusing letters
+- You can swap the positions of adjacent letters by clicking them
+- There are a limited number of swaps, although finding longer words will reward more swaps
+- Each letter is worth a different amount of points. The points awarded for a word is the sum of the letters points multiplied by a word length bonus"
 label_settings = SubResource("LabelSettings_i0ny5")
 autowrap_mode = 3
 

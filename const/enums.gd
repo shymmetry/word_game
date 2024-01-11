@@ -6,3 +6,8 @@ enum WIN_TYPES {
 	WORD_TOPIC,
 	WORD_SIZE,
 }
+
+enum WORD_DRAG {
+	LINE,
+	ADJACENT,
+}
