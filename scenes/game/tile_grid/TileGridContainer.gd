@@ -14,7 +14,7 @@ func _unhandled_input(event):
 		# A tile was selected already for swapping
 		if Globals.selected_tile:
 			# Only handle if the tile to swap to was clicked and adjacent
-			if end_tile == clicked_tile \
+			if end_tile and end_tile == clicked_tile \
 					and is_adjacent(Globals.selected_tile, end_tile) \
 					and Globals.swaps > 0:
 				swap_tiles(Globals.selected_tile, end_tile)
@@ -39,7 +39,7 @@ func _unhandled_input(event):
 	# Handle mouse movement for dragging tiles
 	if clicked_tile and event is InputEventMouseMotion and !Globals.selected_tile:
 		var hover_tile = get_tile_at_point(get_local_mouse_position())
-		if hover_tile != last_hover_tile:
+		if hover_tile and hover_tile != last_hover_tile:
 			last_hover_tile = hover_tile
 			var samecol = hover_tile.col == clicked_tile.col
 			var samerow = hover_tile.row == clicked_tile.row
@@ -76,6 +76,10 @@ func is_adjacent(tile1, tile2):
 	return coldif + rowdif == 1
 
 func get_tile_at_point(position):
-	var col = floor((position.x-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding))
-	var row = floor((position.y-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding))
-	return Globals.tiles[min(col, Globals.level_data.cols-1)][min(row, Globals.level_data.rows-1)]
+	var col = (position.x-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding)
+	var row = (position.y-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding)
+	
+	if col < 0 or row < 0 or col >= Globals.level_data.cols or row >= Globals.level_data.rows: 
+		return null
+	else:
+		return Globals.tiles[min(col, Globals.level_data.cols-1)][min(row, Globals.level_data.rows-1)]
