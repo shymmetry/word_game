@@ -16,10 +16,11 @@ config/features=PackedStringArray("4.2", "Mobile")
 
 [autoload]
 
-Signals="*res://const/Signals.gd"
-Globals="*res://const/globals.gd"
-E="*res://const/enums.gd"
-Levels="*res://const/levels.gd"
+Signals="*res://globals/signals.gd"
+Globals="*res://globals/globals.gd"
+E="*res://globals/enums.gd"
+Levels="*res://scripts/levels.gd"
+UserData="*res://globals/user_data.gd"
 
 [display]
 

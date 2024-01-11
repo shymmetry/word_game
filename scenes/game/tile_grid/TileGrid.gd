@@ -3,10 +3,12 @@ extends Area2D
 const tile_scene = preload("res://scenes/game/tile_grid/tile.tscn")
 const word_pop = preload("res://scenes/game/word_pop/word_pop.tscn")
 const ED = preload("res://scripts/dict.gd")
-const LU = preload("res://const/letters.gd")
+const LU = preload("res://scripts/letters.gd")
 
 var letter_util = null
 var word_dict = null
+var store = null
+
 var exploding_tiles = {}
 var exploding_tiles_done = 0
 var dropping_tiles_done = 0
@@ -20,6 +22,7 @@ func _init():
 	
 	letter_util = LU.new()
 	word_dict = ED.new()
+	store = Store.new()
 
 func _ready():
 	init_tiles()
@@ -32,9 +35,10 @@ func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
 	if Globals.board_changed:
 		if has_won():
-			if !Globals.completed_levels.has(Globals.current_level):
-				Globals.completed_levels[Globals.current_level] = {}
+			if !UserData.completed_levels.has(Globals.current_level):
+				UserData.completed_levels[Globals.current_level] = {}
 			$"../../WinScreenCL".show()
+			store.save_game()
 		elif Globals.swaps <= 0 \
 				and get_all_line_words().size() == 0 \
 				and Globals.level_data.word_drag_type == E.WORD_DRAG.LINE:
