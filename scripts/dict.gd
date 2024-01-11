@@ -12,3 +12,6 @@ func load_words(dict: Dictionary, file_name: String):
 	while not file.eof_reached():
 		var content = file.get_line()
 		dict[content] = null
+
+func is_word(word: String):
+	return words.has(word.to_lower())

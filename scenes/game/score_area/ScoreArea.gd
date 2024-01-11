@@ -1,14 +1,12 @@
 extends Node2D
 
-const Letters = preload("res://const/letters.gd")
-
 var matched_words = []
 
 func _ready():
 	$Title.text = "Level %s" % Globals.current_level
 
 # Called when the node enters the scene tree for the first time.
-func _process(delta):
+func _process(_delta):
 	$ScoreNumber.text = str(Globals.score)
 	$SwapsNumber.text = str(Globals.swaps)
 	$"VBoxContainer/Goal".text = Globals.level_data.win_text
@@ -18,19 +16,19 @@ func _process(delta):
 func score_word(word: String):
 	# Update score
 	var letter_score_up = 0
-	for char in word:
-		letter_score_up += Globals.level_data.letter_scores.get(char)
+	for letter in word:
+		letter_score_up += Globals.level_data.letter_scores.get(letter)
 	var length_mult = Globals.level_data.word_length_score_multiplier.get(word.length())
 	if length_mult == null:
 		# Not all lengths are tracked, so default to the highest defined
-		var max = Globals.level_data.word_length_score_multiplier.keys().max()
-		var min = Globals.level_data.word_length_score_multiplier.keys().min()
-		if word.length() > max:
-			length_mult = Globals.level_data.word_length_score_multiplier.get(max)
-		elif word.length() < min:
-			length_mult = Globals.level_data.word_length_score_multiplier.get(min)
+		var maxwl = Globals.level_data.word_length_score_multiplier.keys().max()
+		var minwl = Globals.level_data.word_length_score_multiplier.keys().min()
+		if word.length() > maxwl:
+			length_mult = Globals.level_data.word_length_score_multiplier.get(maxwl)
+		elif word.length() < minwl:
+			length_mult = Globals.level_data.word_length_score_multiplier.get(minwl)
 		else:
-			assert(true, "No length mult for word with length %s" % word.length())
+			length_mult = 1
 	var score_up = letter_score_up * length_mult
 	Globals.score += score_up
 	
@@ -38,14 +36,14 @@ func score_word(word: String):
 	var bonus = Globals.level_data.swap_bonus.get(word.length())
 	if bonus == null:
 		# Not all lengths are tracked, so default to the highest defined
-		var max = Globals.level_data.swap_bonus.keys().max()
-		var min = Globals.level_data.swap_bonus.keys().min()
-		if word.length() > max:
-			bonus = Globals.level_data.swap_bonus.get(max)
-		elif word.length() < min:
-			bonus = Globals.level_data.swap_bonus.get(min)
+		var maxwl = Globals.level_data.swap_bonus.keys().max()
+		var minwl = Globals.level_data.swap_bonus.keys().min()
+		if word.length() > maxwl:
+			bonus = Globals.level_data.swap_bonus.get(maxwl)
+		elif word.length() < minwl:
+			bonus = Globals.level_data.swap_bonus.get(minwl)
 		else:
-			assert(true, "No bonus for word with length %s" % word.length())
+			bonus = 0
 	Globals.swaps += bonus
 	
 	# Update words display

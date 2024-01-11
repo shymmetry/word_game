@@ -1,7 +1,5 @@
 extends Panel
 
-@onready var animation = $AnimationPlayer
-
 func _ready():
 	var tween = create_tween()
 	tween.tween_property(self, "position", position + Vector2(0, -50), 2)

@@ -10,8 +10,8 @@ var tile_style = preload("res://tres/tile.tres")
 var tile_clicked_style = preload("res://tres/tile_clicked.tres")
 var tile_dragged_style = preload("res://tres/tile_dragged.tres")
 
-func set_letter(char: String):
-	$Letter.text = char
+func set_letter(letter: String):
+	$Letter.text = letter
 
 func explode():
 	animation.play("explode")
@@ -30,7 +30,7 @@ func destroy():
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var stylebox = self.get_theme_stylebox("panel")
 	if Globals.selected_tile == self:
 		if stylebox != tile_clicked_style:

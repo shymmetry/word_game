@@ -2,11 +2,11 @@ extends Area2D
 
 const tile_scene = preload("res://scenes/game/tile_grid/tile.tscn")
 const word_pop = preload("res://scenes/game/word_pop/word_pop.tscn")
-const EnglishDict = preload("res://scripts/dict.gd")
-const Letters = preload("res://const/letters.gd")
+const ED = preload("res://scripts/dict.gd")
+const LU = preload("res://const/letters.gd")
 
-var letters = null
-var words = null
+var letter_util = null
+var word_dict = null
 var exploding_tiles = {}
 var exploding_tiles_done = 0
 var dropping_tiles_done = 0
@@ -18,8 +18,8 @@ func _init():
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.score = 0
 	
-	letters = Letters.new()
-	words = EnglishDict.new().words
+	letter_util = LU.new()
+	word_dict = ED.new()
 
 func _ready():
 	init_tiles()
@@ -28,7 +28,7 @@ func _ready():
 	Signals.connect('StartGame', reset)
 	Signals.connect('GuessWord', guess_word)
 
-func _process(delta):
+func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
 	if Globals.board_changed:
 		if has_won():
@@ -71,9 +71,9 @@ func guess_word():
 		word1 = word1 + letter
 		word2 = letter + word2
 	
-	if is_word(word1):
+	if word_dict.is_word(word1):
 		remove_words([{"str": word1, "tiles": Globals.dragged_tiles}])
-	elif is_word(word2):
+	elif word_dict.is_word(word2):
 		remove_words([{"str": word2, "tiles": Globals.dragged_tiles}])
 
 func remove_words(words_to_remove):
@@ -198,7 +198,7 @@ func get_all_line_words():
 func get_word(x: int, y: int, xdif: int, ydif: int):
 	# Gets the longest word starting at a given point and going in a given 
 	# direction. If no word is found null is returned.
-	var str = ""
+	var letters = ""
 	var word_tiles = []
 	var xrange 
 	var yrange
@@ -212,9 +212,9 @@ func get_word(x: int, y: int, xdif: int, ydif: int):
 		1: yrange = range(y, Globals.level_data.rows)
 	for col in xrange:
 		for row in yrange:
-			str += get_letter(col, row)
+			letters += get_letter(col, row)
 	
-	var longest_str = get_longest_word(str)
+	var longest_str = get_longest_word(letters)
 	if !longest_str: return null
 	
 	for i in range(0, longest_str.length()):
@@ -224,16 +224,13 @@ func get_word(x: int, y: int, xdif: int, ydif: int):
 func get_letter(x: int, y: int):
 	return Globals.tiles[x][y].get_node("Letter").text
 
-func get_longest_word(str: String):
-	if str.length() < Globals.level_data.min_word_length: return null
-	for len in range(str.length(), Globals.level_data.min_word_length-1, -1):
-		var word = str.substr(0, len)
-		if is_word(word):
+func get_longest_word(letters: String):
+	if letters.length() < Globals.level_data.min_word_length: return null
+	for length in range(letters.length(), Globals.level_data.min_word_length-1, -1):
+		var word = letters.substr(0, length)
+		if word_dict.is_word(word):
 			return word
 	return null
-
-func is_word(word: String):
-	return words.has(word.to_lower())
 
 func create_tile(col: int, row: int, new: bool = false):
 	var tile = tile_scene.instantiate()
@@ -244,9 +241,9 @@ func create_tile(col: int, row: int, new: bool = false):
 	else: y = Globals.level_data.padding*(row + 1) + row*Globals.level_data.tile_size
 	
 	tile.position = Vector2(x, y)
-	var char = letters.rand_char()
-	tile.get_node("Letter").text = char
-	tile.get_node("Score").text = str(Globals.level_data.letter_scores.get(char))
+	var rand_char = letter_util.rand_char()
+	tile.get_node("Letter").text = rand_char
+	tile.get_node("Score").text = str(Globals.level_data.letter_scores.get(rand_char))
 	tile.col = col
 	tile.row = row
 

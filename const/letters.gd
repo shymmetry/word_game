@@ -1,5 +1,5 @@
 extends Node
-class_name Letters
+class_name LetterUtil
 
 var letter_picker_freq_total = 0
 
