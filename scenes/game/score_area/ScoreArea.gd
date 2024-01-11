@@ -17,15 +17,36 @@ func _process(delta):
 
 func score_word(word: String):
 	# Update score
-	var score_up = 0
+	var letter_score_up = 0
 	for char in word:
-		score_up += Globals.level_data.letter_scores.get(char)
-	score_up = score_up * Globals.level_data.word_length_score_multiplier.get(word.length())
+		letter_score_up += Globals.level_data.letter_scores.get(char)
+	var length_mult = Globals.level_data.word_length_score_multiplier.get(word.length())
+	if length_mult == null:
+		# Not all lengths are tracked, so default to the highest defined
+		var max = Globals.level_data.word_length_score_multiplier.keys().max()
+		var min = Globals.level_data.word_length_score_multiplier.keys().min()
+		if word.length() > max:
+			length_mult = Globals.level_data.word_length_score_multiplier.get(max)
+		elif word.length() < min:
+			length_mult = Globals.level_data.word_length_score_multiplier.get(min)
+		else:
+			assert(true, "No length mult for word with length %s" % word.length())
+	var score_up = letter_score_up * length_mult
 	Globals.score += score_up
 	
 	# Update swap count
 	var bonus = Globals.level_data.swap_bonus.get(word.length())
-	Globals.swaps += bonus if bonus != null else 0
+	if bonus == null:
+		# Not all lengths are tracked, so default to the highest defined
+		var max = Globals.level_data.swap_bonus.keys().max()
+		var min = Globals.level_data.swap_bonus.keys().min()
+		if word.length() > max:
+			bonus = Globals.level_data.swap_bonus.get(max)
+		elif word.length() < min:
+			bonus = Globals.level_data.swap_bonus.get(min)
+		else:
+			assert(true, "No bonus for word with length %s" % word.length())
+	Globals.swaps += bonus
 	
 	# Update words display
 	var new_matched_words = [word]

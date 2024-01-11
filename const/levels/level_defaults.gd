@@ -18,19 +18,25 @@ var win_type = E.WIN_TYPES.SCORE
 var win_threshold = 1
 var win_text = "Get over 1 points"
 var starting_swaps = 1
-var min_word_length = 4
+var min_word_length = 3
 var word_drag_type = E.WORD_DRAG.ADJACENT
 
 var swap_bonus = {
 	4: 0,
 	5: 1,
 	6: 2,
+	7: 2,
+	8: 3,
 }
 
 var word_length_score_multiplier = {
 	4: 1,
 	5: 2,
-	6: 5,
+	6: 3,
+	7: 5,
+	8: 7,
+	9: 10,
+	10: 15,
 }
 
 var letter_scores = Globals.default_letter_scores
