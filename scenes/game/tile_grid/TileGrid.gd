@@ -79,6 +79,8 @@ func guess_word():
 		remove_words([{"str": word1, "tiles": Globals.dragged_tiles}])
 	elif word_dict.is_word(word2):
 		remove_words([{"str": word2, "tiles": Globals.dragged_tiles}])
+	else:
+		Globals.idle = true
 
 func remove_words(words_to_remove):
 	exploding_tiles = {}

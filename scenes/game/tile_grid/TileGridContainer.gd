@@ -18,6 +18,8 @@ func _unhandled_input(event):
 					and is_adjacent(Globals.selected_tile, end_tile) \
 					and Globals.swaps > 0:
 				swap_tiles(Globals.selected_tile, end_tile)
+			else:
+				Globals.idle = true
 			Globals.selected_tile = null
 		else:
 			# A single tile was selected for swapping
@@ -27,6 +29,8 @@ func _unhandled_input(event):
 			else:
 				if Globals.dragged_tiles.size() >= Globals.level_data.min_word_length:
 					Signals.emit_signal("GuessWord")
+				else:
+					Globals.idle = true
 		clicked_tile = null; last_hover_tile = null; Globals.dragged_tiles = []
 	
 	# Handle mouse for clicking a tile
@@ -35,6 +39,7 @@ func _unhandled_input(event):
 		and event.pressed \
 		and Globals.idle:
 			clicked_tile = get_tile_at_point(get_local_mouse_position())
+			Globals.idle = false
 	
 	# Handle mouse movement for dragging tiles
 	if clicked_tile and event is InputEventMouseMotion and !Globals.selected_tile:
@@ -71,7 +76,6 @@ func swap_tiles(tile1, tile2):
 	$"../ScoreArea".count_swap()
 	
 	# Perform visual swap (prevent other actions while this is happening)
-	Globals.idle = false
 	var tween = create_tween()
 	tween.tween_property(tile1, "position", tile2.position, 0.25)
 	tween.parallel().tween_property(tile2, "position", tile1_position, 0.25)
