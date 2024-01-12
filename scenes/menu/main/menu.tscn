@@ -1,9 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqyfnnndmmbcb"]
+[gd_scene load_steps=4 format=3 uid="uid://cqyfnnndmmbcb"]
 
 [ext_resource type="Script" path="res://scenes/menu/main/menu.gd" id="1_4fs86"]
-[ext_resource type="Script" path="res://scenes/menu/main/StartButton.gd" id="1_jnaxd"]
-[ext_resource type="Script" path="res://scenes/menu/main/HowTo.gd" id="2_6ki0b"]
-[ext_resource type="Script" path="res://scenes/menu/main/Settings.gd" id="2_ib353"]
 [ext_resource type="StyleBox" uid="uid://47m8f88slmqa" path="res://tres/button.tres" id="2_tq3oa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lrdmq"]
@@ -50,18 +47,26 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("2_tq3oa")
 text = "PLAY"
-script = ExtResource("1_jnaxd")
 
 [node name="Settings" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("2_tq3oa")
 text = "SETTINGS"
-script = ExtResource("2_ib353")
 
 [node name="HowTo" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("2_tq3oa")
 text = "HOW TO PLAY"
-script = ExtResource("2_6ki0b")
+
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("2_tq3oa")
+text = "QUIT"
+
+[connection signal="pressed" from="Buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Buttons/HowTo" to="." method="_on_how_to_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]

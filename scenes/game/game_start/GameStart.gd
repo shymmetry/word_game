@@ -1,4 +1,4 @@
-extends GridContainer
+extends ReferenceRect
 
 func _ready():
 	$MenuLabel.text = "Level %s" % Globals.current_level
