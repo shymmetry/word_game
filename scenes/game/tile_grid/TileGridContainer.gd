@@ -37,7 +37,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_LEFT \
 		and event.pressed \
-		and Globals.idle:
+		and (Globals.idle or Globals.selected_tile):
 			clicked_tile = get_tile_at_point(get_local_mouse_position())
 			Globals.idle = false
 	
