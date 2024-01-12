@@ -5,7 +5,7 @@ var words = {}
 
 func _init():
 	# Populate dictionary
-	load_words(words, "res://static/usa_words.txt")
+	load_words(words, "res://static/collins_scrabble_words_2019.txt")
 
 func load_words(dict: Dictionary, file_name: String):
 	var file = FileAccess.open(file_name, FileAccess.READ)
@@ -14,4 +14,4 @@ func load_words(dict: Dictionary, file_name: String):
 		dict[content] = null
 
 func is_word(word: String):
-	return words.has(word.to_lower())
+	return words.has(word.to_upper())
