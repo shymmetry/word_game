@@ -67,16 +67,13 @@ func reset():
 	get_tree().reload_current_scene()
 
 func guess_word():
-	var word1 = ""; var word2 = ""
+	var word = ""
 	for tile in Globals.dragged_tiles:
 		var letter = tile.get_node("Letter").text
-		word1 = word1 + letter
-		word2 = letter + word2
+		word = word + letter
 	
-	if word_dict.is_word(word1):
-		remove_words([{"str": word1, "tiles": Globals.dragged_tiles}])
-	elif word_dict.is_word(word2):
-		remove_words([{"str": word2, "tiles": Globals.dragged_tiles}])
+	if word_dict.is_word(word):
+		remove_words([{"str": word, "tiles": Globals.dragged_tiles}])
 	else:
 		Globals.idle = true
 

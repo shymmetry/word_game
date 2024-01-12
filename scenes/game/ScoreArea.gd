@@ -67,3 +67,6 @@ func track_progress(word: String, score_up: int):
 func count_swap():
 	Globals.swaps -= 1
 	$SwapsNumber.text = str(Globals.swaps)
+
+func _on_in_game_menu_button_pressed():
+	$"../MenuCL".show()
