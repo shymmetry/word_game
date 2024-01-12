@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqyfnnndmmbcb"]
+[gd_scene load_steps=7 format=3 uid="uid://cqyfnnndmmbcb"]
 
 [ext_resource type="Script" path="res://scenes/menu/main/menu.gd" id="1_4fs86"]
 [ext_resource type="Script" path="res://scenes/menu/main/StartButton.gd" id="1_jnaxd"]
 [ext_resource type="Script" path="res://scenes/menu/main/HowTo.gd" id="2_6ki0b"]
 [ext_resource type="Script" path="res://scenes/menu/main/Settings.gd" id="2_ib353"]
+[ext_resource type="StyleBox" uid="uid://47m8f88slmqa" path="res://tres/button.tres" id="2_tq3oa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lrdmq"]
 font_size = 48
@@ -22,9 +23,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -122.5
-offset_top = -33.5
+offset_top = -120.0
 offset_right = 122.5
-offset_bottom = 33.5
+offset_bottom = -53.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Word Turd"
@@ -37,26 +38,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = 40.0
-offset_right = 60.0
-offset_bottom = 129.0
+offset_left = -76.5
+offset_top = -40.0
+offset_right = 76.5
+offset_bottom = 82.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Start" type="Button" parent="Buttons"]
 layout_mode = 2
-text = "Start"
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("2_tq3oa")
+text = "PLAY"
 script = ExtResource("1_jnaxd")
 
 [node name="Settings" type="Button" parent="Buttons"]
 layout_mode = 2
-text = "Settings
-"
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("2_tq3oa")
+text = "SETTINGS"
 script = ExtResource("2_ib353")
 
 [node name="HowTo" type="Button" parent="Buttons"]
 layout_mode = 2
-text = "How To Play
-"
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("2_tq3oa")
+text = "HOW TO PLAY"
 script = ExtResource("2_6ki0b")

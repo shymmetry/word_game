@@ -35,8 +35,8 @@ func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
 	if Globals.board_changed:
 		if has_won():
-			if !UserData.completed_levels.has(Globals.current_level):
-				UserData.completed_levels[Globals.current_level] = {}
+			if !UserData.completed_levels.has(str(Globals.current_level)):
+				UserData.completed_levels[str(Globals.current_level)] = {}
 			$"../../WinScreenCL".show()
 			store.save_game()
 		elif Globals.swaps <= 0 \
