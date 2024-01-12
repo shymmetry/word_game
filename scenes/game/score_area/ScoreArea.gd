@@ -1,7 +1,5 @@
 extends Node2D
 
-var matched_words = []
-
 func _ready():
 	$Title.text = "Level %s" % Globals.current_level
 
@@ -11,7 +9,7 @@ func _process(_delta):
 	$SwapsNumber.text = str(Globals.swaps)
 	$"VBoxContainer/Goal".text = Globals.level_data.win_text
 	$"VBoxContainer/ProgressBar".max_value = Globals.level_data.win_threshold
-	$"VBoxContainer/ProgressBar".value = Globals.score
+	$"VBoxContainer/ProgressBar".value = Globals.progress
 
 func score_word(word: String):
 	# Update score
@@ -47,15 +45,24 @@ func score_word(word: String):
 	Globals.swaps += bonus
 	
 	# Update words display
-	var new_matched_words = [word]
-	new_matched_words.append_array(matched_words.slice(0, 4))
-	matched_words = new_matched_words
+	Globals.matched_words = [word] + Globals.matched_words
 	var display_words = ""
-	for matched_word in matched_words:
+	for i in range(0, min(Globals.matched_words.size(), 4)):
+		var matched_word = Globals.matched_words[i]
 		display_words = matched_word + "\n" + display_words
 	$Words.text = display_words
 	
+	track_progress(word, score_up)
+	
 	return score_up
+
+func track_progress(word: String, score_up: int):
+	match Globals.level_data.win_type:
+		E.WIN_TYPES.SCORE:
+			Globals.progress += score_up
+		E.WIN_TYPES.WORD_SIZE:
+			if word.length() >= Globals.level_data.win_data.word_size:
+				Globals.progress += 1
 
 func count_swap():
 	Globals.swaps -= 1

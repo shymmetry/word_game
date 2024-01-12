@@ -19,6 +19,7 @@ func _init():
 	
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.score = 0
+	Globals.progress = 0
 	
 	letter_util = LU.new()
 	word_dict = ED.new()
@@ -47,10 +48,7 @@ func _process(_delta):
 		Globals.board_changed = false
 
 func has_won():
-	match Globals.level_data.win_type:
-		E.WIN_TYPES.SCORE:
-			return Globals.score >= Globals.level_data.win_threshold
-	return false
+	return Globals.progress >= Globals.level_data.win_threshold
 
 func init_tiles():
 	Globals.tiles = []

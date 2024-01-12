@@ -6,7 +6,9 @@ const num_levels = 4
 # Game variables
 var tiles = []
 var score = 0
+var progress = 0
 var swaps = 1
+var matched_words = []
 
 var board_changed = false
 var idle = true
