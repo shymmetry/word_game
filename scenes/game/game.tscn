@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=16 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGrid.gd" id="2_1ocn6"]
 [ext_resource type="Script" path="res://scenes/game/ScoreArea.gd" id="3_vlwa8"]
+[ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/tracker.tscn" id="4_6y3dl"]
 [ext_resource type="StyleBox" uid="uid://47m8f88slmqa" path="res://tres/button.tres" id="4_d6ar4"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://tres/hamburger.tres" id="4_f7i5n"]
 [ext_resource type="Texture2D" uid="uid://b50uc5r7wm45g" path="res://icons/TripleBar.png" id="4_gthw2"]
@@ -13,12 +14,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
-
-[sub_resource type="LabelSettings" id="LabelSettings_fqtkm"]
-font_size = 24
-
-[sub_resource type="LabelSettings" id="LabelSettings_l4v2q"]
-font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_j1hmb"]
 font_size = 18
@@ -58,37 +53,18 @@ shape = SubResource("RectangleShape2D_cgcgr")
 [node name="ScoreArea" type="Node2D" parent="ColorRect"]
 script = ExtResource("3_vlwa8")
 
-[node name="Score" type="Label" parent="ColorRect/ScoreArea"]
+[node name="Trackers" type="VBoxContainer" parent="ColorRect/ScoreArea"]
 offset_left = 35.0
-offset_top = 180.0
-offset_right = 106.0
-offset_bottom = 214.0
-text = "Score:"
-label_settings = SubResource("LabelSettings_fqtkm")
+offset_top = 170.0
+offset_right = 125.0
+offset_bottom = 260.0
+theme_override_constants/separation = 10
 
-[node name="ScoreNumber" type="Label" parent="ColorRect/ScoreArea"]
-offset_left = 175.0
-offset_top = 180.0
-offset_right = 215.0
-offset_bottom = 214.0
-text = "0"
-label_settings = SubResource("LabelSettings_l4v2q")
+[node name="ScoreTracker" parent="ColorRect/ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
+layout_mode = 2
 
-[node name="Swaps" type="Label" parent="ColorRect/ScoreArea"]
-offset_left = 35.0
-offset_top = 220.0
-offset_right = 167.0
-offset_bottom = 254.0
-text = "Swaps Left:"
-label_settings = SubResource("LabelSettings_fqtkm")
-
-[node name="SwapsNumber" type="Label" parent="ColorRect/ScoreArea"]
-offset_left = 175.0
-offset_top = 220.0
-offset_right = 215.0
-offset_bottom = 254.0
-text = "0"
-label_settings = SubResource("LabelSettings_l4v2q")
+[node name="SwapTracker" parent="ColorRect/ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
+layout_mode = 2
 
 [node name="Words" type="Label" parent="ColorRect/ScoreArea"]
 offset_left = 240.0
@@ -101,9 +77,9 @@ vertical_alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/ScoreArea"]
 offset_left = 40.0
-offset_top = 60.0
+offset_top = 80.0
 offset_right = 440.0
-offset_bottom = 114.0
+offset_bottom = 134.0
 
 [node name="ProgressBar" type="ProgressBar" parent="ColorRect/ScoreArea/VBoxContainer"]
 layout_mode = 2
@@ -289,6 +265,7 @@ theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "BACK"
 
 [node name="GameStartCL" type="CanvasLayer" parent="ColorRect"]
+visible = false
 
 [node name="GameStart" type="ColorRect" parent="ColorRect/GameStartCL"]
 anchors_preset = 15

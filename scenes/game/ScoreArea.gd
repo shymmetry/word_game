@@ -2,11 +2,13 @@ extends Node2D
 
 func _ready():
 	$Title.text = "Level %s" % Globals.current_level
+	$"Trackers/SwapTracker".set_icon("res://icons/outline_swap_horiz_white_24dp.png")
+	$"Trackers/ScoreTracker".set_icon("res://icons/outline_scoreboard_white_24dp.png")
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
-	$ScoreNumber.text = str(Globals.score)
-	$SwapsNumber.text = str(Globals.swaps)
+	$"Trackers/SwapTracker".set_value(Globals.swaps)
+	$"Trackers/ScoreTracker".set_value(Globals.score)
 	$"VBoxContainer/Goal".text = Globals.level_data.win_text
 	$"VBoxContainer/ProgressBar".max_value = Globals.level_data.win_threshold
 	$"VBoxContainer/ProgressBar".value = Globals.progress
@@ -66,7 +68,6 @@ func track_progress(word: String, score_up: int):
 
 func count_swap():
 	Globals.swaps -= 1
-	$SwapsNumber.text = str(Globals.swaps)
 
 func _on_in_game_menu_button_pressed():
 	$"../MenuCL".show()

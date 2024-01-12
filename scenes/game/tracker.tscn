@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://4rveb6yybb8j"]
+
+[ext_resource type="Texture2D" uid="uid://cj2hyiu5gtaks" path="res://icons/outline_swap_horiz_white_24dp.png" id="1_06myn"]
+[ext_resource type="Script" path="res://scenes/game/tracker.gd" id="1_xm3mw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7n22"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Tracker" type="Panel"]
+custom_minimum_size = Vector2(90, 40)
+offset_right = 90.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r7n22")
+script = ExtResource("1_xm3mw")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 38.0
+offset_bottom = 36.0
+texture = ExtResource("1_06myn")
+expand_mode = 1
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 80.0
+offset_bottom = 40.0
+text = "0
+"
+horizontal_alignment = 2
+vertical_alignment = 1
