@@ -8,7 +8,7 @@ func _init():
 		var level = level_scene.instantiate()
 		
 		level.level = num_level
-		level.get_node("Level").text = "Level %s" % num_level
+		level.get_node("Level").text = str(num_level)
 		
 		var highest_level_won = UserData.completed_levels.keys().max()
 		highest_level_won = 0 if highest_level_won == null else highest_level_won

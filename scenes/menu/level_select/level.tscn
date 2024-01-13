@@ -5,7 +5,7 @@
 [sub_resource type="Theme" id="Theme_ylx3x"]
 
 [node name="Button" type="Button"]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(100, 100)
 offset_right = 200.0
 offset_bottom = 200.0
 theme = SubResource("Theme_ylx3x")

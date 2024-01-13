@@ -35,6 +35,10 @@ window/handheld/orientation=1
 
 enabled=PackedStringArray("res://addons/explore-editor-theme/plugin.cfg")
 
+[gui]
+
+theme/custom="res://themes/main_theme.tres"
+
 [input]
 
 drag_word={
