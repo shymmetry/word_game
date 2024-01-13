@@ -3,7 +3,7 @@ extends Node2D
 func _ready():
 	$Title.text = "Level %s" % Globals.current_level
 	$"Trackers/SwapTracker".set_icon("res://icons/outline_swap_horiz_white_24dp.png")
-	$"Trackers/ScoreTracker".set_icon("res://icons/outline_scoreboard_white_24dp.png")
+	$"Trackers/ScoreTracker".set_icon("res://icons/outline_stars_white_36dp.png")
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):

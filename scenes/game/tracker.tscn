@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scenes/game/tracker.gd" id="1_xm3mw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7n22"]
+bg_color = Color(0.776471, 0.596078, 0.454902, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20

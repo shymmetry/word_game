@@ -7,7 +7,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_i0ny5"]
 font_size = 18
 
-[node name="Node2D" type="Control"]
+[node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0

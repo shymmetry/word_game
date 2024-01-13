@@ -39,6 +39,6 @@ offset_right = 14.5
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.67451, 0.580392, 0.956863, 1)
 text = "????"
 horizontal_alignment = 1

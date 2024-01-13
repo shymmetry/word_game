@@ -10,9 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Word Merge"
+config/name="Word Turd"
 run/main_scene="res://scenes/menu/main/menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
+boot_splash/bg_color=Color(0.737255, 0.415686, 0.235294, 1)
+boot_splash/image="res://icons/poop_emoji.png"
 
 [autoload]
 
@@ -27,6 +29,7 @@ UserData="*res://globals/user_data.gd"
 window/size/viewport_width=480
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+window/handheld/orientation=1
 
 [editor_plugins]
 
@@ -43,3 +46,4 @@ drag_word={
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.737255, 0.415686, 0.235294, 1)
