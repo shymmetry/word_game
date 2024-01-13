@@ -1,4 +1,4 @@
-extends ReferenceRect
+extends VBoxContainer
 
 func _ready():
 	if Globals.current_level == 0:

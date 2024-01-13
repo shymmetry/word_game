@@ -161,13 +161,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -138.0
-offset_top = -68.0
-offset_right = 138.0
-offset_bottom = 68.0
+offset_left = -140.0
+offset_top = -160.0
+offset_right = 136.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 script = ExtResource("7_5h4bb")
 
 [node name="GOLabel" type="Label" parent="GameOverCL/GameOver/VBoxContainer"]
@@ -183,14 +182,25 @@ text = "Score: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Node2D" type="VBoxContainer" parent="GameOverCL/GameOver/VBoxContainer"]
+[node name="Buttons" type="Control" parent="GameOverCL/GameOver/VBoxContainer"]
 layout_mode = 2
 
-[node name="RestartButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Node2D"]
+[node name="Container" type="VBoxContainer" parent="GameOverCL/GameOver/VBoxContainer/Buttons"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -79.0
+offset_right = 79.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="RestartButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Buttons/Container"]
 layout_mode = 2
 text = "RETRY"
 
-[node name="MainMenuButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Node2D"]
+[node name="MainMenuButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Buttons/Container"]
 layout_mode = 2
 text = "MAIN MENU"
 
@@ -205,7 +215,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="HFlowContainer" parent="WinScreenCL/WinScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WinScreenCL/WinScreen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -213,12 +223,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -138.0
-offset_top = -68.0
+offset_top = -160.0
 offset_right = 138.0
-offset_bottom = 68.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 script = ExtResource("9_2vw12")
 
 [node name="WinScreenLabel" type="Label" parent="WinScreenCL/WinScreen/VBoxContainer"]
@@ -228,11 +237,25 @@ label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer"]
+[node name="Buttons" type="Control" parent="WinScreenCL/WinScreen/VBoxContainer"]
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="WinScreenCL/WinScreen/VBoxContainer/Buttons"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -79.0
+offset_right = 79.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="MainMenuButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer/Buttons/Container"]
 layout_mode = 2
 text = "MAIN MENU"
 
-[node name="NextLevelButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer"]
+[node name="NextLevelButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer/Buttons/Container"]
 layout_mode = 2
 text = "NEXT LEVEL"
 
@@ -247,7 +270,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="GridContainer" parent="MenuCL/Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuCL/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -255,9 +278,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -76.0
-offset_top = -96.5
+offset_top = -160.0
 offset_right = 76.0
-offset_bottom = 96.5
+offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_4gls3")
@@ -269,20 +292,33 @@ label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
+[node name="Buttons" type="Control" parent="MenuCL/Menu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="MenuCL/Menu/VBoxContainer/Buttons"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -79.0
+offset_right = 79.0
+offset_bottom = 122.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="MainMenuButton" type="Button" parent="MenuCL/Menu/VBoxContainer/Buttons/Container"]
 layout_mode = 2
 text = "MAIN MENU"
 
-[node name="RestartButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="MenuCL/Menu/VBoxContainer/Buttons/Container"]
 layout_mode = 2
 text = "RESTART"
 
-[node name="BackButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
+[node name="BackButton" type="Button" parent="MenuCL/Menu/VBoxContainer/Buttons/Container"]
 layout_mode = 2
 text = "BACK"
 
 [node name="GameStartCL" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="GameStart" type="ColorRect" parent="GameStartCL"]
 anchors_preset = 15
@@ -292,7 +328,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="ReferenceRect" parent="GameStartCL/GameStart"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameStartCL/GameStart"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -300,19 +336,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -75.0
+offset_top = -160.0
 offset_right = 150.0
-offset_bottom = 75.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_wh0dg")
 
 [node name="MenuLabel" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 67.0
-grow_horizontal = 2
+layout_mode = 2
 text = "Level X"
 label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
@@ -320,35 +352,28 @@ vertical_alignment = 1
 
 [node name="Goal" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
 custom_minimum_size = Vector2(300, 40)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -20.0
-offset_right = 150.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 text = "SAMPLE GOAL"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="StartButton" type="Button" parent="GameStartCL/GameStart/VBoxContainer"]
+[node name="Buttons" type="Control" parent="GameStartCL/GameStart/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameStartCL/GameStart/VBoxContainer/Buttons"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -81.5
-offset_top = -38.0
-offset_right = 81.5
+offset_left = -44.0
+offset_right = 44.0
+offset_bottom = 40.0
 grow_horizontal = 2
-grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="StartButton" type="Button" parent="GameStartCL/GameStart/VBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
 text = "START"
 
 [node name="GiveUpCL" type="CanvasLayer" parent="."]
@@ -362,17 +387,17 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="GridContainer" parent="GiveUpCL/GiveUp"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GiveUpCL/GiveUp"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -76.0
-offset_top = -96.5
-offset_right = 76.0
-offset_bottom = 96.5
+offset_left = -103.5
+offset_top = -160.0
+offset_right = 103.5
+offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_ofsgs")
@@ -384,23 +409,37 @@ label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ConfirmButton" type="Button" parent="GiveUpCL/GiveUp/VBoxContainer"]
+[node name="Buttons" type="Control" parent="GiveUpCL/GiveUp/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GiveUpCL/GiveUp/VBoxContainer/Buttons"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.5
+offset_right = 72.5
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="ConfirmButton" type="Button" parent="GiveUpCL/GiveUp/VBoxContainer/Buttons/VBoxContainer"]
 layout_mode = 2
 text = "YES PLEASE"
 
-[node name="BackButton" type="Button" parent="GiveUpCL/GiveUp/VBoxContainer"]
+[node name="BackButton" type="Button" parent="GiveUpCL/GiveUp/VBoxContainer/Buttons/VBoxContainer"]
 layout_mode = 2
 text = "NO WAY"
 
 [connection signal="pressed" from="ScoreArea/InGameMenuButton" to="ScoreArea" method="_on_in_game_menu_button_pressed"]
 [connection signal="pressed" from="ScoreArea/GiveUp" to="ScoreArea" method="_on_give_up_pressed"]
-[connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Node2D/RestartButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Node2D/MainMenuButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/MainMenuButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/NextLevelButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_next_level_button_pressed"]
-[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/MainMenuButton" to="MenuCL/Menu/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/RestartButton" to="MenuCL/Menu/VBoxContainer" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/BackButton" to="MenuCL/Menu/VBoxContainer" method="_on_back_button_pressed"]
-[connection signal="pressed" from="GameStartCL/GameStart/VBoxContainer/StartButton" to="GameStartCL/GameStart/VBoxContainer" method="_on_start_button_pressed"]
-[connection signal="pressed" from="GiveUpCL/GiveUp/VBoxContainer/ConfirmButton" to="GiveUpCL/GiveUp/VBoxContainer" method="_on_confirm_button_pressed"]
-[connection signal="pressed" from="GiveUpCL/GiveUp/VBoxContainer/BackButton" to="GiveUpCL/GiveUp/VBoxContainer" method="_on_back_button_pressed"]
+[connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Buttons/Container/RestartButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Buttons/Container/MainMenuButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/Buttons/Container/MainMenuButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/Buttons/Container/NextLevelButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/Buttons/Container/MainMenuButton" to="MenuCL/Menu/VBoxContainer" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/Buttons/Container/RestartButton" to="MenuCL/Menu/VBoxContainer" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/Buttons/Container/BackButton" to="MenuCL/Menu/VBoxContainer" method="_on_back_button_pressed"]
+[connection signal="pressed" from="GameStartCL/GameStart/VBoxContainer/Buttons/VBoxContainer/StartButton" to="GameStartCL/GameStart/VBoxContainer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="GiveUpCL/GiveUp/VBoxContainer/Buttons/VBoxContainer/ConfirmButton" to="GiveUpCL/GiveUp/VBoxContainer" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="GiveUpCL/GiveUp/VBoxContainer/Buttons/VBoxContainer/BackButton" to="GiveUpCL/GiveUp/VBoxContainer" method="_on_back_button_pressed"]
