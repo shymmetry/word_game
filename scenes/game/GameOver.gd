@@ -1,5 +1,8 @@
 extends VBoxContainer
 
+func _process(_delta):
+	$Score.text = "Score: %s" % Globals.score
+
 func _on_restart_button_pressed():
 	Signals.emit_signal("StartGame")
 

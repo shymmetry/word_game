@@ -9,13 +9,11 @@
 [ext_resource type="Script" path="res://scenes/game/GameOver.gd" id="7_5h4bb"]
 [ext_resource type="Script" path="res://scenes/game/WinScreen.gd" id="9_2vw12"]
 [ext_resource type="Script" path="res://scenes/game/Menu.gd" id="11_4gls3"]
+[ext_resource type="Script" path="res://scenes/game/GiveUp.gd" id="11_ofsgs"]
 [ext_resource type="Script" path="res://scenes/game/GameStart.gd" id="12_wh0dg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
-
-[sub_resource type="LabelSettings" id="LabelSettings_j1hmb"]
-font_size = 18
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_argww"]
 bg_color = Color(0.835294, 0.690196, 0.486275, 1)
@@ -71,7 +69,12 @@ script = ExtResource("2_1ocn6")
 position = Vector2(215, 215)
 shape = SubResource("RectangleShape2D_cgcgr")
 
-[node name="ScoreArea" type="Node2D" parent="."]
+[node name="ScoreArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 260.0
+grow_horizontal = 2
 script = ExtResource("3_vlwa8")
 
 [node name="Trackers" type="VBoxContainer" parent="ScoreArea"]
@@ -87,29 +90,19 @@ layout_mode = 2
 [node name="SwapTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
 layout_mode = 2
 
-[node name="Words" type="Label" parent="ScoreArea"]
-visible = false
-offset_left = 240.0
-offset_top = 130.0
-offset_right = 445.0
-offset_bottom = 250.0
-label_settings = SubResource("LabelSettings_j1hmb")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScoreArea"]
+[node name="Progress" type="VBoxContainer" parent="ScoreArea"]
 offset_left = 90.0
 offset_top = 70.0
 offset_right = 390.0
 offset_bottom = 124.0
 
-[node name="ProgressBar" type="ProgressBar" parent="ScoreArea/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="ScoreArea/Progress"]
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_argww")
 theme_override_styles/fill = SubResource("StyleBoxFlat_od072")
 step = 1.0
 
-[node name="Goal" type="Label" parent="ScoreArea/VBoxContainer"]
+[node name="Goal" type="Label" parent="ScoreArea/Progress"]
 layout_mode = 2
 text = "Goal"
 horizontal_alignment = 1
@@ -134,6 +127,20 @@ text = "WORD TURD"
 label_settings = SubResource("LabelSettings_fmmef")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GiveUp" type="Button" parent="ScoreArea"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -146.0
+offset_top = -38.0
+offset_right = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Give Up"
 
 [node name="GameOverCL" type="CanvasLayer" parent="."]
 layer = 100
@@ -275,6 +282,7 @@ layout_mode = 2
 text = "BACK"
 
 [node name="GameStartCL" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="GameStart" type="ColorRect" parent="GameStartCL"]
 anchors_preset = 15
@@ -343,7 +351,49 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "START"
 
+[node name="GiveUpCL" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="GiveUp" type="ColorRect" parent="GiveUpCL"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.862745)
+
+[node name="VBoxContainer" type="GridContainer" parent="GiveUpCL/GiveUp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -96.5
+offset_right = 76.0
+offset_bottom = 96.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_ofsgs")
+
+[node name="MenuLabel" type="Label" parent="GiveUpCL/GiveUp/VBoxContainer"]
+layout_mode = 2
+text = "GIVE UP?"
+label_settings = SubResource("LabelSettings_2lkm2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="GiveUpCL/GiveUp/VBoxContainer"]
+layout_mode = 2
+text = "YES PLEASE"
+
+[node name="BackButton" type="Button" parent="GiveUpCL/GiveUp/VBoxContainer"]
+layout_mode = 2
+text = "NO WAY"
+
 [connection signal="pressed" from="ScoreArea/InGameMenuButton" to="ScoreArea" method="_on_in_game_menu_button_pressed"]
+[connection signal="pressed" from="ScoreArea/GiveUp" to="ScoreArea" method="_on_give_up_pressed"]
 [connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Node2D/RestartButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Node2D/MainMenuButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/MainMenuButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_main_menu_button_pressed"]
@@ -352,3 +402,5 @@ text = "START"
 [connection signal="pressed" from="MenuCL/Menu/VBoxContainer/RestartButton" to="MenuCL/Menu/VBoxContainer" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MenuCL/Menu/VBoxContainer/BackButton" to="MenuCL/Menu/VBoxContainer" method="_on_back_button_pressed"]
 [connection signal="pressed" from="GameStartCL/GameStart/VBoxContainer/StartButton" to="GameStartCL/GameStart/VBoxContainer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="GiveUpCL/GiveUp/VBoxContainer/ConfirmButton" to="GiveUpCL/GiveUp/VBoxContainer" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="GiveUpCL/GiveUp/VBoxContainer/BackButton" to="GiveUpCL/GiveUp/VBoxContainer" method="_on_back_button_pressed"]

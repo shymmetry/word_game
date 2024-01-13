@@ -1,17 +1,23 @@
-extends Node2D
+extends Control
 
 func _ready():
-	$Title.text = "Level %s" % Globals.current_level
+	if Globals.current_level == 0:
+		$Title.text = "Endless"
+	else:
+		$Title.text = "Level %s" % Globals.current_level
 	$"Trackers/SwapTracker".set_icon("res://icons/outline_swap_horiz_white_24dp.png")
 	$"Trackers/ScoreTracker".set_icon("res://icons/outline_stars_white_36dp.png")
+	
+	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
+		$Progress.hide()
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
 	$"Trackers/SwapTracker".set_value(Globals.swaps)
 	$"Trackers/ScoreTracker".set_value(Globals.score)
-	$"VBoxContainer/Goal".text = Globals.level_data.win_text
-	$"VBoxContainer/ProgressBar".max_value = Globals.level_data.win_threshold
-	$"VBoxContainer/ProgressBar".value = Globals.progress
+	$"Progress/Goal".text = Globals.level_data.win_text
+	$"Progress/ProgressBar".max_value = Globals.level_data.win_threshold
+	$"Progress/ProgressBar".value = Globals.progress
 
 func score_word(word: String):
 	# Update score
@@ -46,13 +52,7 @@ func score_word(word: String):
 			bonus = 0
 	Globals.swaps += bonus
 	
-	# Update words display
 	Globals.matched_words = [word] + Globals.matched_words
-	var display_words = ""
-	for i in range(0, min(Globals.matched_words.size(), 4)):
-		var matched_word = Globals.matched_words[i]
-		display_words = matched_word + "\n" + display_words
-	$Words.text = display_words
 	
 	track_progress(word, score_up)
 	
@@ -60,9 +60,9 @@ func score_word(word: String):
 
 func track_progress(word: String, score_up: int):
 	match Globals.level_data.win_type:
-		E.WIN_TYPES.SCORE:
+		E.WIN_TYPE.SCORE:
 			Globals.progress += score_up
-		E.WIN_TYPES.WORD_SIZE:
+		E.WIN_TYPE.WORD_SIZE:
 			if word.length() >= Globals.level_data.win_data.word_size:
 				Globals.progress += 1
 
@@ -71,3 +71,6 @@ func count_swap():
 
 func _on_in_game_menu_button_pressed():
 	$"../MenuCL".show()
+
+func _on_give_up_pressed():
+	$"../GiveUpCL".show()

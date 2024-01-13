@@ -1,10 +1,11 @@
 extends Node
 
-enum WIN_TYPES {
+enum WIN_TYPE {
 	SCORE, 
 	WORD_SCORE,
 	WORD_TOPIC,
 	WORD_SIZE,
+	NONE,
 }
 
 enum WORD_DRAG {

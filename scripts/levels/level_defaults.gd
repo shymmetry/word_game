@@ -14,7 +14,7 @@ var cols = 6
 var tile_size = 60
 var padding = 10
 
-var win_type = E.WIN_TYPES.SCORE
+var win_type = E.WIN_TYPE.SCORE
 var win_threshold = 1
 var win_text = "Get over 1 points"
 var win_data = {}

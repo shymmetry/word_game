@@ -15,7 +15,7 @@ var dropping_tiles_done = 0
 
 func _init():
 	if !Globals.level_data:
-		Levels.set_current_level(1)
+		Levels.set_current_level(0)
 	
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.score = 0
@@ -31,6 +31,7 @@ func _ready():
 	Signals.connect('DropFinished', drop_finished)
 	Signals.connect('StartGame', reset)
 	Signals.connect('GuessWord', guess_word)
+	Signals.connect('GameOver', game_over)
 
 func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
@@ -43,12 +44,25 @@ func _process(_delta):
 		elif Globals.swaps <= 0 \
 				and get_all_line_words().size() == 0 \
 				and Globals.level_data.word_drag_type == E.WORD_DRAG.LINE:
-			$"../../GameOverCL/GameOver/VBoxContainer/Score".text = "Score: %s" % Globals.score
 			$"../../GameOverCL".show()
+			game_over()
 		Globals.board_changed = false
 
 func has_won():
-	return Globals.progress >= Globals.level_data.win_threshold
+	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
+		return false
+	else:
+		return Globals.progress >= Globals.level_data.win_threshold
+
+func game_over():
+	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
+		var endless_data = UserData.completed_levels.get("0")
+		if !endless_data:
+			UserData.completed_levels["0"] = {"high_score": Globals.score}
+			store.save_game()
+		elif Globals.score > endless_data.high_score:
+			UserData.completed_levels["0"].high_score = Globals.score
+			store.save_game()
 
 func init_tiles():
 	Globals.tiles = []
