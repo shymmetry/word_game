@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=17 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGrid.gd" id="2_1ocn6"]
@@ -7,7 +7,6 @@
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://tres/hamburger.tres" id="4_f7i5n"]
 [ext_resource type="Texture2D" uid="uid://b50uc5r7wm45g" path="res://icons/TripleBar.png" id="4_gthw2"]
 [ext_resource type="Script" path="res://scenes/game/GameOver.gd" id="7_5h4bb"]
-[ext_resource type="StyleBox" uid="uid://cko7armi4wlch" path="res://tres/button_disabled.tres" id="8_1l18j"]
 [ext_resource type="Script" path="res://scenes/game/WinScreen.gd" id="9_2vw12"]
 [ext_resource type="Script" path="res://scenes/game/Menu.gd" id="11_4gls3"]
 [ext_resource type="Script" path="res://scenes/game/GameStart.gd" id="12_wh0dg"]
@@ -182,14 +181,10 @@ layout_mode = 2
 
 [node name="RestartButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Node2D"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("8_1l18j")
 text = "RETRY"
 
 [node name="MainMenuButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Node2D"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("8_1l18j")
 text = "MAIN MENU"
 
 [node name="WinScreenCL" type="CanvasLayer" parent="."]
@@ -228,14 +223,10 @@ vertical_alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("8_1l18j")
 text = "MAIN MENU"
 
 [node name="NextLevelButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("8_1l18j")
 text = "NEXT LEVEL"
 
 [node name="MenuCL" type="CanvasLayer" parent="."]
@@ -273,20 +264,14 @@ vertical_alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("8_1l18j")
 text = "MAIN MENU"
 
 [node name="RestartButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("8_1l18j")
 text = "RESTART"
 
 [node name="BackButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("8_1l18j")
 text = "BACK"
 
 [node name="GameStartCL" type="CanvasLayer" parent="."]
@@ -306,10 +291,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -96.5
-offset_right = 240.0
-offset_bottom = 63.5
+offset_left = -150.0
+offset_top = -75.0
+offset_right = 150.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_wh0dg")
@@ -356,8 +341,6 @@ offset_top = -38.0
 offset_right = 81.5
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("8_1l18j")
 text = "START"
 
 [connection signal="pressed" from="ScoreArea/InGameMenuButton" to="ScoreArea" method="_on_in_game_menu_button_pressed"]
