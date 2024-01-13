@@ -24,15 +24,13 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_2lkm2"]
 font_size = 48
 
-[node name="Game" type="Node2D"]
-
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect"]
 offset_right = 480.0
 offset_bottom = 720.0
 mouse_filter = 2
 color = Color(0.313726, 0.313726, 0.313726, 1)
 
-[node name="TileGridContainer" type="ReferenceRect" parent="ColorRect"]
+[node name="TileGridContainer" type="ReferenceRect" parent="."]
 clip_contents = true
 layout_mode = 0
 offset_left = 25.0
@@ -42,31 +40,31 @@ offset_bottom = 695.0
 mouse_filter = 2
 script = ExtResource("1_c2goi")
 
-[node name="TileGrid" type="Area2D" parent="ColorRect/TileGridContainer"]
+[node name="TileGrid" type="Area2D" parent="TileGridContainer"]
 z_index = 2
 script = ExtResource("2_1ocn6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/TileGridContainer/TileGrid"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileGridContainer/TileGrid"]
 position = Vector2(215, 215)
 shape = SubResource("RectangleShape2D_cgcgr")
 
-[node name="ScoreArea" type="Node2D" parent="ColorRect"]
+[node name="ScoreArea" type="Node2D" parent="."]
 script = ExtResource("3_vlwa8")
 
-[node name="Trackers" type="VBoxContainer" parent="ColorRect/ScoreArea"]
+[node name="Trackers" type="VBoxContainer" parent="ScoreArea"]
 offset_left = 35.0
 offset_top = 170.0
 offset_right = 125.0
 offset_bottom = 260.0
 theme_override_constants/separation = 10
 
-[node name="ScoreTracker" parent="ColorRect/ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
+[node name="ScoreTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
 layout_mode = 2
 
-[node name="SwapTracker" parent="ColorRect/ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
+[node name="SwapTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
 layout_mode = 2
 
-[node name="Words" type="Label" parent="ColorRect/ScoreArea"]
+[node name="Words" type="Label" parent="ScoreArea"]
 offset_left = 240.0
 offset_top = 130.0
 offset_right = 445.0
@@ -75,23 +73,23 @@ label_settings = SubResource("LabelSettings_j1hmb")
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/ScoreArea"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScoreArea"]
 offset_left = 40.0
 offset_top = 80.0
 offset_right = 440.0
 offset_bottom = 134.0
 
-[node name="ProgressBar" type="ProgressBar" parent="ColorRect/ScoreArea/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="ScoreArea/VBoxContainer"]
 layout_mode = 2
 step = 1.0
 
-[node name="Goal" type="Label" parent="ColorRect/ScoreArea/VBoxContainer"]
+[node name="Goal" type="Label" parent="ScoreArea/VBoxContainer"]
 layout_mode = 2
 text = "Goal"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InGameMenuButton" type="Button" parent="ColorRect/ScoreArea"]
+[node name="InGameMenuButton" type="Button" parent="ScoreArea"]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 26.0
@@ -103,7 +101,7 @@ theme_override_styles/pressed = ExtResource("4_f7i5n")
 theme_override_styles/focus = ExtResource("4_f7i5n")
 icon = ExtResource("4_gthw2")
 
-[node name="Title" type="Label" parent="ColorRect/ScoreArea"]
+[node name="Title" type="Label" parent="ScoreArea"]
 offset_right = 480.0
 offset_bottom = 60.0
 text = "WORD TURD"
@@ -111,11 +109,11 @@ label_settings = SubResource("LabelSettings_fmmef")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameOverCL" type="CanvasLayer" parent="ColorRect"]
+[node name="GameOverCL" type="CanvasLayer" parent="."]
 layer = 100
 visible = false
 
-[node name="GameOver" type="ColorRect" parent="ColorRect/GameOverCL"]
+[node name="GameOver" type="ColorRect" parent="GameOverCL"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -123,7 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/GameOverCL/GameOver"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverCL/GameOver"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -139,38 +137,38 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("7_5h4bb")
 
-[node name="GOLabel" type="Label" parent="ColorRect/GameOverCL/GameOver/VBoxContainer"]
+[node name="GOLabel" type="Label" parent="GameOverCL/GameOver/VBoxContainer"]
 layout_mode = 2
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Score" type="Label" parent="ColorRect/GameOverCL/GameOver/VBoxContainer"]
+[node name="Score" type="Label" parent="GameOverCL/GameOver/VBoxContainer"]
 layout_mode = 2
 text = "Score: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Node2D" type="VBoxContainer" parent="ColorRect/GameOverCL/GameOver/VBoxContainer"]
+[node name="Node2D" type="VBoxContainer" parent="GameOverCL/GameOver/VBoxContainer"]
 layout_mode = 2
 
-[node name="RestartButton" type="Button" parent="ColorRect/GameOverCL/GameOver/VBoxContainer/Node2D"]
+[node name="RestartButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Node2D"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "RETRY"
 
-[node name="MainMenuButton" type="Button" parent="ColorRect/GameOverCL/GameOver/VBoxContainer/Node2D"]
+[node name="MainMenuButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Node2D"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "MAIN MENU"
 
-[node name="WinScreenCL" type="CanvasLayer" parent="ColorRect"]
+[node name="WinScreenCL" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="WinScreen" type="ColorRect" parent="ColorRect/WinScreenCL"]
+[node name="WinScreen" type="ColorRect" parent="WinScreenCL"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -178,7 +176,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="HFlowContainer" parent="ColorRect/WinScreenCL/WinScreen"]
+[node name="VBoxContainer" type="HFlowContainer" parent="WinScreenCL/WinScreen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -194,29 +192,29 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("9_2vw12")
 
-[node name="WinScreenLabel" type="Label" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
+[node name="WinScreenLabel" type="Label" parent="WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
 text = "YOU WON!"
 label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "MAIN MENU"
 
-[node name="NextLevelButton" type="Button" parent="ColorRect/WinScreenCL/WinScreen/VBoxContainer"]
+[node name="NextLevelButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "NEXT LEVEL"
 
-[node name="MenuCL" type="CanvasLayer" parent="ColorRect"]
+[node name="MenuCL" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Menu" type="ColorRect" parent="ColorRect/MenuCL"]
+[node name="Menu" type="ColorRect" parent="MenuCL"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -224,7 +222,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="GridContainer" parent="ColorRect/MenuCL/Menu"]
+[node name="VBoxContainer" type="GridContainer" parent="MenuCL/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -239,35 +237,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_4gls3")
 
-[node name="MenuLabel" type="Label" parent="ColorRect/MenuCL/Menu/VBoxContainer"]
+[node name="MenuLabel" type="Label" parent="MenuCL/Menu/VBoxContainer"]
 layout_mode = 2
 text = "MENU"
 label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="ColorRect/MenuCL/Menu/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "MAIN MENU"
 
-[node name="RestartButton" type="Button" parent="ColorRect/MenuCL/Menu/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "RESTART"
 
-[node name="BackButton" type="Button" parent="ColorRect/MenuCL/Menu/VBoxContainer"]
+[node name="BackButton" type="Button" parent="MenuCL/Menu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "BACK"
 
-[node name="GameStartCL" type="CanvasLayer" parent="ColorRect"]
-visible = false
+[node name="GameStartCL" type="CanvasLayer" parent="."]
 
-[node name="GameStart" type="ColorRect" parent="ColorRect/GameStartCL"]
+[node name="GameStart" type="ColorRect" parent="GameStartCL"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -275,7 +272,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.862745)
 
-[node name="VBoxContainer" type="ReferenceRect" parent="ColorRect/GameStartCL/GameStart"]
+[node name="VBoxContainer" type="ReferenceRect" parent="GameStartCL/GameStart"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -290,7 +287,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_wh0dg")
 
-[node name="MenuLabel" type="Label" parent="ColorRect/GameStartCL/GameStart/VBoxContainer"]
+[node name="MenuLabel" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -301,7 +298,7 @@ label_settings = SubResource("LabelSettings_2lkm2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Goal" type="Label" parent="ColorRect/GameStartCL/GameStart/VBoxContainer"]
+[node name="Goal" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 1
 anchors_preset = 8
@@ -320,7 +317,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="StartButton" type="Button" parent="ColorRect/GameStartCL/GameStart/VBoxContainer"]
+[node name="StartButton" type="Button" parent="GameStartCL/GameStart/VBoxContainer"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -336,12 +333,12 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = ExtResource("4_d6ar4")
 text = "START"
 
-[connection signal="pressed" from="ColorRect/ScoreArea/InGameMenuButton" to="ColorRect/ScoreArea" method="_on_in_game_menu_button_pressed"]
-[connection signal="pressed" from="ColorRect/GameOverCL/GameOver/VBoxContainer/Node2D/RestartButton" to="ColorRect/GameOverCL/GameOver/VBoxContainer" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="ColorRect/GameOverCL/GameOver/VBoxContainer/Node2D/MainMenuButton" to="ColorRect/GameOverCL/GameOver/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="ColorRect/WinScreenCL/WinScreen/VBoxContainer/MainMenuButton" to="ColorRect/WinScreenCL/WinScreen/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="ColorRect/WinScreenCL/WinScreen/VBoxContainer/NextLevelButton" to="ColorRect/WinScreenCL/WinScreen/VBoxContainer" method="_on_next_level_button_pressed"]
-[connection signal="pressed" from="ColorRect/MenuCL/Menu/VBoxContainer/MainMenuButton" to="ColorRect/MenuCL/Menu/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="ColorRect/MenuCL/Menu/VBoxContainer/RestartButton" to="ColorRect/MenuCL/Menu/VBoxContainer" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="ColorRect/MenuCL/Menu/VBoxContainer/BackButton" to="ColorRect/MenuCL/Menu/VBoxContainer" method="_on_back_button_pressed"]
-[connection signal="pressed" from="ColorRect/GameStartCL/GameStart/VBoxContainer/StartButton" to="ColorRect/GameStartCL/GameStart/VBoxContainer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="ScoreArea/InGameMenuButton" to="ScoreArea" method="_on_in_game_menu_button_pressed"]
+[connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Node2D/RestartButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Node2D/MainMenuButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/MainMenuButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/NextLevelButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/MainMenuButton" to="MenuCL/Menu/VBoxContainer" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/RestartButton" to="MenuCL/Menu/VBoxContainer" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/BackButton" to="MenuCL/Menu/VBoxContainer" method="_on_back_button_pressed"]
+[connection signal="pressed" from="GameStartCL/GameStart/VBoxContainer/StartButton" to="GameStartCL/GameStart/VBoxContainer" method="_on_start_button_pressed"]
