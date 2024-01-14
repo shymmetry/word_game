@@ -2,67 +2,22 @@ extends Area2D
 
 const tile_scene = preload("res://scenes/game/tile_grid/tile.tscn")
 const word_pop = preload("res://scenes/game/word_pop/word_pop.tscn")
-const ED = preload("res://scripts/dict.gd")
 const LU = preload("res://scripts/letters.gd")
 
 var letter_util = null
-var word_dict = null
-var store = null
 
 var exploding_tiles = {}
 var exploding_tiles_done = 0
 var dropping_tiles_done = 0
 
 func _init():
-	if !Globals.level_data:
-		Levels.set_current_level(0)
-	
-	Globals.swaps = Globals.level_data.starting_swaps
-	Globals.score = 0
-	Globals.progress = 0
-	
 	letter_util = LU.new()
-	word_dict = ED.new()
-	store = Store.new()
 
 func _ready():
 	init_tiles()
 	Signals.connect('ExplodeFinished', explode_finished)
 	Signals.connect('DropFinished', drop_finished)
-	Signals.connect('StartGame', reset)
 	Signals.connect('GuessWord', guess_word)
-	Signals.connect('GameOver', game_over)
-
-func _process(_delta):
-	# Perform any necessary checks when the state of the board changes
-	if Globals.board_changed:
-		if has_won():
-			if !UserData.completed_levels.has(str(Globals.current_level)):
-				UserData.completed_levels[str(Globals.current_level)] = {}
-			$"../../WinScreenCL".show()
-			store.save_game()
-		elif Globals.swaps <= 0 \
-				and get_all_line_words().size() == 0 \
-				and Globals.level_data.word_drag_type == E.WORD_DRAG.LINE:
-			$"../../GameOverCL".show()
-			game_over()
-		Globals.board_changed = false
-
-func has_won():
-	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
-		return false
-	else:
-		return Globals.progress >= Globals.level_data.win_threshold
-
-func game_over():
-	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
-		var endless_data = UserData.completed_levels.get("0")
-		if !endless_data:
-			UserData.completed_levels["0"] = {"high_score": Globals.score}
-			store.save_game()
-		elif Globals.score > endless_data.high_score:
-			UserData.completed_levels["0"].high_score = Globals.score
-			store.save_game()
 
 func init_tiles():
 	Globals.tiles = []
@@ -75,18 +30,13 @@ func init_tiles():
 			
 		Globals.tiles.append(tile_col)
 
-func reset():
-	$"../../GameOverCL".hide()
-	$"../../WinScreenCL".hide()
-	get_tree().reload_current_scene()
-
 func guess_word():
 	var word = ""
 	for tile in Globals.dragged_tiles:
 		var letter = tile.get_node("Letter").text
 		word = word + letter
 	
-	if word_dict.is_word(word):
+	if Dict.is_word(word):
 		remove_words([{"str": word, "tiles": Globals.dragged_tiles}])
 	else:
 		Globals.idle = true
@@ -200,53 +150,6 @@ func drop_finished():
 		Globals.board_changed = true
 		Globals.idle = true
 
-func get_all_line_words():
-	# Gets all the words on the board starting from any letter 
-	var found = []
-	for col in range(0, Globals.level_data.cols):
-		for row in range(0, Globals.level_data.rows):
-			for dif in [[1,0],[-1,0],[0,1],[0,-1]]:
-				var word = get_word(row, col, dif[0], dif[1])
-				if word: found.append(word)
-	return found
-
-func get_word(x: int, y: int, xdif: int, ydif: int):
-	# Gets the longest word starting at a given point and going in a given 
-	# direction. If no word is found null is returned.
-	var letters = ""
-	var word_tiles = []
-	var xrange 
-	var yrange
-	match xdif:
-		-1: xrange = range(x, -1, -1)
-		0: xrange = [x]
-		1: xrange = range(x, Globals.level_data.cols)
-	match ydif:
-		-1: yrange = range(y, -1, -1)
-		0: yrange = [y]
-		1: yrange = range(y, Globals.level_data.rows)
-	for col in xrange:
-		for row in yrange:
-			letters += get_letter(col, row)
-	
-	var longest_str = get_longest_word(letters)
-	if !longest_str: return null
-	
-	for i in range(0, longest_str.length()):
-		word_tiles.append(Globals.tiles[x+(i*xdif)][y+(i*ydif)])
-	return {"str": longest_str, "tiles": word_tiles}
-
-func get_letter(x: int, y: int):
-	return Globals.tiles[x][y].get_node("Letter").text
-
-func get_longest_word(letters: String):
-	if letters.length() < Globals.level_data.min_word_length: return null
-	for length in range(letters.length(), Globals.level_data.min_word_length-1, -1):
-		var word = letters.substr(0, length)
-		if word_dict.is_word(word):
-			return word
-	return null
-
 func create_tile(col: int, row: int, new: bool = false):
 	var tile = tile_scene.instantiate()
 	
@@ -264,12 +167,3 @@ func create_tile(col: int, row: int, new: bool = false):
 
 	add_child(tile)
 	return tile
-
-func print_tiles():
-	var tile_letters = []
-	for col in range(0, Globals.level_data.cols):
-		var tile_letters_col = []
-		for row in range(0, Globals.level_data.rows):
-			tile_letters_col.append(get_letter(col, row))
-		tile_letters.append(tile_letters_col)
-	print(tile_letters)

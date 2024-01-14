@@ -5,10 +5,11 @@
 [sub_resource type="LabelSettings" id="LabelSettings_lrdmq"]
 font_size = 48
 
-[node name="Menu" type="ColorRect"]
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 720.0
-color = Color(0.313726, 0.313726, 0.313726, 0)
 script = ExtResource("1_4fs86")
 
 [node name="Title" type="Label" parent="."]

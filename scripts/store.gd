@@ -1,5 +1,4 @@
 extends Node
-class_name Store
 
 func save_game():
 	var save_data = UserData.save_data()

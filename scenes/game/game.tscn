@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=18 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGrid.gd" id="2_1ocn6"]
 [ext_resource type="Script" path="res://scenes/game/ScoreArea.gd" id="3_vlwa8"]
 [ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/tracker.tscn" id="4_6y3dl"]
@@ -45,11 +46,13 @@ font_color = Color(0.952941, 0.972549, 1, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_2lkm2"]
 font_size = 48
 
-[node name="ColorRect" type="ColorRect"]
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 720.0
 mouse_filter = 2
-color = Color(0.737255, 0.415686, 0.235294, 1)
+script = ExtResource("1_h6npk")
 
 [node name="TileGridContainer" type="ReferenceRect" parent="."]
 clip_contents = true
@@ -78,6 +81,7 @@ grow_horizontal = 2
 script = ExtResource("3_vlwa8")
 
 [node name="Trackers" type="VBoxContainer" parent="ScoreArea"]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 170.0
 offset_right = 125.0
@@ -91,6 +95,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Progress" type="VBoxContainer" parent="ScoreArea"]
+layout_mode = 0
 offset_left = 90.0
 offset_top = 70.0
 offset_right = 390.0
@@ -109,6 +114,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="InGameMenuButton" type="Button" parent="ScoreArea"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 26.0
@@ -121,6 +127,7 @@ theme_override_styles/focus = ExtResource("4_f7i5n")
 icon = ExtResource("4_gthw2")
 
 [node name="Title" type="Label" parent="ScoreArea"]
+layout_mode = 0
 offset_right = 480.0
 offset_bottom = 60.0
 text = "WORD TURD"
@@ -357,6 +364,9 @@ text = "SAMPLE GOAL"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Label" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
+layout_mode = 2
 
 [node name="Buttons" type="Control" parent="GameStartCL/GameStart/VBoxContainer"]
 layout_mode = 2

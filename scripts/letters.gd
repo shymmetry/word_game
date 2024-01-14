@@ -1,6 +1,9 @@
 extends Node
 class_name LetterUtil
 
+# This class isn't a global AutoLoad because it relies on level data only
+# known at the start of the game and therefore must be instantiated by it.
+
 var letter_picker_freq_total = 0
 
 func _init():

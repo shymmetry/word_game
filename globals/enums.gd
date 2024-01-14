@@ -12,3 +12,9 @@ enum WORD_DRAG {
 	LINE,
 	ADJACENT,
 }
+
+enum TILE_TYPE {
+	NORMAL,
+	MULTIPLIER,
+	PURPLE,
+}

@@ -23,6 +23,8 @@ Globals="*res://globals/globals.gd"
 E="*res://globals/enums.gd"
 Levels="*res://scripts/levels.gd"
 UserData="*res://globals/user_data.gd"
+Store="*res://scripts/store.gd"
+Dict="*res://scripts/dict.gd"
 
 [display]
 
