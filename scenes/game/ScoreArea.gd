@@ -15,7 +15,7 @@ func _ready():
 func _process(_delta):
 	$"Trackers/SwapTracker".set_value(Globals.swaps)
 	$"Trackers/ScoreTracker".set_value(Globals.score)
-	$"Progress/Goal".text = Globals.level_data.win_text
+	$"Progress/Goal".text = Globals.level_data.goal
 	$"Progress/ProgressBar".max_value = Globals.level_data.win_threshold
 	$"Progress/ProgressBar".value = Globals.progress
 

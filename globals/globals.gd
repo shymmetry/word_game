@@ -1,7 +1,7 @@
 extends Node
 
 # Constants
-const num_levels = 5
+const num_levels = 6
 
 # Game variables
 var tiles = []

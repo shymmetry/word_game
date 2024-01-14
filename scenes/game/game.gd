@@ -2,7 +2,7 @@ extends Control
 
 func _init():
 	if !Globals.level_data:
-		Levels.set_current_level(0)
+		Levels.set_current_level(1)
 	
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.score = 0

@@ -31,15 +31,27 @@ func init_tiles():
 		Globals.tiles.append(tile_col)
 
 func guess_word():
-	var word = ""
-	for tile in Globals.dragged_tiles:
-		var letter = tile.get_node("Letter").text
-		word = word + letter
-	
-	if Dict.is_word(word):
+	var word = get_word("", Globals.dragged_tiles)
+	if word:
 		remove_words([{"str": word, "tiles": Globals.dragged_tiles}])
 	else:
 		Globals.idle = true
+
+func get_word(word, tiles):
+	const is_word = false
+	const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for speed
+	for i in range(0, tiles.size()):
+		var tile = tiles[i]
+		var letter = tile.get_node("Letter").text
+		if letter != "?":
+			word = word + letter
+		else:
+			for add_letter in all_letters:
+				var final_word = get_word(word + add_letter, tiles.slice(i+1, tiles.size()))
+				if final_word:
+					return final_word
+			return null
+	return word if Dict.is_word(word) else null
 
 func remove_words(words_to_remove):
 	exploding_tiles = {}

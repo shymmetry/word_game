@@ -1,12 +1,11 @@
 extends Node
 
-const starting_swaps = 1
-const win_threshold = 150
-const goal = "Get over 150 points"
-const level_info = "Use ? tiles as any letter"
+const starting_swaps = 0
+const win_threshold = 9000
+const goal = "LOL OVER 9000 POINTS???"
 
 const letter_freq = {
-	"?": 300,
+	"?": 100,
 	"E": 1202,
 	"T": 910,
 	"A": 812,

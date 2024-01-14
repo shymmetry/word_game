@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=20 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
@@ -45,6 +45,12 @@ font_color = Color(0.952941, 0.972549, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2lkm2"]
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_na7p3"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_fn5ty"]
+font_size = 12
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -361,12 +367,17 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
 text = "SAMPLE GOAL"
+label_settings = SubResource("LabelSettings_na7p3")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
+[node name="LevelInfo" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
 layout_mode = 2
+text = "Level Info"
+label_settings = SubResource("LabelSettings_fn5ty")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Buttons" type="Control" parent="GameStartCL/GameStart/VBoxContainer"]
 layout_mode = 2

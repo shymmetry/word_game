@@ -16,7 +16,8 @@ var padding = 10
 
 var win_type = E.WIN_TYPE.SCORE
 var win_threshold = 1
-var win_text = "Get over 1 points"
+var goal = "Get over 1 points"
+var level_info = ""
 var win_data = {}
 var starting_swaps = 1
 var min_word_length = 3
@@ -66,6 +67,7 @@ var letter_scores = {
 	"Q": 9,
 	"J": 9,
 	"Z": 9,
+	"?": 0,
 }
 
 var letter_freq = {
