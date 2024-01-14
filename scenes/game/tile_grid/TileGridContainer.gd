@@ -51,15 +51,7 @@ func _unhandled_input(event):
 			
 			if hover_tile == clicked_tile and Globals.dragged_tiles.size() == 0:
 				Globals.dragged_tiles.append(hover_tile)
-			elif Globals.level_data.word_drag_type == E.WORD_DRAG.LINE \
-					and samecol != samerow:
-				var dragged_tiles = []
-				for col in range(min(hover_tile.col, clicked_tile.col), max(hover_tile.col, clicked_tile.col) + 1):
-					for row in range(min(hover_tile.row, clicked_tile.row), max(hover_tile.row, clicked_tile.row) + 1):
-						dragged_tiles.append(Globals.tiles[col][row])
-				Globals.dragged_tiles = dragged_tiles
-			elif Globals.level_data.word_drag_type == E.WORD_DRAG.ADJACENT \
-					and is_adjacent(Globals.dragged_tiles.back(), hover_tile) \
+			elif is_adjacent(Globals.dragged_tiles.back(), hover_tile) \
 					and !Globals.dragged_tiles.has(hover_tile):
 				Globals.dragged_tiles.append(hover_tile)
 			else:

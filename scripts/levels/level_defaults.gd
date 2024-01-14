@@ -20,7 +20,6 @@ var win_text = "Get over 1 points"
 var win_data = {}
 var starting_swaps = 1
 var min_word_length = 3
-var word_drag_type = E.WORD_DRAG.ADJACENT
 
 var swap_bonus = {
 	4: 0,
