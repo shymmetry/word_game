@@ -70,8 +70,6 @@ func remove_word(word_tiles: WordTiles):
 	# Remove all the points that were matched
 	exploding_tiles = []
 	for tile in word_tiles.tiles:
-		if tile.tile_type == E.TILE_TYPE.HARDENED:
-			pass
 		exploding_tiles.append(tile)
 		exploding_tiles_done += 1
 		tile.explode()
@@ -99,7 +97,7 @@ func explode_finished():
 		
 		drop_tiles(exploding_tiles, new_tiles)
 
-func populate_tiles(removed_tiles: Array[Tile]):
+func populate_tiles(removed_tiles: Array):
 	# Adds new tiles for each given removed point. The created tiles are placed
 	# in new negative y rows.
 	var col_totals = []; col_totals.resize(Globals.level_data.cols); col_totals.fill(0)
@@ -117,7 +115,7 @@ func populate_tiles(removed_tiles: Array[Tile]):
 	
 	return new_tiles
 
-func drop_tiles(removed_tiles: Array[Tile], new_tiles: Array):
+func drop_tiles(removed_tiles: Array, new_tiles: Array):
 	# 2D array of the number of spaces each tile needs to drop
 	var drops = []
 	for i in range(0, Globals.level_data.cols):

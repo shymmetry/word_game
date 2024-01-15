@@ -10,6 +10,7 @@ var tile_type = E.TILE_TYPE.NORMAL
 
 var normal_base_style = preload("res://tres/tile/base/tile_normal.tres")
 var harden_base_style = preload("res://tres/tile/base/tile_harden.tres")
+var mult_base_style = preload("res://tres/tile/base/tile_multiplier.tres")
 var clicked_overlay_style = preload("res://tres/tile/overlay/tile_clicked_overlay.tres")
 var normal_overlay_style = preload("res://tres/tile/overlay/tile_normal_overlay.tres")
 var dragged_overlay_style = preload("res://tres/tile/overlay/tile_dragged_overlay.tres")
@@ -49,6 +50,8 @@ func _process(_delta):
 	match tile_type:
 		E.TILE_TYPE.NORMAL:
 			update_stylebox($Base, normal_base_style)
+		E.TILE_TYPE.MULTIPLIER:
+			update_stylebox($Base, mult_base_style)
 		E.TILE_TYPE.HARDENED:
 			update_stylebox($Base, harden_base_style)
 

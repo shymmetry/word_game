@@ -21,9 +21,10 @@ func _process(_delta):
 
 func score_word(word_tiles: WordTiles):
 	# Update score
-	var letter_score_up = 0
+	var letter_score = 0
 	for letter in word_tiles.word:
-		letter_score_up += Globals.level_data.letter_scores.get(letter)
+		letter_score += Globals.level_data.letter_scores.get(letter)
+	
 	var length_mult = Globals.level_data.word_length_score_multiplier.get(word_tiles.word.length())
 	if length_mult == null:
 		# Not all lengths are tracked, so default to the highest defined
@@ -35,7 +36,12 @@ func score_word(word_tiles: WordTiles):
 			length_mult = Globals.level_data.word_length_score_multiplier.get(minwl)
 		else:
 			length_mult = 1
-	var score_up = letter_score_up * length_mult
+	
+	var tile_mult = 1
+	for tile in word_tiles.tiles:
+		if tile.tile_type == E.TILE_TYPE.MULTIPLIER: tile_mult *= 2
+	
+	var score_up = letter_score * length_mult * tile_mult
 	Globals.score += score_up
 	
 	# Update swap count
