@@ -17,7 +17,7 @@ func _init():
 	add_child(endless)
 	
 	# Add normal levels
-	for num_level in range(1, Globals.num_levels + 1):
+	for num_level in range(1, Levels.num_levels() + 1):
 		var user_data = UserData.completed_levels.get(str(num_level))
 		var level = level_scene.instantiate()
 		

@@ -3,7 +3,8 @@ extends Node
 const starting_swaps = 0
 const win_threshold = 100
 const goal = "Get over 100 points"
-const level_info = "Use [?] tiles as any letter"
+const level_info = "Words must contain 4+ letters"
+const min_word_length = 4
 
 const letter_freq = {
 	"?": 300,

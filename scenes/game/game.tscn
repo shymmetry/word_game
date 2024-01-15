@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=21 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
@@ -38,6 +38,9 @@ border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 6
 corner_radius_bottom_left = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_m8gcd"]
+font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_fmmef"]
 font_size = 32
@@ -93,9 +96,7 @@ offset_top = 170.0
 offset_right = 125.0
 offset_bottom = 260.0
 theme_override_constants/separation = 10
-
-[node name="ScoreTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
-layout_mode = 2
+alignment = 2
 
 [node name="SwapTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
 layout_mode = 2
@@ -108,10 +109,24 @@ offset_right = 390.0
 offset_bottom = 124.0
 
 [node name="ProgressBar" type="ProgressBar" parent="ScoreArea/Progress"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_argww")
 theme_override_styles/fill = SubResource("StyleBoxFlat_od072")
 step = 1.0
+show_percentage = false
+
+[node name="Progress" type="Label" parent="ScoreArea/Progress/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0 / 0"
+label_settings = SubResource("LabelSettings_m8gcd")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Goal" type="Label" parent="ScoreArea/Progress"]
 layout_mode = 2
