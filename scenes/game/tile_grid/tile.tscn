@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjn0ohfkaqqbp"]
+[gd_scene load_steps=9 format=3 uid="uid://cjn0ohfkaqqbp"]
 
-[ext_resource type="StyleBox" uid="uid://cumsb3w1jkw7v" path="res://tres/tile_dragged.tres" id="1_ch1xw"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/tile.gd" id="2_1hfe7"]
+[ext_resource type="StyleBox" uid="uid://bvpdnl601inlb" path="res://tres/tile/underlay/tile_normal_underlay.tres" id="2_e8rig"]
+[ext_resource type="StyleBox" uid="uid://b5k3ga3wpywrm" path="res://tres/tile/base/tile_normal.tres" id="3_d3afk"]
+[ext_resource type="StyleBox" uid="uid://bwvtfmanm0ilu" path="res://tres/tile/overlay/tile_dragged_overlay.tres" id="4_uojc2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a6iek"]
 font_size = 32
@@ -45,13 +47,34 @@ _data = {
 "explode": SubResource("Animation_at1xv")
 }
 
-[node name="Tile" type="Panel"]
+[node name="Tile" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 60.0
 offset_bottom = 60.0
 pivot_offset = Vector2(30, 30)
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_ch1xw")
 script = ExtResource("2_1hfe7")
+
+[node name="Underlay" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_e8rig")
+
+[node name="Base" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_d3afk")
 
 [node name="Letter" type="Label" parent="."]
 layout_mode = 1
@@ -65,7 +88,6 @@ text = "?"
 label_settings = SubResource("LabelSettings_a6iek")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="Score" type="Label" parent="."]
 layout_mode = 0
@@ -74,6 +96,16 @@ offset_bottom = 20.0
 text = "?"
 label_settings = SubResource("LabelSettings_43hrm")
 horizontal_alignment = 1
+
+[node name="Overlay" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("4_uojc2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

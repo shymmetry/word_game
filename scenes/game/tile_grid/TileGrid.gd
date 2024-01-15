@@ -6,7 +6,7 @@ const LU = preload("res://scripts/letters.gd")
 
 var letter_util = null
 
-var exploding_tiles = {}
+var exploding_tiles = []
 var exploding_tiles_done = 0
 var dropping_tiles_done = 0
 
@@ -33,11 +33,11 @@ func init_tiles():
 func guess_word():
 	var word = get_word("", Globals.dragged_tiles)
 	if word:
-		remove_words([{"str": word, "tiles": Globals.dragged_tiles}])
+		remove_word(WordTiles.new(word, Globals.dragged_tiles))
 	else:
 		Globals.idle = true
 
-func get_word(word, tiles):
+func get_word(word: String, tiles: Array[Tile]):
 	const is_word = false
 	const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for speed
 	for i in range(0, tiles.size()):
@@ -53,30 +53,30 @@ func get_word(word, tiles):
 			return null
 	return word if Dict.is_word(word) else null
 
-func remove_words(words_to_remove):
-	exploding_tiles = {}
-	for word in words_to_remove:
-		var score = $"../../ScoreArea".score_word(word.str)
-		
-		var new_word_pop = word_pop.instantiate()
-		new_word_pop.update_text(word.str, score)
-		# Need to add the parents position since the CanvasLayer of the 
-		# word_pop doesn't have (0,0) as it's parents position
-		var center = center_of_points(word.tiles)
-		var parent_pos = get_parent().position
-		new_word_pop.set_position(center + parent_pos)
-		
-		add_child(new_word_pop)
-		
-		for tile in word.tiles:
-			exploding_tiles[tile] = null
+func remove_word(word_tiles: WordTiles):
+	var score = $"../../ScoreArea".score_word(word_tiles)
+	
+	# Handle word pop
+	var new_word_pop = word_pop.instantiate()
+	new_word_pop.update_text(word_tiles.word, score)
+	# Need to add the parents position since the CanvasLayer of the 
+	# word_pop doesn't have (0,0) as it's parents position
+	var center = center_of_points(word_tiles.tiles)
+	var parent_pos = get_parent().position
+	new_word_pop.set_position(center + parent_pos)
+	
+	add_child(new_word_pop)
 	
 	# Remove all the points that were matched
-	for tile in exploding_tiles:
-		tile.explode()
+	exploding_tiles = []
+	for tile in word_tiles.tiles:
+		if tile.tile_type == E.TILE_TYPE.HARDENED:
+			pass
+		exploding_tiles.append(tile)
 		exploding_tiles_done += 1
+		tile.explode()
 
-func center_of_points(tiles):
+func center_of_points(tiles: Array[Tile]):
 	var tile1 = tiles[0]
 	var tile2 = tiles[tiles.size()-1]
 	# Get the average of the first and last nodes to get the middle. Add
@@ -99,7 +99,7 @@ func explode_finished():
 		
 		drop_tiles(exploding_tiles, new_tiles)
 
-func populate_tiles(removed_tiles):
+func populate_tiles(removed_tiles: Array[Tile]):
 	# Adds new tiles for each given removed point. The created tiles are placed
 	# in new negative y rows.
 	var col_totals = []; col_totals.resize(Globals.level_data.cols); col_totals.fill(0)
@@ -117,7 +117,7 @@ func populate_tiles(removed_tiles):
 	
 	return new_tiles
 
-func drop_tiles(removed_tiles: Dictionary, new_tiles: Array):
+func drop_tiles(removed_tiles: Array[Tile], new_tiles: Array):
 	# 2D array of the number of spaces each tile needs to drop
 	var drops = []
 	for i in range(0, Globals.level_data.cols):
@@ -165,12 +165,16 @@ func drop_finished():
 func create_tile(col: int, row: int, new: bool = false):
 	var tile = tile_scene.instantiate()
 	
+	# Resolve positions
 	var x = Globals.level_data.padding*(col + 1) + col*Globals.level_data.tile_size
 	var y = 0
 	if new: y = -1 * (Globals.level_data.padding*(row) + (row + 1)*Globals.level_data.tile_size)
 	else: y = Globals.level_data.padding*(row + 1) + row*Globals.level_data.tile_size
-	
 	tile.position = Vector2(x, y)
+	
+	# Resolve tile type
+	tile.tile_type = resolve_tile_type()
+	
 	var rand_char = letter_util.rand_char()
 	tile.get_node("Letter").text = rand_char
 	tile.get_node("Score").text = str(Globals.level_data.letter_scores.get(rand_char))
@@ -179,3 +183,12 @@ func create_tile(col: int, row: int, new: bool = false):
 
 	add_child(tile)
 	return tile
+
+func resolve_tile_type():
+	var rand_num = randi() % 100 + 1
+	var sum = 0
+	for tile_type in Globals.level_data.tile_type_chance:
+		sum += Globals.level_data.tile_type_chance[tile_type]
+		if sum >= rand_num:
+			return tile_type
+	return null

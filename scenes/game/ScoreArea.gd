@@ -19,19 +19,19 @@ func _process(_delta):
 	$"Progress/ProgressBar".max_value = Globals.level_data.win_threshold
 	$"Progress/ProgressBar".value = Globals.progress
 
-func score_word(word: String):
+func score_word(word_tiles: WordTiles):
 	# Update score
 	var letter_score_up = 0
-	for letter in word:
+	for letter in word_tiles.word:
 		letter_score_up += Globals.level_data.letter_scores.get(letter)
-	var length_mult = Globals.level_data.word_length_score_multiplier.get(word.length())
+	var length_mult = Globals.level_data.word_length_score_multiplier.get(word_tiles.word.length())
 	if length_mult == null:
 		# Not all lengths are tracked, so default to the highest defined
 		var maxwl = Globals.level_data.word_length_score_multiplier.keys().max()
 		var minwl = Globals.level_data.word_length_score_multiplier.keys().min()
-		if word.length() > maxwl:
+		if word_tiles.word.length() > maxwl:
 			length_mult = Globals.level_data.word_length_score_multiplier.get(maxwl)
-		elif word.length() < minwl:
+		elif word_tiles.word.length() < minwl:
 			length_mult = Globals.level_data.word_length_score_multiplier.get(minwl)
 		else:
 			length_mult = 1
@@ -39,22 +39,22 @@ func score_word(word: String):
 	Globals.score += score_up
 	
 	# Update swap count
-	var bonus = Globals.level_data.swap_bonus.get(word.length())
+	var bonus = Globals.level_data.swap_bonus.get(word_tiles.word.length())
 	if bonus == null:
 		# Not all lengths are tracked, so default to the highest defined
 		var maxwl = Globals.level_data.swap_bonus.keys().max()
 		var minwl = Globals.level_data.swap_bonus.keys().min()
-		if word.length() > maxwl:
+		if word_tiles.word.length() > maxwl:
 			bonus = Globals.level_data.swap_bonus.get(maxwl)
-		elif word.length() < minwl:
+		elif word_tiles.word.length() < minwl:
 			bonus = Globals.level_data.swap_bonus.get(minwl)
 		else:
 			bonus = 0
 	Globals.swaps += bonus
 	
-	Globals.matched_words = [word] + Globals.matched_words
+	Globals.matched_words = [word_tiles.word] + Globals.matched_words
 	
-	track_progress(word, score_up)
+	track_progress(word_tiles.word, score_up)
 	
 	return score_up
 

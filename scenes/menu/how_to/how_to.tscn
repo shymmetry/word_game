@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dkesw4sqphw7c"]
 
 [ext_resource type="Script" path="res://scenes/menu/how_to/how_to.gd" id="1_h4116"]
-[ext_resource type="StyleBox" uid="uid://d0r5f6321vjml" path="res://tres/button_icon.tres" id="2_j28d5"]
+[ext_resource type="StyleBox" uid="uid://d0r5f6321vjml" path="res://tres/button/button_icon.tres" id="2_j28d5"]
 [ext_resource type="Texture2D" uid="uid://bpuoacu0ngb1y" path="res://icons/ArrowLeft.png" id="3_nb5xj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i0ny5"]

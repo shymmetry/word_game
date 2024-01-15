@@ -14,7 +14,7 @@ var board_changed = false
 var idle = true
 
 var selected_tile = null
-var dragged_tiles = []
+var dragged_tiles: Array[Tile] = []
 
 var current_level = 0
 var level_data = null

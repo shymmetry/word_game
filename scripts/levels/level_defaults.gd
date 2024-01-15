@@ -30,6 +30,13 @@ var swap_bonus = {
 	8: 3,
 }
 
+var tile_type_chance = {
+	E.TILE_TYPE.NORMAL: 50,
+	E.TILE_TYPE.HARDENED: 50,
+	E.TILE_TYPE.MULTIPLIER: 0,
+	E.TILE_TYPE.GOAL: 0,
+}
+
 var word_length_score_multiplier = {
 	4: 1,
 	5: 2,

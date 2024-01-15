@@ -13,7 +13,7 @@ func _init():
 		letter_picker_freq_total += freq
 
 func rand_char():
-	var rand_num = randi() % letter_picker_freq_total
+	var rand_num = randi() % letter_picker_freq_total + 1
 	var sum = 0
 	var selected_letter = "?"
 	for letter in Globals.level_data.letter_freq:
