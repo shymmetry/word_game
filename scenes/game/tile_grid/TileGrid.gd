@@ -176,8 +176,7 @@ func create_tile(col: int, row: int, new: bool = false):
 	tile.tile_type = resolve_tile_type()
 	
 	var rand_char = letter_util.rand_char()
-	tile.get_node("Letter").text = rand_char
-	tile.get_node("Score").text = str(Globals.level_data.letter_scores.get(rand_char))
+	tile.set_letter(rand_char)
 	tile.col = col
 	tile.row = row
 
