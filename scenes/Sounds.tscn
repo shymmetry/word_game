@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://r4hacp4p8rc7"]
+[gd_scene load_steps=9 format=3 uid="uid://r4hacp4p8rc7"]
 
 [ext_resource type="AudioStream" uid="uid://caxflnblodcev" path="res://audio/button-tick.wav" id="1_4sdfq"]
 [ext_resource type="Script" path="res://scenes/Sounds.gd" id="1_mgxed"]
@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://cy2ntvwpwhh3u" path="res://audio/open_program.wav" id="4_dgbkp"]
 [ext_resource type="AudioStream" uid="uid://bdp0bqhi5xtt8" path="res://audio/pop.wav" id="5_phg8y"]
 [ext_resource type="AudioStream" uid="uid://crugu8erbbk4j" path="res://audio/whoosh-high.wav" id="6_j8mjk"]
+[ext_resource type="AudioStream" uid="uid://csvxld7at1b84" path="res://audio/jingle_win_synth.wav" id="7_bohbw"]
+[ext_resource type="AudioStream" uid="uid://dw4kkxcpkltna" path="res://audio/failure.wav" id="8_326ak"]
 
 [node name="Sounds" type="Node"]
 script = ExtResource("1_mgxed")
@@ -24,3 +26,9 @@ stream = ExtResource("5_phg8y")
 
 [node name="Swap" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_j8mjk")
+
+[node name="Win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_bohbw")
+
+[node name="Lose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_326ak")

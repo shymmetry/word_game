@@ -6,18 +6,24 @@ func _ready():
 	else:
 		$Title.text = "Level %s" % Globals.current_level
 	$"Trackers/SwapTracker".set_icon("res://icons/outline_swap_horiz_white_24dp.png")
+	$"Trackers/HintTracker".set_icon("res://icons/outline_help_center_white_24dp.png")
 	
 	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
-		$Progress.hide()
+		$"Progress/ProgressBar".hide()
+		$"Progress/ProgressRect".show()
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
 	$"Trackers/SwapTracker".set_value(Globals.swaps)
+	$"Trackers/HintTracker".set_value(Globals.hints)
 	$"Progress/Goal".text = Globals.level_data.goal
-	$"Progress/ProgressBar".max_value = Globals.level_data.win_threshold
-	$"Progress/ProgressBar".value = Globals.progress
-	$"Progress/ProgressBar/Progress".text = \
-		"%s / %s" % [Globals.progress, Globals.level_data.win_threshold]
+	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
+		$"Progress/ProgressRect/Progress".text = str(Globals.progress)
+	else:
+		$"Progress/ProgressBar".max_value = Globals.level_data.win_threshold
+		$"Progress/ProgressBar".value = Globals.progress
+		$"Progress/ProgressBar/Progress".text = \
+			"%s / %s" % [Globals.progress, Globals.level_data.win_threshold]
 
 func score_word(word_tiles: WordTiles):
 	# Update score
@@ -66,6 +72,8 @@ func score_word(word_tiles: WordTiles):
 
 func track_progress(word: String, score_up: int):
 	match Globals.level_data.win_type:
+		E.WIN_TYPE.NONE:
+			Globals.progress += score_up
 		E.WIN_TYPE.SCORE:
 			Globals.progress += score_up
 		E.WIN_TYPE.WORD_SIZE:

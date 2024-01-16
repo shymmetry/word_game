@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=22 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/tracker.tscn" id="4_6y3dl"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://tres/hamburger.tres" id="4_f7i5n"]
 [ext_resource type="Texture2D" uid="uid://b50uc5r7wm45g" path="res://icons/TripleBar.png" id="4_gthw2"]
+[ext_resource type="StyleBox" uid="uid://gldv2yjpybuk" path="res://tres/progress/progress_background.tres" id="6_6v52k"]
+[ext_resource type="StyleBox" uid="uid://bsydb2ngwo13u" path="res://tres/progress/progress_full.tres" id="7_3ujnf"]
 [ext_resource type="Script" path="res://scenes/game/GameOver.gd" id="7_5h4bb"]
 [ext_resource type="Script" path="res://scenes/game/WinScreen.gd" id="9_2vw12"]
 [ext_resource type="Script" path="res://scenes/game/Menu.gd" id="11_4gls3"]
@@ -16,30 +18,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_argww"]
-bg_color = Color(0.835294, 0.690196, 0.486275, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-shadow_size = 1
-shadow_offset = Vector2(1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_od072"]
-bg_color = Color(0.87451, 0.517647, 0.00784314, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 6
-corner_radius_bottom_left = 6
-
 [sub_resource type="LabelSettings" id="LabelSettings_m8gcd"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_bajh7"]
 font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_fmmef"]
@@ -92,13 +74,16 @@ script = ExtResource("3_vlwa8")
 [node name="Trackers" type="VBoxContainer" parent="ScoreArea"]
 layout_mode = 0
 offset_left = 35.0
-offset_top = 170.0
+offset_top = 100.0
 offset_right = 125.0
 offset_bottom = 260.0
-theme_override_constants/separation = 10
+theme_override_constants/separation = 5
 alignment = 2
 
 [node name="SwapTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
+layout_mode = 2
+
+[node name="HintTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
 layout_mode = 2
 
 [node name="Progress" type="VBoxContainer" parent="ScoreArea"]
@@ -111,8 +96,8 @@ offset_bottom = 124.0
 [node name="ProgressBar" type="ProgressBar" parent="ScoreArea/Progress"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_argww")
-theme_override_styles/fill = SubResource("StyleBoxFlat_od072")
+theme_override_styles/background = ExtResource("6_6v52k")
+theme_override_styles/fill = ExtResource("7_3ujnf")
 step = 1.0
 show_percentage = false
 
@@ -125,6 +110,24 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0 / 0"
 label_settings = SubResource("LabelSettings_m8gcd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressRect" type="Panel" parent="ScoreArea/Progress"]
+visible = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_6v52k")
+
+[node name="Progress" type="Label" parent="ScoreArea/Progress/ProgressRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_bajh7")
 horizontal_alignment = 1
 vertical_alignment = 1
 

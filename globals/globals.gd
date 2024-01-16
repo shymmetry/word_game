@@ -5,6 +5,7 @@ var tiles = []
 var score = 0
 var progress = 0
 var swaps = 1
+var hints = 1
 var matched_words = []
 
 var board_changed = false

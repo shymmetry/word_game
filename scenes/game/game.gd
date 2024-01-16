@@ -2,7 +2,7 @@ extends Control
 
 func _init():
 	if !Globals.level_data:
-		Levels.set_current_level(1)
+		Levels.set_current_level(0)
 	
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.score = 0
@@ -18,6 +18,7 @@ func _process(_delta):
 		if has_won():
 			if !UserData.completed_levels.has(str(Globals.current_level)):
 				UserData.completed_levels[str(Globals.current_level)] = {}
+			Sounds.win()
 			$WinScreenCL.show()
 			Store.save_game()
 		if !find_all_words(Globals.level_data.min_word_length):
@@ -37,6 +38,7 @@ func has_won():
 		return Globals.progress >= Globals.level_data.win_threshold
 
 func game_over():
+	Sounds.lose()
 	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
 		var endless_data = UserData.completed_levels.get("0")
 		if !endless_data:
