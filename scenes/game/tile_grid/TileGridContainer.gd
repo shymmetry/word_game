@@ -18,7 +18,10 @@ func _unhandled_input(event):
 					and is_adjacent(Globals.selected_tile, end_tile) \
 					and Globals.swaps > 0:
 				swap_tiles(Globals.selected_tile, end_tile)
+				Sounds.swap()
 			else:
+				if Globals.selected_tile != end_tile:
+					Sounds.failure()
 				Globals.idle = true
 			Globals.selected_tile = null
 		else:
@@ -30,6 +33,7 @@ func _unhandled_input(event):
 				if Globals.dragged_tiles.size() >= Globals.level_data.min_word_length:
 					Signals.emit_signal("GuessWord")
 				else:
+					Sounds.failure()
 					Globals.idle = true
 		clicked_tile = null; last_hover_tile = null; Globals.dragged_tiles = []
 	

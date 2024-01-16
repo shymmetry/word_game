@@ -9,4 +9,5 @@ func _ready():
 	$LevelInfo.text = Globals.level_data.level_info
 
 func _on_start_button_pressed():
+	Sounds.click()
 	get_parent().get_parent().hide()

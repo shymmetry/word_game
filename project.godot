@@ -25,6 +25,7 @@ Levels="*res://scripts/levels.gd"
 UserData="*res://globals/user_data.gd"
 Store="*res://scripts/store.gd"
 Dict="*res://scripts/dict.gd"
+Sounds="*res://scenes/Sounds.tscn"
 
 [display]
 

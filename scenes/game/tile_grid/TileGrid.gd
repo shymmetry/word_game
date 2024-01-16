@@ -34,7 +34,9 @@ func guess_word():
 	var word = get_word("", Globals.dragged_tiles)
 	if word:
 		remove_word(WordTiles.new(word, Globals.dragged_tiles))
+		Sounds.success()
 	else:
+		Sounds.failure()
 		Globals.idle = true
 
 func get_word(word: String, tiles: Array[Tile]):
