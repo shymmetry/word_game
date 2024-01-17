@@ -45,12 +45,10 @@ theme_override_constants/separation = 10
 
 [node name="Start" type="Button" parent="Buttons"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "PLAY"
 
 [node name="Settings" type="Button" parent="Buttons"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "SETTINGS"
 

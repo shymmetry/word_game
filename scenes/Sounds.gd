@@ -11,7 +11,7 @@ func success():
 
 func menu_open():
 	$MenuOpen.play()
-
+	
 func failure():
 	$Failure.play()
 

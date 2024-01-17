@@ -7,6 +7,7 @@ func _ready():
 		$Title.text = "Level %s" % Globals.current_level
 	$"Trackers/SwapTracker".set_icon("res://icons/outline_swap_horiz_white_24dp.png")
 	$"Trackers/HintTracker".set_icon("res://icons/outline_help_center_white_24dp.png")
+	$"Trackers/HintTracker".on_click_signal = "HintRequested"
 	
 	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
 		$"Progress/ProgressBar".hide()

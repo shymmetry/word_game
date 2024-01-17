@@ -7,6 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://b80vt53b6ud3c" path="res://tres/button/button_press.tres" id="5_t2itl"]
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
 Button/font_sizes/font_size = 24
 Button/styles/disabled = ExtResource("1_kr2e6")
 Button/styles/focus = ExtResource("2_mbivg")

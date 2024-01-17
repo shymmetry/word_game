@@ -19,9 +19,9 @@ var dragged_overlay_style = preload("res://tres/tile/overlay/tile_dragged_overla
 var clicked_underlay_style = preload("res://tres/tile/underlay/tile_clicked_underlay.tres")
 var normal_underlay_style = preload("res://tres/tile/underlay/tile_normal_underlay.tres")
 
-func set_letter(letter: String):
-	self.letter = letter
-	var new_score = Globals.level_data.letter_scores.get(letter)
+func set_letter(new_letter: String):
+	self.letter = new_letter
+	var new_score = Globals.level_data.letter_scores.get(new_letter)
 	self.score = str(new_score) if new_score > 0 else ""
 
 func _process(_delta):
@@ -38,13 +38,22 @@ func _process(_delta):
 		update_stylebox($Overlay, normal_overlay_style)
 		update_stylebox($Underlay, normal_underlay_style)
 	
+	var base_style: StyleBoxFlat = null
 	match tile_type:
 		E.TILE_TYPE.NORMAL:
-			update_stylebox($Base, normal_base_style)
+			base_style = normal_base_style
 		E.TILE_TYPE.MULTIPLIER:
-			update_stylebox($Base, mult_base_style)
+			base_style = mult_base_style
 		E.TILE_TYPE.HARDENED:
-			update_stylebox($Base, harden_base_style)
+			base_style = harden_base_style
+	if Globals.hint_tiles.has(self):
+		base_style = base_style.duplicate()
+		base_style.border_color = Color(255, 215, 0) #gold
+		base_style.border_width_left = 2
+		base_style.border_width_right = 2
+		base_style.border_width_top = 2
+		base_style.border_width_bottom = 2
+	update_stylebox($Base, base_style)
 
 func explode():
 	animation.play("explode")

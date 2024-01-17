@@ -1,5 +1,8 @@
 extends Node
 
+# Constants
+const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for speed
+
 # Game variables
 var tiles = []
 var score = 0
@@ -13,6 +16,7 @@ var idle = true
 
 var selected_tile = null
 var dragged_tiles: Array[Tile] = []
+var hint_tiles = []
 
 var current_level = 0
 var level_data = null

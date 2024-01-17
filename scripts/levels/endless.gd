@@ -3,7 +3,7 @@ extends Node
 const win_type = E.WIN_TYPE.NONE
 const win_threshold = 0
 const goal = "Play until you die of exhaustion"
-const starting_swaps = 0
+const starting_swaps = 1
 
 const letter_freq = {
 	"?": 100,

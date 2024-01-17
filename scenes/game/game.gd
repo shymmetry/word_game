@@ -5,12 +5,14 @@ func _init():
 		Levels.set_current_level(0)
 	
 	Globals.swaps = Globals.level_data.starting_swaps
+	Globals.hints = Globals.level_data.starting_hints
 	Globals.score = 0
 	Globals.progress = 0
 
 func _ready():
 	Signals.connect('StartGame', reset)
 	Signals.connect('GameOver', game_over)
+	Signals.connect('HintRequested', give_hint)
 
 func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
@@ -48,6 +50,32 @@ func game_over():
 			UserData.completed_levels["0"].high_score = Globals.score
 			Store.save_game()
 
+func give_hint():
+	if Globals.hints > 0:
+		var min_size = 3
+		var max_size = 6
+		var hint_words = find_all_words(min_size, max_size)
+		var hints_by_length = {}
+		# Sort the found words by their length
+		for hint in hint_words:
+			var len = hint.word.length()
+			if hints_by_length.has(len):
+				hints_by_length[len].append(hint)
+			else:
+				hints_by_length[len] = [hint]
+		
+		# Get a random word from the largest size word set
+		var hint = null
+		for len in range(max_size, min_size - 1, -1):
+			if hints_by_length.has(len):
+				var rand_i = randi() % hints_by_length.get(len).size()
+				hint = hints_by_length.get(len)[rand_i]
+				break
+		
+		if hint:
+			Globals.hint_tiles = hint.tiles
+			Globals.hints -= 1
+
 # Only finds words up to 6 characters for efficiency. I expect that if there is
 # a word with 7+ letters we could also find one with less.
 func find_all_words(min_letters: int, max_letters: int = 6):
@@ -55,31 +83,41 @@ func find_all_words(min_letters: int, max_letters: int = 6):
 	for col in Globals.level_data.cols:
 		for row in Globals.level_data.rows:
 			var tile = Globals.tiles[col][row]
-			all_words += find_all_words_recurse(tile.letter, [tile], min_letters, max_letters)
+			all_words += _find_all_words_recurse(tile.letter, [tile], min_letters, max_letters)
 	return all_words
 
-func find_all_words_recurse(word: String, tiles: Array, min_letters: int, max_letters: int = 6):
+func _find_all_words_recurse(word: String, tiles: Array, min_letters: int, max_letters: int = 6):
 	var all_words = []
 	var last_tile = tiles.back()
-	var adjacent_tiles = get_adjacent_tiles(last_tile)
+	var adjacent_tiles = _get_adjacent_tiles(last_tile)
 	for tile in adjacent_tiles:
-		if tiles.has(tile): 
+		if tiles.has(tile): # Ignore repeat tile usage
 			continue
 		else:
-			var new_word = word + tile.letter
 			var new_tiles = tiles + [tile]
-			
-			# Check word
-			if new_word.length() >= min_letters and Dict.is_word(new_word):
-				all_words.append(WordTiles.new(new_word, new_tiles))
-			
-			# Recurse
-			if new_word.length() < max_letters:
-				all_words += find_all_words_recurse(new_word, new_tiles, min_letters, max_letters)
+			if tile.letter == "?": # Handle wildcard tiles
+				for letter in Globals.all_letters:
+					var new_word = word + letter
+					all_words += _find_all_words_recurse_inner(new_word, new_tiles, min_letters, max_letters)
+			else:
+				var new_word = word + tile.letter
+				all_words += _find_all_words_recurse_inner(new_word, new_tiles, min_letters, max_letters)
 	
 	return all_words
 
-func get_adjacent_tiles(tile):
+func _find_all_words_recurse_inner(word: String, tiles: Array, min_letters: int, max_letters: int = 6):
+	var all_words = []
+	# Check word
+	if word.length() >= min_letters and Dict.is_word(word):
+		all_words.append(WordTiles.new(word, tiles))
+	
+	# Recurse
+	if word.length() < max_letters:
+		all_words += _find_all_words_recurse(word, tiles, min_letters, max_letters)
+	
+	return all_words
+
+func _get_adjacent_tiles(tile):
 	var tiles = []
 	for adjust in [[0,1],[0,-1],[1,0],[-1,0]]:
 		var col = tile.col + adjust[0]

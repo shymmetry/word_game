@@ -5,3 +5,4 @@ signal DropFinished
 signal StartGame
 signal GuessWord
 signal GameOver
+signal HintRequested

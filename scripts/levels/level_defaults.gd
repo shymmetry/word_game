@@ -20,6 +20,7 @@ var goal = "Get over 1 points"
 var level_info = ""
 var win_data = {}
 var starting_swaps = 1
+var starting_hints = 1
 var min_word_length = 3
 
 var swap_bonus = {

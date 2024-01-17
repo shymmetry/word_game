@@ -41,14 +41,13 @@ func guess_word():
 
 func get_word(word: String, tiles: Array[Tile]):
 	const is_word = false
-	const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for speed
 	for i in range(0, tiles.size()):
 		var tile = tiles[i]
 		var letter = tile.get_node("Letter").text
 		if letter != "?":
 			word = word + letter
 		else:
-			for add_letter in all_letters:
+			for add_letter in Globals.all_letters:
 				var final_word = get_word(word + add_letter, tiles.slice(i+1, tiles.size()))
 				if final_word:
 					return final_word
