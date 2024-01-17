@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3bldlk0k56xe"
-path="res://.godot/imported/outline_help_center_white_24dp.png-0035b46a8433de0db1cd358f9a7decb7.ctex"
+uid="uid://cwhygwwbjj10r"
+path="res://.godot/imported/letter.png-0725d9399729ba0567aecca577589bb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/outline_help_center_white_24dp.png"
-dest_files=["res://.godot/imported/outline_help_center_white_24dp.png-0035b46a8433de0db1cd358f9a7decb7.ctex"]
+source_file="res://icons/letter.png"
+dest_files=["res://.godot/imported/letter.png-0725d9399729ba0567aecca577589bb5.ctex"]
 
 [params]
 

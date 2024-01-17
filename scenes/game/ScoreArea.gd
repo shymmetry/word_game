@@ -5,9 +5,16 @@ func _ready():
 		$Title.text = "Endless"
 	else:
 		$Title.text = "Level %s" % Globals.current_level
-	$"Trackers/SwapTracker".set_icon("res://icons/outline_swap_horiz_white_24dp.png")
-	$"Trackers/HintTracker".set_icon("res://icons/outline_help_center_white_24dp.png")
-	$"Trackers/HintTracker".on_click_signal = "HintRequested"
+	
+	# Set up trackers
+	$"Trackers/SwapTracker".set_icon("res://icons/outline_swap.png")
+	if Globals.level_data.show_hints:
+		$"Trackers/HintTracker".set_icon("res://icons/help_outline.png")
+		$"Trackers/HintTracker".on_click_signal = "HintRequested"
+	else:
+		$"Trackers/HintTracker".hide()
+	$"Trackers/LetterCount".set_icon("res://icons/letter.png")
+	$"Trackers/LetterCount".set_value("%s+" % Globals.level_data.min_word_length)
 	
 	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
 		$"Progress/ProgressBar".hide()
@@ -15,8 +22,8 @@ func _ready():
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
-	$"Trackers/SwapTracker".set_value(Globals.swaps)
-	$"Trackers/HintTracker".set_value(Globals.hints)
+	$"Trackers/SwapTracker".set_value(str(Globals.swaps))
+	$"Trackers/HintTracker".set_value(str(Globals.hints))
 	$"Progress/Goal".text = Globals.level_data.goal
 	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
 		$"Progress/ProgressRect/Progress".text = str(Globals.progress)

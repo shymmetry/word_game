@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cj2hyiu5gtaks"
-path="res://.godot/imported/outline_swap_horiz_white_24dp.png-15c14771e51666428a07530e7a1c816e.ctex"
+path="res://.godot/imported/outline_swap.png-934dcb1bcdce6a549acefc5c081336dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/outline_swap_horiz_white_24dp.png"
-dest_files=["res://.godot/imported/outline_swap_horiz_white_24dp.png-15c14771e51666428a07530e7a1c816e.ctex"]
+source_file="res://icons/outline_swap.png"
+dest_files=["res://.godot/imported/outline_swap.png-934dcb1bcdce6a549acefc5c081336dc.ctex"]
 
 [params]
 

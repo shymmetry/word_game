@@ -71,6 +71,9 @@ offset_bottom = 260.0
 theme_override_constants/separation = 5
 alignment = 2
 
+[node name="LetterCount" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
+layout_mode = 2
+
 [node name="SwapTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
 layout_mode = 2
 

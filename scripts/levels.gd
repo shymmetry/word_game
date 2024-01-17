@@ -1,18 +1,19 @@
 extends Node
 
-const level_defaults = preload("res://scripts/levels/level_defaults.gd")
+const level_defaults = preload("res://static/levels/level_defaults.gd")
 
 # Ordered list of levels
 const level_order = [
-	"res://scripts/levels/endless.gd",
-	"res://scripts/levels/basic.gd",
-	"res://scripts/levels/basic2.gd",
-	"res://scripts/levels/word_size.gd",
-	"res://scripts/levels/word_size2.gd",
-	"res://scripts/levels/wildcard_intro.gd",
-	"res://scripts/levels/min_size4.gd",
-	"res://scripts/levels/multiplier_intro.gd",
-	"res://scripts/levels/impossible.gd",
+	"res://static/levels/endless.gd",
+	"res://static/levels/basic.gd",
+	"res://static/levels/basic2.gd",
+	"res://static/levels/word_size.gd",
+	"res://static/levels/word_size2.gd",
+	"res://static/levels/wildcard_intro.gd",
+	"res://static/levels/min_size4.gd",
+	"res://static/levels/hint_intro.gd",
+	"res://static/levels/multiplier_intro.gd",
+	"res://static/levels/impossible.gd",
 ]
 
 func set_current_level(level: int):

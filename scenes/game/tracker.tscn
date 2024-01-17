@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://4rveb6yybb8j"]
 
-[ext_resource type="Texture2D" uid="uid://cj2hyiu5gtaks" path="res://icons/outline_swap_horiz_white_24dp.png" id="1_06myn"]
 [ext_resource type="Script" path="res://scenes/game/tracker.gd" id="1_xm3mw"]
+[ext_resource type="Texture2D" uid="uid://cj2hyiu5gtaks" path="res://icons/outline_swap.png" id="2_gowgf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7n22"]
 bg_color = Color(0.776471, 0.596078, 0.454902, 1)
@@ -25,12 +25,16 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_r7n22")
 script = ExtResource("1_xm3mw")
 
 [node name="Icon" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 4.0
-offset_right = 38.0
-offset_bottom = 36.0
-texture = ExtResource("1_06myn")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -12.0
+offset_right = 34.0
+offset_bottom = 12.0
+grow_vertical = 2
+texture = ExtResource("2_gowgf")
 expand_mode = 1
 
 [node name="Value" type="Label" parent="."]

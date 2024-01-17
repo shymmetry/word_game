@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0h3gujrkv8dr"
-path="res://.godot/imported/outline_stars_white_36dp.png-8f4938ded9807fe1cced14844a9325b0.ctex"
+uid="uid://cxktybqyp8mup"
+path="res://.godot/imported/help_outline.png-de755cda379db8c98a00d7a045c8fc29.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/outline_stars_white_36dp.png"
-dest_files=["res://.godot/imported/outline_stars_white_36dp.png-8f4938ded9807fe1cced14844a9325b0.ctex"]
+source_file="res://icons/help_outline.png"
+dest_files=["res://.godot/imported/help_outline.png-de755cda379db8c98a00d7a045c8fc29.ctex"]
 
 [params]
 
