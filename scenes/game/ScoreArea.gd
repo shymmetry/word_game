@@ -85,7 +85,9 @@ func count_swap():
 	Globals.swaps -= 1
 
 func _on_in_game_menu_button_pressed():
-	$"../MenuCL".show()
+	Sounds.click()
+	$"../MenuModal".show()
 
 func _on_give_up_pressed():
-	$"../GiveUpCL".show()
+	Sounds.click()
+	$"../GiveUpModal".show()

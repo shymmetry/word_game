@@ -50,9 +50,7 @@ func _unhandled_input(event):
 		var hover_tile = get_tile_at_point(get_local_mouse_position())
 		if hover_tile and hover_tile != last_hover_tile:
 			last_hover_tile = hover_tile
-			var samecol = hover_tile.col == clicked_tile.col
-			var samerow = hover_tile.row == clicked_tile.row
-			
+
 			if hover_tile == clicked_tile and Globals.dragged_tiles.size() == 0:
 				Globals.dragged_tiles.append(hover_tile)
 			elif is_adjacent(Globals.dragged_tiles.back(), hover_tile) \

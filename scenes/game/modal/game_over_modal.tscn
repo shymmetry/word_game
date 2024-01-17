@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwsfvvi3tj3q5"]
+
+[ext_resource type="PackedScene" uid="uid://4rwmb5gf6jqu" path="res://scenes/game/modal/modal.tscn" id="1_bk2eq"]
+[ext_resource type="Script" path="res://scenes/game/modal/game_over_modal.gd" id="2_ce0jl"]
+
+[node name="GameOverModal" instance=ExtResource("1_bk2eq")]
+script = ExtResource("2_ce0jl")
+
+[node name="ButtonLeft" parent="Background/Buttons/MarginContainer/HBoxContainer" index="0"]
+text = "RESTART"
+
+[node name="ButtonMiddle" parent="Background/Buttons/MarginContainer/HBoxContainer" index="1"]
+visible = false
+
+[node name="ButtonRight" parent="Background/Buttons/MarginContainer/HBoxContainer" index="2"]
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
+[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]

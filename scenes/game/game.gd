@@ -22,10 +22,9 @@ func _process(_delta):
 			if !UserData.completed_levels.has(str(Globals.current_level)):
 				UserData.completed_levels[str(Globals.current_level)] = {}
 			Sounds.win()
-			$WinScreenCL.show()
+			$WinModal.show()
 			Store.save_game()
 		if !find_all_words(Globals.level_data.min_word_length):
-			$GameOverCL.show()
 			Signals.emit_signal("GameOver")
 		
 		# Every time the board state changes and a hint was present, remove the
@@ -36,8 +35,8 @@ func _process(_delta):
 		Globals.board_changed = false
 
 func reset():
-	$GameOverCL.hide()
-	$WinScreenCL.hide()
+	$GameOverModal.hide()
+	$WinModal.hide()
 	get_tree().reload_current_scene()
 
 func has_won():
@@ -48,6 +47,7 @@ func has_won():
 
 func game_over():
 	Sounds.lose()
+	$GameOverModal.show()
 	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
 		var endless_data = UserData.completed_levels.get("0")
 		if !endless_data:
@@ -59,24 +59,24 @@ func game_over():
 
 func give_hint():
 	if Globals.hints > 0:
-		var min_size = 3
+		var min_size = Globals.level_data.min_word_length
 		var max_size = 6
 		var hint_words = find_all_words(min_size, max_size)
 		var hints_by_length = {}
 		# Sort the found words by their length
 		for hint in hint_words:
-			var len = hint.word.length()
-			if hints_by_length.has(len):
-				hints_by_length[len].append(hint)
+			var word_len = hint.word.length()
+			if hints_by_length.has(word_len):
+				hints_by_length[word_len].append(hint)
 			else:
-				hints_by_length[len] = [hint]
+				hints_by_length[word_len] = [hint]
 		
 		# Get a random word from the largest size word set
 		var hint = null
-		for len in range(max_size, min_size - 1, -1):
-			if hints_by_length.has(len):
-				var rand_i = randi() % hints_by_length.get(len).size()
-				hint = hints_by_length.get(len)[rand_i]
+		for word_len in range(max_size, min_size - 1, -1):
+			if hints_by_length.has(word_len):
+				var rand_i = randi() % hints_by_length.get(word_len).size()
+				hint = hints_by_length.get(word_len)[rand_i]
 				break
 		
 		if hint:

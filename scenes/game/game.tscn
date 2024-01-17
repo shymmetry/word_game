@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=19 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
@@ -9,11 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://b50uc5r7wm45g" path="res://icons/TripleBar.png" id="4_gthw2"]
 [ext_resource type="StyleBox" uid="uid://gldv2yjpybuk" path="res://tres/progress/progress_background.tres" id="6_6v52k"]
 [ext_resource type="StyleBox" uid="uid://bsydb2ngwo13u" path="res://tres/progress/progress_full.tres" id="7_3ujnf"]
-[ext_resource type="Script" path="res://scenes/game/GameOver.gd" id="7_5h4bb"]
-[ext_resource type="Script" path="res://scenes/game/WinScreen.gd" id="9_2vw12"]
-[ext_resource type="Script" path="res://scenes/game/Menu.gd" id="11_4gls3"]
-[ext_resource type="Script" path="res://scenes/game/GiveUp.gd" id="11_ofsgs"]
-[ext_resource type="Script" path="res://scenes/game/GameStart.gd" id="12_wh0dg"]
+[ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/menu_modal.tscn" id="15_occs8"]
+[ext_resource type="PackedScene" uid="uid://caaru3t6wgsf" path="res://scenes/game/modal/game_start_modal.tscn" id="15_yg57j"]
+[ext_resource type="PackedScene" uid="uid://d2mv7djwaxlpe" path="res://scenes/game/modal/give_up_modal.tscn" id="17_qubtb"]
+[ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over_modal.tscn" id="18_7d1n6"]
+[ext_resource type="PackedScene" uid="uid://dwd0rw6u2hyjx" path="res://scenes/game/modal/win_modal.tscn" id="19_l7mpj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
@@ -27,15 +27,6 @@ font_size = 12
 [sub_resource type="LabelSettings" id="LabelSettings_fmmef"]
 font_size = 32
 font_color = Color(0.952941, 0.972549, 1, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_2lkm2"]
-font_size = 48
-
-[sub_resource type="LabelSettings" id="LabelSettings_na7p3"]
-font_size = 18
-
-[sub_resource type="LabelSettings" id="LabelSettings_fn5ty"]
-font_size = 12
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -173,312 +164,19 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Give Up"
 
-[node name="GameOverCL" type="CanvasLayer" parent="."]
-layer = 100
+[node name="MenuModal" parent="." instance=ExtResource("15_occs8")]
 visible = false
 
-[node name="GameOver" type="ColorRect" parent="GameOverCL"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.862745)
+[node name="GameStartModal" parent="." instance=ExtResource("15_yg57j")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOverCL/GameOver"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -140.0
-offset_top = -160.0
-offset_right = 136.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("7_5h4bb")
-
-[node name="GOLabel" type="Label" parent="GameOverCL/GameOver/VBoxContainer"]
-layout_mode = 2
-text = "GAME OVER"
-label_settings = SubResource("LabelSettings_2lkm2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Score" type="Label" parent="GameOverCL/GameOver/VBoxContainer"]
-layout_mode = 2
-text = "Score: 0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buttons" type="Control" parent="GameOverCL/GameOver/VBoxContainer"]
-layout_mode = 2
-
-[node name="Container" type="VBoxContainer" parent="GameOverCL/GameOver/VBoxContainer/Buttons"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -79.0
-offset_right = 79.0
-offset_bottom = 80.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="RestartButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Buttons/Container"]
-layout_mode = 2
-text = "RETRY"
-
-[node name="MainMenuButton" type="Button" parent="GameOverCL/GameOver/VBoxContainer/Buttons/Container"]
-layout_mode = 2
-text = "MAIN MENU"
-
-[node name="WinScreenCL" type="CanvasLayer" parent="."]
+[node name="GiveUpModal" parent="." instance=ExtResource("17_qubtb")]
 visible = false
 
-[node name="WinScreen" type="ColorRect" parent="WinScreenCL"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.862745)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="WinScreenCL/WinScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -138.0
-offset_top = -160.0
-offset_right = 138.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("9_2vw12")
-
-[node name="WinScreenLabel" type="Label" parent="WinScreenCL/WinScreen/VBoxContainer"]
-layout_mode = 2
-text = "YOU WON!"
-label_settings = SubResource("LabelSettings_2lkm2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buttons" type="Control" parent="WinScreenCL/WinScreen/VBoxContainer"]
-layout_mode = 2
-
-[node name="Container" type="VBoxContainer" parent="WinScreenCL/WinScreen/VBoxContainer/Buttons"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -79.0
-offset_right = 79.0
-offset_bottom = 80.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="MainMenuButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer/Buttons/Container"]
-layout_mode = 2
-text = "MAIN MENU"
-
-[node name="NextLevelButton" type="Button" parent="WinScreenCL/WinScreen/VBoxContainer/Buttons/Container"]
-layout_mode = 2
-text = "NEXT LEVEL"
-
-[node name="MenuCL" type="CanvasLayer" parent="."]
+[node name="GameOverModal" parent="." instance=ExtResource("18_7d1n6")]
 visible = false
 
-[node name="Menu" type="ColorRect" parent="MenuCL"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.862745)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuCL/Menu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -76.0
-offset_top = -160.0
-offset_right = 76.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("11_4gls3")
-
-[node name="MenuLabel" type="Label" parent="MenuCL/Menu/VBoxContainer"]
-layout_mode = 2
-text = "MENU"
-label_settings = SubResource("LabelSettings_2lkm2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buttons" type="Control" parent="MenuCL/Menu/VBoxContainer"]
-layout_mode = 2
-
-[node name="Container" type="VBoxContainer" parent="MenuCL/Menu/VBoxContainer/Buttons"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -79.0
-offset_right = 79.0
-offset_bottom = 122.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="MainMenuButton" type="Button" parent="MenuCL/Menu/VBoxContainer/Buttons/Container"]
-layout_mode = 2
-text = "MAIN MENU"
-
-[node name="RestartButton" type="Button" parent="MenuCL/Menu/VBoxContainer/Buttons/Container"]
-layout_mode = 2
-text = "RESTART"
-
-[node name="BackButton" type="Button" parent="MenuCL/Menu/VBoxContainer/Buttons/Container"]
-layout_mode = 2
-text = "BACK"
-
-[node name="GameStartCL" type="CanvasLayer" parent="."]
-
-[node name="GameStart" type="ColorRect" parent="GameStartCL"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.862745)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameStartCL/GameStart"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -160.0
-offset_right = 150.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("12_wh0dg")
-
-[node name="MenuLabel" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
-layout_mode = 2
-text = "Level X"
-label_settings = SubResource("LabelSettings_2lkm2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Goal" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
-custom_minimum_size = Vector2(300, 40)
-layout_mode = 2
-text = "SAMPLE GOAL"
-label_settings = SubResource("LabelSettings_na7p3")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="LevelInfo" type="Label" parent="GameStartCL/GameStart/VBoxContainer"]
-layout_mode = 2
-text = "Level Info"
-label_settings = SubResource("LabelSettings_fn5ty")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buttons" type="Control" parent="GameStartCL/GameStart/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameStartCL/GameStart/VBoxContainer/Buttons"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -44.0
-offset_right = 44.0
-offset_bottom = 40.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="StartButton" type="Button" parent="GameStartCL/GameStart/VBoxContainer/Buttons/VBoxContainer"]
-layout_mode = 2
-text = "START"
-
-[node name="GiveUpCL" type="CanvasLayer" parent="."]
+[node name="WinModal" parent="." instance=ExtResource("19_l7mpj")]
 visible = false
-
-[node name="GiveUp" type="ColorRect" parent="GiveUpCL"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.862745)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GiveUpCL/GiveUp"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -103.5
-offset_top = -160.0
-offset_right = 103.5
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("11_ofsgs")
-
-[node name="MenuLabel" type="Label" parent="GiveUpCL/GiveUp/VBoxContainer"]
-layout_mode = 2
-text = "GIVE UP?"
-label_settings = SubResource("LabelSettings_2lkm2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buttons" type="Control" parent="GiveUpCL/GiveUp/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GiveUpCL/GiveUp/VBoxContainer/Buttons"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -72.5
-offset_right = 72.5
-offset_bottom = 80.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="ConfirmButton" type="Button" parent="GiveUpCL/GiveUp/VBoxContainer/Buttons/VBoxContainer"]
-layout_mode = 2
-text = "YES PLEASE"
-
-[node name="BackButton" type="Button" parent="GiveUpCL/GiveUp/VBoxContainer/Buttons/VBoxContainer"]
-layout_mode = 2
-text = "NO WAY"
 
 [connection signal="pressed" from="ScoreArea/InGameMenuButton" to="ScoreArea" method="_on_in_game_menu_button_pressed"]
 [connection signal="pressed" from="ScoreArea/GiveUp" to="ScoreArea" method="_on_give_up_pressed"]
-[connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Buttons/Container/RestartButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="GameOverCL/GameOver/VBoxContainer/Buttons/Container/MainMenuButton" to="GameOverCL/GameOver/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/Buttons/Container/MainMenuButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="WinScreenCL/WinScreen/VBoxContainer/Buttons/Container/NextLevelButton" to="WinScreenCL/WinScreen/VBoxContainer" method="_on_next_level_button_pressed"]
-[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/Buttons/Container/MainMenuButton" to="MenuCL/Menu/VBoxContainer" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/Buttons/Container/RestartButton" to="MenuCL/Menu/VBoxContainer" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="MenuCL/Menu/VBoxContainer/Buttons/Container/BackButton" to="MenuCL/Menu/VBoxContainer" method="_on_back_button_pressed"]
-[connection signal="pressed" from="GameStartCL/GameStart/VBoxContainer/Buttons/VBoxContainer/StartButton" to="GameStartCL/GameStart/VBoxContainer" method="_on_start_button_pressed"]
-[connection signal="pressed" from="GiveUpCL/GiveUp/VBoxContainer/Buttons/VBoxContainer/ConfirmButton" to="GiveUpCL/GiveUp/VBoxContainer" method="_on_confirm_button_pressed"]
-[connection signal="pressed" from="GiveUpCL/GiveUp/VBoxContainer/Buttons/VBoxContainer/BackButton" to="GiveUpCL/GiveUp/VBoxContainer" method="_on_back_button_pressed"]

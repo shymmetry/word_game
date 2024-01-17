@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwd0rw6u2hyjx"]
+
+[ext_resource type="PackedScene" uid="uid://4rwmb5gf6jqu" path="res://scenes/game/modal/modal.tscn" id="1_ql5xl"]
+[ext_resource type="Script" path="res://scenes/game/modal/win_modal.gd" id="2_idicq"]
+
+[node name="WinModal" instance=ExtResource("1_ql5xl")]
+script = ExtResource("2_idicq")
+
+[node name="ButtonLeft" parent="Background/Buttons/MarginContainer/HBoxContainer" index="0"]
+text = "NEXT LEVEL"
+
+[node name="ButtonMiddle" parent="Background/Buttons/MarginContainer/HBoxContainer" index="1"]
+visible = false
+
+[node name="ButtonRight" parent="Background/Buttons/MarginContainer/HBoxContainer" index="2"]
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
+[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]

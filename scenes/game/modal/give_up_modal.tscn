@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2mv7djwaxlpe"]
+
+[ext_resource type="PackedScene" uid="uid://4rwmb5gf6jqu" path="res://scenes/game/modal/modal.tscn" id="1_qv442"]
+[ext_resource type="Script" path="res://scenes/game/modal/give_up_modal.gd" id="2_x8sla"]
+
+[node name="GiveUpModal" instance=ExtResource("1_qv442")]
+script = ExtResource("2_x8sla")
+
+[node name="Label" parent="Background/Title/Margin" index="0"]
+text = "Give Up?
+"
+
+[node name="Label" parent="Background/Details" index="0"]
+text = ""
+
+[node name="ButtonLeft" parent="Background/Buttons/MarginContainer/HBoxContainer" index="0"]
+text = "YES"
+
+[node name="ButtonMiddle" parent="Background/Buttons/MarginContainer/HBoxContainer" index="1"]
+visible = false
+
+[node name="ButtonRight" parent="Background/Buttons/MarginContainer/HBoxContainer" index="2"]
+text = "NO"
+
+[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
+[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://caaru3t6wgsf"]
+
+[ext_resource type="PackedScene" uid="uid://4rwmb5gf6jqu" path="res://scenes/game/modal/modal.tscn" id="1_4rpx7"]
+[ext_resource type="Script" path="res://scenes/game/modal/game_start_modal.gd" id="2_ryft6"]
+
+[node name="GameStartModal" instance=ExtResource("1_4rpx7")]
+script = ExtResource("2_ryft6")
+
+[node name="ButtonLeft" parent="Background/Buttons/MarginContainer/HBoxContainer" index="0"]
+visible = false
+
+[node name="ButtonMiddle" parent="Background/Buttons/MarginContainer/HBoxContainer" index="1"]
+text = "PLAY"
+
+[node name="ButtonRight" parent="Background/Buttons/MarginContainer/HBoxContainer" index="2"]
+visible = false
+
+[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonMiddle" to="." method="_on_button_middle_pressed"]

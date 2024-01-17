@@ -52,7 +52,7 @@ func get_word(word: String, tiles: Array[Tile]):
 				if final_word:
 					return final_word
 			return null
-	return word if Dict.is_word(word) else null
+	return word if Dict.is_word(word) else ""
 
 func remove_word(word_tiles: WordTiles):
 	var score = $"../../ScoreArea".score_word(word_tiles)
