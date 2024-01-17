@@ -4,7 +4,7 @@ var words = {}
 
 func _init():
 	# Populate dictionary
-	load_words(words, "res://static/collins_scrabble_words_2019.txt")
+	load_words(words, "res://static/dictionary.txt")
 
 func load_words(dict: Dictionary, file_name: String):
 	var file = FileAccess.open(file_name, FileAccess.READ)
