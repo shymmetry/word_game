@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjn0ohfkaqqbp"]
+[gd_scene load_steps=10 format=3 uid="uid://cjn0ohfkaqqbp"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/tile.gd" id="2_1hfe7"]
 [ext_resource type="StyleBox" uid="uid://bvpdnl601inlb" path="res://tres/tile/underlay/tile_normal_underlay.tres" id="2_e8rig"]
@@ -42,9 +42,26 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(0.5, 0.5)]
 }
 
+[sub_resource type="Animation" id="Animation_r16w0"]
+resource_name = "hint"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g7j3p"]
 _data = {
-"explode": SubResource("Animation_at1xv")
+"explode": SubResource("Animation_at1xv"),
+"hint": SubResource("Animation_r16w0")
 }
 
 [node name="Tile" type="Control"]

@@ -28,6 +28,7 @@ func _process(_delta):
 	$Letter.text = self.letter
 	$Score.text = self.score
 	
+	# Handle overlay / underlay from tile state
 	if Globals.selected_tile == self:
 		update_stylebox($Overlay, clicked_overlay_style)
 		update_stylebox($Underlay, clicked_underlay_style)
@@ -38,6 +39,7 @@ func _process(_delta):
 		update_stylebox($Overlay, normal_overlay_style)
 		update_stylebox($Underlay, normal_underlay_style)
 	
+	# Handle base style from tile type
 	var base_style: StyleBoxFlat = null
 	match tile_type:
 		E.TILE_TYPE.NORMAL:
@@ -46,14 +48,13 @@ func _process(_delta):
 			base_style = mult_base_style
 		E.TILE_TYPE.HARDENED:
 			base_style = harden_base_style
-	if Globals.hint_tiles.has(self):
-		base_style = base_style.duplicate()
-		base_style.border_color = Color(255, 215, 0) #gold
-		base_style.border_width_left = 2
-		base_style.border_width_right = 2
-		base_style.border_width_top = 2
-		base_style.border_width_bottom = 2
 	update_stylebox($Base, base_style)
+	
+	# Handle animations
+	if Globals.hint_tiles.has(self) and !animation.current_animation:
+		animation.play('hint')
+	elif !Globals.hint_tiles.has(self) and animation.current_animation == "hint":
+		animation.stop()
 
 func explode():
 	animation.play("explode")

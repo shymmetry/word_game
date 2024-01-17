@@ -17,6 +17,7 @@ func _ready():
 func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
 	if Globals.board_changed:
+		# Handle win/loss
 		if has_won():
 			if !UserData.completed_levels.has(str(Globals.current_level)):
 				UserData.completed_levels[str(Globals.current_level)] = {}
@@ -26,6 +27,12 @@ func _process(_delta):
 		if !find_all_words(Globals.level_data.min_word_length):
 			$GameOverCL.show()
 			Signals.emit_signal("GameOver")
+		
+		# Every time the board state changes and a hint was present, remove the
+		# hint as it is considered outdated.
+		if Globals.hint_tiles:
+			Globals.hint_tiles = []
+		
 		Globals.board_changed = false
 
 func reset():
