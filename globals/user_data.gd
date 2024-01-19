@@ -1,6 +1,6 @@
 extends Node
 
-var completed_levels = {}
+var endless_high_score = 0
 
 func save_data():
 	var data_map = {}

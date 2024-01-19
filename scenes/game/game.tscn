@@ -1,32 +1,31 @@
-[gd_scene load_steps=19 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=16 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGrid.gd" id="2_1ocn6"]
-[ext_resource type="Script" path="res://scenes/game/ScoreArea.gd" id="3_vlwa8"]
-[ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/tracker.tscn" id="4_6y3dl"]
+[ext_resource type="Script" path="res://scenes/game/Title.gd" id="2_mdss5"]
+[ext_resource type="Texture2D" uid="uid://786xx47uf4o3" path="res://icons/outline_menu_white_48dp.png" id="4_7r455"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://tres/hamburger.tres" id="4_f7i5n"]
-[ext_resource type="Texture2D" uid="uid://b50uc5r7wm45g" path="res://icons/TripleBar.png" id="4_gthw2"]
-[ext_resource type="StyleBox" uid="uid://gldv2yjpybuk" path="res://tres/progress/progress_background.tres" id="6_6v52k"]
-[ext_resource type="StyleBox" uid="uid://bsydb2ngwo13u" path="res://tres/progress/progress_full.tres" id="7_3ujnf"]
+[ext_resource type="PackedScene" uid="uid://baa6i0aenowti" path="res://scenes/game/trackers/hint_tracker.tscn" id="6_gyoeg"]
+[ext_resource type="PackedScene" uid="uid://dmpfem7ewtteu" path="res://scenes/game/trackers/swap_tracker.tscn" id="7_xphf4"]
+[ext_resource type="PackedScene" uid="uid://bhquh7gqrmpw7" path="res://scenes/game/trackers/score_tracker.tscn" id="8_h06yx"]
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/menu_modal.tscn" id="15_occs8"]
-[ext_resource type="PackedScene" uid="uid://caaru3t6wgsf" path="res://scenes/game/modal/game_start_modal.tscn" id="15_yg57j"]
-[ext_resource type="PackedScene" uid="uid://d2mv7djwaxlpe" path="res://scenes/game/modal/give_up_modal.tscn" id="17_qubtb"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over_modal.tscn" id="18_7d1n6"]
 [ext_resource type="PackedScene" uid="uid://dwd0rw6u2hyjx" path="res://scenes/game/modal/win_modal.tscn" id="19_l7mpj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
-size = Vector2(430, 430)
-
-[sub_resource type="LabelSettings" id="LabelSettings_m8gcd"]
-font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_bajh7"]
-font_size = 12
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
+bg_color = Color(0.835294, 0.690196, 0.486275, 1)
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_fmmef"]
 font_size = 32
 font_color = Color(0.952941, 0.972549, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
+size = Vector2(430, 430)
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -36,115 +35,34 @@ offset_bottom = 720.0
 mouse_filter = 2
 script = ExtResource("1_h6npk")
 
-[node name="TileGridContainer" type="ReferenceRect" parent="."]
-clip_contents = true
-layout_mode = 0
-offset_left = 25.0
-offset_top = 265.0
-offset_right = 455.0
-offset_bottom = 695.0
-mouse_filter = 2
-script = ExtResource("1_c2goi")
-
-[node name="TileGrid" type="Area2D" parent="TileGridContainer"]
-z_index = 2
-script = ExtResource("2_1ocn6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileGridContainer/TileGrid"]
-position = Vector2(215, 215)
-shape = SubResource("RectangleShape2D_cgcgr")
-
-[node name="ScoreArea" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 260.0
-grow_horizontal = 2
-script = ExtResource("3_vlwa8")
-
-[node name="Trackers" type="VBoxContainer" parent="ScoreArea"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 100.0
-offset_right = 125.0
-offset_bottom = 260.0
-theme_override_constants/separation = 5
-alignment = 2
-
-[node name="LetterCount" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
-layout_mode = 2
-
-[node name="SwapTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
-layout_mode = 2
-
-[node name="HintTracker" parent="ScoreArea/Trackers" instance=ExtResource("4_6y3dl")]
-layout_mode = 2
-
-[node name="Progress" type="VBoxContainer" parent="ScoreArea"]
-layout_mode = 0
-offset_left = 90.0
-offset_top = 70.0
-offset_right = 390.0
-offset_bottom = 124.0
-
-[node name="ProgressBar" type="ProgressBar" parent="ScoreArea/Progress"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_styles/background = ExtResource("6_6v52k")
-theme_override_styles/fill = ExtResource("7_3ujnf")
-step = 1.0
-show_percentage = false
-
-[node name="Progress" type="Label" parent="ScoreArea/Progress/ProgressBar"]
+[node name="Page" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "0 / 0"
-label_settings = SubResource("LabelSettings_m8gcd")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="ProgressRect" type="Panel" parent="ScoreArea/Progress"]
-visible = false
-custom_minimum_size = Vector2(0, 20)
+[node name="Title" type="Panel" parent="Page"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-theme_override_styles/panel = ExtResource("6_6v52k")
+theme_override_styles/panel = SubResource("StyleBoxFlat_tvib1")
+script = ExtResource("2_mdss5")
 
-[node name="Progress" type="Label" parent="ScoreArea/Progress/ProgressRect"]
+[node name="InGameMenuButton" type="Button" parent="Page/Title"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "0"
-label_settings = SubResource("LabelSettings_bajh7")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Goal" type="Label" parent="ScoreArea/Progress"]
-layout_mode = 2
-text = "Goal"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="InGameMenuButton" type="Button" parent="ScoreArea"]
-layout_mode = 0
 offset_left = 10.0
-offset_top = 10.0
-offset_right = 26.0
-offset_bottom = 26.0
-scale = Vector2(2.5, 2.5)
+offset_right = 58.0
+grow_vertical = 2
 theme_override_styles/normal = ExtResource("4_f7i5n")
 theme_override_styles/hover = ExtResource("4_f7i5n")
 theme_override_styles/pressed = ExtResource("4_f7i5n")
 theme_override_styles/focus = ExtResource("4_f7i5n")
-icon = ExtResource("4_gthw2")
+icon = ExtResource("4_7r455")
 
-[node name="Title" type="Label" parent="ScoreArea"]
+[node name="Title" type="Label" parent="Page/Title"]
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 60.0
@@ -153,26 +71,53 @@ label_settings = SubResource("LabelSettings_fmmef")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GiveUp" type="Button" parent="ScoreArea"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -146.0
-offset_top = -38.0
-offset_right = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Give Up"
+[node name="ScoreArea" type="MarginContainer" parent="Page"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Page/ScoreArea"]
+layout_mode = 2
+
+[node name="Trackers" type="VBoxContainer" parent="Page/ScoreArea/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="HintTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("6_gyoeg")]
+layout_mode = 2
+
+[node name="SwapTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("7_xphf4")]
+layout_mode = 2
+
+[node name="ScoreTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("8_h06yx")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Page"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="TileGridContainer" type="ReferenceRect" parent="Page/MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(430, 430)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("1_c2goi")
+
+[node name="TileGrid" type="Area2D" parent="Page/MarginContainer/TileGridContainer"]
+z_index = 2
+script = ExtResource("2_1ocn6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Page/MarginContainer/TileGridContainer/TileGrid"]
+position = Vector2(215, 215)
+shape = SubResource("RectangleShape2D_cgcgr")
 
 [node name="MenuModal" parent="." instance=ExtResource("15_occs8")]
-visible = false
-
-[node name="GameStartModal" parent="." instance=ExtResource("15_yg57j")]
-
-[node name="GiveUpModal" parent="." instance=ExtResource("17_qubtb")]
 visible = false
 
 [node name="GameOverModal" parent="." instance=ExtResource("18_7d1n6")]
@@ -181,5 +126,6 @@ visible = false
 [node name="WinModal" parent="." instance=ExtResource("19_l7mpj")]
 visible = false
 
-[connection signal="pressed" from="ScoreArea/InGameMenuButton" to="ScoreArea" method="_on_in_game_menu_button_pressed"]
-[connection signal="pressed" from="ScoreArea/GiveUp" to="ScoreArea" method="_on_give_up_pressed"]
+[connection signal="pressed" from="Page/Title/InGameMenuButton" to="Page/Title" method="_on_in_game_menu_button_pressed"]
+[connection signal="gui_input" from="Page/ScoreArea/HBoxContainer/Trackers/HintTracker" to="Page/ScoreArea/HBoxContainer/Trackers/HintTracker" method="_on_gui_input"]
+[connection signal="gui_input" from="Page/ScoreArea/HBoxContainer/Trackers/ScoreTracker" to="Page/ScoreArea/HBoxContainer/Trackers/ScoreTracker" method="_on_gui_input"]

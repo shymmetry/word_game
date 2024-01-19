@@ -1,13 +1,13 @@
 extends Control
 
 func _init():
-	if !Globals.level_data:
-		Levels.set_current_level(0)
+	if !Globals.game_mode:
+		Globals.game_mode = E.GAME_TYPE.ENDLESS
+		Levels.set_endless()
 	
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.hints = Globals.level_data.starting_hints
 	Globals.score = 0
-	Globals.progress = 0
 
 func _ready():
 	Signals.connect('StartGame', reset)
@@ -17,16 +17,6 @@ func _ready():
 func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
 	if Globals.board_changed:
-		# Handle win/loss
-		if has_won():
-			if !UserData.completed_levels.has(str(Globals.current_level)):
-				UserData.completed_levels[str(Globals.current_level)] = {}
-			Sounds.win()
-			$WinModal.show()
-			Store.save_game()
-		if !find_all_words(Globals.level_data.min_word_length):
-			Signals.emit_signal("GameOver")
-		
 		# Every time the board state changes and a hint was present, remove the
 		# hint as it is considered outdated.
 		if Globals.hint_tiles:
@@ -39,23 +29,14 @@ func reset():
 	$WinModal.hide()
 	get_tree().reload_current_scene()
 
-func has_won():
-	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
-		return false
-	else:
-		return Globals.progress >= Globals.level_data.win_threshold
-
 func game_over():
 	Sounds.lose()
 	$GameOverModal.show()
-	if Globals.level_data.win_type == E.WIN_TYPE.NONE:
-		var endless_data = UserData.completed_levels.get("0")
-		if !endless_data:
-			UserData.completed_levels["0"] = {"high_score": Globals.score}
-			Store.save_game()
-		elif Globals.score > endless_data.high_score:
-			UserData.completed_levels["0"].high_score = Globals.score
-			Store.save_game()
+	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
+		pass
+	elif Globals.game_mode == E.GAME_TYPE.ENDLESS:
+		UserData.endless_high_score = Globals.score
+		Store.save_game()
 
 func give_hint():
 	if Globals.hints > 0:

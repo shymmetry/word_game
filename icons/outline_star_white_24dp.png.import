@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b50uc5r7wm45g"
-path="res://.godot/imported/TripleBar.png-4c94dbecae81e2fbcb1efdbcc1fad950.ctex"
+uid="uid://dejlfmqooht1h"
+path="res://.godot/imported/outline_star_white_24dp.png-a1196dc3f37b1392fb78cc3c535f5055.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/TripleBar.png"
-dest_files=["res://.godot/imported/TripleBar.png-4c94dbecae81e2fbcb1efdbcc1fad950.ctex"]
+source_file="res://icons/outline_star_white_24dp.png"
+dest_files=["res://.godot/imported/outline_star_white_24dp.png-a1196dc3f37b1392fb78cc3c535f5055.ctex"]
 
 [params]
 

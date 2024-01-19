@@ -20,8 +20,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 script = SubResource("GDScript_o31ft")
 
 [node name="WordPop" type="Panel" parent="."]
-offset_right = 80.0
-offset_bottom = 40.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_iwomm")
 script = ExtResource("2_vhes7")

@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://4rveb6yybb8j"]
+[gd_scene load_steps=3 format=3 uid="uid://4rveb6yybb8j"]
 
-[ext_resource type="Script" path="res://scenes/game/tracker.gd" id="1_xm3mw"]
 [ext_resource type="Texture2D" uid="uid://cj2hyiu5gtaks" path="res://icons/outline_swap.png" id="2_gowgf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7n22"]
@@ -22,29 +21,31 @@ custom_minimum_size = Vector2(90, 40)
 offset_right = 90.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_r7n22")
-script = ExtResource("1_xm3mw")
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="Margins" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = -12.0
-offset_right = 34.0
-offset_bottom = 12.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBox" type="HBoxContainer" parent="Margins"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Margins/HBox"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
 texture = ExtResource("2_gowgf")
 expand_mode = 1
+stretch_mode = 5
 
-[node name="Value" type="Label" parent="."]
-layout_mode = 0
-offset_left = 45.0
-offset_right = 80.0
-offset_bottom = 40.0
+[node name="Value" type="Label" parent="Margins/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "0
 "
 horizontal_alignment = 2
 vertical_alignment = 1
-
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]

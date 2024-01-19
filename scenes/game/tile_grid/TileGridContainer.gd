@@ -67,7 +67,7 @@ func swap_tiles(tile1, tile2):
 	Globals.tiles[tile2.col][tile2.row] = tile1
 	tile1.col = tile2.col; tile1.row = tile2.row
 	tile2.col = tile1_col; tile2.row = tile1_row
-	$"../ScoreArea".count_swap()
+	Globals.swaps -= 1
 	
 	# Perform visual swap (prevent other actions while this is happening)
 	var tween = create_tween()

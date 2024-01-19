@@ -55,7 +55,7 @@ func get_word(word: String, tiles: Array[Tile]):
 	return word if Dict.is_word(word) else ""
 
 func remove_word(word_tiles: WordTiles):
-	var score = $"../../ScoreArea".score_word(word_tiles)
+	var score = score_word(word_tiles)
 	
 	# Handle word pop
 	var new_word_pop = word_pop.instantiate()
@@ -63,8 +63,7 @@ func remove_word(word_tiles: WordTiles):
 	# Need to add the parents position since the CanvasLayer of the 
 	# word_pop doesn't have (0,0) as it's parents position
 	var center = center_of_points(word_tiles.tiles)
-	var parent_pos = get_parent().position
-	new_word_pop.set_position(center + parent_pos)
+	new_word_pop.set_position(center)
 	
 	add_child(new_word_pop)
 	
@@ -75,15 +74,64 @@ func remove_word(word_tiles: WordTiles):
 		exploding_tiles_done += 1
 		tile.explode()
 
+func score_word(word_tiles: WordTiles):
+	# Update score
+	var letter_score = 0
+	for letter in word_tiles.word:
+		letter_score += Globals.level_data.letter_scores.get(letter)
+	
+	var length_mult = Globals.level_data.word_length_score_multiplier.get(word_tiles.word.length())
+	if length_mult == null:
+		# Not all lengths are tracked, so default to the highest defined
+		var maxwl = Globals.level_data.word_length_score_multiplier.keys().max()
+		var minwl = Globals.level_data.word_length_score_multiplier.keys().min()
+		if word_tiles.word.length() > maxwl:
+			length_mult = Globals.level_data.word_length_score_multiplier.get(maxwl)
+		elif word_tiles.word.length() < minwl:
+			length_mult = Globals.level_data.word_length_score_multiplier.get(minwl)
+		else:
+			length_mult = 1
+	
+	var tile_mult = 1
+	for tile in word_tiles.tiles:
+		if tile.tile_type == E.TILE_TYPE.MULTIPLIER: tile_mult *= 2
+	
+	var score_up = letter_score * length_mult * tile_mult
+	Globals.score += score_up
+	
+	# Update swap count
+	var bonus = Globals.level_data.swap_bonus.get(word_tiles.word.length())
+	if bonus == null:
+		# Not all lengths are tracked, so default to the highest defined
+		var maxwl = Globals.level_data.swap_bonus.keys().max()
+		var minwl = Globals.level_data.swap_bonus.keys().min()
+		if word_tiles.word.length() > maxwl:
+			bonus = Globals.level_data.swap_bonus.get(maxwl)
+		elif word_tiles.word.length() < minwl:
+			bonus = Globals.level_data.swap_bonus.get(minwl)
+		else:
+			bonus = 0
+	Globals.swaps += bonus
+	
+	Globals.matched_words = [word_tiles.word] + Globals.matched_words
+	
+	return score_up
+
 func center_of_points(tiles: Array[Tile]):
-	var tile1 = tiles[0]
-	var tile2 = tiles[tiles.size()-1]
-	# Get the average of the first and last nodes to get the middle. Add
-	# 1 to center the point.
-	# Subtract half of size from the end to center
-	# Add half of padding to account for sides of tile grid
-	var x = (abs(tile1.col+tile2.col+1)/2.0)*(Globals.level_data.tile_size+Globals.level_data.padding)-40+Globals.level_data.padding/2
-	var y = (abs(tile1.row+tile2.row+1)/2.0)*(Globals.level_data.tile_size+Globals.level_data.padding)-20+Globals.level_data.padding/2
+	var minx = 9999999
+	var maxx = 0
+	var miny = 9999999
+	var maxy = 0
+	var size = tiles[0].size
+	for tile in tiles:
+		minx = min(minx, tile.global_position.x)
+		maxx = max(maxx, tile.global_position.x)
+		miny = min(miny, tile.global_position.y)
+		maxy = max(maxy, tile.global_position.y)
+	
+	var x = minx+(maxx-minx)/2+size.x/2
+	var y = miny+(maxy-miny)/2+size.y/2
+	
 	return Vector2(x, y)
 
 func explode_finished():

@@ -14,14 +14,8 @@ var cols = 6
 var tile_size = 60
 var padding = 10
 
-var win_type = E.WIN_TYPE.SCORE
-var win_threshold = 1
-var goal = "Get over 1 points"
-var level_info = ""
-var win_data = {}
 var starting_swaps = 1
 var starting_hints = 0
-var show_hints = false
 var min_word_length = 3
 
 var swap_bonus = {
@@ -36,7 +30,6 @@ var tile_type_chance = {
 	E.TILE_TYPE.NORMAL: 100,
 	E.TILE_TYPE.HARDENED: 0,
 	E.TILE_TYPE.MULTIPLIER: 0,
-	E.TILE_TYPE.GOAL: 0,
 }
 
 var word_length_score_multiplier = {

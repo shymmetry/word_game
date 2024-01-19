@@ -4,9 +4,9 @@ extends Node
 const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for speed
 
 # Game variables
+var game_mode = null
 var tiles = []
 var score = 0
-var progress = 0
 var swaps = 1
 var hints = 1
 var matched_words = []
