@@ -1,14 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=23 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGrid.gd" id="2_1ocn6"]
-[ext_resource type="Script" path="res://scenes/game/Title.gd" id="2_mdss5"]
+[ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
 [ext_resource type="Texture2D" uid="uid://786xx47uf4o3" path="res://icons/outline_menu_white_48dp.png" id="4_7r455"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://tres/hamburger.tres" id="4_f7i5n"]
-[ext_resource type="PackedScene" uid="uid://baa6i0aenowti" path="res://scenes/game/trackers/hint_tracker.tscn" id="6_gyoeg"]
-[ext_resource type="PackedScene" uid="uid://dmpfem7ewtteu" path="res://scenes/game/trackers/swap_tracker.tscn" id="7_xphf4"]
-[ext_resource type="PackedScene" uid="uid://bhquh7gqrmpw7" path="res://scenes/game/trackers/score_tracker.tscn" id="8_h06yx"]
+[ext_resource type="Script" path="res://scenes/game/title/TimerLabel.gd" id="5_gc41v"]
+[ext_resource type="PackedScene" uid="uid://ruilr3qm8sxw" path="res://scenes/game/score_area/trackers/hint_tracker.tscn" id="6_gyoeg"]
+[ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/score_area/trackers/gold_tracker.tscn" id="7_gdb5j"]
+[ext_resource type="PackedScene" uid="uid://ddjfdnexe12e1" path="res://scenes/game/score_area/trackers/swap_tracker.tscn" id="7_xphf4"]
+[ext_resource type="PackedScene" uid="uid://bhquh7gqrmpw7" path="res://scenes/game/score_area/trackers/score_tracker.tscn" id="8_h06yx"]
+[ext_resource type="PackedScene" uid="uid://diy7hx0ob4kh5" path="res://scenes/game/score_area/trackers/life_tracker.tscn" id="8_nvj2p"]
+[ext_resource type="Script" path="res://scenes/game/score_area/WordScores.gd" id="9_bqcat"]
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/menu_modal.tscn" id="15_occs8"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over_modal.tscn" id="18_7d1n6"]
 [ext_resource type="PackedScene" uid="uid://dwd0rw6u2hyjx" path="res://scenes/game/modal/win_modal.tscn" id="19_l7mpj"]
@@ -23,6 +27,18 @@ shadow_offset = Vector2(0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_fmmef"]
 font_size = 32
 font_color = Color(0.952941, 0.972549, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gidju"]
+line_spacing = 0.0
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_ykkqn"]
+line_spacing = 0.0
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_44dt0"]
+line_spacing = 0.0
+font_size = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
 size = Vector2(430, 430)
@@ -42,6 +58,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="Title" type="Panel" parent="Page"]
 custom_minimum_size = Vector2(0, 60)
@@ -62,21 +79,20 @@ theme_override_styles/pressed = ExtResource("4_f7i5n")
 theme_override_styles/focus = ExtResource("4_f7i5n")
 icon = ExtResource("4_7r455")
 
-[node name="Title" type="Label" parent="Page/Title"]
+[node name="TimerLabel" type="Label" parent="Page/Title"]
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 60.0
-text = "WORD TURD"
 label_settings = SubResource("LabelSettings_fmmef")
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("5_gc41v")
+
+[node name="Timer" type="Timer" parent="Page/Title/TimerLabel"]
 
 [node name="ScoreArea" type="MarginContainer" parent="Page"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Page/ScoreArea"]
@@ -84,36 +100,75 @@ layout_mode = 2
 
 [node name="Trackers" type="VBoxContainer" parent="Page/ScoreArea/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 5
-alignment = 2
-
-[node name="HintTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("6_gyoeg")]
-layout_mode = 2
-
-[node name="SwapTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("7_xphf4")]
-layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
 
 [node name="ScoreTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("8_h06yx")]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Page"]
+[node name="GoldTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("7_gdb5j")]
+layout_mode = 2
+
+[node name="LifeTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("8_nvj2p")]
+layout_mode = 2
+
+[node name="WordScores" type="HBoxContainer" parent="Page/ScoreArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("9_bqcat")
+
+[node name="Words" type="Label" parent="Page/ScoreArea/HBoxContainer/WordScores"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_gidju")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Dashes" type="Label" parent="Page/ScoreArea/HBoxContainer/WordScores"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_ykkqn")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Scores" type="Label" parent="Page/ScoreArea/HBoxContainer/WordScores"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_44dt0")
+vertical_alignment = 2
+
+[node name="Abilities" type="VBoxContainer" parent="Page/ScoreArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="HintTracker" parent="Page/ScoreArea/HBoxContainer/Abilities" instance=ExtResource("6_gyoeg")]
+layout_mode = 2
+
+[node name="SwapTracker" parent="Page/ScoreArea/HBoxContainer/Abilities" instance=ExtResource("7_xphf4")]
+layout_mode = 2
+
+[node name="TileGrid" type="MarginContainer" parent="Page"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="TileGridContainer" type="ReferenceRect" parent="Page/MarginContainer"]
+[node name="TileGridContainer" type="ReferenceRect" parent="Page/TileGrid"]
 clip_contents = true
 custom_minimum_size = Vector2(420, 420)
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("1_c2goi")
 
-[node name="TileGrid" type="Area2D" parent="Page/MarginContainer/TileGridContainer"]
+[node name="TileGridArea" type="Area2D" parent="Page/TileGrid/TileGridContainer"]
 z_index = 2
 script = ExtResource("2_1ocn6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Page/MarginContainer/TileGridContainer/TileGrid"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Page/TileGrid/TileGridContainer/TileGridArea"]
 position = Vector2(215, 215)
 shape = SubResource("RectangleShape2D_cgcgr")
 
@@ -126,6 +181,8 @@ visible = false
 [node name="WinModal" parent="." instance=ExtResource("19_l7mpj")]
 visible = false
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="pressed" from="Page/Title/InGameMenuButton" to="Page/Title" method="_on_in_game_menu_button_pressed"]
-[connection signal="gui_input" from="Page/ScoreArea/HBoxContainer/Trackers/HintTracker" to="Page/ScoreArea/HBoxContainer/Trackers/HintTracker" method="_on_gui_input"]
-[connection signal="gui_input" from="Page/ScoreArea/HBoxContainer/Trackers/ScoreTracker" to="Page/ScoreArea/HBoxContainer/Trackers/ScoreTracker" method="_on_gui_input"]
+[connection signal="timeout" from="Page/Title/TimerLabel/Timer" to="Page/Title/TimerLabel" method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -39,11 +39,11 @@ func _unhandled_input(event):
 	
 	# Handle mouse for clicking a tile
 	if event is InputEventMouseButton \
-		and event.button_index == MOUSE_BUTTON_LEFT \
-		and event.pressed \
-		and (Globals.idle or Globals.selected_tile):
-			clicked_tile = get_tile_at_point(get_local_mouse_position())
-			Globals.idle = false
+			and event.button_index == MOUSE_BUTTON_LEFT \
+			and event.pressed \
+			and (Globals.idle or Globals.selected_tile):
+		clicked_tile = get_tile_at_point(get_local_mouse_position())
+		Globals.idle = false
 	
 	# Handle mouse movement for dragging tiles
 	if clicked_tile and event is InputEventMouseMotion and !Globals.selected_tile:

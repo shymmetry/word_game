@@ -57,6 +57,9 @@ func get_word(word: String, tiles: Array[Tile]):
 func remove_word(word_tiles: WordTiles):
 	var score = score_word(word_tiles)
 	
+	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
+		Signals.emit_signal("ResetTimer")
+	
 	# Handle word pop
 	var new_word_pop = word_pop.instantiate()
 	new_word_pop.update_text(word_tiles.word, score)
@@ -66,6 +69,8 @@ func remove_word(word_tiles: WordTiles):
 	new_word_pop.set_position(center)
 	
 	add_child(new_word_pop)
+	
+	Signals.emit_signal("MatchedWord")
 	
 	# Remove all the points that were matched
 	exploding_tiles = []
@@ -113,7 +118,7 @@ func score_word(word_tiles: WordTiles):
 			bonus = 0
 	Globals.swaps += bonus
 	
-	Globals.matched_words = [word_tiles.word] + Globals.matched_words
+	Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
 	return score_up
 

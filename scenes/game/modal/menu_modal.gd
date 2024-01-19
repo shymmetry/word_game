@@ -12,7 +12,7 @@ func _on_button_left_pressed():
 
 func _on_button_middle_pressed():
 	Sounds.click()
-	Signals.emit_signal("StartGame")
+	Signals.emit_signal("ResetGame")
 
 func _on_button_right_pressed():
 	Sounds.click()

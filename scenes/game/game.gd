@@ -1,18 +1,32 @@
 extends Control
 
 func _init():
+	# Handle if loaded outside of menu
+	# TODO: Only actually used for testing, figure out how to handle better
 	if !Globals.game_mode:
+		Store.load_game()
 		Globals.game_mode = E.GAME_TYPE.ENDLESS
 		Levels.set_endless()
 	
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.hints = Globals.level_data.starting_hints
 	Globals.score = 0
+	Globals.elapsed_seconds = 0
+	Globals.matched_words = []
 
 func _ready():
-	Signals.connect('StartGame', reset)
-	Signals.connect('GameOver', game_over)
-	Signals.connect('HintRequested', give_hint)
+	Signals.connect("ResetGame", reset)
+	Signals.connect("GameOver", game_over)
+	Signals.connect("HintRequested", give_hint)
+	Signals.connect("TimedOut", timed_out)
+	
+	Signals.emit_signal("StartGame")
+	
+	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
+		$"Page/ScoreArea/HBoxContainer/Trackers/GoldTracker".hide()
+		$"Page/ScoreArea/HBoxContainer/Trackers/LifeTracker".hide()
+	elif Globals.game_mode == E.GAME_TYPE.SURVIVAL:
+		pass
 
 func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
@@ -29,14 +43,25 @@ func reset():
 	$WinModal.hide()
 	get_tree().reload_current_scene()
 
+func timed_out():
+	Globals.idle = false
+	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
+		game_over()
+	elif Globals.game_mode == E.GAME_TYPE.ENDLESS:
+		round_over()
+
+func round_over():
+	pass
+
 func game_over():
 	Sounds.lose()
 	$GameOverModal.show()
 	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
 		pass
 	elif Globals.game_mode == E.GAME_TYPE.ENDLESS:
-		UserData.endless_high_score = Globals.score
-		Store.save_game()
+		if Globals.score > UserData.endless_high_score:
+			UserData.endless_high_score = Globals.score
+			Store.save_game()
 
 func give_hint():
 	if Globals.hints > 0:
@@ -115,3 +140,5 @@ func _get_adjacent_tiles(tile):
 			tiles.append(Globals.tiles[col][row])
 	return tiles
 
+func _on_timer_timeout():
+	Globals.elapsed_seconds += 1

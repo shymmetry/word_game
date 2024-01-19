@@ -9,6 +9,7 @@ func get_config_map():
 		config_map[property_name] = property_value
 	return config_map
 
+var time_seconds = 60
 var starting_swaps = 1
 var starting_hints = 0
 var min_word_length = 3

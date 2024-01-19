@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddjfdnexe12e1"]
+
+[ext_resource type="PackedScene" uid="uid://b1jtojilfwrub" path="res://scenes/game/score_area/trackers/right_tracker.tscn" id="1_tmkul"]
+[ext_resource type="Script" path="res://scenes/game/score_area/trackers/swap_tracker.gd" id="2_62723"]
+
+[node name="SwapTracker" instance=ExtResource("1_tmkul")]
+script = ExtResource("2_62723")

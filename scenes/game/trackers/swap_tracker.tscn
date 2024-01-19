@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmpfem7ewtteu"]
-
-[ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/trackers/tracker.tscn" id="1_jyfhq"]
-[ext_resource type="Script" path="res://scenes/game/trackers/swap_tracker.gd" id="2_62723"]
-
-[node name="Tracker" instance=ExtResource("1_jyfhq")]
-script = ExtResource("2_62723")
-
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]

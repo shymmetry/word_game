@@ -1,26 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://4rveb6yybb8j"]
+[gd_scene load_steps=3 format=3 uid="uid://b1jtojilfwrub"]
 
-[ext_resource type="Texture2D" uid="uid://cj2hyiu5gtaks" path="res://icons/outline_swap.png" id="2_gowgf"]
+[ext_resource type="Texture2D" uid="uid://cj2hyiu5gtaks" path="res://icons/outline_swap.png" id="1_x10n5"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7n22"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bx1f"]
 bg_color = Color(0.776471, 0.596078, 0.454902, 1)
 border_width_left = 1
 border_width_top = 1
-border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 shadow_size = 1
 shadow_offset = Vector2(1, 1)
 
-[node name="Tracker" type="Panel"]
+[node name="RightTracker" type="Panel"]
 custom_minimum_size = Vector2(90, 40)
-offset_right = 90.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_r7n22")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0bx1f")
 
 [node name="Margins" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -30,22 +25,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 5
 
 [node name="HBox" type="HBoxContainer" parent="Margins"]
 layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="Margins/HBox"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-texture = ExtResource("2_gowgf")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Value" type="Label" parent="Margins/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0
 "
-horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Margins/HBox"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("1_x10n5")
+expand_mode = 1
+stretch_mode = 5

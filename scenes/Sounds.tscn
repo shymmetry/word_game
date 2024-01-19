@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bdp0bqhi5xtt8" path="res://audio/pop.wav" id="5_phg8y"]
 [ext_resource type="AudioStream" uid="uid://crugu8erbbk4j" path="res://audio/whoosh-high.wav" id="6_j8mjk"]
 [ext_resource type="AudioStream" uid="uid://csvxld7at1b84" path="res://audio/jingle_win_synth.wav" id="7_bohbw"]
-[ext_resource type="AudioStream" uid="uid://dw4kkxcpkltna" path="res://audio/failure.wav" id="8_326ak"]
+[ext_resource type="AudioStream" uid="uid://cs7anuo8pbeu5" path="res://audio/horn_fail_wahwah.wav" id="8_0qtcf"]
 
 [node name="Sounds" type="Node"]
 script = ExtResource("1_mgxed")
@@ -31,4 +31,4 @@ stream = ExtResource("6_j8mjk")
 stream = ExtResource("7_bohbw")
 
 [node name="Lose" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_326ak")
+stream = ExtResource("8_0qtcf")

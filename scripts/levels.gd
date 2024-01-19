@@ -5,6 +5,7 @@ const endless_config = preload("res://static/levels/endless.gd")
 
 # Ordered list of levels
 const level_order = [
+	"res://static/levels/survival1.gd"
 ]
 
 func set_endless():
@@ -13,7 +14,7 @@ func set_endless():
 func set_current_level(level: int):
 	Globals.current_level = level
 	
-	set_level_config(load(level_order[level]))
+	set_level_config(load(level_order[level-1]))
 	
 func set_level_config(level_data):
 	var config_map = level_defaults.new().get_config_map()
