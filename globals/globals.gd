@@ -5,6 +5,8 @@ const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for spee
 
 # Game variables
 var game_mode = null
+var rows = 6
+var cols = 6
 var tiles = []
 var score = 0
 var swaps = 1

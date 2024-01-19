@@ -21,10 +21,10 @@ func _ready():
 
 func init_tiles():
 	Globals.tiles = []
-	for col in range(0, Globals.level_data.cols):
+	for col in range(0, Globals.cols):
 		var tile_col = []
 		
-		for row in range(0, Globals.level_data.rows):
+		for row in range(0, Globals.rows):
 			var tile = create_tile(col, row)
 			tile_col.append(tile)
 			
@@ -43,7 +43,7 @@ func get_word(word: String, tiles: Array[Tile]):
 	const is_word = false
 	for i in range(0, tiles.size()):
 		var tile = tiles[i]
-		var letter = tile.get_node("Letter").text
+		var letter = tile.letter
 		if letter != "?":
 			word = word + letter
 		else:
@@ -149,12 +149,12 @@ func explode_finished():
 func populate_tiles(removed_tiles: Array):
 	# Adds new tiles for each given removed point. The created tiles are placed
 	# in new negative y rows.
-	var col_totals = []; col_totals.resize(Globals.level_data.cols); col_totals.fill(0)
+	var col_totals = []; col_totals.resize(Globals.cols); col_totals.fill(0)
 	for removed_tile in removed_tiles:
 		col_totals[removed_tile.col] += 1
 	
 	var new_tiles = []
-	for col in Globals.level_data.cols:
+	for col in Globals.cols:
 		var new_tiles_col = []
 		for row in range(0, col_totals[col]):
 			var tile = create_tile(col, row, true)
@@ -167,8 +167,8 @@ func populate_tiles(removed_tiles: Array):
 func drop_tiles(removed_tiles: Array, new_tiles: Array):
 	# 2D array of the number of spaces each tile needs to drop
 	var drops = []
-	for i in range(0, Globals.level_data.cols):
-		var col = []; col.resize(Globals.level_data.rows); col.fill(0)
+	for i in range(0, Globals.cols):
+		var col = []; col.resize(Globals.rows); col.fill(0)
 		drops.append(col)
 	
 	# Calculate the number of spaces each tile must fall.
@@ -179,22 +179,24 @@ func drop_tiles(removed_tiles: Array, new_tiles: Array):
 	
 	# Drop the tiles
 	dropping_tiles_done = 0
-	for col in range(0, Globals.level_data.cols):
-		for row in range(Globals.level_data.rows-1, -1, -1):
+	for col in range(0, Globals.cols):
+		# Go through backwards so the last rows drop first
+		for row in range(Globals.rows-1, -1, -1):
 			var drop = drops[col][row]
 			var tile = Globals.tiles[col][row]
 			
 			if tile and drop > 0: 
-				tile.drop(drop*(Globals.level_data.tile_size+Globals.level_data.padding))
+				tile.drop(drop*tile.size.y)
 				dropping_tiles_done += 1
 				tile.row = row+drop
 				Globals.tiles[col][row] = null
 			Globals.tiles[col][row+drop] = tile
 		
+		# Drop the new tiles
 		var new_tiles_col = new_tiles[col]
 		for i in range(0, new_tiles_col.size()):
 			var new_tile = new_tiles_col[i]
-			new_tile.drop(new_tiles_col.size()*(Globals.level_data.tile_size+Globals.level_data.padding))
+			new_tile.drop(new_tiles_col.size()*(new_tile.size.y))
 			dropping_tiles_done += 1
 			
 			var row = new_tiles_col.size()-1-i
@@ -213,10 +215,10 @@ func create_tile(col: int, row: int, new: bool = false):
 	var tile = tile_scene.instantiate()
 	
 	# Resolve positions
-	var x = Globals.level_data.padding*(col + 1) + col*Globals.level_data.tile_size
+	var x = col * tile.size.x
 	var y = 0
-	if new: y = -1 * (Globals.level_data.padding*(row) + (row + 1)*Globals.level_data.tile_size)
-	else: y = Globals.level_data.padding*(row + 1) + row*Globals.level_data.tile_size
+	if new: y = -1 * (row+1) * tile.size.y
+	else: y = row * tile.size.y
 	tile.position = Vector2(x, y)
 	
 	# Resolve tile type

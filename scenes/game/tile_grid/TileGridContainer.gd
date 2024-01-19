@@ -82,10 +82,12 @@ func is_adjacent(tile1, tile2):
 	return coldif + rowdif == 1
 
 func get_tile_at_point(pos):
-	var col = (pos.x-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding)
-	var row = (pos.y-Globals.level_data.padding/2) / (Globals.level_data.tile_size+Globals.level_data.padding)
+	# TODO: Do something better than just getting the first tile.
+	var tile = Globals.tiles[0][0]
+	var col = pos.x / tile.size.x
+	var row = pos.y / tile.size.y
 	
-	if col < 0 or row < 0 or col >= Globals.level_data.cols or row >= Globals.level_data.rows: 
+	if col < 0 or row < 0 or col >= Globals.cols or row >= Globals.rows: 
 		return null
 	else:
-		return Globals.tiles[min(col, Globals.level_data.cols-1)][min(row, Globals.level_data.rows-1)]
+		return Globals.tiles[min(col, Globals.cols-1)][min(row, Globals.rows-1)]

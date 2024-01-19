@@ -68,8 +68,8 @@ func give_hint():
 # a word with 7+ letters we could also find one with less.
 func find_all_words(min_letters: int, max_letters: int = 6):
 	var all_words = []
-	for col in Globals.level_data.cols:
-		for row in Globals.level_data.rows:
+	for col in Globals.cols:
+		for row in Globals.rows:
 			var tile = Globals.tiles[col][row]
 			all_words += _find_all_words_recurse(tile.letter, [tile], min_letters, max_letters)
 	return all_words
@@ -110,8 +110,8 @@ func _get_adjacent_tiles(tile):
 	for adjust in [[0,1],[0,-1],[1,0],[-1,0]]:
 		var col = tile.col + adjust[0]
 		var row = tile.row + adjust[1]
-		if col >= 0 and col < Globals.level_data.cols \
-				and row >= 0 and row < Globals.level_data.rows:
+		if col >= 0 and col < Globals.cols \
+				and row >= 0 and row < Globals.rows:
 			tiles.append(Globals.tiles[col][row])
 	return tiles
 

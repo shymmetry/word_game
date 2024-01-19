@@ -9,11 +9,6 @@ func get_config_map():
 		config_map[property_name] = property_value
 	return config_map
 
-var rows = 6
-var cols = 6
-var tile_size = 60
-var padding = 10
-
 var starting_swaps = 1
 var starting_hints = 0
 var min_word_length = 3

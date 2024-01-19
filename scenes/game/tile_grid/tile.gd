@@ -1,7 +1,7 @@
 extends Control
 class_name Tile
 
-@onready var animation = $AnimationPlayer
+@onready var animation = $"Body/AnimationPlayer"
 
 # GAME MUST UPDATE THESE
 var row = -1
@@ -25,19 +25,19 @@ func set_letter(new_letter: String):
 	self.score = str(new_score) if new_score > 0 else ""
 
 func _process(_delta):
-	$Letter.text = self.letter
-	$Score.text = self.score
+	$"Body/Letter".text = self.letter
+	$"Body/Score".text = self.score
 	
 	# Handle overlay / underlay from tile state
 	if Globals.selected_tile == self:
-		update_stylebox($Overlay, clicked_overlay_style)
-		update_stylebox($Underlay, clicked_underlay_style)
+		update_stylebox($"Body/Overlay", clicked_overlay_style)
+		update_stylebox($"Body/Underlay", clicked_underlay_style)
 	elif Globals.dragged_tiles.has(self):
-		update_stylebox($Overlay, dragged_overlay_style)
-		update_stylebox($Underlay, normal_underlay_style)
+		update_stylebox($"Body/Overlay", dragged_overlay_style)
+		update_stylebox($"Body/Underlay", normal_underlay_style)
 	else:
-		update_stylebox($Overlay, normal_overlay_style)
-		update_stylebox($Underlay, normal_underlay_style)
+		update_stylebox($"Body/Overlay", normal_overlay_style)
+		update_stylebox($"Body/Underlay", normal_underlay_style)
 	
 	# Handle base style from tile type
 	var base_style: StyleBoxFlat = null
@@ -48,7 +48,7 @@ func _process(_delta):
 			base_style = mult_base_style
 		E.TILE_TYPE.HARDENED:
 			base_style = harden_base_style
-	update_stylebox($Base, base_style)
+	update_stylebox($"Body/Base", base_style)
 	
 	# Handle animations
 	if Globals.hint_tiles.has(self) and !animation.current_animation:
