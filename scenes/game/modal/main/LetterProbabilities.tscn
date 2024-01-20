@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://jsakvoov63xq"]
+
+[ext_resource type="Script" path="res://scenes/game/modal/main/LetterProbabilities.gd" id="1_lnua0"]
+
+[node name="LetterProbabilities" type="VBoxContainer"]
+custom_minimum_size = Vector2(0, 429)
+offset_bottom = 8.0
+script = ExtResource("1_lnua0")

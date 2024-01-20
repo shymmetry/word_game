@@ -6,18 +6,23 @@
 [node name="GameOverModal" instance=ExtResource("1_bk2eq")]
 script = ExtResource("2_ce0jl")
 
-[node name="Label" parent="Background/Details" index="0"]
-text = "
+[node name="Label" parent="Background/VBox/Title/Margin" index="0"]
+text = "Game Over
 "
 
-[node name="ButtonLeft" parent="Background/Buttons/MarginContainer/HBoxContainer" index="0"]
-text = "RESTART"
+[node name="Label" type="Label" parent="Background/VBox/Details/Margin" index="0"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ButtonMiddle" parent="Background/Buttons/MarginContainer/HBoxContainer" index="1"]
+[node name="ButtonLeft" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="0"]
+text = "RETRY"
+
+[node name="ButtonMiddle" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="1"]
 visible = false
 
-[node name="ButtonRight" parent="Background/Buttons/MarginContainer/HBoxContainer" index="2"]
+[node name="ButtonRight" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="2"]
 text = "MAIN MENU"
 
-[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
-[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]
+[connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
+[connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]

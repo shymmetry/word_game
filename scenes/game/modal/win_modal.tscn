@@ -6,14 +6,17 @@
 [node name="WinModal" instance=ExtResource("1_ql5xl")]
 script = ExtResource("2_idicq")
 
-[node name="ButtonLeft" parent="Background/Buttons/MarginContainer/HBoxContainer" index="0"]
+[node name="Label" parent="Background/VBox/Title/Margin" index="0"]
+text = "Level Complete"
+
+[node name="ButtonLeft" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="0"]
 text = "NEXT LEVEL"
 
-[node name="ButtonMiddle" parent="Background/Buttons/MarginContainer/HBoxContainer" index="1"]
+[node name="ButtonMiddle" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="1"]
 visible = false
 
-[node name="ButtonRight" parent="Background/Buttons/MarginContainer/HBoxContainer" index="2"]
-text = "MAIN MENU"
+[node name="ButtonRight" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="2"]
+text = "QUIT"
 
-[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
-[connection signal="pressed" from="Background/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]
+[connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
+[connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]

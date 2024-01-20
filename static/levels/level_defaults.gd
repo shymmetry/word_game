@@ -12,7 +12,6 @@ func get_config_map():
 var time_seconds = 60
 var starting_swaps = 1
 var starting_hints = 0
-var min_word_length = 3
 
 var swap_bonus = {
 	4: 0,
@@ -23,9 +22,9 @@ var swap_bonus = {
 }
 
 var tile_type_chance = {
-	E.TILE_TYPE.NORMAL: 100,
+	E.TILE_TYPE.NORMAL: 97,
 	E.TILE_TYPE.HARDENED: 0,
-	E.TILE_TYPE.MULTIPLIER: 0,
+	E.TILE_TYPE.MULTIPLIER: 3,
 }
 
 var word_length_score_multiplier = {
@@ -69,6 +68,7 @@ var letter_scores = {
 }
 
 var letter_freq = {
+	"?": 300,
 	"E": 1202,
 	"T": 910,
 	"A": 812,

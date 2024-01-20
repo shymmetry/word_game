@@ -76,3 +76,6 @@ func update_stylebox(panel: Panel, new_stylebox: StyleBoxFlat):
 	var stylebox = panel.get_theme_stylebox("panel")
 	if stylebox != new_stylebox:
 		panel.add_theme_stylebox_override("panel", new_stylebox)
+
+func _hint_sound():
+	Sounds.hint()

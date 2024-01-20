@@ -2,16 +2,10 @@ extends Area2D
 
 const tile_scene = preload("res://scenes/game/tile_grid/tile.tscn")
 const word_pop = preload("res://scenes/game/word_pop/word_pop.tscn")
-const LU = preload("res://scripts/letters.gd")
-
-var letter_util = null
 
 var exploding_tiles = []
 var exploding_tiles_done = 0
 var dropping_tiles_done = 0
-
-func _init():
-	letter_util = LU.new()
 
 func _ready():
 	init_tiles()
@@ -34,7 +28,6 @@ func guess_word():
 	var word = get_word("", Globals.dragged_tiles)
 	if word:
 		remove_word(WordTiles.new(word, Globals.dragged_tiles))
-		Sounds.success()
 	else:
 		Sounds.failure()
 		Globals.idle = true
@@ -57,14 +50,20 @@ func get_word(word: String, tiles: Array[Tile]):
 func remove_word(word_tiles: WordTiles):
 	var score = score_word(word_tiles)
 	
+	# Handle sound
+	if score >= 100:
+		Sounds.congrats()
+	elif score >= 50:
+		Sounds.yay()
+	else:
+		Sounds.pop()
+	
 	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
 		Signals.emit_signal("ResetTimer")
 	
 	# Handle word pop
 	var new_word_pop = word_pop.instantiate()
 	new_word_pop.update_text(word_tiles.word, score)
-	# Need to add the parents position since the CanvasLayer of the 
-	# word_pop doesn't have (0,0) as it's parents position
 	var center = center_of_points(word_tiles.tiles)
 	new_word_pop.set_position(center)
 	
@@ -82,8 +81,8 @@ func remove_word(word_tiles: WordTiles):
 func score_word(word_tiles: WordTiles):
 	# Update score
 	var letter_score = 0
-	for letter in word_tiles.word:
-		letter_score += Globals.level_data.letter_scores.get(letter)
+	for tile in word_tiles.tiles:
+		letter_score += Globals.level_data.letter_scores.get(tile.letter)
 	
 	var length_mult = Globals.level_data.word_length_score_multiplier.get(word_tiles.word.length())
 	if length_mult == null:
@@ -229,7 +228,7 @@ func create_tile(col: int, row: int, new: bool = false):
 	# Resolve tile type
 	tile.tile_type = resolve_tile_type()
 	
-	var rand_char = letter_util.rand_char()
+	var rand_char = LetterUtil.rand_char()
 	tile.set_letter(rand_char)
 	tile.col = col
 	tile.row = row

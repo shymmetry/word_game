@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=24 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGridContainer.gd" id="1_c2goi"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
@@ -13,7 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bhquh7gqrmpw7" path="res://scenes/game/score_area/trackers/score_tracker.tscn" id="8_h06yx"]
 [ext_resource type="PackedScene" uid="uid://diy7hx0ob4kh5" path="res://scenes/game/score_area/trackers/life_tracker.tscn" id="8_nvj2p"]
 [ext_resource type="Script" path="res://scenes/game/score_area/WordScores.gd" id="9_bqcat"]
-[ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/menu_modal.tscn" id="15_occs8"]
+[ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
+[ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/main/menu_modal.tscn" id="15_occs8"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over_modal.tscn" id="18_7d1n6"]
 [ext_resource type="PackedScene" uid="uid://dwd0rw6u2hyjx" path="res://scenes/game/modal/win_modal.tscn" id="19_l7mpj"]
 
@@ -112,12 +113,17 @@ layout_mode = 2
 [node name="LifeTracker" parent="Page/ScoreArea/HBoxContainer/Trackers" instance=ExtResource("8_nvj2p")]
 layout_mode = 2
 
-[node name="WordScores" type="HBoxContainer" parent="Page/ScoreArea/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Page/ScoreArea/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="WordScores" type="HBoxContainer" parent="Page/ScoreArea/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("9_bqcat")
 
-[node name="Words" type="Label" parent="Page/ScoreArea/HBoxContainer/WordScores"]
+[node name="Words" type="Label" parent="Page/ScoreArea/HBoxContainer/VBoxContainer/WordScores"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -125,7 +131,7 @@ label_settings = SubResource("LabelSettings_gidju")
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Dashes" type="Label" parent="Page/ScoreArea/HBoxContainer/WordScores"]
+[node name="Dashes" type="Label" parent="Page/ScoreArea/HBoxContainer/VBoxContainer/WordScores"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -133,12 +139,15 @@ label_settings = SubResource("LabelSettings_ykkqn")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Scores" type="Label" parent="Page/ScoreArea/HBoxContainer/WordScores"]
+[node name="Scores" type="Label" parent="Page/ScoreArea/HBoxContainer/VBoxContainer/WordScores"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_44dt0")
 vertical_alignment = 2
+
+[node name="Notification" parent="Page/ScoreArea/HBoxContainer/VBoxContainer" instance=ExtResource("10_xxh0w")]
+layout_mode = 2
 
 [node name="Abilities" type="VBoxContainer" parent="Page/ScoreArea/HBoxContainer"]
 layout_mode = 2

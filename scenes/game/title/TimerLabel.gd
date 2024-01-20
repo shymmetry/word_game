@@ -13,10 +13,12 @@ func _process(_delta):
 	text = "%d:%02d" % [minutes, seconds]
 
 func _reset_timer():
-	seconds_left = Globals.level_data.time_seconds
+	$Timer.start(1)
+	seconds_left = Globals.reset_seconds
 
 func _on_timer_timeout():
-	seconds_left -= 1
-	if seconds_left == 0:
-		$Timer.stop()
-		Signals.emit_signal("TimedOut")
+	if !Globals.paused:
+		seconds_left -= 1
+		if seconds_left == 0:
+			$Timer.stop()
+			Signals.emit_signal("TimedOut")

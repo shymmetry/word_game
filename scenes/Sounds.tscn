@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://r4hacp4p8rc7"]
+[gd_scene load_steps=15 format=3 uid="uid://r4hacp4p8rc7"]
 
 [ext_resource type="AudioStream" uid="uid://caxflnblodcev" path="res://audio/button-tick.wav" id="1_4sdfq"]
 [ext_resource type="Script" path="res://scenes/Sounds.gd" id="1_mgxed"]
@@ -8,6 +8,12 @@
 [ext_resource type="AudioStream" uid="uid://crugu8erbbk4j" path="res://audio/whoosh-high.wav" id="6_j8mjk"]
 [ext_resource type="AudioStream" uid="uid://csvxld7at1b84" path="res://audio/jingle_win_synth.wav" id="7_bohbw"]
 [ext_resource type="AudioStream" uid="uid://cs7anuo8pbeu5" path="res://audio/horn_fail_wahwah.wav" id="8_0qtcf"]
+[ext_resource type="AudioStream" uid="uid://cb4vndnulyoqm" path="res://audio/pop2.wav" id="9_2qxxh"]
+[ext_resource type="AudioStream" uid="uid://bdfq4r0mki4e" path="res://audio/pop3.mp3" id="10_o73vp"]
+[ext_resource type="AudioStream" uid="uid://bmbb0uvpsdcu7" path="res://audio/notification.wav" id="11_l3hhh"]
+[ext_resource type="AudioStream" uid="uid://crwq2k6s1dsoa" path="res://audio/congrats.wav" id="12_0kbgu"]
+[ext_resource type="AudioStream" uid="uid://qv85vxmqh1hg" path="res://audio/yay.mp3" id="13_8ibpy"]
+[ext_resource type="AudioStream" uid="uid://ev8p8jntdsrc" path="res://audio/hint.mp3" id="14_ceciv"]
 
 [node name="Sounds" type="Node"]
 script = ExtResource("1_mgxed")
@@ -21,9 +27,6 @@ stream = ExtResource("3_43wxx")
 [node name="MenuOpen" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dgbkp")
 
-[node name="Success" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_phg8y")
-
 [node name="Swap" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_j8mjk")
 
@@ -32,3 +35,24 @@ stream = ExtResource("7_bohbw")
 
 [node name="Lose" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_0qtcf")
+
+[node name="Pop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_phg8y")
+
+[node name="Pop2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_2qxxh")
+
+[node name="Pop3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_o73vp")
+
+[node name="Notification" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_l3hhh")
+
+[node name="Congrats" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_0kbgu")
+
+[node name="Yay" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_8ibpy")
+
+[node name="Hint" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_ceciv")

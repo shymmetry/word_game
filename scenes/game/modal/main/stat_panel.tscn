@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://ce5bbpkqpsvp7"]
+
+[ext_resource type="Script" path="res://scenes/game/modal/main/stat_panel.gd" id="1_csbfg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mw12r"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ld46"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_vw6ju"]
+line_spacing = 0.0
+font_size = 12
+
+[node name="StatPanel" type="Panel"]
+custom_minimum_size = Vector2(80, 80)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mw12r")
+script = ExtResource("1_csbfg")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 5
+
+[node name="Num" type="Label" parent="Margin"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "99"
+label_settings = SubResource("LabelSettings_7ld46")
+horizontal_alignment = 1
+
+[node name="Text" type="Label" parent="Margin"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Stat"
+label_settings = SubResource("LabelSettings_vw6ju")
+horizontal_alignment = 1
+autowrap_mode = 2

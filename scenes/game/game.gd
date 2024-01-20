@@ -8,20 +8,27 @@ func _init():
 		Globals.game_mode = E.GAME_TYPE.ENDLESS
 		Levels.set_endless()
 	
+	# Init game state
 	Globals.swaps = Globals.level_data.starting_swaps
 	Globals.hints = Globals.level_data.starting_hints
 	Globals.score = 0
-	Globals.elapsed_seconds = 0
+	Globals.last_processed_score_for_increased_difficulty = 0
+	Globals.paused = false
+	Globals.idle = true
 	Globals.matched_words = []
+	Globals.reset_seconds = Globals.level_data.time_seconds
+	LetterUtil.set_letter_freq(Globals.level_data.letter_freq)
 
 func _ready():
 	Signals.connect("ResetGame", reset)
 	Signals.connect("GameOver", game_over)
 	Signals.connect("HintRequested", give_hint)
 	Signals.connect("TimedOut", timed_out)
+	Signals.connect("MatchedWord", increase_difficulty)
 	
 	Signals.emit_signal("StartGame")
 	
+	# Modify display based on mode
 	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
 		$"Page/ScoreArea/HBoxContainer/Trackers/GoldTracker".hide()
 		$"Page/ScoreArea/HBoxContainer/Trackers/LifeTracker".hide()
@@ -63,9 +70,23 @@ func game_over():
 			UserData.endless_high_score = Globals.score
 			Store.save_game()
 
+func increase_difficulty():
+	var last = Globals.last_processed_score_for_increased_difficulty
+	var increases = Globals.score / Globals.points_to_increase_difficulty - last / Globals.points_to_increase_difficulty
+	Globals.last_processed_score_for_increased_difficulty = Globals.score
+	
+	var new_reset_seconds = Globals.reset_seconds
+	for _i in range(0, increases):
+		if new_reset_seconds > 10:
+			new_reset_seconds -= 1
+	
+	if new_reset_seconds != Globals.reset_seconds:
+		Globals.reset_seconds = new_reset_seconds
+		Signals.emit_signal("NotifyPlayer", "Refresh reduced to %d seconds" % new_reset_seconds)
+
 func give_hint():
 	if Globals.hints > 0:
-		var min_size = Globals.level_data.min_word_length
+		var min_size = Globals.min_word_length
 		var max_size = 6
 		var hint_words = find_all_words(min_size, max_size)
 		var hints_by_length = {}
@@ -88,6 +109,7 @@ func give_hint():
 		if hint:
 			Globals.hint_tiles = hint.tiles
 			Globals.hints -= 1
+			Signals.emit_signal("NotifyPlayer", "Hint: %s" % hint.word)
 
 # Only finds words up to 6 characters for efficiency. I expect that if there is
 # a word with 7+ letters we could also find one with less.
@@ -139,6 +161,3 @@ func _get_adjacent_tiles(tile):
 				and row >= 0 and row < Globals.rows:
 			tiles.append(Globals.tiles[col][row])
 	return tiles
-
-func _on_timer_timeout():
-	Globals.elapsed_seconds += 1

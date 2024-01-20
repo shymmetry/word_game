@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk2u0qieifvna"]
+
+[ext_resource type="Script" path="res://scenes/game/modal/main/table_cell.gd" id="1_0p346"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vetvi"]
+bg_color = Color(0, 0, 0, 0.266667)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_vsrrd"]
+font_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fps6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_eh8yg"]
+font_size = 12
+
+[node name="TableCell" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0p346")
+
+[node name="TableCell" type="Panel" parent="."]
+layout_mode = 2
+offset_right = 65.0
+offset_bottom = 17.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vetvi")
+
+[node name="Content" type="HBoxContainer" parent="TableCell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Letter" type="Label" parent="TableCell/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "M"
+label_settings = SubResource("LabelSettings_vsrrd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Panel" parent="TableCell/Content"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6fps6")
+
+[node name="Value" type="Label" parent="TableCell/Content"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "99.9%"
+label_settings = SubResource("LabelSettings_eh8yg")
+vertical_alignment = 1

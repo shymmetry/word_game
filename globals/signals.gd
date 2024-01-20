@@ -13,3 +13,5 @@ signal TimedOut
 signal GuessWord
 signal MatchedWord
 signal HintRequested
+
+signal NotifyPlayer
