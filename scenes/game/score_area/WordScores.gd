@@ -7,7 +7,7 @@ func _update_word_scores():
 	var words = ""
 	var dashes = ""
 	var scores = ""
-	for i in range(min(Globals.matched_words.size() - 1, 3), -1, -1):
+	for i in range(min(Globals.matched_words.size() - 1, 4), -1, -1):
 		var word_score = Globals.matched_words[Globals.matched_words.size() - i - 1]
 		words += "\n%s" % word_score.word
 		dashes += "\n-"
