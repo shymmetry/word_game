@@ -32,8 +32,9 @@ LetterUtil="*res://scripts/letter_util.gd"
 
 window/size/viewport_width=480
 window/size/viewport_height=720
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/handheld/orientation=1
+window/custom_font=""
 
 [editor_plugins]
 

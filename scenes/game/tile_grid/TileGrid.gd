@@ -48,12 +48,12 @@ func get_word(word: String, tiles: Array[Tile]):
 	return word if Dict.is_word(word) else ""
 
 func remove_word(word_tiles: WordTiles):
-	var score = score_word(word_tiles)
+	var score_results = score_word(word_tiles)
 	
 	# Handle sound
-	if score >= 100:
+	if score_results.score >= 100:
 		Sounds.congrats()
-	elif score >= 50:
+	elif score_results.score >= 50:
 		Sounds.yay()
 	else:
 		Sounds.pop()
@@ -63,7 +63,7 @@ func remove_word(word_tiles: WordTiles):
 	
 	# Handle word pop
 	var new_word_pop = word_pop.instantiate()
-	new_word_pop.update_text(word_tiles.word, score)
+	new_word_pop.update_text(score_results)
 	var center = center_of_points(word_tiles.tiles)
 	new_word_pop.set_position(center)
 	
@@ -78,7 +78,7 @@ func remove_word(word_tiles: WordTiles):
 		exploding_tiles_done += 1
 		tile.explode()
 
-func score_word(word_tiles: WordTiles):
+func score_word(word_tiles: WordTiles) -> ScoreResults:
 	# Update score
 	var letter_score = 0
 	for tile in word_tiles.tiles:
@@ -103,23 +103,23 @@ func score_word(word_tiles: WordTiles):
 	var score_up = letter_score * length_mult * tile_mult
 	Globals.score += score_up
 	
-	# Update swap count
-	var bonus = Globals.level_data.swap_bonus.get(word_tiles.word.length())
-	if bonus == null:
+	# Update bonuses
+	var swap_bonus = Globals.level_data.swap_bonus.get(word_tiles.word.length())
+	if swap_bonus == null:
 		# Not all lengths are tracked, so default to the highest defined
 		var maxwl = Globals.level_data.swap_bonus.keys().max()
 		var minwl = Globals.level_data.swap_bonus.keys().min()
 		if word_tiles.word.length() > maxwl:
-			bonus = Globals.level_data.swap_bonus.get(maxwl)
+			swap_bonus = Globals.level_data.swap_bonus.get(maxwl)
 		elif word_tiles.word.length() < minwl:
-			bonus = Globals.level_data.swap_bonus.get(minwl)
+			swap_bonus = Globals.level_data.swap_bonus.get(minwl)
 		else:
-			bonus = 0
-	Globals.swaps += bonus
+			swap_bonus = 0
+	Globals.swaps += swap_bonus
 	
 	Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
-	return score_up
+	return ScoreResults.new(score_up, swap_bonus, 0, 0)
 
 func center_of_points(tiles: Array[Tile]):
 	var minx = 9999999
