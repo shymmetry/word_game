@@ -6,8 +6,8 @@
 [sub_resource type="GDScript" id="GDScript_o31ft"]
 script/source = "extends CanvasLayer
 
-func update_text(score_results: ScoreResults):
-	var new_text = \"+%d\" % score_results.score
+func update_text(word: String, score_results: ScoreResults):
+	var new_text = \"%s\\n+%d\" % [word, score_results.score]
 	if score_results.bonus_hints > 0:
 		new_text += \"\\n+%d Hints\" % score_results.bonus_hints
 	if score_results.bonus_swaps > 0:

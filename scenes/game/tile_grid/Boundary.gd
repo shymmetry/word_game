@@ -9,15 +9,15 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and not event.pressed:
-		var end_tile = get_tile_at_point(get_local_mouse_position())
+		var end_tile = _get_tile_at_point(get_local_mouse_position())
 		
 		# A tile was selected already for swapping
 		if Globals.selected_tile:
 			# Only handle if the tile to swap to was clicked and adjacent
 			if end_tile and end_tile == clicked_tile \
-					and is_adjacent(Globals.selected_tile, end_tile) \
+					and _is_adjacent(Globals.selected_tile, end_tile) \
 					and Globals.swaps > 0:
-				swap_tiles(Globals.selected_tile, end_tile)
+				_swap_tiles(Globals.selected_tile, end_tile)
 				Sounds.swap()
 			else:
 				if Globals.selected_tile != end_tile:
@@ -42,25 +42,25 @@ func _unhandled_input(event):
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed \
 			and (Globals.idle or Globals.selected_tile):
-		clicked_tile = get_tile_at_point(get_local_mouse_position())
+		clicked_tile = _get_tile_at_point(get_local_mouse_position())
 		Globals.idle = false
 	
 	# Handle mouse movement for dragging tiles
 	if clicked_tile and event is InputEventMouseMotion and !Globals.selected_tile:
-		var hover_tile = get_tile_at_point(get_local_mouse_position())
+		var hover_tile = _get_tile_at_point(get_local_mouse_position())
 		if hover_tile and hover_tile != last_hover_tile:
 			last_hover_tile = hover_tile
 
 			if hover_tile == clicked_tile and Globals.dragged_tiles.size() == 0:
 				Globals.dragged_tiles.append(hover_tile)
-			elif is_adjacent(Globals.dragged_tiles.back(), hover_tile) \
+			elif _is_adjacent(Globals.dragged_tiles.back(), hover_tile) \
 					and !Globals.dragged_tiles.has(hover_tile):
 				Globals.dragged_tiles.append(hover_tile)
 			else:
 				# If dragged to an invalid tile, clear
 				Globals.dragged_tiles = []
 
-func swap_tiles(tile1, tile2):
+func _swap_tiles(tile1, tile2):
 	var tile1_col = tile1.col; var tile1_row = tile1.row
 	var tile1_position = tile1.position
 	Globals.tiles[tile1_col][tile1_row] = tile2
@@ -75,13 +75,13 @@ func swap_tiles(tile1, tile2):
 	tween.parallel().tween_property(tile2, "position", tile1_position, 0.25)
 	tween.tween_callback(func(): Globals.idle = true; Globals.board_changed = true)
 
-func is_adjacent(tile1, tile2):
+func _is_adjacent(tile1, tile2):
 	if tile1 == null or tile2 == null: return false
 	var coldif = abs(tile1.col - tile2.col)
 	var rowdif = abs(tile1.row - tile2.row)
 	return coldif + rowdif == 1
 
-func get_tile_at_point(pos):
+func _get_tile_at_point(pos):
 	# TODO: Do something better than just getting the first tile.
 	var tile = Globals.tiles[0][0]
 	var col = pos.x / tile.size.x

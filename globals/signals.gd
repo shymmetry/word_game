@@ -11,7 +11,7 @@ signal ResetTimer
 signal TimedOut
 
 signal GuessWord
-signal MatchedWord
-signal HintRequested
+signal WordFound
+signal WordScored
 
 signal NotifyPlayer

@@ -1,8 +1,5 @@
 extends Area2D
 
-const tile_scene = preload("res://scenes/game/tile_grid/tile.tscn")
-const word_pop = preload("res://scenes/game/word_pop/word_pop.tscn")
-
 var exploding_tiles = []
 var exploding_tiles_done = 0
 var dropping_tiles_done = 0
@@ -19,7 +16,8 @@ func init_tiles():
 		var tile_col = []
 		
 		for row in range(0, Globals.rows):
-			var tile = create_tile(col, row)
+			var tile = $TileCreator.create_tile(col, row)
+			add_child(tile)
 			tile_col.append(tile)
 			
 		Globals.tiles.append(tile_col)
@@ -27,7 +25,9 @@ func init_tiles():
 func guess_word():
 	var word = get_word("", Globals.dragged_tiles)
 	if word:
-		remove_word(WordTiles.new(word, Globals.dragged_tiles))
+		var word_tiles = WordTiles.new(word, Globals.dragged_tiles)
+		Signals.emit_signal("WordFound", word_tiles)
+		remove_word(word_tiles)
 	else:
 		Sounds.failure()
 		Globals.idle = true
@@ -48,28 +48,8 @@ func get_word(word: String, tiles: Array[Tile]):
 	return word if Dict.is_word(word) else ""
 
 func remove_word(word_tiles: WordTiles):
-	var score_results = score_word(word_tiles)
-	
-	# Handle sound
-	if score_results.score >= 100:
-		Sounds.congrats()
-	elif score_results.score >= 50:
-		Sounds.yay()
-	else:
-		Sounds.pop()
-	
 	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
 		Signals.emit_signal("ResetTimer")
-	
-	# Handle word pop
-	var new_word_pop = word_pop.instantiate()
-	new_word_pop.update_text(score_results)
-	var center = center_of_points(word_tiles.tiles)
-	new_word_pop.set_position(center)
-	
-	add_child(new_word_pop)
-	
-	Signals.emit_signal("MatchedWord")
 	
 	# Remove all the points that were matched
 	exploding_tiles = []
@@ -77,66 +57,6 @@ func remove_word(word_tiles: WordTiles):
 		exploding_tiles.append(tile)
 		exploding_tiles_done += 1
 		tile.explode()
-
-func score_word(word_tiles: WordTiles) -> ScoreResults:
-	# Update score
-	var letter_score = 0
-	for tile in word_tiles.tiles:
-		letter_score += Globals.level_data.letter_scores.get(tile.letter)
-	
-	var length_mult = Globals.level_data.word_length_score_multiplier.get(word_tiles.word.length())
-	if length_mult == null:
-		# Not all lengths are tracked, so default to the highest defined
-		var maxwl = Globals.level_data.word_length_score_multiplier.keys().max()
-		var minwl = Globals.level_data.word_length_score_multiplier.keys().min()
-		if word_tiles.word.length() > maxwl:
-			length_mult = Globals.level_data.word_length_score_multiplier.get(maxwl)
-		elif word_tiles.word.length() < minwl:
-			length_mult = Globals.level_data.word_length_score_multiplier.get(minwl)
-		else:
-			length_mult = 1
-	
-	var tile_mult = 1
-	for tile in word_tiles.tiles:
-		if tile.tile_type == E.TILE_TYPE.MULTIPLIER: tile_mult *= 2
-	
-	var score_up = letter_score * length_mult * tile_mult
-	Globals.score += score_up
-	
-	# Update bonuses
-	var swap_bonus = Globals.level_data.swap_bonus.get(word_tiles.word.length())
-	if swap_bonus == null:
-		# Not all lengths are tracked, so default to the highest defined
-		var maxwl = Globals.level_data.swap_bonus.keys().max()
-		var minwl = Globals.level_data.swap_bonus.keys().min()
-		if word_tiles.word.length() > maxwl:
-			swap_bonus = Globals.level_data.swap_bonus.get(maxwl)
-		elif word_tiles.word.length() < minwl:
-			swap_bonus = Globals.level_data.swap_bonus.get(minwl)
-		else:
-			swap_bonus = 0
-	Globals.swaps += swap_bonus
-	
-	Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
-	
-	return ScoreResults.new(score_up, swap_bonus, 0, 0)
-
-func center_of_points(tiles: Array[Tile]):
-	var minx = 9999999
-	var maxx = 0
-	var miny = 9999999
-	var maxy = 0
-	var size = tiles[0].size
-	for tile in tiles:
-		minx = min(minx, tile.global_position.x)
-		maxx = max(maxx, tile.global_position.x)
-		miny = min(miny, tile.global_position.y)
-		maxy = max(maxy, tile.global_position.y)
-	
-	var x = minx+(maxx-minx)/2+size.x/2
-	var y = miny+(maxy-miny)/2+size.y/2
-	
-	return Vector2(x, y)
 
 func explode_finished():
 	exploding_tiles_done -= 1
@@ -161,7 +81,8 @@ func populate_tiles(removed_tiles: Array):
 	for col in Globals.cols:
 		var new_tiles_col = []
 		for row in range(0, col_totals[col]):
-			var tile = create_tile(col, row, true)
+			var tile = $TileCreator.create_tile(col, row, true)
+			add_child(tile)
 			new_tiles_col.append(tile)
 		
 		new_tiles.append(new_tiles_col)
@@ -214,33 +135,3 @@ func drop_finished():
 		# Allow for actions
 		Globals.board_changed = true
 		Globals.idle = true
-
-func create_tile(col: int, row: int, new: bool = false):
-	var tile = tile_scene.instantiate()
-	
-	# Resolve positions
-	var x = col * tile.size.x
-	var y = 0
-	if new: y = -1 * (row+1) * tile.size.y
-	else: y = row * tile.size.y
-	tile.position = Vector2(x, y)
-	
-	# Resolve tile type
-	tile.tile_type = resolve_tile_type()
-	
-	var rand_char = LetterUtil.rand_char()
-	tile.set_letter(rand_char)
-	tile.col = col
-	tile.row = row
-
-	add_child(tile)
-	return tile
-
-func resolve_tile_type():
-	var rand_num = randi() % 100 + 1
-	var sum = 0
-	for tile_type in Globals.level_data.tile_type_chance:
-		sum += Globals.level_data.tile_type_chance[tile_type]
-		if sum >= rand_num:
-			return tile_type
-	return null
