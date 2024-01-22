@@ -3,22 +3,16 @@ extends Node
 # Constants
 const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for speed
 
-# Game variables
+# Game data
 var game_mode = null
-var rows = 6
-var cols = 6
 var tiles = [] # 2D array of all tiles in play
-var score = 0
-var swaps = 1
-var hints = 1
-var reset_seconds = 0
-var last_processed_score_for_increased_difficulty = 0
-var points_to_increase_difficulty = 50
 var matched_words = []
-var min_word_length = 3
-
-var gold = 0
-var life = 0
+var score = null
+var swaps = null
+var hints = null
+var life = null
+var reset_seconds = null
+var last_processed_score_for_increased_difficulty = null
 
 # Game state
 var board_changed = false #ONLY FOR BASE GAME SCRIPT HANDLING

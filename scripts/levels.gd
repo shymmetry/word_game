@@ -10,17 +10,17 @@ const level_order = [
 ]
 
 func set_endless():
-	set_level_config(endless_config)
+	_set_level_config(endless_config)
 
 func set_timed():
-	set_level_config(timed_config)
+	_set_level_config(timed_config)
 
 func set_current_level(level: int):
 	Globals.current_level = level
 	
-	set_level_config(load(level_order[level-1]))
+	_set_level_config(load(level_order[level-1]))
 	
-func set_level_config(level_data):
+func _set_level_config(level_data):
 	var config_map = level_defaults.new().get_config_map()
 	for key in config_map:
 		if key in level_data:

@@ -5,18 +5,21 @@ func _init():
 	# TODO: Only actually used for testing, figure out how to handle better
 	if Globals.game_mode == null:
 		Store.load_game()
-		Globals.game_mode = E.GAME_TYPE.ENDLESS
-		Levels.set_endless()
+		Globals.game_mode = E.GAME_TYPE.SURVIVAL
+		Levels.set_current_level(1)
 	
 	# Init game state
-	Globals.swaps = Globals.level_data.starting_swaps
-	Globals.hints = Globals.level_data.starting_hints
+	Globals.tiles = []
+	Globals.matched_words = []
 	Globals.score = 0
+	Globals.swaps = Globals.level_data.swaps
+	Globals.hints = Globals.level_data.hints
 	Globals.last_processed_score_for_increased_difficulty = 0
 	Globals.paused = false
 	Globals.idle = true
-	Globals.matched_words = []
 	Globals.reset_seconds = Globals.level_data.time_seconds
+	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
+		Globals.life = Globals.level_data.life
 	LetterUtil.set_letter_freq(Globals.level_data.letter_freq)
 
 func _ready():
@@ -35,7 +38,7 @@ func _ready():
 		$Page/HUD/HBoxContainer/Trackers/GoldTracker.hide()
 		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
 	elif Globals.game_mode == E.GAME_TYPE.SURVIVAL:
-		pass
+		$Page/HUD/HBoxContainer/Trackers/ScoreTracker.hide()
 
 func _process(_delta):
 	# Perform any necessary checks when the state of the board changes
@@ -60,7 +63,7 @@ func timed_out():
 		round_over()
 
 func round_over():
-	pass
+	Globals.idle = false
 
 func game_over():
 	Sounds.lose()

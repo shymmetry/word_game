@@ -12,11 +12,11 @@ func _ready():
 
 func init_tiles():
 	Globals.tiles = []
-	for col in range(0, Globals.cols):
+	for col in range(0, Globals.level_data.cols):
 		var tile_col = []
 		
-		for row in range(0, Globals.rows):
-			var tile = $TileCreator.create_tile(col, row)
+		for row in range(0, Globals.level_data.rows):
+			var tile = $TileCreator.create_tile(col, row, true)
 			add_child(tile)
 			tile_col.append(tile)
 			
@@ -73,15 +73,15 @@ func explode_finished():
 func populate_tiles(removed_tiles: Array):
 	# Adds new tiles for each given removed point. The created tiles are placed
 	# in new negative y rows.
-	var col_totals = []; col_totals.resize(Globals.cols); col_totals.fill(0)
+	var col_totals = []; col_totals.resize(Globals.level_data.cols); col_totals.fill(0)
 	for removed_tile in removed_tiles:
 		col_totals[removed_tile.col] += 1
 	
 	var new_tiles = []
-	for col in Globals.cols:
+	for col in Globals.level_data.cols:
 		var new_tiles_col = []
 		for row in range(0, col_totals[col]):
-			var tile = $TileCreator.create_tile(col, row, true)
+			var tile = $TileCreator.create_tile(col, row, false)
 			add_child(tile)
 			new_tiles_col.append(tile)
 		
@@ -92,8 +92,8 @@ func populate_tiles(removed_tiles: Array):
 func drop_tiles(removed_tiles: Array, new_tiles: Array):
 	# 2D array of the number of spaces each tile needs to drop
 	var drops = []
-	for i in range(0, Globals.cols):
-		var col = []; col.resize(Globals.rows); col.fill(0)
+	for i in range(0, Globals.level_data.cols):
+		var col = []; col.resize(Globals.level_data.rows); col.fill(0)
 		drops.append(col)
 	
 	# Calculate the number of spaces each tile must fall.
@@ -104,9 +104,9 @@ func drop_tiles(removed_tiles: Array, new_tiles: Array):
 	
 	# Drop the tiles
 	dropping_tiles_done = 0
-	for col in range(0, Globals.cols):
+	for col in range(0, Globals.level_data.cols):
 		# Go through backwards so the last rows drop first
-		for row in range(Globals.rows-1, -1, -1):
+		for row in range(Globals.level_data.rows-1, -1, -1):
 			var drop = drops[col][row]
 			var tile = Globals.tiles[col][row]
 			

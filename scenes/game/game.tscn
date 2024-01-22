@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://diy7hx0ob4kh5" path="res://scenes/game/score_area/trackers/life_tracker.tscn" id="8_nvj2p"]
 [ext_resource type="Script" path="res://scenes/game/score_area/WordScores.gd" id="9_bqcat"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
-[ext_resource type="Script" path="res://scenes/game/tile_grid/Boundary.gd" id="13_wgtol"]
+[ext_resource type="Script" path="res://scenes/game/tile_grid/MouseController.gd" id="13_wgtol"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileCreator.gd" id="15_6mqnh"]
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/main/menu_modal.tscn" id="15_occs8"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/PopWords.gd" id="16_tsrdy"]

@@ -1,9 +1,9 @@
 extends Control
 
 func _ready():
-	Signals.connect("MatchedWord", _update_word_scores)
+	Signals.connect("WordScored", _update_word_scores)
 
-func _update_word_scores():
+func _update_word_scores(_score_results: ScoreResults):
 	var words = ""
 	var dashes = ""
 	var scores = ""
@@ -13,6 +13,7 @@ func _update_word_scores():
 		dashes += "\n-"
 		scores += "\n%d" % word_score.score
 	
+	print(words)
 	$Words.text = words
 	$Dashes.text = dashes
 	$Scores.text = scores
