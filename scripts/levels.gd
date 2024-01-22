@@ -4,8 +4,8 @@ const level_defaults = preload("res://static/levels/level_defaults.gd")
 const endless_config = preload("res://static/levels/endless.gd")
 const timed_config = preload("res://static/levels/timed.gd")
 
-# Ordered list of levels
-const level_order = [
+# Ordered list of survival rounds
+const survival_round_order = [
 	"res://static/levels/survival1.gd"
 ]
 
@@ -15,10 +15,10 @@ func set_endless():
 func set_timed():
 	_set_level_config(timed_config)
 
-func set_current_level(level: int):
-	Globals.current_level = level
+func set_current_round(round: int):
+	Globals.current_round = round
 	
-	_set_level_config(load(level_order[level-1]))
+	_set_level_config(load(survival_round_order[round-1]))
 	
 func _set_level_config(level_data):
 	var config_map = level_defaults.new().get_config_map()

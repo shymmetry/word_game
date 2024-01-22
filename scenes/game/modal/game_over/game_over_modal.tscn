@@ -1,22 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwd0rw6u2hyjx"]
+[gd_scene load_steps=3 format=3 uid="uid://dwsfvvi3tj3q5"]
 
-[ext_resource type="PackedScene" uid="uid://4rwmb5gf6jqu" path="res://scenes/game/modal/modal.tscn" id="1_ql5xl"]
-[ext_resource type="Script" path="res://scenes/game/modal/win_modal.gd" id="2_idicq"]
+[ext_resource type="PackedScene" uid="uid://4rwmb5gf6jqu" path="res://scenes/game/modal/modal.tscn" id="1_bk2eq"]
+[ext_resource type="Script" path="res://scenes/game/modal/game_over/game_over_modal.gd" id="2_ce0jl"]
 
-[node name="WinModal" instance=ExtResource("1_ql5xl")]
-script = ExtResource("2_idicq")
+[node name="GameOverModal" instance=ExtResource("1_bk2eq")]
+script = ExtResource("2_ce0jl")
 
 [node name="Label" parent="Background/VBox/Title/Margin" index="0"]
-text = "Level Complete"
+text = "Game Over
+"
+
+[node name="Label" type="Label" parent="Background/VBox/Details/Margin" index="0"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ButtonLeft" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="0"]
-text = "NEXT LEVEL"
+text = "RETRY"
 
 [node name="ButtonMiddle" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="1"]
 visible = false
 
 [node name="ButtonRight" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="2"]
-text = "QUIT"
+text = "MAIN MENU"
 
 [connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
 [connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]

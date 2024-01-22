@@ -25,5 +25,5 @@ var dragged_tiles: Array[Tile] = []
 var hint_tiles = []
 
 # Level info
-var current_level = 0
+var current_round = 0
 var level_data = null

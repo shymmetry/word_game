@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=27 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileArea.gd" id="2_1ocn6"]
@@ -18,8 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/main/menu_modal.tscn" id="15_occs8"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/PopWords.gd" id="16_tsrdy"]
 [ext_resource type="Script" path="res://scenes/game/ScoreHandler.gd" id="16_w0eha"]
-[ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over_modal.tscn" id="18_7d1n6"]
-[ext_resource type="PackedScene" uid="uid://dwd0rw6u2hyjx" path="res://scenes/game/modal/win_modal.tscn" id="19_l7mpj"]
+[ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over/game_over_modal.tscn" id="18_7d1n6"]
 [ext_resource type="Script" path="res://scenes/game/LevelHandler.gd" id="21_2eyvd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
@@ -201,9 +200,6 @@ script = ExtResource("15_6mqnh")
 visible = false
 
 [node name="GameOverModal" parent="." instance=ExtResource("18_7d1n6")]
-visible = false
-
-[node name="WinModal" parent="." instance=ExtResource("19_l7mpj")]
 visible = false
 
 [node name="ScoreHandler" type="Node" parent="."]

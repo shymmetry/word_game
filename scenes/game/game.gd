@@ -6,7 +6,7 @@ func _init():
 	if Globals.game_mode == null:
 		Store.load_game()
 		Globals.game_mode = E.GAME_TYPE.SURVIVAL
-		Levels.set_current_level(1)
+		Levels.set_current_round(1)
 	
 	# Init game state
 	Globals.tiles = []
@@ -52,7 +52,6 @@ func _process(_delta):
 
 func reset():
 	$GameOverModal.hide()
-	$WinModal.hide()
 	get_tree().reload_current_scene()
 
 func timed_out():
