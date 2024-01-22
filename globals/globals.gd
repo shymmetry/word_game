@@ -11,6 +11,7 @@ var score = null
 var swaps = null
 var hints = null
 var life = null
+var seconds_left = null
 var reset_seconds = null
 var last_processed_score_for_increased_difficulty = null
 

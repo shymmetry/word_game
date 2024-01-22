@@ -1,18 +1,19 @@
-[gd_scene load_steps=27 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=28 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileArea.gd" id="2_1ocn6"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
 [ext_resource type="Texture2D" uid="uid://786xx47uf4o3" path="res://icons/outline_menu_white_48dp.png" id="4_7r455"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://tres/hamburger.tres" id="4_f7i5n"]
-[ext_resource type="Script" path="res://scenes/game/title/TimerLabel.gd" id="5_gc41v"]
-[ext_resource type="PackedScene" uid="uid://ruilr3qm8sxw" path="res://scenes/game/score_area/trackers/hint_tracker.tscn" id="6_gyoeg"]
-[ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/score_area/trackers/gold_tracker.tscn" id="7_gdb5j"]
-[ext_resource type="PackedScene" uid="uid://ddjfdnexe12e1" path="res://scenes/game/score_area/trackers/swap_tracker.tscn" id="7_xphf4"]
-[ext_resource type="PackedScene" uid="uid://bhquh7gqrmpw7" path="res://scenes/game/score_area/trackers/score_tracker.tscn" id="8_h06yx"]
-[ext_resource type="PackedScene" uid="uid://diy7hx0ob4kh5" path="res://scenes/game/score_area/trackers/life_tracker.tscn" id="8_nvj2p"]
-[ext_resource type="Script" path="res://scenes/game/score_area/WordScores.gd" id="9_bqcat"]
+[ext_resource type="PackedScene" uid="uid://ruilr3qm8sxw" path="res://scenes/game/gui/trackers/hint_tracker.tscn" id="6_gyoeg"]
+[ext_resource type="Script" path="res://scenes/game/Timer.gd" id="6_px3rd"]
+[ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/gui/trackers/gold_tracker.tscn" id="7_gdb5j"]
+[ext_resource type="PackedScene" uid="uid://ddjfdnexe12e1" path="res://scenes/game/gui/trackers/swap_tracker.tscn" id="7_xphf4"]
+[ext_resource type="PackedScene" uid="uid://bhquh7gqrmpw7" path="res://scenes/game/gui/trackers/score_tracker.tscn" id="8_h06yx"]
+[ext_resource type="PackedScene" uid="uid://diy7hx0ob4kh5" path="res://scenes/game/gui/trackers/life_tracker.tscn" id="8_nvj2p"]
+[ext_resource type="Script" path="res://scenes/game/gui/WordScores.gd" id="9_bqcat"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
+[ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/time_tracker.tscn" id="10_yppx5"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/MouseController.gd" id="13_wgtol"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileCreator.gd" id="15_6mqnh"]
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/main/menu_modal.tscn" id="15_occs8"]
@@ -83,16 +84,13 @@ theme_override_styles/pressed = ExtResource("4_f7i5n")
 theme_override_styles/focus = ExtResource("4_f7i5n")
 icon = ExtResource("4_7r455")
 
-[node name="TimerLabel" type="Label" parent="Page/Title"]
+[node name="TitleLabel" type="Label" parent="Page/Title"]
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 60.0
 label_settings = SubResource("LabelSettings_fmmef")
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("5_gc41v")
-
-[node name="Timer" type="Timer" parent="Page/Title/TimerLabel"]
 
 [node name="HUD" type="MarginContainer" parent="Page"]
 layout_mode = 2
@@ -114,6 +112,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="LifeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("8_nvj2p")]
+layout_mode = 2
+
+[node name="LeftTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("10_yppx5")]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Page/HUD/HBoxContainer"]
@@ -208,5 +209,8 @@ script = ExtResource("16_w0eha")
 [node name="LevelHandler" type="Node" parent="."]
 script = ExtResource("21_2eyvd")
 
+[node name="Timer" type="Timer" parent="."]
+script = ExtResource("6_px3rd")
+
 [connection signal="pressed" from="Page/Title/InGameMenuButton" to="Page/Title" method="_on_in_game_menu_button_pressed"]
-[connection signal="timeout" from="Page/Title/TimerLabel/Timer" to="Page/Title/TimerLabel" method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]

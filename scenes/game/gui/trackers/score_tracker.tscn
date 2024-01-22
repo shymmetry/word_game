@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhquh7gqrmpw7"]
 
-[ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/score_area/trackers/left_tracker.tscn" id="1_ovbsw"]
-[ext_resource type="Script" path="res://scenes/game/score_area/trackers/score_tracker.gd" id="2_ntj1x"]
+[ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/gui/trackers/left_tracker.tscn" id="1_ovbsw"]
+[ext_resource type="Script" path="res://scenes/game/gui/trackers/score_tracker.gd" id="2_ntj1x"]
 [ext_resource type="Texture2D" uid="uid://dejlfmqooht1h" path="res://icons/outline_star_white_24dp.png" id="3_ejthw"]
 
 [node name="Tracker" instance=ExtResource("1_ovbsw")]
