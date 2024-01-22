@@ -3,7 +3,7 @@ extends Control
 func _init():
 	# Handle if loaded outside of menu
 	# TODO: Only actually used for testing, figure out how to handle better
-	if !Globals.game_mode:
+	if Globals.game_mode == null:
 		Store.load_game()
 		Globals.game_mode = E.GAME_TYPE.ENDLESS
 		Levels.set_endless()
@@ -28,8 +28,12 @@ func _ready():
 	
 	# Modify display based on mode
 	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
-		$"Page/HUD/HBoxContainer/Trackers/GoldTracker".hide()
-		$"Page/HUD/HBoxContainer/Trackers/LifeTracker".hide()
+		$Page/HUD/HBoxContainer/Trackers/GoldTracker.hide()
+		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
+		$Page/Title/TimerLabel.hide()
+	elif Globals.game_mode == E.GAME_TYPE.TIMED:
+		$Page/HUD/HBoxContainer/Trackers/GoldTracker.hide()
+		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
 	elif Globals.game_mode == E.GAME_TYPE.SURVIVAL:
 		pass
 
@@ -50,9 +54,9 @@ func reset():
 
 func timed_out():
 	Globals.idle = false
-	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
+	if Globals.game_mode == E.GAME_TYPE.TIMED:
 		game_over()
-	elif Globals.game_mode == E.GAME_TYPE.ENDLESS:
+	elif Globals.game_mode == E.GAME_TYPE.SURVIVAL:
 		round_over()
 
 func round_over():
@@ -66,4 +70,8 @@ func game_over():
 	elif Globals.game_mode == E.GAME_TYPE.ENDLESS:
 		if Globals.score > UserData.endless_high_score:
 			UserData.endless_high_score = Globals.score
+			Store.save_game()
+	elif Globals.game_mode == E.GAME_TYPE.TIMED:
+		if Globals.score > UserData.timed_high_score:
+			UserData.timed_high_score = Globals.score
 			Store.save_game()

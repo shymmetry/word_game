@@ -1,6 +1,7 @@
 extends Node
 
 var endless_high_score = 0
+var timed_high_score = 0
 
 func save_data():
 	var data_map = {}

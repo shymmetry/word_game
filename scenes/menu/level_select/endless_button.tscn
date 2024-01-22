@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb4rwivtyqcft"]
+
+[ext_resource type="PackedScene" uid="uid://blkpabmiq16x5" path="res://scenes/menu/level_select/level_button.tscn" id="1_13bb6"]
+
+[node name="Endless" instance=ExtResource("1_13bb6")]
+
+[node name="Title" parent="VBox" index="0"]
+text = "Endless"
+
+[node name="Content" parent="VBox/Margin" index="0"]
+text = "Play until you give up
+No timer
+"

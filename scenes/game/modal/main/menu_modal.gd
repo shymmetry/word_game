@@ -3,6 +3,8 @@ extends CanvasLayer
 func _ready():
 	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
 		$"Background/VBox/Title/Margin/Label".text = "Endless"
+	elif Globals.game_mode == E.GAME_TYPE.TIMED:
+		$"Background/VBox/Title/Margin/Label".text = "Timed"
 	else:
 		$"Background/VBox/Title/Margin/Label".text = "Survival"
 

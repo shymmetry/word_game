@@ -2,6 +2,7 @@ extends Node
 
 const level_defaults = preload("res://static/levels/level_defaults.gd")
 const endless_config = preload("res://static/levels/endless.gd")
+const timed_config = preload("res://static/levels/timed.gd")
 
 # Ordered list of levels
 const level_order = [
@@ -10,6 +11,9 @@ const level_order = [
 
 func set_endless():
 	set_level_config(endless_config)
+
+func set_timed():
+	set_level_config(timed_config)
 
 func set_current_level(level: int):
 	Globals.current_level = level

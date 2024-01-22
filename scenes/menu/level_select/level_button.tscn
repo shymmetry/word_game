@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://blkpabmiq16x5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pd87o"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_blend = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_1bxdk"]
+font_size = 12
+
+[node name="LevelButton" type="Button"]
+custom_minimum_size = Vector2(360, 180)
+offset_right = 16.0
+offset_bottom = 4.0
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_pd87o")
+text = "Game Type"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Margin" type="MarginContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Content" type="Label" parent="VBox/Margin"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "One line of text
+Two line of text
+Three line of text
+Four line of text"
+label_settings = SubResource("LabelSettings_1bxdk")
+
+[node name="Margin2" type="MarginContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HighScoreLabel" type="Label" parent="VBox/Margin2"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "High Score: 0"
+horizontal_alignment = 1

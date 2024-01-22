@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b04ttg4gifp4f"]
+
+[ext_resource type="PackedScene" uid="uid://blkpabmiq16x5" path="res://scenes/menu/level_select/level_button.tscn" id="1_hdned"]
+
+[node name="Survival" instance=ExtResource("1_hdned")]
+
+[node name="Title" parent="VBox" index="0"]
+text = "Survival"
+
+[node name="Content" parent="VBox/Margin" index="0"]
+text = "Survive 20 rounds of attacks
+Starting letters attack at the end of round
+Earn gold each round by finding words
+Buy upgrades to help you"
+
+[node name="HighScoreLabel" parent="VBox/Margin2" index="0"]
+visible = false
