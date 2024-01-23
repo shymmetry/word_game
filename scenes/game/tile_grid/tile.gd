@@ -11,14 +11,14 @@ var letter = "?"
 var score = ""
 var damage = 0
 
-var normal_base_style = preload("res://tres/tile/base/tile_normal.tres")
-var harden_base_style = preload("res://tres/tile/base/tile_harden.tres")
-var mult_base_style = preload("res://tres/tile/base/tile_multiplier.tres")
-var clicked_overlay_style = preload("res://tres/tile/overlay/tile_clicked_overlay.tres")
-var normal_overlay_style = preload("res://tres/tile/overlay/tile_normal_overlay.tres")
-var dragged_overlay_style = preload("res://tres/tile/overlay/tile_dragged_overlay.tres")
-var clicked_underlay_style = preload("res://tres/tile/underlay/tile_clicked_underlay.tres")
-var normal_underlay_style = preload("res://tres/tile/underlay/tile_normal_underlay.tres")
+var normal_base_style = preload("res://styles/tile/base/tile_normal.tres")
+var harden_base_style = preload("res://styles/tile/base/tile_harden.tres")
+var mult_base_style = preload("res://styles/tile/base/tile_multiplier.tres")
+var clicked_overlay_style = preload("res://styles/tile/overlay/tile_clicked_overlay.tres")
+var normal_overlay_style = preload("res://styles/tile/overlay/tile_normal_overlay.tres")
+var dragged_overlay_style = preload("res://styles/tile/overlay/tile_dragged_overlay.tres")
+var clicked_underlay_style = preload("res://styles/tile/underlay/tile_clicked_underlay.tres")
+var normal_underlay_style = preload("res://styles/tile/underlay/tile_normal_underlay.tres")
 
 func _ready():
 	if damage >= 1: $Body/Footer/Gun1.show()

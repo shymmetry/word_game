@@ -27,6 +27,7 @@ Store="*res://scripts/store.gd"
 Dict="*res://scripts/dict.gd"
 Sounds="*res://scenes/Sounds.tscn"
 LetterUtil="*res://scripts/letter_util.gd"
+ItemUtil="*res://scripts/item_util.gd"
 
 [display]
 
@@ -43,7 +44,7 @@ enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/explore
 [gui]
 
 common/snap_controls_to_pixels=false
-theme/custom="res://themes/main_theme.tres"
+theme/custom="res://styles/main_theme.tres"
 
 [input]
 

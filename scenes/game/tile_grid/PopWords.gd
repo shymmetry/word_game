@@ -18,14 +18,14 @@ func _center_of_points(tiles: Array[Tile]):
 	var maxx = 0
 	var miny = 9999999
 	var maxy = 0
-	var size = tiles[0].size
+	var tile_size = tiles[0].size
 	for tile in tiles:
 		minx = min(minx, tile.global_position.x)
 		maxx = max(maxx, tile.global_position.x)
 		miny = min(miny, tile.global_position.y)
 		maxy = max(maxy, tile.global_position.y)
 	
-	var x = minx+(maxx-minx)/2+size.x/2
-	var y = miny+(maxy-miny)/2+size.y/2
+	var x = minx+(maxx-minx)/2+tile_size.x/2
+	var y = miny+(maxy-miny)/2+tile_size.y/2
 	
 	return Vector2(x, y)

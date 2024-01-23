@@ -13,7 +13,6 @@ func _update_word_scores(_score_results: ScoreResults):
 		dashes += "\n-"
 		scores += "\n%d" % word_score.score
 	
-	print(words)
 	$Words.text = words
 	$Dashes.text = dashes
 	$Scores.text = scores

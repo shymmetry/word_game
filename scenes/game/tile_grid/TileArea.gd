@@ -9,6 +9,7 @@ func _ready():
 	Signals.connect('ExplodeFinished', explode_finished)
 	Signals.connect('DropFinished', drop_finished)
 	Signals.connect('GuessWord', guess_word)
+	Signals.connect('InitGame', init_tiles)
 
 func init_tiles():
 	Globals.tiles = []

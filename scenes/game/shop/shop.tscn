@@ -1,3 +1,32 @@
-[gd_scene format=3 uid="uid://5pbldm3dhxqv"]
+[gd_scene load_steps=3 format=3 uid="uid://5pbldm3dhxqv"]
 
-[node name="Shop" type="Node2D"]
+[ext_resource type="Script" path="res://scenes/game/shop/shop_items.gd" id="1_2enbd"]
+[ext_resource type="Script" path="res://scenes/game/shop/shop.gd" id="1_4nhvb"]
+
+[node name="Shop" type="Control"]
+custom_minimum_size = Vector2(420, 420)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4nhvb")
+
+[node name="MainCol" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopItems" type="VBoxContainer" parent="MainCol"]
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("1_2enbd")
+
+[node name="Button" type="Button" parent="MainCol"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Next Round
+"
+
+[connection signal="pressed" from="MainCol/Button" to="." method="_on_button_pressed"]

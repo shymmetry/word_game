@@ -9,23 +9,27 @@ func _init():
 		Levels.set_current_round(1)
 	
 	# Init game state
-	Globals.tiles = []
-	Globals.matched_words = []
 	Globals.score = 0
 	Globals.swaps = Globals.level_data.swaps
 	Globals.hints = Globals.level_data.hints
-	Globals.last_processed_score_for_increased_difficulty = 0
-	Globals.paused = false
-	Globals.idle = true
-	Globals.reset_seconds = Globals.level_data.time_seconds
 	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
 		Globals.life = Globals.level_data.life
+	
+	_init_round()
+
+func _init_round():
+	Globals.paused = false
+	Globals.idle = true
 	LetterUtil.set_letter_freq(Globals.level_data.letter_freq)
+	Globals.last_processed_score_for_increased_difficulty = 0
+	Globals.reset_seconds = Globals.level_data.time_seconds
+	Globals.matched_words = []
 
 func _ready():
 	Signals.connect("ResetGame", reset)
 	Signals.connect("GameOver", game_over)
 	Signals.connect("TimedOut", timed_out)
+	Signals.connect("NextRound", next_round)
 	
 	Signals.emit_signal("StartGame")
 	
@@ -64,6 +68,27 @@ func timed_out():
 
 func round_over():
 	Globals.idle = false
+	Signals.emit_signal("RoundOver")
+	
+	var start_pos = $Page/PlayArea.position
+	var tween = create_tween()
+	tween.tween_property($Page/PlayArea, "position", start_pos + Vector2(0, 500), 1)
+	tween.tween_callback(func(): $Page/PlayArea/TileGrid.hide())
+	tween.tween_callback(func(): $Page/PlayArea/Shop.show())
+	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
+
+func next_round():
+	_init_round()
+	Signals.emit_signal("InitGame")
+	
+	var start_pos = $Page/PlayArea.position
+	var tween = create_tween()
+	tween.tween_property($Page/PlayArea, "position", start_pos + Vector2(0, 500), 1)
+	tween.tween_callback(func(): $Page/PlayArea/Shop.hide())
+	tween.tween_callback(func(): $Page/PlayArea/TileGrid.show())
+	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
+	
+	Signals.emit_signal("StartGame")
 
 func game_over():
 	Sounds.lose()

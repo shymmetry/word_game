@@ -15,10 +15,10 @@ func set_endless():
 func set_timed():
 	_set_level_config(timed_config)
 
-func set_current_round(round: int):
-	Globals.current_round = round
+func set_current_round(cur_round: int):
+	Globals.current_round = cur_round
 	
-	_set_level_config(load(survival_round_order[round-1]))
+	_set_level_config(load(survival_round_order[cur_round-1]))
 	
 func _set_level_config(level_data):
 	var config_map = level_defaults.new().get_config_map()

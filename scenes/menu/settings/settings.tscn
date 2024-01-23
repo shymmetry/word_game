@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/menu/settings/settings.gd" id="1_7hstj"]
 [ext_resource type="Texture2D" uid="uid://dno7se8cuwbk6" path="res://icons/poop_emoji.png" id="1_hyptj"]
-[ext_resource type="StyleBox" uid="uid://d0r5f6321vjml" path="res://tres/button/button_icon.tres" id="3_n74wa"]
+[ext_resource type="StyleBox" uid="uid://d0r5f6321vjml" path="res://styles/button/button_icon.tres" id="3_n74wa"]
 [ext_resource type="Texture2D" uid="uid://bpuoacu0ngb1y" path="res://icons/ArrowLeft.png" id="4_13ac3"]
 
 [node name="Control" type="Control"]

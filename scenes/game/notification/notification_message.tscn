@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwf3f1agty0a5"]
 
-[ext_resource type="SystemFont" uid="uid://b8ajidl1phcno" path="res://themes/bold_font.tres" id="1_5hkbw"]
+[ext_resource type="SystemFont" uid="uid://b8ajidl1phcno" path="res://styles/fonts/bold_font.tres" id="1_5hkbw"]
 [ext_resource type="Script" path="res://scenes/game/notification/notification_message.gd" id="2_vt3v5"]
 
 [node name="NotificationMessage" type="Label"]

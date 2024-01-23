@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cv7jfmoypci2l"]
 
-[ext_resource type="SystemFont" uid="uid://b8ajidl1phcno" path="res://themes/bold_font.tres" id="2_k4ny2"]
+[ext_resource type="SystemFont" uid="uid://b8ajidl1phcno" path="res://styles/fonts/bold_font.tres" id="2_k4ny2"]
 [ext_resource type="Script" path="res://scenes/game/word_pop/WordPop.gd" id="2_vhes7"]
 
 [sub_resource type="GDScript" id="GDScript_o31ft"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://cjn0ohfkaqqbp"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/tile.gd" id="2_1hfe7"]
-[ext_resource type="StyleBox" uid="uid://bvpdnl601inlb" path="res://tres/tile/underlay/tile_normal_underlay.tres" id="2_e8rig"]
-[ext_resource type="StyleBox" uid="uid://b5k3ga3wpywrm" path="res://tres/tile/base/tile_normal.tres" id="3_d3afk"]
+[ext_resource type="StyleBox" uid="uid://bvpdnl601inlb" path="res://styles/tile/underlay/tile_normal_underlay.tres" id="2_e8rig"]
+[ext_resource type="StyleBox" uid="uid://b5k3ga3wpywrm" path="res://styles/tile/base/tile_normal.tres" id="3_d3afk"]
 [ext_resource type="Texture2D" uid="uid://do8g6xmwgpax0" path="res://icons/gun_icon.png" id="4_jhkk6"]
-[ext_resource type="StyleBox" uid="uid://bwvtfmanm0ilu" path="res://tres/tile/overlay/tile_dragged_overlay.tres" id="4_uojc2"]
+[ext_resource type="StyleBox" uid="uid://bwvtfmanm0ilu" path="res://styles/tile/overlay/tile_dragged_overlay.tres" id="4_uojc2"]
 
 [sub_resource type="FontVariation" id="FontVariation_ypwqj"]
 

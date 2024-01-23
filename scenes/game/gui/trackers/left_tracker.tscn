@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://4rveb6yybb8j"]
 
 [ext_resource type="Texture2D" uid="uid://cj2hyiu5gtaks" path="res://icons/outline_swap.png" id="1_yhvxy"]
-[ext_resource type="SystemFont" uid="uid://b8ajidl1phcno" path="res://themes/bold_font.tres" id="2_6phpr"]
+[ext_resource type="SystemFont" uid="uid://b8ajidl1phcno" path="res://styles/fonts/bold_font.tres" id="2_6phpr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7n22"]
 bg_color = Color(0.776471, 0.596078, 0.454902, 1)

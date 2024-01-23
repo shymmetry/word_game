@@ -1,6 +1,6 @@
 extends Node
 
-const time_seconds = 90
+const time_seconds = 10
 const swaps = 1
 const hints = 0
 const life = 100
