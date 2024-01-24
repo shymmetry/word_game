@@ -84,8 +84,9 @@ func _is_adjacent(tile1, tile2):
 func _get_tile_at_point(pos):
 	# TODO: Do something better than just getting the first tile.
 	var tile = Globals.tiles[0][0]
-	var col = pos.x / tile.size.x
-	var row = pos.y / tile.size.y
+	# TODO: Fix this nonsense calculation for handling row/col < 6
+	var col = (pos.x - (6 - Globals.cols)*tile.size.x/2) / tile.size.x
+	var row = (pos.y - (6 - Globals.rows)*tile.size.y/2) / tile.size.y
 	
 	if col < 0 or row < 0 or col >= Globals.cols or row >= Globals.rows: 
 		return null
