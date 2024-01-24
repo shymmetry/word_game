@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=27 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
@@ -16,9 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://cp7wy71prqkky" path="res://scenes/game/tile_grid/tile_grid.tscn" id="13_myhjs"]
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/main/menu_modal.tscn" id="15_occs8"]
 [ext_resource type="Script" path="res://scenes/game/ScoreHandler.gd" id="16_w0eha"]
+[ext_resource type="PackedScene" uid="uid://h6aot8mj52sl" path="res://scenes/game/modal/win/win_modal.tscn" id="17_0y53a"]
 [ext_resource type="PackedScene" uid="uid://5pbldm3dhxqv" path="res://scenes/game/shop/shop.tscn" id="17_cxo0i"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over/game_over_modal.tscn" id="18_7d1n6"]
-[ext_resource type="Script" path="res://scenes/game/DamageHandler.gd" id="19_2sv64"]
+[ext_resource type="Script" path="res://scenes/game/damage/DamageHandler.gd" id="19_2sv64"]
 [ext_resource type="Script" path="res://scenes/game/LevelHandler.gd" id="21_2eyvd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
@@ -179,14 +180,27 @@ visible = false
 [node name="GameOverModal" parent="." instance=ExtResource("18_7d1n6")]
 visible = false
 
+[node name="WinModal" parent="." instance=ExtResource("17_0y53a")]
+visible = false
+
+[node name="DamageHandler" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("19_2sv64")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="DamageHandler"]
+layer = 3
+
 [node name="ScoreHandler" type="Node" parent="."]
 script = ExtResource("16_w0eha")
 
 [node name="LevelHandler" type="Node" parent="."]
 script = ExtResource("21_2eyvd")
-
-[node name="DamageHandler" type="Node" parent="."]
-script = ExtResource("19_2sv64")
 
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource("6_px3rd")

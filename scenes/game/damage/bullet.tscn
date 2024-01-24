@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwqd0ahu12d70"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nd8gr"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Bullet" type="Panel"]
+offset_right = 10.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nd8gr")

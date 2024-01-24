@@ -16,7 +16,7 @@ func _on_back_pressed():
 func _on_survival_pressed():
 	Sounds.click()
 	Globals.game_mode = E.GAME_TYPE.SURVIVAL
-	Levels.set_current_level(1)
+	Levels.set_current_round(1)
 	get_tree().change_scene_to_file(\"res://scenes/game/game.tscn\")
 
 func _on_endless_pressed():

@@ -9,7 +9,6 @@ func _ready():
 	Signals.connect('ExplodeFinished', explode_finished)
 	Signals.connect('DropFinished', drop_finished)
 	Signals.connect('GuessWord', guess_word)
-	Signals.connect('InitGame', init_tiles)
 	
 	# Center the tile area
 	# For every missing row and column, adding 1/2 of the size of a tile

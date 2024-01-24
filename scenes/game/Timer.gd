@@ -17,3 +17,5 @@ func _on_timeout():
 		if Globals.seconds_left == 0:
 			self.stop()
 			Signals.emit_signal("TimedOut")
+		elif Globals.seconds_left <= 10:
+			Sounds.timer()

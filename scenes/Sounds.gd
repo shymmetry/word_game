@@ -41,3 +41,9 @@ func notify():
 
 func hint():
 	$Hint.play()
+
+func timer():
+	$Timer.play()
+
+func gun_shot():
+	$GunShot.play()

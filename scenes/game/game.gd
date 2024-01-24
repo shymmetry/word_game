@@ -58,7 +58,8 @@ func _process(_delta):
 		Globals.board_changed = false
 
 func reset():
-	$GameOverModal.hide()
+	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
+		Levels.set_current_round(1)
 	get_tree().reload_current_scene()
 
 func timed_out():
@@ -72,11 +73,14 @@ func round_over():
 	Globals.idle = false
 	Signals.emit_signal("RoundOver")
 	
-	$DamageHandler.take_damage()
+	var life_tracker = $Page/HUD/HBoxContainer/Trackers/LifeTracker
+	var tracker_pos = life_tracker.global_position + life_tracker.size / 2
+	await $DamageHandler.take_damage(tracker_pos)
+	
 	if Globals.life <= 0: game_over()
 	if Globals.current_round == Levels.total_rounds():
-		# TODO: WIN
-		pass
+		$WinModal.show()
+		return
 	
 	var start_pos = $Page/PlayArea.position
 	var tween = create_tween()
@@ -88,7 +92,6 @@ func round_over():
 func next_round():
 	Levels.set_current_round(Globals.current_round + 1)
 	_init_round()
-	Signals.emit_signal("InitGame")
 	
 	# Reset the grid
 	var scene = load("res://scenes/game/tile_grid/tile_grid.tscn")

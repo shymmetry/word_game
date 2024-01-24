@@ -4,7 +4,6 @@ signal ExplodeFinished
 signal DropFinished
 
 signal ResetGame
-signal InitGame
 signal StartGame
 signal GameOver
 signal RoundOver
