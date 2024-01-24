@@ -111,7 +111,7 @@ layout_mode = 2
 [node name="LifeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("8_nvj2p")]
 layout_mode = 2
 
-[node name="LeftTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("10_yppx5")]
+[node name="TimeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("10_yppx5")]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Page/HUD/HBoxContainer"]

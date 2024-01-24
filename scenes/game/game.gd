@@ -40,7 +40,6 @@ func _ready():
 		$Page/HUD/HBoxContainer/Trackers/GoldTracker.hide()
 		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
 		$Page/HUD/HBoxContainer/Trackers/TimeTracker.hide()
-		$Page/Title/TimerLabel.hide()
 	elif Globals.game_mode == E.GAME_TYPE.TIMED:
 		$Page/HUD/HBoxContainer/Trackers/GoldTracker.hide()
 		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
