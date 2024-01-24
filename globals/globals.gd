@@ -24,7 +24,6 @@ var paused = false
 
 # Tile state
 var selected_tile = null
-var clicked_tile = null
 var dragged_tiles: Array[Tile] = []
 var hint_tiles = []
 
