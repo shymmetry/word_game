@@ -10,13 +10,18 @@ func _ready():
 	Signals.connect('DropFinished', drop_finished)
 	Signals.connect('GuessWord', guess_word)
 	Signals.connect('InitGame', init_tiles)
+	
+	# Center the tile area
+	# For every missing row and column, adding 1/2 of the size of a tile
+	# TODO: Fix magic numbers and do this more cleanly
+	self.position = Vector2((6 - Globals.cols) * 35, (6 - Globals.rows) * 35)
 
 func init_tiles():
 	Globals.tiles = []
-	for col in range(0, Globals.level_data.cols):
+	for col in range(0, Globals.cols):
 		var tile_col = []
 		
-		for row in range(0, Globals.level_data.rows):
+		for row in range(0, Globals.rows):
 			var tile = $TileCreator.create_tile(col, row, true)
 			add_child(tile)
 			tile_col.append(tile)
@@ -30,7 +35,7 @@ func guess_word():
 		Signals.emit_signal("WordFound", word_tiles)
 		remove_word(word_tiles)
 	else:
-		Sounds.failure()
+		Sounds.error()
 		Globals.idle = true
 
 func get_word(word: String, tiles: Array[Tile]):
@@ -74,12 +79,12 @@ func explode_finished():
 func populate_tiles(removed_tiles: Array):
 	# Adds new tiles for each given removed point. The created tiles are placed
 	# in new negative y rows.
-	var col_totals = []; col_totals.resize(Globals.level_data.cols); col_totals.fill(0)
+	var col_totals = []; col_totals.resize(Globals.cols); col_totals.fill(0)
 	for removed_tile in removed_tiles:
 		col_totals[removed_tile.col] += 1
 	
 	var new_tiles = []
-	for col in Globals.level_data.cols:
+	for col in Globals.cols:
 		var new_tiles_col = []
 		for row in range(0, col_totals[col]):
 			var tile = $TileCreator.create_tile(col, row, false)
@@ -93,8 +98,8 @@ func populate_tiles(removed_tiles: Array):
 func drop_tiles(removed_tiles: Array, new_tiles: Array):
 	# 2D array of the number of spaces each tile needs to drop
 	var drops = []
-	for i in range(0, Globals.level_data.cols):
-		var col = []; col.resize(Globals.level_data.rows); col.fill(0)
+	for i in range(0, Globals.cols):
+		var col = []; col.resize(Globals.rows); col.fill(0)
 		drops.append(col)
 	
 	# Calculate the number of spaces each tile must fall.
@@ -105,9 +110,9 @@ func drop_tiles(removed_tiles: Array, new_tiles: Array):
 	
 	# Drop the tiles
 	dropping_tiles_done = 0
-	for col in range(0, Globals.level_data.cols):
+	for col in range(0, Globals.cols):
 		# Go through backwards so the last rows drop first
-		for row in range(Globals.level_data.rows-1, -1, -1):
+		for row in range(Globals.rows-1, -1, -1):
 			var drop = drops[col][row]
 			var tile = Globals.tiles[col][row]
 			

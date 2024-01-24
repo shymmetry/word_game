@@ -12,6 +12,8 @@ func _init():
 	Globals.score = 0
 	Globals.swaps = Globals.level_data.swaps
 	Globals.hints = Globals.level_data.hints
+	Globals.cols = Globals.level_data.cols
+	Globals.rows = Globals.level_data.rows
 	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
 		Globals.life = Globals.level_data.life
 	

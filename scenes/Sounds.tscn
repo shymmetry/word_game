@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://r4hacp4p8rc7"]
+[gd_scene load_steps=16 format=3 uid="uid://r4hacp4p8rc7"]
 
 [ext_resource type="AudioStream" uid="uid://caxflnblodcev" path="res://audio/button-tick.wav" id="1_4sdfq"]
 [ext_resource type="Script" path="res://scenes/Sounds.gd" id="1_mgxed"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://crwq2k6s1dsoa" path="res://audio/congrats.wav" id="12_0kbgu"]
 [ext_resource type="AudioStream" uid="uid://qv85vxmqh1hg" path="res://audio/yay.mp3" id="13_8ibpy"]
 [ext_resource type="AudioStream" uid="uid://ev8p8jntdsrc" path="res://audio/hint.mp3" id="14_ceciv"]
+[ext_resource type="AudioStream" uid="uid://b23m716e66nw5" path="res://audio/error.mp3" id="15_cc03w"]
 
 [node name="Sounds" type="Node"]
 script = ExtResource("1_mgxed")
@@ -56,3 +57,6 @@ stream = ExtResource("13_8ibpy")
 
 [node name="Hint" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_ceciv")
+
+[node name="Error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_cc03w")

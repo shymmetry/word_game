@@ -10,8 +10,8 @@ func get_config_map():
 	return config_map
 
 var time_seconds = 60
-var rows = 5
-var cols = 5
+var rows = 6
+var cols = 6
 var swaps = 1
 var hints = 0
 var life = 0

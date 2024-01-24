@@ -21,7 +21,7 @@ func _unhandled_input(event):
 				Sounds.swap()
 			else:
 				if Globals.selected_tile != end_tile:
-					Sounds.failure()
+					Sounds.error()
 				Globals.idle = true
 			Globals.selected_tile = null
 		else:
@@ -33,7 +33,7 @@ func _unhandled_input(event):
 				if Globals.dragged_tiles.size() >= Globals.level_data.min_word_length:
 					Signals.emit_signal("GuessWord")
 				else:
-					Sounds.failure()
+					Sounds.error()
 					Globals.idle = true
 		clicked_tile = null; last_hover_tile = null; Globals.dragged_tiles = []
 	
@@ -87,7 +87,7 @@ func _get_tile_at_point(pos):
 	var col = pos.x / tile.size.x
 	var row = pos.y / tile.size.y
 	
-	if col < 0 or row < 0 or col >= Globals.level_data.cols or row >= Globals.level_data.rows: 
+	if col < 0 or row < 0 or col >= Globals.cols or row >= Globals.rows: 
 		return null
 	else:
-		return Globals.tiles[min(col, Globals.level_data.cols-1)][min(row, Globals.level_data.rows-1)]
+		return Globals.tiles[min(col, Globals.cols-1)][min(row, Globals.rows-1)]

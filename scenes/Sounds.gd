@@ -27,6 +27,9 @@ func menu_open():
 func failure():
 	$Failure.play()
 
+func error():
+	$Error.play()
+
 func win():
 	$Win.play()
 
