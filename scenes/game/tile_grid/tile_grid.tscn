@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cp7wy71prqkky"]
+
+[ext_resource type="Script" path="res://scenes/game/tile_grid/TimeGrid.gd" id="1_l2hmy"]
+[ext_resource type="Script" path="res://scenes/game/tile_grid/PopWords.gd" id="2_rlrfr"]
+[ext_resource type="Script" path="res://scenes/game/tile_grid/TileArea.gd" id="3_tcs8j"]
+[ext_resource type="Script" path="res://scenes/game/tile_grid/TileCreator.gd" id="4_j8ip5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcksj"]
+size = Vector2(430, 430)
+
+[node name="TileGrid" type="ReferenceRect"]
+clip_contents = true
+custom_minimum_size = Vector2(420, 420)
+mouse_filter = 2
+script = ExtResource("1_l2hmy")
+
+[node name="PopWords" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_rlrfr")
+
+[node name="TileArea" type="Area2D" parent="."]
+z_index = 2
+script = ExtResource("3_tcs8j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileArea"]
+position = Vector2(215, 215)
+shape = SubResource("RectangleShape2D_gcksj")
+
+[node name="TileCreator" type="Node" parent="TileArea"]
+script = ExtResource("4_j8ip5")

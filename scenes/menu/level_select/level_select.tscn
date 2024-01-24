@@ -79,7 +79,6 @@ layout_mode = 2
 
 [node name="Survival" parent="MarginContainer/Levels" instance=ExtResource("5_j57xi")]
 layout_mode = 2
-disabled = true
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MarginContainer/Levels/Timed" to="." method="_on_timed_pressed"]

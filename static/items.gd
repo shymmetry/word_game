@@ -27,7 +27,7 @@ var heal = Item.new(
 	"Heal 20",
 	"Increase life by 20",
 	50,
-	func(): Globals.swaps += 2,
+	func(): Globals.life += 20,
 )
 
 var shrink_cols = Item.new(
@@ -36,3 +36,11 @@ var shrink_cols = Item.new(
 	150,
 	func(): Globals.cols -= 1,
 )
+
+var shrink_rows = Item.new(
+	"-1 Rows",
+	"Remove a row from the board",
+	150,
+	func(): Globals.rows -= 1,
+)
+

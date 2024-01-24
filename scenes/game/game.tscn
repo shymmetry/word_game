@@ -1,7 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=26 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
-[ext_resource type="Script" path="res://scenes/game/tile_grid/TileArea.gd" id="2_1ocn6"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
 [ext_resource type="Texture2D" uid="uid://786xx47uf4o3" path="res://icons/outline_menu_white_48dp.png" id="4_7r455"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://styles/hamburger.tres" id="4_f7i5n"]
@@ -14,13 +13,12 @@
 [ext_resource type="Script" path="res://scenes/game/gui/WordScores.gd" id="9_bqcat"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
 [ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/time_tracker.tscn" id="10_yppx5"]
-[ext_resource type="Script" path="res://scenes/game/tile_grid/MouseController.gd" id="13_wgtol"]
-[ext_resource type="Script" path="res://scenes/game/tile_grid/TileCreator.gd" id="15_6mqnh"]
+[ext_resource type="PackedScene" uid="uid://cp7wy71prqkky" path="res://scenes/game/tile_grid/tile_grid.tscn" id="13_myhjs"]
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/main/menu_modal.tscn" id="15_occs8"]
-[ext_resource type="Script" path="res://scenes/game/tile_grid/PopWords.gd" id="16_tsrdy"]
 [ext_resource type="Script" path="res://scenes/game/ScoreHandler.gd" id="16_w0eha"]
 [ext_resource type="PackedScene" uid="uid://5pbldm3dhxqv" path="res://scenes/game/shop/shop.tscn" id="17_cxo0i"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over/game_over_modal.tscn" id="18_7d1n6"]
+[ext_resource type="Script" path="res://scenes/game/DamageHandler.gd" id="19_2sv64"]
 [ext_resource type="Script" path="res://scenes/game/LevelHandler.gd" id="21_2eyvd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
@@ -45,9 +43,6 @@ font_size = 20
 [sub_resource type="LabelSettings" id="LabelSettings_44dt0"]
 line_spacing = 0.0
 font_size = 20
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgcgr"]
-size = Vector2(430, 430)
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -171,32 +166,8 @@ theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="TileGrid" type="ReferenceRect" parent="Page/PlayArea"]
-clip_contents = true
-custom_minimum_size = Vector2(420, 420)
+[node name="TileGrid" parent="Page/PlayArea" instance=ExtResource("13_myhjs")]
 layout_mode = 2
-mouse_filter = 2
-script = ExtResource("13_wgtol")
-
-[node name="PopWords" type="Control" parent="Page/PlayArea/TileGrid"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("16_tsrdy")
-
-[node name="TileArea" type="Area2D" parent="Page/PlayArea/TileGrid"]
-z_index = 2
-script = ExtResource("2_1ocn6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Page/PlayArea/TileGrid/TileArea"]
-position = Vector2(215, 215)
-shape = SubResource("RectangleShape2D_cgcgr")
-
-[node name="TileCreator" type="Node" parent="Page/PlayArea/TileGrid/TileArea"]
-script = ExtResource("15_6mqnh")
 
 [node name="Shop" parent="Page/PlayArea" instance=ExtResource("17_cxo0i")]
 visible = false
@@ -213,6 +184,9 @@ script = ExtResource("16_w0eha")
 
 [node name="LevelHandler" type="Node" parent="."]
 script = ExtResource("21_2eyvd")
+
+[node name="DamageHandler" type="Node" parent="."]
+script = ExtResource("19_2sv64")
 
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource("6_px3rd")

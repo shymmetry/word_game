@@ -70,6 +70,12 @@ func round_over():
 	Globals.idle = false
 	Signals.emit_signal("RoundOver")
 	
+	$DamageHandler.take_damage()
+	if Globals.life <= 0: game_over()
+	if Globals.current_round == Levels.total_rounds():
+		# TODO: WIN
+		pass
+	
 	var start_pos = $Page/PlayArea.position
 	var tween = create_tween()
 	tween.tween_property($Page/PlayArea, "position", start_pos + Vector2(0, 500), 1)
@@ -78,9 +84,20 @@ func round_over():
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
 
 func next_round():
+	Levels.set_current_round(Globals.current_round + 1)
 	_init_round()
 	Signals.emit_signal("InitGame")
 	
+	# Reset the grid
+	var scene = load("res://scenes/game/tile_grid/tile_grid.tscn")
+	var old_grid = $Page/PlayArea/TileGrid
+	$Page/PlayArea.remove_child(old_grid)
+	old_grid.queue_free()
+	var new_grid = scene.instantiate()
+	new_grid.hide()
+	$Page/PlayArea.add_child(new_grid, true)
+	
+	# Swap the Play Area content
 	var start_pos = $Page/PlayArea.position
 	var tween = create_tween()
 	tween.tween_property($Page/PlayArea, "position", start_pos + Vector2(0, 500), 1)
@@ -88,6 +105,7 @@ func next_round():
 	tween.tween_callback(func(): $Page/PlayArea/TileGrid.show())
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
 	
+	Signals.emit_signal("ResetTimer")
 	Signals.emit_signal("StartGame")
 
 func game_over():

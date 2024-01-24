@@ -25,7 +25,7 @@ func _score_word(word_tiles: WordTiles):
 	for tile in word_tiles.tiles:
 		if tile.tile_type == E.TILE_TYPE.MULTIPLIER: tile_mult *= 2
 	
-	var score_up = 75#letter_score * length_mult * tile_mult
+	var score_up = letter_score * length_mult * tile_mult
 	Globals.score += score_up
 	
 	# Update bonuses
