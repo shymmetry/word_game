@@ -71,6 +71,7 @@ func timed_out():
 
 func round_over():
 	Globals.idle = false
+	Globals.matched_words = []
 	Signals.emit_signal("RoundOver")
 	
 	var life_tracker = $Page/HUD/HBoxContainer/Trackers/LifeTracker

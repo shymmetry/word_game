@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://cjn0ohfkaqqbp"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/tile.gd" id="2_1hfe7"]
-[ext_resource type="StyleBox" uid="uid://bvpdnl601inlb" path="res://styles/tile/underlay/tile_normal_underlay.tres" id="2_e8rig"]
-[ext_resource type="StyleBox" uid="uid://b5k3ga3wpywrm" path="res://styles/tile/base/tile_normal.tres" id="3_d3afk"]
+[ext_resource type="StyleBox" uid="uid://bvpdnl601inlb" path="res://styles/tile/underlay/tile_normal_underlay.tres" id="2_7j7c2"]
+[ext_resource type="StyleBox" uid="uid://b5k3ga3wpywrm" path="res://styles/tile/base/tile_normal.tres" id="3_h3nwy"]
 [ext_resource type="Texture2D" uid="uid://do8g6xmwgpax0" path="res://icons/gun_icon.png" id="4_jhkk6"]
-[ext_resource type="StyleBox" uid="uid://bwvtfmanm0ilu" path="res://styles/tile/overlay/tile_dragged_overlay.tres" id="4_uojc2"]
+[ext_resource type="StyleBox" uid="uid://bwvtfmanm0ilu" path="res://styles/tile/overlay/tile_dragged_overlay.tres" id="5_xymu6"]
 
 [sub_resource type="FontVariation" id="FontVariation_ypwqj"]
 
@@ -81,10 +81,10 @@ _data = {
 offset_right = 70.0
 offset_bottom = 70.0
 pivot_offset = Vector2(35, 35)
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 script = ExtResource("2_1hfe7")
 
 [node name="Body" type="Control" parent="."]
@@ -96,12 +96,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 2.0
-offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("2_e8rig")
+theme_override_styles/panel = ExtResource("2_7j7c2")
 
 [node name="Base" type="Panel" parent="Body"]
 layout_mode = 1
@@ -111,7 +109,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_d3afk")
+theme_override_styles/panel = ExtResource("3_h3nwy")
 
 [node name="Footer" type="HBoxContainer" parent="Body"]
 custom_minimum_size = Vector2(0, 16)
@@ -215,7 +213,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("4_uojc2")
+theme_override_styles/panel = ExtResource("5_xymu6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
 libraries = {
