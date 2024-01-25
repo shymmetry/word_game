@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var item = null
+var item: Item = null
 
 func set_item(_item: Item):
 	item = _item
@@ -12,5 +12,5 @@ func _on_button_pressed():
 	Signals.emit_signal("PurchaseItem", item)
 
 func _process(_delta):
-	if Globals.score < item.cost:
+	if Globals.score < item.cost or (Globals.items[item] >= item.max_owned and item.max_owned != -1):
 		$Buy.disabled = true

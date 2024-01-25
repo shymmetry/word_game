@@ -24,7 +24,7 @@ func _init_round():
 	Globals.idle = true
 	LetterUtil.set_letter_freq(Globals.level_data.letter_freq)
 	Globals.last_processed_score_for_increased_difficulty = 0
-	Globals.reset_seconds = Globals.level_data.time_seconds
+	Globals.round_time = Globals.level_data.time_seconds + ItemUtil.extra_round_time()
 	Globals.matched_words = []
 
 func _ready():

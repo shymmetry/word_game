@@ -14,7 +14,7 @@ var swaps = null
 var hints = null
 var life = null
 var seconds_left = null
-var reset_seconds = null
+var round_time = null
 var last_processed_score_for_increased_difficulty = null
 
 # Game state
@@ -30,3 +30,7 @@ var hint_tiles = []
 # Level info
 var current_round = 0
 var level_data = null
+
+# Player data
+var items = {}
+var length_bonuses = {}

@@ -9,7 +9,7 @@ func _ready():
 
 func _reset_timer():
 	self.start(1)
-	Globals.seconds_left = Globals.reset_seconds
+	Globals.seconds_left = Globals.round_time
 
 func _on_timeout():
 	if !Globals.paused:

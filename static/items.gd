@@ -10,37 +10,73 @@ func get_all_items():
 	return config_map
 
 var hint = Item.new(
-	"1 Hint",
-	"Get shown the longest word",
+	"Send Help",
+	"Gain 1 extra hint",
 	50,
+	-1,
 	func(): Globals.hints += 1,
 )
 
 var swap = Item.new(
-	"2 Swaps",
-	"Swap 2 adjacent tiles",
+	"Swap Master",
+	"Gain 2 extra swaps",
 	50,
+	-1,
 	func(): Globals.swaps += 2,
 )
 
 var heal = Item.new(
-	"Heal 20",
+	"Health Pack",
 	"Increase life by 20",
 	50,
+	-1,
 	func(): Globals.life += 20,
 )
 
 var shrink_cols = Item.new(
-	"-1 Columns",
-	"Remove a column from the board",
+	"Shrink Columns",
+	"Remove 1 column from the board",
 	150,
+	2,
 	func(): Globals.cols -= 1,
 )
 
 var shrink_rows = Item.new(
-	"-1 Rows",
-	"Remove a row from the board",
+	"Shrink Rows",
+	"Remove 1 row from the board",
 	150,
+	2,
 	func(): Globals.rows -= 1,
 )
 
+var word_heal = Item.new(
+	"Word Snack",
+	"Heal 1 for each matched word",
+	100,
+	3,
+	Callable(),
+)
+
+var medium_word_bonus = Item.new(
+	"Medium Word Bonus",
+	"Gain 1 swap for 5 letter words",
+	200,
+	3,
+	Callable(),
+)
+
+var big_word_bonus = Item.new(
+	"Big Word Bonus",
+	"Gain 1 swap for 6+ letter words",
+	50,
+	3,
+	Callable(),
+)
+
+var increase_round_time = Item.new(
+	"Time Extension",
+	"Add 10 seconds per round",
+	200,
+	3,
+	Callable(),
+)

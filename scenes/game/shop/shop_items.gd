@@ -10,7 +10,7 @@ func _ready():
 
 func _init_shop():
 	_clear_shop()
-	items = ItemUtil.get_random_items(4, false)
+	items = ItemUtil.get_random_items(5, false)
 	for item in items:
 		var new_item = item_scene.instantiate()
 		new_item.set_item(item)
@@ -28,6 +28,10 @@ func _purchase_item(purchase_item: Item):
 			if child.item == purchase_item:
 				Globals.score -= purchase_item.cost
 				purchase_item.effect.call()
+				if Globals.items.has(purchase_item):
+					Globals.items[purchase_item] = Globals.items.get(purchase_item) + 1
+				else:
+					Globals.items[purchase_item] = 1
 				
 				self.remove_child(child)
 				child.queue_free()
