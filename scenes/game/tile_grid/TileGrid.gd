@@ -30,7 +30,7 @@ func _unhandled_input(event):
 				Globals.selected_tile = end_tile
 			# A different tile was selected for word guess
 			else:
-				if Globals.dragged_tiles.size() >= Globals.level_data.min_word_length:
+				if Globals.dragged_tiles.size() >= Globals.round_data.min_word_length:
 					Signals.emit_signal("GuessWord")
 				else:
 					Sounds.error()

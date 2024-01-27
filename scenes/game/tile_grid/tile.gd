@@ -33,14 +33,14 @@ func _process(_delta):
 	
 	# Handle overlay / underlay from tile state
 	if Globals.selected_tile == self:
-		update_stylebox($"Body/Overlay", clicked_overlay_style)
-		update_stylebox($"Body/Underlay", clicked_underlay_style)
+		_update_stylebox($"Body/Overlay", clicked_overlay_style)
+		_update_stylebox($"Body/Underlay", clicked_underlay_style)
 	elif Globals.dragged_tiles.has(self):
-		update_stylebox($"Body/Overlay", dragged_overlay_style)
-		update_stylebox($"Body/Underlay", normal_underlay_style)
+		_update_stylebox($"Body/Overlay", dragged_overlay_style)
+		_update_stylebox($"Body/Underlay", normal_underlay_style)
 	else:
-		update_stylebox($"Body/Overlay", normal_overlay_style)
-		update_stylebox($"Body/Underlay", normal_underlay_style)
+		_update_stylebox($"Body/Overlay", normal_overlay_style)
+		_update_stylebox($"Body/Underlay", normal_underlay_style)
 	
 	# Handle base style from tile type
 	var base_style: StyleBoxFlat = null
@@ -51,7 +51,7 @@ func _process(_delta):
 			base_style = mult_base_style
 		E.TILE_TYPE.HARDENED:
 			base_style = harden_base_style
-	update_stylebox($"Body/Base", base_style)
+	_update_stylebox($"Body/Base", base_style)
 	
 	# Handle animations
 	if Globals.hint_tiles.has(self) and !animation.current_animation:
@@ -61,7 +61,7 @@ func _process(_delta):
 
 func set_letter(new_letter: String):
 	self.letter = new_letter
-	var new_score = Globals.level_data.letter_scores.get(new_letter)
+	var new_score = Globals.round_data.letter_scores.get(new_letter)
 	self.score = str(new_score) if new_score > 0 else ""
 
 func explode():
@@ -75,12 +75,9 @@ func drop(tiles: int):
 
 func explode_finished():
 	Signals.emit_signal("ExplodeFinished")
-	destroy()
-
-func destroy():
 	queue_free()
 
-func update_stylebox(panel: Panel, new_stylebox: StyleBoxFlat):
+func _update_stylebox(panel: Panel, new_stylebox: StyleBoxFlat):
 	var stylebox = panel.get_theme_stylebox("panel")
 	if stylebox != new_stylebox:
 		panel.add_theme_stylebox_override("panel", new_stylebox)

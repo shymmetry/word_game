@@ -26,15 +26,15 @@ var hint_tiles = []
 
 # Round info
 var current_round = 0
-var level_data = null
+var round_data = null
 
 func cols():
-	if level_data == null: return null
-	return level_data.board.size()
+	if round_data == null: return null
+	return round_data.board.size()
 
 func rows():
-	if level_data == null: return null
-	return level_data.board[0].size()
+	if round_data == null: return null
+	return round_data.board[0].size()
 
 # Player data
 var items = {}

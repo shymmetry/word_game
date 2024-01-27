@@ -6,7 +6,7 @@ func _ready():
 func _increase_difficulty(_score_results: ScoreResults):
 	if Globals.game_mode == E.GAME_TYPE.TIMED:
 		var last = Globals.last_processed_score_for_increased_difficulty
-		var increases = Globals.score / Globals.level_data.points_to_increase_difficulty - last / Globals.level_data.points_to_increase_difficulty
+		var increases = Globals.score / Globals.round_data.points_to_increase_difficulty - last / Globals.round_data.points_to_increase_difficulty
 		Globals.last_processed_score_for_increased_difficulty = Globals.score
 		
 		var new_round_time = Globals.round_time

@@ -15,7 +15,7 @@ func _init_tiles():
 	for row in range(0, Globals.rows()):
 		var tile_row = []
 		for col in range(0, Globals.cols()):
-			if Globals.level_data.board[row][col] != '/':
+			if Globals.round_data.board[row][col] != '/':
 				var tile = $TileCreator.create_tile(row, col, true)
 				add_child(tile)
 				tile_row.append(tile)
@@ -123,7 +123,7 @@ func _drop_tiles(removed_tiles: Array, new_tiles: Array):
 func _drop_size(row: int, col: int) -> int:
 	if row == Globals.rows()-1: return 0
 	var drop = 0
-	var board = Globals.level_data.board
+	var board = Globals.round_data.board
 	for r in range(row+1, Globals.rows()):
 		if r < 0:
 			drop += 1

@@ -7,17 +7,17 @@ func _score_word(word_tiles: WordTiles):
 	# Update score
 	var letter_score = 0
 	for tile in word_tiles.tiles:
-		letter_score += Globals.level_data.letter_scores.get(tile.letter)
+		letter_score += Globals.round_data.letter_scores.get(tile.letter)
 	
-	var length_mult = Globals.level_data.word_length_score_multiplier.get(word_tiles.word.length())
+	var length_mult = Globals.round_data.word_length_score_multiplier.get(word_tiles.word.length())
 	if length_mult == null:
 		# Not all lengths are tracked, so default to the highest defined
-		var maxwl = Globals.level_data.word_length_score_multiplier.keys().max()
-		var minwl = Globals.level_data.word_length_score_multiplier.keys().min()
+		var maxwl = Globals.round_data.word_length_score_multiplier.keys().max()
+		var minwl = Globals.round_data.word_length_score_multiplier.keys().min()
 		if word_tiles.word.length() > maxwl:
-			length_mult = Globals.level_data.word_length_score_multiplier.get(maxwl)
+			length_mult = Globals.round_data.word_length_score_multiplier.get(maxwl)
 		elif word_tiles.word.length() < minwl:
-			length_mult = Globals.level_data.word_length_score_multiplier.get(minwl)
+			length_mult = Globals.round_data.word_length_score_multiplier.get(minwl)
 		else:
 			length_mult = 1
 	
@@ -29,15 +29,15 @@ func _score_word(word_tiles: WordTiles):
 	Globals.score += score_up
 	
 	# Update bonuses
-	var swap_bonus = Globals.level_data.swap_bonus.get(word_tiles.word.length())
+	var swap_bonus = Globals.round_data.swap_bonus.get(word_tiles.word.length())
 	if swap_bonus == null:
 		# Not all lengths are tracked, so default to the highest defined
-		var maxwl = Globals.level_data.swap_bonus.keys().max()
-		var minwl = Globals.level_data.swap_bonus.keys().min()
+		var maxwl = Globals.round_data.swap_bonus.keys().max()
+		var minwl = Globals.round_data.swap_bonus.keys().min()
 		if word_tiles.word.length() > maxwl:
-			swap_bonus = Globals.level_data.swap_bonus.get(maxwl)
+			swap_bonus = Globals.round_data.swap_bonus.get(maxwl)
 		elif word_tiles.word.length() < minwl:
-			swap_bonus = Globals.level_data.swap_bonus.get(minwl)
+			swap_bonus = Globals.round_data.swap_bonus.get(minwl)
 		else:
 			swap_bonus = 0
 	Globals.swaps += swap_bonus

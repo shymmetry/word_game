@@ -33,12 +33,12 @@ func set_current_round(cur_round: int) -> void:
 func total_rounds() -> int:
 	return survival_round_order.size()
 
-func _set_level_config(level_data: Resource, survival: bool) -> void:
+func _set_level_config(round_data: Resource, survival: bool) -> void:
 	var config_map = level_defaults.new().get_config_map()
 	for key in config_map:
 		if survival and key in survival_defaults:
 			config_map[key] = survival_defaults[key]
-		if key in level_data:
-			config_map[key] = level_data[key]
+		if key in round_data:
+			config_map[key] = round_data[key]
 	
-	Globals.level_data = config_map
+	Globals.round_data = config_map

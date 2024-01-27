@@ -11,19 +11,19 @@ func _init():
 	# Init game state
 	Globals.score = 0
 	Globals.items = {}
-	Globals.swaps = Globals.level_data.swaps
-	Globals.hints = Globals.level_data.hints
+	Globals.swaps = Globals.round_data.swaps
+	Globals.hints = Globals.round_data.hints
 	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
-		Globals.life = Globals.level_data.life
+		Globals.life = Globals.round_data.life
 	
 	_init_round()
 
 func _init_round():
 	Globals.paused = false
 	Globals.idle = true
-	LetterUtil.set_letter_freq(Globals.level_data.letter_freq)
+	LetterUtil.set_letter_freq(Globals.round_data.letter_freq)
 	Globals.last_processed_score_for_increased_difficulty = 0
-	Globals.round_time = Globals.level_data.time_seconds + ItemUtil.extra_round_time()
+	Globals.round_time = Globals.round_data.time_seconds + ItemUtil.extra_round_time()
 	Globals.matched_words = []
 
 func _ready():

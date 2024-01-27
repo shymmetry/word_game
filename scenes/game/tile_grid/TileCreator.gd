@@ -37,8 +37,8 @@ func create_tile(row: int, col: int, initial: bool) -> Tile:
 func _resolve_tile_type():
 	var rand_num = randi() % 100 + 1
 	var sum = 0
-	for tile_type in Globals.level_data.tile_type_chance:
-		sum += Globals.level_data.tile_type_chance[tile_type]
+	for tile_type in Globals.round_data.tile_type_chance:
+		sum += Globals.round_data.tile_type_chance[tile_type]
 		if sum >= rand_num:
 			return tile_type
 	return null
@@ -47,8 +47,8 @@ func _resolve_damage(initial: bool):
 	if !initial: return 0
 	var rand_num = randi() % 100 + 1
 	var sum = 0
-	for dmg in Globals.level_data.dmg_probs:
-		sum += Globals.level_data.dmg_probs[dmg]
+	for dmg in Globals.round_data.dmg_probs:
+		sum += Globals.round_data.dmg_probs[dmg]
 		if sum >= rand_num:
 			return dmg
 	return null

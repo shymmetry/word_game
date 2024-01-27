@@ -8,7 +8,7 @@ func _on_gui_input(event):
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed:
-		give_hint(Globals.level_data.min_word_length, 6)
+		give_hint(Globals.round_data.min_word_length, 6)
 
 func give_hint(min_size: int, max_size: int) -> void:
 	if Globals.hints > 0:
