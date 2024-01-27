@@ -2,9 +2,20 @@ extends Node
 
 const tile_scene = preload("res://scenes/game/tile_grid/tile.tscn")
 
+var tile_width: int
+var tile_height: int
+
+func _ready():
+	var grid_size = $"../..".size
+	tile_width = grid_size.x / Globals.cols()
+	tile_height = grid_size.y / Globals.rows()
+
 # Initial designated whether or not the tile is for the initial board state
 func create_tile(row: int, col: int, initial: bool) -> Tile:
 	var tile = tile_scene.instantiate()
+	
+	# Update size
+	tile.size = Vector2(tile_width, tile_height)
 	
 	# Resolve positions
 	var x = col * tile.size.x

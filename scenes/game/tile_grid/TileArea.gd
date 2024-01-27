@@ -15,7 +15,7 @@ func _init_tiles():
 	for row in range(0, Globals.rows()):
 		var tile_row = []
 		for col in range(0, Globals.cols()):
-			if Globals.level_data.board[row][col] != '':
+			if Globals.level_data.board[row][col] != '/':
 				var tile = $TileCreator.create_tile(row, col, true)
 				add_child(tile)
 				tile_row.append(tile)
@@ -128,7 +128,7 @@ func _drop_size(row: int, col: int) -> int:
 		if r < 0:
 			drop += 1
 		# Handle permanently empty cells
-		elif board[r][col] == '':
+		elif board[r][col] == '/':
 			# If this spot would drop, the tile can pass through this spot
 			# because it wont end in it.
 			if _drop_size(r, col) > 0: 

@@ -42,7 +42,6 @@ func _unhandled_input(event):
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed \
 			and (Globals.idle or Globals.selected_tile):
-		print('clicked')
 		clicked_tile = _get_tile_at_point(get_local_mouse_position())
 		Globals.idle = false
 	
@@ -84,7 +83,11 @@ func _is_adjacent(tile1, tile2):
 
 func _get_tile_at_point(pos):
 	# TODO: Do something better than just getting the first tile.
-	var tile = Globals.tiles[0][0]
+	var tile = null
+	for r in Globals.rows():
+		if Globals.tiles[r][0]:
+			tile = Globals.tiles[r][0]
+			break
 
 	var col = pos.x / tile.size.x
 	var row = pos.y / tile.size.y
