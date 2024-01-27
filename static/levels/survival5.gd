@@ -1,12 +1,10 @@
 extends Node
 
-const time_seconds = 90
-
 const dmg_probs = {
 	0: 0,
-	1: 70,
-	2: 30,
-	3: 0,
+	1: 50,
+	2: 40,
+	3: 10,
 	4: 0,
 	5: 0,
 }

@@ -1,10 +1,5 @@
 extends Node
 
-const time_seconds = 90
-const swaps = 1
-const hints = 0
-const life = 100
-
 const dmg_probs = {
 	0: 20,
 	1: 80,

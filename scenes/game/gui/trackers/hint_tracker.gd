@@ -8,13 +8,11 @@ func _on_gui_input(event):
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed:
-		give_hint()
+		give_hint(Globals.level_data.min_word_length, 6)
 
-func give_hint():
+func give_hint(min_size: int, max_size: int) -> void:
 	if Globals.hints > 0:
-		var min_size = Globals.level_data.min_word_length
-		var max_size = 6
-		var hint_words = find_all_words(min_size, max_size)
+		var hint_words = _find_all_words(min_size, max_size)
 		var hints_by_length = {}
 		# Sort the found words by their length
 		for hint in hint_words:
@@ -39,11 +37,11 @@ func give_hint():
 
 # Only finds words up to 6 characters for efficiency. I expect that if there is
 # a word with 7+ letters we could also find one with less.
-func find_all_words(min_letters: int, max_letters: int = 6):
+func _find_all_words(min_letters: int, max_letters: int = 6):
 	var all_words = []
-	for col in Globals.cols:
-		for row in Globals.rows:
-			var tile = Globals.tiles[col][row]
+	for row in Globals.rows():
+		for col in Globals.cols():
+			var tile = Globals.tiles[row][col]
 			all_words += _find_all_words_recurse(tile.letter, [tile], min_letters, max_letters)
 	return all_words
 
@@ -81,9 +79,9 @@ func _find_all_words_recurse_inner(word: String, tiles: Array, min_letters: int,
 func _get_adjacent_tiles(tile):
 	var tiles = []
 	for adjust in [[0,1],[0,-1],[1,0],[-1,0]]:
-		var col = tile.col + adjust[0]
-		var row = tile.row + adjust[1]
-		if col >= 0 and col < Globals.cols \
-				and row >= 0 and row < Globals.rows:
-			tiles.append(Globals.tiles[col][row])
+		var row = tile.row + adjust[0]
+		var col = tile.col + adjust[1]
+		if col >= 0 and col < Globals.cols() \
+				and row >= 0 and row < Globals.rows():
+			tiles.append(Globals.tiles[row][col])
 	return tiles

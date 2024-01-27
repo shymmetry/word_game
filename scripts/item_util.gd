@@ -4,7 +4,7 @@ const _stored_items = preload("res://static/items.gd")
 
 var _items: Dictionary = {}
 
-func _ready():
+func _init():
 	var config_map = _stored_items.new().get_all_items()
 	for key in config_map:
 		_items[key] = config_map[key]
@@ -21,18 +21,17 @@ func get_random_items(num: int, duplicates: bool) -> Array[Item]:
 	return selected_items
 
 func get_health_for_word(word: String) -> int:
-	var heals = Globals.items[_items.word_heal]
-	return 0 if !heals else heals
+	if !Globals.items.has(_items.word_heal): return 0
+	return Globals.items.get(_items.word_heal)
 
 func get_swap_bonus(word: String) -> int:
-	var swaps = 0
 	if word.length() == 5:
-		swaps = Globals.items[_items.medium_word_bonus]
+		return Globals.items[_items.medium_word_bonus] if Globals.items.has(_items.medium_word_bonus) else 0
 	elif word.length() > 5:
-		swaps = Globals.items[_items.big_word_bonus]
-	return 0 if !swaps else swaps
+		return Globals.items[_items.big_word_bonus] if Globals.items.has(_items.big_word_bonus) else 0
+	else:
+		return 0
 
-func extra_round_time():
-	if !_items: return 0
-	var time_items = Globals.items[_items.increase_round_time]
-	return 10 * (0 if !time_items else time_items)
+func extra_round_time() -> int:
+	if !Globals.items.has(_items.increase_round_time): return 0
+	return 10 * Globals.items.get(_items.increase_round_time)

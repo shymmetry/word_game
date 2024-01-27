@@ -15,6 +15,7 @@ signal TimedOut
 signal GuessWord
 signal WordFound
 signal WordScored
+signal BoardChanged
 
 signal PurchaseItem
 

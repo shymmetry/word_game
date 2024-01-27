@@ -1,14 +1,12 @@
 extends Node
 
-const time_seconds = 90
-
 const dmg_probs = {
 	0: 0,
-	1: 20,
-	2: 40,
-	3: 20,
-	4: 10,
-	5: 10,
+	1: 0,
+	2: 20,
+	3: 40,
+	4: 20,
+	5: 20,
 }
 
 const letter_freq = {

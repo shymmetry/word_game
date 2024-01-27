@@ -7,8 +7,6 @@ const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for spee
 var game_mode = null
 var tiles = [] # 2D array of all tiles in play
 var matched_words = []
-var cols = null
-var rows = null
 var score = null
 var swaps = null
 var hints = null
@@ -18,7 +16,6 @@ var round_time = null
 var last_processed_score_for_increased_difficulty = null
 
 # Game state
-var board_changed = false #ONLY FOR BASE GAME SCRIPT HANDLING
 var idle = true
 var paused = false
 
@@ -27,10 +24,17 @@ var selected_tile = null
 var dragged_tiles: Array[Tile] = []
 var hint_tiles = []
 
-# Level info
+# Round info
 var current_round = 0
 var level_data = null
 
+func cols():
+	if level_data == null: return null
+	return level_data.board.size()
+
+func rows():
+	if level_data == null: return null
+	return level_data.board[0].size()
+
 # Player data
 var items = {}
-var length_bonuses = {}

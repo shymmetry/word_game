@@ -42,6 +42,7 @@ func _unhandled_input(event):
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed \
 			and (Globals.idle or Globals.selected_tile):
+		print('clicked')
 		clicked_tile = _get_tile_at_point(get_local_mouse_position())
 		Globals.idle = false
 	
@@ -63,8 +64,8 @@ func _unhandled_input(event):
 func _swap_tiles(tile1, tile2):
 	var tile1_col = tile1.col; var tile1_row = tile1.row
 	var tile1_position = tile1.position
-	Globals.tiles[tile1_col][tile1_row] = tile2
-	Globals.tiles[tile2.col][tile2.row] = tile1
+	Globals.tiles[tile1_row][tile1_col] = tile2
+	Globals.tiles[tile2.row][tile2.col] = tile1
 	tile1.col = tile2.col; tile1.row = tile2.row
 	tile2.col = tile1_col; tile2.row = tile1_row
 	Globals.swaps -= 1
@@ -73,7 +74,7 @@ func _swap_tiles(tile1, tile2):
 	var tween = create_tween()
 	tween.tween_property(tile1, "position", tile2.position, 0.25)
 	tween.parallel().tween_property(tile2, "position", tile1_position, 0.25)
-	tween.tween_callback(func(): Globals.idle = true; Globals.board_changed = true)
+	tween.tween_callback(func(): Globals.idle = true; Signals.emit_signal("BoardChanged"))
 
 func _is_adjacent(tile1, tile2):
 	if tile1 == null or tile2 == null: return false
@@ -84,11 +85,11 @@ func _is_adjacent(tile1, tile2):
 func _get_tile_at_point(pos):
 	# TODO: Do something better than just getting the first tile.
 	var tile = Globals.tiles[0][0]
-	# TODO: Fix this nonsense calculation for handling row/col < 6
-	var col = (pos.x - (6 - Globals.cols)*tile.size.x/2) / tile.size.x
-	var row = (pos.y - (6 - Globals.rows)*tile.size.y/2) / tile.size.y
+
+	var col = pos.x / tile.size.x
+	var row = pos.y / tile.size.y
 	
-	if col < 0 or row < 0 or col >= Globals.cols or row >= Globals.rows: 
+	if col < 0 or row < 0 or col >= Globals.cols() or row >= Globals.rows(): 
 		return null
 	else:
-		return Globals.tiles[min(col, Globals.cols-1)][min(row, Globals.rows-1)]
+		return Globals.tiles[row][col]

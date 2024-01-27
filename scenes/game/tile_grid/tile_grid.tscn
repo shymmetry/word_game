@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cp7wy71prqkky"]
 
-[ext_resource type="Script" path="res://scenes/game/tile_grid/TimeGrid.gd" id="1_l2hmy"]
+[ext_resource type="Script" path="res://scenes/game/tile_grid/TileGrid.gd" id="1_amwbp"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/PopWords.gd" id="2_rlrfr"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileArea.gd" id="3_tcs8j"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileCreator.gd" id="4_j8ip5"]
@@ -12,7 +12,7 @@ size = Vector2(430, 430)
 clip_contents = true
 custom_minimum_size = Vector2(420, 420)
 mouse_filter = 2
-script = ExtResource("1_l2hmy")
+script = ExtResource("1_amwbp")
 
 [node name="PopWords" type="Control" parent="."]
 layout_mode = 1

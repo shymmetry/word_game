@@ -33,22 +33,6 @@ var heal = Item.new(
 	func(): Globals.life += 20,
 )
 
-var shrink_cols = Item.new(
-	"Shrink Columns",
-	"Remove 1 column from the board",
-	150,
-	2,
-	func(): Globals.cols -= 1,
-)
-
-var shrink_rows = Item.new(
-	"Shrink Rows",
-	"Remove 1 row from the board",
-	150,
-	2,
-	func(): Globals.rows -= 1,
-)
-
 var word_heal = Item.new(
 	"Word Snack",
 	"Heal 1 for each matched word",

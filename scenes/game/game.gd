@@ -10,10 +10,9 @@ func _init():
 	
 	# Init game state
 	Globals.score = 0
+	Globals.items = {}
 	Globals.swaps = Globals.level_data.swaps
 	Globals.hints = Globals.level_data.hints
-	Globals.cols = Globals.level_data.cols
-	Globals.rows = Globals.level_data.rows
 	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
 		Globals.life = Globals.level_data.life
 	
@@ -32,6 +31,7 @@ func _ready():
 	Signals.connect("GameOver", game_over)
 	Signals.connect("TimedOut", timed_out)
 	Signals.connect("NextRound", next_round)
+	Signals.connect("BoardChanged", _check_win)
 	
 	Signals.emit_signal("StartGame")
 	
@@ -46,15 +46,11 @@ func _ready():
 	elif Globals.game_mode == E.GAME_TYPE.SURVIVAL:
 		$Page/HUD/HBoxContainer/Trackers/ScoreTracker.hide()
 
-func _process(_delta):
-	# Perform any necessary checks when the state of the board changes
-	if Globals.board_changed:
-		# Every time the board state changes and a hint was present, remove the
-		# hint as it is considered outdated.
-		if Globals.hint_tiles:
-			Globals.hint_tiles = []
-		
-		Globals.board_changed = false
+func _check_win():
+	# Every time the board state changes and a hint was present, remove the
+	# hint as it is considered outdated.
+	if Globals.hint_tiles:
+		Globals.hint_tiles = []
 
 func reset():
 	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:

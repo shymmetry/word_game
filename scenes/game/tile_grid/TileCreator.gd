@@ -3,7 +3,7 @@ extends Node
 const tile_scene = preload("res://scenes/game/tile_grid/tile.tscn")
 
 # Initial designated whether or not the tile is for the initial board state
-func create_tile(col: int, row: int, initial: bool) -> Tile:
+func create_tile(row: int, col: int, initial: bool) -> Tile:
 	var tile = tile_scene.instantiate()
 	
 	# Resolve positions

@@ -67,9 +67,9 @@ func set_letter(new_letter: String):
 func explode():
 	animation.play("explode")
 
-func drop(pixels: int):
+func drop(tiles: int):
 	var tween = create_tween()
-	var new_position = Vector2(self.position.x, self.position.y+pixels)
+	var new_position = Vector2(self.position.x, self.position.y+tiles*self.size.y)
 	tween.tween_property(self, "position", new_position, 0.5)
 	tween.tween_callback(func(): Signals.emit_signal("DropFinished"))
 
