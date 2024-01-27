@@ -9,9 +9,7 @@ var matched_words = []
 var score = null
 var swaps = null
 var hints = null
-var seconds_left = null
-var round_time = null
-var last_processed_score_for_increased_difficulty = null
+var seconds_left = 0
 
 # Game state
 var idle = true

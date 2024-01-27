@@ -40,11 +40,3 @@ var big_word_bonus = Item.new(
 	3,
 	Callable(),
 )
-
-var increase_round_time = Item.new(
-	"Time Extension",
-	"Add 10 seconds per round",
-	200,
-	3,
-	Callable(),
-)

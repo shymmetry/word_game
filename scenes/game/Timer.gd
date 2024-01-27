@@ -1,12 +1,7 @@
 extends Timer
 
 func _ready():
-	_reset_timer()
-	Signals.connect('StartRound', func(): _reset_timer())
-
-func _reset_timer():
-	self.start(1)
-	Globals.seconds_left = Globals.round_time
+	Signals.connect('StartRound', func(): self.start(1))
 
 func _on_timeout():
 	if !Globals.paused:

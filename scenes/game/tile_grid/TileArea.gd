@@ -67,7 +67,7 @@ func _explode_finished():
 		# Add tiles to top
 		var new_tiles = _add_new_tiles(exploding_tiles)
 		
-		_drop_tiles(exploding_tiles, new_tiles)
+		_drop_tiles(new_tiles)
 
 func _add_new_tiles(removed_tiles: Array):
 	# Adds new tiles for each given removed point. The created tiles are placed
@@ -88,7 +88,7 @@ func _add_new_tiles(removed_tiles: Array):
 	
 	return new_tiles
 
-func _drop_tiles(removed_tiles: Array, new_tiles: Array):
+func _drop_tiles(new_tiles: Array):
 	# Drop the tiles
 	dropping_tiles_count = 0
 	for col in range(0, Globals.cols()):

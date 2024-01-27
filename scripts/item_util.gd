@@ -27,7 +27,3 @@ func get_swap_bonus(word: String) -> int:
 		return Globals.items[_items.big_word_bonus] if Globals.items.has(_items.big_word_bonus) else 0
 	else:
 		return 0
-
-func extra_round_time() -> int:
-	if !Globals.items.has(_items.increase_round_time): return 0
-	return 10 * Globals.items.get(_items.increase_round_time)
