@@ -15,8 +15,7 @@ var cols = 6
 var swaps = 1
 var hints = 0
 var min_word_length = 3
-var max_word_length = 36
-var points_to_increase_difficulty = 50
+var max_word_length = 100
 
 var board = [
 	['*','*','*','*','*','*','*'],

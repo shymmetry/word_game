@@ -12,6 +12,7 @@ func _init():
 	Globals.items = {}
 	Globals.swaps = Globals.round_data.swaps
 	Globals.hints = Globals.round_data.hints
+	Globals.seconds_left = 0
 	
 	_init_round()
 
@@ -38,6 +39,9 @@ func _on_board_changed():
 	# hint as it is considered outdated.
 	if Globals.hint_tiles:
 		Globals.hint_tiles = []
+	
+	# Check if the round has been won
+	
 
 func _reset():
 	Levels.set_current_round(1)

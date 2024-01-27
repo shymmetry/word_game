@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://jsakvoov63xq" path="res://scenes/game/modal/main/LetterProbabilities.tscn" id="3_kq2qo"]
 [ext_resource type="StyleBox" uid="uid://d0r5f6321vjml" path="res://styles/button/button_icon.tres" id="4_1n882"]
 [ext_resource type="Script" path="res://scenes/game/modal/main/Stats.gd" id="4_fcksr"]
-[ext_resource type="PackedScene" path="res://scenes/game/modal/main/stat_panel.tscn" id="5_nlnqv"]
+[ext_resource type="PackedScene" uid="uid://ce5bbpkqpsvp7" path="res://scenes/game/modal/main/stat_panel.tscn" id="5_nlnqv"]
 [ext_resource type="Texture2D" uid="uid://bpuoacu0ngb1y" path="res://icons/ArrowLeft.png" id="5_pn8uy"]
 
 [node name="MenuModal" instance=ExtResource("1_4a3vp")]

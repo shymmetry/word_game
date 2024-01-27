@@ -8,7 +8,7 @@ func _ready():
 	_init_tiles()
 	Signals.connect('ExplodeFinished', _explode_finished)
 	Signals.connect('DropFinished', _drop_finished)
-	Signals.connect('GuessWord', _guess_word)
+	Signals.connect('WordGuess', _guess_word)
 
 func _init_tiles():
 	Globals.tiles = []

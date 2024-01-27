@@ -11,9 +11,9 @@ signal NextRound
 
 signal TimedOut
 
-signal GuessWord
+signal WordGuess
 signal WordFound
-signal WordScored
+signal WordHandled
 signal BoardChanged
 
 signal PurchaseItem

@@ -1,13 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=19 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
 [ext_resource type="Texture2D" uid="uid://786xx47uf4o3" path="res://icons/outline_menu_white_48dp.png" id="4_7r455"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://styles/hamburger.tres" id="4_f7i5n"]
 [ext_resource type="PackedScene" uid="uid://ruilr3qm8sxw" path="res://scenes/game/gui/trackers/hint_tracker.tscn" id="6_gyoeg"]
+[ext_resource type="Script" path="res://scenes/game/gui/FoundWords.gd" id="6_njilg"]
 [ext_resource type="Script" path="res://scenes/game/Timer.gd" id="6_px3rd"]
 [ext_resource type="PackedScene" uid="uid://ddjfdnexe12e1" path="res://scenes/game/gui/trackers/swap_tracker.tscn" id="7_xphf4"]
-[ext_resource type="Script" path="res://scenes/game/gui/WordScores.gd" id="9_bqcat"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
 [ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/time_tracker.tscn" id="10_yppx5"]
 [ext_resource type="PackedScene" uid="uid://cp7wy71prqkky" path="res://scenes/game/tile_grid/tile_grid.tscn" id="13_myhjs"]
@@ -27,18 +27,6 @@ shadow_offset = Vector2(0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_fmmef"]
 font_size = 32
 font_color = Color(0.952941, 0.972549, 1, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_gidju"]
-line_spacing = 0.0
-font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_ykkqn"]
-line_spacing = 0.0
-font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_44dt0"]
-line_spacing = 0.0
-font_size = 20
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -104,34 +92,21 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WordScores" type="HBoxContainer" parent="Page/HUD/HBoxContainer/VBoxContainer"]
+[node name="WordMargin" type="MarginContainer" parent="Page/HUD/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("9_bqcat")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="Words" type="Label" parent="Page/HUD/HBoxContainer/VBoxContainer/WordScores"]
+[node name="FoundWords" type="GridContainer" parent="Page/HUD/HBoxContainer/VBoxContainer/WordMargin"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-label_settings = SubResource("LabelSettings_gidju")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="Dashes" type="Label" parent="Page/HUD/HBoxContainer/VBoxContainer/WordScores"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-size_flags_vertical = 1
-label_settings = SubResource("LabelSettings_ykkqn")
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="Scores" type="Label" parent="Page/HUD/HBoxContainer/VBoxContainer/WordScores"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-label_settings = SubResource("LabelSettings_44dt0")
-vertical_alignment = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 2
+script = ExtResource("6_njilg")
 
 [node name="Notification" parent="Page/HUD/HBoxContainer/VBoxContainer" instance=ExtResource("10_xxh0w")]
 layout_mode = 2

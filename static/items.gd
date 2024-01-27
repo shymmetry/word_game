@@ -10,19 +10,19 @@ func get_all_items():
 	return config_map
 
 var hint = Item.new(
-	"Send Help",
+	"Call Friend",
 	"Gain 1 extra hint",
-	50,
+	10,
 	-1,
 	func(): Globals.hints += 1,
 )
 
 var swap = Item.new(
-	"Swap Master",
-	"Gain 2 extra swaps",
-	50,
+	"Refill Coffee",
+	"Increase swaps back to 3",
+	15,
 	-1,
-	func(): Globals.swaps += 2,
+	func(): Globals.swaps = 3,
 )
 
 var medium_word_bonus = Item.new(

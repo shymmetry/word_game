@@ -3,7 +3,7 @@ extends Control
 const word_pop = preload("res://scenes/game/word_pop/word_pop.tscn")
 
 func _ready():
-	Signals.connect("WordScored", _word_pop)
+	Signals.connect("WordHandled", _word_pop)
 
 func _word_pop(score_results: ScoreResults):
 	# Handle word pop
