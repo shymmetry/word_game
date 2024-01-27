@@ -10,7 +10,7 @@ func _ready():
 
 func _init_shop():
 	_clear_shop()
-	items = ItemUtil.get_random_items(5, false)
+	items = ItemUtil.get_random_items(4, false)
 	for item in items:
 		var new_item = item_scene.instantiate()
 		new_item.set_item(item)

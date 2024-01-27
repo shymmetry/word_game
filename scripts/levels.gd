@@ -19,12 +19,12 @@ const round_order: Array[String] = [
 func set_current_round(cur_round: int) -> void:
 	Globals.current_round = cur_round
 	
-	_set_round_config(load(round_order[cur_round-1]), true)
+	_set_round_config(load(round_order[cur_round-1]))
 
 func total_rounds() -> int:
 	return round_order.size()
 
-func _set_round_config(round_data: Resource, survival: bool) -> void:
+func _set_round_config(round_data: Resource) -> void:
 	var config_map = round_defaults.new().get_config_map()
 	for key in config_map:
 		if key in round_data:

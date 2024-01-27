@@ -20,7 +20,7 @@ func _init_round():
 	Globals.paused = false
 	Globals.idle = true
 	LetterUtil.set_letter_freq(Globals.round_data.letter_freq)
-	Globals.seconds_left += Globals.round_data.time_seconds
+	Globals.seconds_left += Globals.round_data.round_time_seconds
 	Globals.matched_words = []
 
 func _ready():
@@ -41,7 +41,8 @@ func _on_board_changed():
 		Globals.hint_tiles = []
 	
 	# Check if the round has been won
-	
+	if Globals.matched_words.size() >= Globals.round_data.word_cnt_goal:
+		_round_over()
 
 func _reset():
 	Levels.set_current_round(1)
@@ -52,6 +53,7 @@ func _timed_out():
 	_game_over()
 
 func _round_over():
+	Globals.paused = true
 	Globals.idle = false
 	Globals.matched_words = []
 	Signals.emit_signal("RoundOver")
@@ -87,8 +89,10 @@ func _next_round():
 	tween.tween_callback(func(): $Page/PlayArea/Shop.hide())
 	tween.tween_callback(func(): $Page/PlayArea/TileGrid.show())
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
-	
-	Signals.emit_signal("StartRound")
+	tween.tween_callback(func(): 
+		Signals.emit_signal("StartRound")
+		Globals.paused = false
+	)
 
 func _game_over():
 	Sounds.lose()

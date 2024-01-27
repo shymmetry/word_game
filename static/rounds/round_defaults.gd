@@ -9,13 +9,11 @@ func get_config_map():
 		config_map[property_name] = property_value
 	return config_map
 
-var time_seconds = 60
-var rows = 6
-var cols = 6
+var round_time_seconds = 60
 var swaps = 1
 var hints = 0
 var min_word_length = 3
-var max_word_length = 100
+var word_cnt_goal = 1
 
 var board = [
 	['*','*','*','*','*','*','*'],
