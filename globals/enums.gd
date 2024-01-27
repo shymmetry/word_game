@@ -1,11 +1,5 @@
 extends Node
 
-enum GAME_TYPE {
-	TIMED,
-	ENDLESS,
-	SURVIVAL,
-}
-
 enum TILE_TYPE {
 	NORMAL,
 	MULTIPLIER,

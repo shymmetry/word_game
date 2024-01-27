@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=22 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
@@ -6,10 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://styles/hamburger.tres" id="4_f7i5n"]
 [ext_resource type="PackedScene" uid="uid://ruilr3qm8sxw" path="res://scenes/game/gui/trackers/hint_tracker.tscn" id="6_gyoeg"]
 [ext_resource type="Script" path="res://scenes/game/Timer.gd" id="6_px3rd"]
-[ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/gui/trackers/gold_tracker.tscn" id="7_gdb5j"]
 [ext_resource type="PackedScene" uid="uid://ddjfdnexe12e1" path="res://scenes/game/gui/trackers/swap_tracker.tscn" id="7_xphf4"]
-[ext_resource type="PackedScene" uid="uid://bhquh7gqrmpw7" path="res://scenes/game/gui/trackers/score_tracker.tscn" id="8_h06yx"]
-[ext_resource type="PackedScene" uid="uid://diy7hx0ob4kh5" path="res://scenes/game/gui/trackers/life_tracker.tscn" id="8_nvj2p"]
 [ext_resource type="Script" path="res://scenes/game/gui/WordScores.gd" id="9_bqcat"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
 [ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/time_tracker.tscn" id="10_yppx5"]
@@ -19,8 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://h6aot8mj52sl" path="res://scenes/game/modal/win/win_modal.tscn" id="17_0y53a"]
 [ext_resource type="PackedScene" uid="uid://5pbldm3dhxqv" path="res://scenes/game/shop/shop.tscn" id="17_cxo0i"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over/game_over_modal.tscn" id="18_7d1n6"]
-[ext_resource type="Script" path="res://scenes/game/damage/DamageHandler.gd" id="19_2sv64"]
-[ext_resource type="Script" path="res://scenes/game/LevelHandler.gd" id="21_2eyvd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
 bg_color = Color(0.835294, 0.690196, 0.486275, 1)
@@ -102,15 +97,6 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="ScoreTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("8_h06yx")]
-layout_mode = 2
-
-[node name="GoldTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("7_gdb5j")]
-layout_mode = 2
-
-[node name="LifeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("8_nvj2p")]
-layout_mode = 2
-
 [node name="TimeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("10_yppx5")]
 layout_mode = 2
 
@@ -183,24 +169,8 @@ visible = false
 [node name="WinModal" parent="." instance=ExtResource("17_0y53a")]
 visible = false
 
-[node name="DamageHandler" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("19_2sv64")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="DamageHandler"]
-layer = 3
-
 [node name="ScoreHandler" type="Node" parent="."]
 script = ExtResource("16_w0eha")
-
-[node name="LevelHandler" type="Node" parent="."]
-script = ExtResource("21_2eyvd")
 
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource("6_px3rd")

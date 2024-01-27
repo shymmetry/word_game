@@ -14,7 +14,6 @@ var rows = 6
 var cols = 6
 var swaps = 1
 var hints = 0
-var life = 0
 var min_word_length = 3
 var max_word_length = 36
 var points_to_increase_difficulty = 50
@@ -28,15 +27,6 @@ var board = [
 	['*','*','*','*','*','*','*'],
 	['*','*','*','*','*','*','*'],
 ]
-
-var dmg_probs = {
-	0: 100,
-	1: 0,
-	2: 0,
-	3: 0,
-	4: 0,
-	5: 0,
-}
 
 var swap_bonus = {
 	4: 0,

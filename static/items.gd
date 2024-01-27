@@ -25,22 +25,6 @@ var swap = Item.new(
 	func(): Globals.swaps += 2,
 )
 
-var heal = Item.new(
-	"Health Pack",
-	"Increase life by 20",
-	50,
-	-1,
-	func(): Globals.life += 20,
-)
-
-var word_heal = Item.new(
-	"Word Snack",
-	"Heal 1 for each matched word",
-	100,
-	3,
-	Callable(),
-)
-
 var medium_word_bonus = Item.new(
 	"Medium Word Bonus",
 	"Gain 1 swap for 5 letter words",

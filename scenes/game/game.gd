@@ -3,9 +3,8 @@ extends Control
 func _init():
 	# Handle if loaded outside of menu
 	# TODO: Only actually used for testing, figure out how to handle better
-	if Globals.game_mode == null:
+	if Globals.current_round == 0:
 		Store.load_game()
-		Globals.game_mode = E.GAME_TYPE.SURVIVAL
 		Levels.set_current_round(1)
 	
 	# Init game state
@@ -13,8 +12,6 @@ func _init():
 	Globals.items = {}
 	Globals.swaps = Globals.round_data.swaps
 	Globals.hints = Globals.round_data.hints
-	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
-		Globals.life = Globals.round_data.life
 	
 	_init_round()
 
@@ -27,53 +24,35 @@ func _init_round():
 	Globals.matched_words = []
 
 func _ready():
-	Signals.connect("ResetGame", reset)
-	Signals.connect("GameOver", game_over)
-	Signals.connect("TimedOut", timed_out)
-	Signals.connect("NextRound", next_round)
-	Signals.connect("BoardChanged", _check_win)
+	Signals.connect("ResetGame", _reset)
+	Signals.connect("GameOver", _game_over)
+	Signals.connect("TimedOut", _timed_out)
+	Signals.connect("NextRound", _next_round)
+	Signals.connect("BoardChanged", _on_board_changed)
 	
-	Signals.emit_signal("StartGame")
-	
-	# Modify display based on mode
-	if Globals.game_mode == E.GAME_TYPE.ENDLESS:
-		$Page/HUD/HBoxContainer/Trackers/GoldTracker.hide()
-		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
-		$Page/HUD/HBoxContainer/Trackers/TimeTracker.hide()
-	elif Globals.game_mode == E.GAME_TYPE.TIMED:
-		$Page/HUD/HBoxContainer/Trackers/GoldTracker.hide()
-		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
-	elif Globals.game_mode == E.GAME_TYPE.SURVIVAL:
-		$Page/HUD/HBoxContainer/Trackers/ScoreTracker.hide()
+	# TODO: Check to see if this actually triggers since its called from a _ready
+	# function. Could have issues since the connectors instantiate in ready functions too.
+	Signals.emit_signal("StartRound")
 
-func _check_win():
+func _on_board_changed():
 	# Every time the board state changes and a hint was present, remove the
 	# hint as it is considered outdated.
 	if Globals.hint_tiles:
 		Globals.hint_tiles = []
 
-func reset():
-	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
-		Levels.set_current_round(1)
+func _reset():
+	Levels.set_current_round(1)
 	get_tree().reload_current_scene()
 
-func timed_out():
+func _timed_out():
 	Globals.idle = false
-	if Globals.game_mode == E.GAME_TYPE.TIMED:
-		game_over()
-	elif Globals.game_mode == E.GAME_TYPE.SURVIVAL:
-		round_over()
+	_game_over()
 
-func round_over():
+func _round_over():
 	Globals.idle = false
 	Globals.matched_words = []
 	Signals.emit_signal("RoundOver")
 	
-	var life_tracker = $Page/HUD/HBoxContainer/Trackers/LifeTracker
-	var tracker_pos = life_tracker.global_position + life_tracker.size / 2
-	await $DamageHandler.take_damage(tracker_pos)
-	
-	if Globals.life <= 0: game_over()
 	if Globals.current_round == Levels.total_rounds():
 		$WinModal.show()
 		return
@@ -85,7 +64,7 @@ func round_over():
 	tween.tween_callback(func(): $Page/PlayArea/Shop.show())
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
 
-func next_round():
+func _next_round():
 	Levels.set_current_round(Globals.current_round + 1)
 	_init_round()
 	
@@ -106,19 +85,9 @@ func next_round():
 	tween.tween_callback(func(): $Page/PlayArea/TileGrid.show())
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
 	
-	Signals.emit_signal("ResetTimer")
-	Signals.emit_signal("StartGame")
+	Signals.emit_signal("StartRound")
 
-func game_over():
+func _game_over():
 	Sounds.lose()
 	$GameOverModal.show()
-	if Globals.game_mode == E.GAME_TYPE.SURVIVAL:
-		pass
-	elif Globals.game_mode == E.GAME_TYPE.ENDLESS:
-		if Globals.score > UserData.endless_high_score:
-			UserData.endless_high_score = Globals.score
-			Store.save_game()
-	elif Globals.game_mode == E.GAME_TYPE.TIMED:
-		if Globals.score > UserData.timed_high_score:
-			UserData.timed_high_score = Globals.score
-			Store.save_game()
+	# TODO: Save any user state

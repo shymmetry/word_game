@@ -1,11 +1,8 @@
 extends Timer
 
 func _ready():
-	# No need to initialize for endless games
-	if Globals.game_mode != E.GAME_TYPE.ENDLESS:
-		_reset_timer()
-		Signals.connect('StartGame', func(): self.start(1))
-		Signals.connect('ResetTimer', _reset_timer)
+	_reset_timer()
+	Signals.connect('StartRound', func(): _reset_timer())
 
 func _reset_timer():
 	self.start(1)

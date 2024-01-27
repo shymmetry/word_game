@@ -1,14 +1,5 @@
 extends Node
 
-const dmg_probs = {
-	0: 0,
-	1: 80,
-	2: 20,
-	3: 0,
-	4: 0,
-	5: 0,
-}
-
 const letter_freq = {
 	"?": 300,
 	"E": 1000,

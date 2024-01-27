@@ -4,12 +4,11 @@ signal ExplodeFinished
 signal DropFinished
 
 signal ResetGame
-signal StartGame
+signal StartRound
 signal GameOver
 signal RoundOver
 signal NextRound
 
-signal ResetTimer
 signal TimedOut
 
 signal GuessWord

@@ -45,8 +45,6 @@ func _score_word(word_tiles: WordTiles):
 	
 	Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
-	Globals.life += ItemUtil.get_health_for_word(word_tiles.word)
-	
 	# Handle sound
 	if score_up >= 100:
 		Sounds.congrats()

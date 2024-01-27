@@ -9,7 +9,6 @@ var col = -1
 var tile_type = E.TILE_TYPE.NORMAL
 var letter = "?"
 var score = ""
-var damage = 0
 
 var normal_base_style = preload("res://styles/tile/base/tile_normal.tres")
 var harden_base_style = preload("res://styles/tile/base/tile_harden.tres")
@@ -19,13 +18,6 @@ var normal_overlay_style = preload("res://styles/tile/overlay/tile_normal_overla
 var dragged_overlay_style = preload("res://styles/tile/overlay/tile_dragged_overlay.tres")
 var clicked_underlay_style = preload("res://styles/tile/underlay/tile_clicked_underlay.tres")
 var normal_underlay_style = preload("res://styles/tile/underlay/tile_normal_underlay.tres")
-
-func _ready():
-	if damage >= 1: $Body/Footer/Gun1.show()
-	if damage >= 2: $Body/Footer/Gun2.show()
-	if damage >= 3: $Body/Footer/Gun3.show()
-	if damage >= 4: $Body/Footer/Gun4.show()
-	if damage >= 5: $Body/Footer/Gun5.show()
 
 func _process(_delta):
 	$"Body/Letter".text = self.letter

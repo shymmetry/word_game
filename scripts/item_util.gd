@@ -20,10 +20,6 @@ func get_random_items(num: int, duplicates: bool) -> Array[Item]:
 			items_left.erase(rand_key)
 	return selected_items
 
-func get_health_for_word(word: String) -> int:
-	if !Globals.items.has(_items.word_heal): return 0
-	return Globals.items.get(_items.word_heal)
-
 func get_swap_bonus(word: String) -> int:
 	if word.length() == 5:
 		return Globals.items[_items.medium_word_bonus] if Globals.items.has(_items.medium_word_bonus) else 0

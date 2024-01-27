@@ -4,13 +4,11 @@ extends Node
 const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for speed
 
 # Game data
-var game_mode = null
 var tiles = [] # 2D array of all tiles in play
 var matched_words = []
 var score = null
 var swaps = null
 var hints = null
-var life = null
 var seconds_left = null
 var round_time = null
 var last_processed_score_for_increased_difficulty = null

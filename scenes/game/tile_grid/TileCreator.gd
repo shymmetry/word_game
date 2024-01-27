@@ -25,7 +25,6 @@ func create_tile(row: int, col: int, initial: bool) -> Tile:
 	tile.position = Vector2(x, y)
 	
 	tile.tile_type = _resolve_tile_type()
-	tile.damage = _resolve_damage(initial)
 	
 	var rand_char = LetterUtil.rand_char()
 	tile.set_letter(rand_char)
@@ -41,14 +40,4 @@ func _resolve_tile_type():
 		sum += Globals.round_data.tile_type_chance[tile_type]
 		if sum >= rand_num:
 			return tile_type
-	return null
-
-func _resolve_damage(initial: bool):
-	if !initial: return 0
-	var rand_num = randi() % 100 + 1
-	var sum = 0
-	for dmg in Globals.round_data.dmg_probs:
-		sum += Globals.round_data.dmg_probs[dmg]
-		if sum >= rand_num:
-			return dmg
 	return null

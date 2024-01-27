@@ -50,9 +50,6 @@ func _get_word(word: String, tiles: Array[Tile]):
 	return word if Dict.is_word(word) else ""
 
 func _remove_word(word_tiles: WordTiles):
-	if Globals.game_mode == E.GAME_TYPE.TIMED:
-		Signals.emit_signal("ResetTimer")
-	
 	# Remove all the points that were matched
 	exploding_tiles = []; exploding_tiles_count = 0
 	for tile in word_tiles.tiles:

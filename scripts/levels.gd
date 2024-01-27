@@ -19,12 +19,6 @@ const survival_round_order: Array[String] = [
 	"res://static/levels/survival10.gd",
 ]
 
-func set_endless() -> void:
-	_set_level_config(endless_config, false)
-
-func set_timed() -> void:
-	_set_level_config(timed_config, false)
-
 func set_current_round(cur_round: int) -> void:
 	Globals.current_round = cur_round
 	
