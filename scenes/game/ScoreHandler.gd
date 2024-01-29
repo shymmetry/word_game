@@ -43,7 +43,7 @@ func _score_word(word_tiles: WordTiles):
 	Globals.swaps += swap_bonus
 	Globals.swaps += ItemUtil.get_swap_bonus(word_tiles.word)
 	
-	Globals.matched_words.append(word_tiles.word)
+	Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
 	# Handle sound
 	if score_up >= 100:

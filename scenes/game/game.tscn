@@ -1,15 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=21 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
 [ext_resource type="Texture2D" uid="uid://786xx47uf4o3" path="res://icons/outline_menu_white_48dp.png" id="4_7r455"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://styles/hamburger.tres" id="4_f7i5n"]
+[ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/gui/trackers/gold_tracker.tscn" id="5_dsuwl"]
 [ext_resource type="PackedScene" uid="uid://ruilr3qm8sxw" path="res://scenes/game/gui/trackers/hint_tracker.tscn" id="6_gyoeg"]
 [ext_resource type="Script" path="res://scenes/game/gui/FoundWords.gd" id="6_njilg"]
 [ext_resource type="Script" path="res://scenes/game/Timer.gd" id="6_px3rd"]
 [ext_resource type="PackedScene" uid="uid://ddjfdnexe12e1" path="res://scenes/game/gui/trackers/swap_tracker.tscn" id="7_xphf4"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
 [ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/time_tracker.tscn" id="10_yppx5"]
+[ext_resource type="PackedScene" uid="uid://bmkyqgk7njv0" path="res://scenes/game/poem/poem_results.tscn" id="12_knjfb"]
 [ext_resource type="PackedScene" uid="uid://cp7wy71prqkky" path="res://scenes/game/tile_grid/tile_grid.tscn" id="13_myhjs"]
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/main/menu_modal.tscn" id="15_occs8"]
 [ext_resource type="Script" path="res://scenes/game/ScoreHandler.gd" id="16_w0eha"]
@@ -85,6 +87,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
+[node name="GoldTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("5_dsuwl")]
+layout_mode = 2
+
 [node name="TimeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("10_yppx5")]
 layout_mode = 2
 
@@ -132,6 +137,10 @@ theme_override_constants/margin_bottom = 30
 layout_mode = 2
 
 [node name="Shop" parent="Page/PlayArea" instance=ExtResource("17_cxo0i")]
+visible = false
+layout_mode = 2
+
+[node name="PoemResults" parent="Page/PlayArea" instance=ExtResource("12_knjfb")]
 visible = false
 layout_mode = 2
 

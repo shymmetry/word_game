@@ -28,6 +28,7 @@ Dict="*res://scripts/dict.gd"
 Sounds="*res://scenes/Sounds.tscn"
 LetterUtil="*res://scripts/letter_util.gd"
 ItemUtil="*res://scripts/item_util.gd"
+Env="*res://scripts/env.gd"
 
 [display]
 

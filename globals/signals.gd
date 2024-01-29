@@ -1,21 +1,26 @@
 extends Node
 
-signal ExplodeFinished
-signal DropFinished
-
+# Flow
 signal ResetGame
 signal StartRound
 signal GameOver
 signal RoundOver
+signal ShowShop
 signal NextRound
 
-signal TimedOut
-
+# Game
 signal WordGuess
 signal WordFound
 signal WordHandled
 signal BoardChanged
+signal ExplodeFinished
+signal DropFinished
+signal NotifyPlayer
+signal TimedOut
 
+# Poem
+signal StartWordScoring
+
+# Shop
 signal PurchaseItem
 
-signal NotifyPlayer

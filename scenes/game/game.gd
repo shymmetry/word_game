@@ -28,6 +28,7 @@ func _ready():
 	Signals.connect("GameOver", _game_over)
 	Signals.connect("TimedOut", _timed_out)
 	Signals.connect("NextRound", _next_round)
+	Signals.connect("ShowShop", _show_shop)
 	Signals.connect("BoardChanged", _on_board_changed)
 	
 	# TODO: Check to see if this actually triggers since its called from a _ready
@@ -55,17 +56,28 @@ func _timed_out():
 func _round_over():
 	Globals.paused = true
 	Globals.idle = false
-	Globals.matched_words = []
-	Signals.emit_signal("RoundOver")
-	
 	if Globals.current_round == Levels.total_rounds():
 		$WinModal.show()
 		return
+	
+	# Reset poem results and then trigger round over to start processing
+	$Page/PlayArea/PoemResults.reset()
+	Signals.emit_signal("RoundOver")
 	
 	var start_pos = $Page/PlayArea.position
 	var tween = create_tween()
 	tween.tween_property($Page/PlayArea, "position", start_pos + Vector2(0, 500), 1)
 	tween.tween_callback(func(): $Page/PlayArea/TileGrid.hide())
+	tween.tween_callback(func(): $Page/PlayArea/Shop.hide())
+	tween.tween_callback(func(): $Page/PlayArea/PoemResults.show())
+	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
+
+func _show_shop():
+	var start_pos = $Page/PlayArea.position
+	var tween = create_tween()
+	tween.tween_property($Page/PlayArea, "position", start_pos + Vector2(0, 500), 1)
+	tween.tween_callback(func(): $Page/PlayArea/TileGrid.hide())
+	tween.tween_callback(func(): $Page/PlayArea/PoemResults.hide())
 	tween.tween_callback(func(): $Page/PlayArea/Shop.show())
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
 
@@ -87,6 +99,7 @@ func _next_round():
 	var tween = create_tween()
 	tween.tween_property($Page/PlayArea, "position", start_pos + Vector2(0, 500), 1)
 	tween.tween_callback(func(): $Page/PlayArea/Shop.hide())
+	tween.tween_callback(func(): $Page/PlayArea/PoemResults.hide())
 	tween.tween_callback(func(): $Page/PlayArea/TileGrid.show())
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
 	tween.tween_callback(func(): 
