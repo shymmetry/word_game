@@ -7,14 +7,7 @@
 script/source = "extends CanvasLayer
 
 func update_text(word: String, score_results: ScoreResults):
-	var new_text = \"%s\\n+%d\" % [word, score_results.score]
-	if score_results.bonus_hints > 0:
-		new_text += \"\\n+%d Hints\" % score_results.bonus_hints
-	if score_results.bonus_swaps > 0:
-		new_text += \"\\n+%d Swaps\" % score_results.bonus_swaps
-	if score_results.bonus_resets > 0:
-		new_text += \"\\n+%d Resets\" % score_results.bonus_resets
-	$\"WordPop/Word\".text = new_text
+	$WordPop/Word.text = \"%s\\n+%d\" % [word, score_results.score]
 
 func set_position(point):
 	$WordPop.position.x = point.x

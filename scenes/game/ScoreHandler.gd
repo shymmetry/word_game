@@ -26,25 +26,7 @@ func _score_word(word_tiles: WordTiles):
 		if tile.tile_type == E.TILE_TYPE.MULTIPLIER: tile_mult *= 2
 	
 	var score_up = letter_score * length_mult * tile_mult
-	Globals.score += score_up
-	
-	# Update bonuses
-	var swap_bonus = Globals.round_data.swap_bonus.get(word_tiles.word.length())
-	if swap_bonus == null:
-		# Not all lengths are tracked, so default to the highest defined
-		var maxwl = Globals.round_data.swap_bonus.keys().max()
-		var minwl = Globals.round_data.swap_bonus.keys().min()
-		if word_tiles.word.length() > maxwl:
-			swap_bonus = Globals.round_data.swap_bonus.get(maxwl)
-		elif word_tiles.word.length() < minwl:
-			swap_bonus = Globals.round_data.swap_bonus.get(minwl)
-		else:
-			swap_bonus = 0
-	Globals.swaps += swap_bonus
-	Globals.swaps += ItemUtil.get_swap_bonus(word_tiles.word)
-	
-	Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
-	
+
 	# Handle sound
 	if score_up >= 100:
 		Sounds.congrats()
@@ -52,5 +34,7 @@ func _score_word(word_tiles: WordTiles):
 		Sounds.yay()
 	else:
 		Sounds.pop()
+		
+	Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
-	Signals.emit_signal("WordHandled", ScoreResults.new(word_tiles.word, word_tiles.tiles, score_up, swap_bonus, 0, 0))
+	Signals.emit_signal("WordHandled", ScoreResults.new(word_tiles.word, word_tiles.tiles, score_up))

@@ -5,7 +5,7 @@ func _ready():
 
 func reset() -> void:
 	$Body/Poem.reset()
-	$Body/WordScoring.reset()
+	$Body/Margin/WordScoring.reset()
 
 func _init_poem_results() -> void:
 	var success = _get_poem()
