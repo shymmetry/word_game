@@ -36,7 +36,7 @@ var wildcard_bonus = Item.new(
 var time_bonus = Item.new(
 	"Time Extensions",
 	"Add 5 more seconds for each poem",
-	5,
+	125,
 	-1,
 	func(): {},
 )

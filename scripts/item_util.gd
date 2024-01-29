@@ -36,6 +36,6 @@ func get_wildcard_bonus() -> int:
 
 func get_time_bonus() -> int:
 	if Globals.items.has(_items.time_bonus):
-		return Globals.items[_items.time_bonus]
+		return Globals.items[_items.time_bonus] * 5
 	else: 
 		return 0

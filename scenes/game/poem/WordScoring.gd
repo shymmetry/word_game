@@ -28,7 +28,6 @@ func _score_words() -> void:
 	$ScoreList/TotalScore.show()
 	await $Timer.timeout
 	$WordList/Total.text = "PAYMENT"
-	await $Timer.timeout
 	$ScoreList/TotalScore.text = "$%d" % total_score
 	Sounds.cash_in()
 	Globals.score += total_score
