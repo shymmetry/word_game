@@ -21,6 +21,7 @@ func set_poem(poem: String):
 	
 	$Timer.set_wait_time(0.1)
 	$Timer.start()
+	Sounds.writing()
 	
 	var words = poem.split(" ")
 	var poem_construct = ""
@@ -36,6 +37,8 @@ func set_poem(poem: String):
 		poem_construct = "%s%s " % [poem_construct, word_formatted]
 		self.text = "[center]%s[/center]" % poem_construct
 		await $Timer.timeout
+	
+	Sounds.stop_writing()
 	Signals.emit_signal("StartWordScoring")
 
 func get_all_word_parts(word: String) -> Array[String]:

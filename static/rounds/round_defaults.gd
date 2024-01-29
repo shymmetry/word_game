@@ -34,9 +34,9 @@ var swap_bonus = {
 }
 
 var tile_type_chance = {
-	E.TILE_TYPE.NORMAL: 97,
+	E.TILE_TYPE.NORMAL: 98,
 	E.TILE_TYPE.HARDENED: 0,
-	E.TILE_TYPE.MULTIPLIER: 3,
+	E.TILE_TYPE.MULTIPLIER: 2,
 }
 
 var word_length_score_multiplier = {
@@ -80,7 +80,7 @@ var letter_scores = {
 }
 
 var letter_freq = {
-	"?": 300,
+	"?": 50,
 	"E": 1202,
 	"T": 910,
 	"A": 812,

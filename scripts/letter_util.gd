@@ -3,7 +3,10 @@ extends Node
 var _letter_picker_freq_total = 0
 var _letter_freq = {}
 
-func set_letter_freq(letter_freq):
+func reset_letter_freq():
+	var letter_freq = Globals.round_data.letter_freq
+	letter_freq['?'] = letter_freq['?'] + ItemUtil.get_wildcard_bonus()
+	
 	_letter_picker_freq_total = 0
 	_letter_freq = letter_freq
 	

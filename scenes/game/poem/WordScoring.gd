@@ -12,7 +12,6 @@ func _ready():
 	Signals.connect("StartWordScoring", _score_words)
 
 func _score_words() -> void:
-	print("scoring words")
 	$Timer.set_wait_time(0.4)
 	$Timer.start()
 	var total_score = 0
@@ -22,6 +21,7 @@ func _score_words() -> void:
 		$WordList/Words.text = $WordList/Words.text + word_score.word + "\n"
 		await $Timer.timeout
 		$ScoreList/Scores.text = $ScoreList/Scores.text + str(word_score.score) + "\n"
+		#Sounds.coin_flip()
 		await $Timer.timeout
 	
 	$WordList/Total.show()
@@ -31,4 +31,7 @@ func _score_words() -> void:
 	$ScoreList/TotalScore.show()
 	await $Timer.timeout
 	$ScoreList/TotalScore.text = str(total_score)
+	Sounds.cash_in()
 	Globals.score += total_score
+	
+	$"../../Continue/Button".show()

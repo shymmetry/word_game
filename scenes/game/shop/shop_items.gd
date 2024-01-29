@@ -6,7 +6,7 @@ var items = []
 
 func _ready():
 	Signals.connect("PurchaseItem", _purchase_item)
-	Signals.connect("RoundOver", _init_shop)
+	Signals.connect("ShowShop", _init_shop)
 
 func _init_shop():
 	_clear_shop()
@@ -28,6 +28,8 @@ func _purchase_item(purchase_item: Item):
 			if child.item == purchase_item:
 				Globals.score -= purchase_item.cost
 				purchase_item.effect.call()
+				Sounds.cha_ching()
+				
 				if Globals.items.has(purchase_item):
 					Globals.items[purchase_item] = Globals.items.get(purchase_item) + 1
 				else:

@@ -19,9 +19,9 @@ func _init():
 func _init_round():
 	Globals.paused = false
 	Globals.idle = true
-	LetterUtil.set_letter_freq(Globals.round_data.letter_freq)
-	Globals.seconds_left += Globals.round_data.round_time_seconds
+	Globals.seconds_left = Globals.round_data.round_time_seconds + ItemUtil.get_time_bonus()
 	Globals.matched_words = []
+	LetterUtil.reset_letter_freq()
 
 func _ready():
 	Signals.connect("ResetGame", _reset)

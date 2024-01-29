@@ -6,6 +6,7 @@ func _ready():
 func reset() -> void:
 	$Body/Poem.reset()
 	$Body/Margin/WordScoring.reset()
+	$Body/Continue/Button.hide()
 
 func _init_poem_results() -> void:
 	var success = _get_poem()
@@ -45,7 +46,7 @@ func _get_poem() -> bool:
 	else:
 		return false
 
-func _on_http_request_request_completed(result, response_code, headers, body):
+func _on_http_request_request_completed(_result, _response_code, _headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
 	if json.has("error"):
 		print(json.error)

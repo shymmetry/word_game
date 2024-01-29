@@ -27,3 +27,15 @@ func get_swap_bonus(word: String) -> int:
 		return Globals.items[_items.big_word_bonus] if Globals.items.has(_items.big_word_bonus) else 0
 	else:
 		return 0
+
+func get_wildcard_bonus() -> int:
+	if Globals.items.has(_items.wildcard_bonus):
+		return Globals.items[_items.wildcard_bonus] * 100
+	else: 
+		return 0
+
+func get_time_bonus() -> int:
+	if Globals.items.has(_items.time_bonus):
+		return Globals.items[_items.time_bonus]
+	else: 
+		return 0

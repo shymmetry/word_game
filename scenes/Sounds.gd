@@ -45,5 +45,17 @@ func hint():
 func timer():
 	$Timer.play()
 
-func gun_shot():
-	$GunShot.play()
+func writing():
+	$Writing.play()
+
+func stop_writing():
+	$Writing.stop()
+
+func coin_flip():
+	$CoinFlip.play()
+
+func cash_in():
+	$CashIn.play()
+
+func cha_ching():
+	$ChaChing.play()

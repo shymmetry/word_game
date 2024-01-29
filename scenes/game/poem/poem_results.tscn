@@ -65,8 +65,8 @@ libraries = {
 
 [node name="Margin" type="MarginContainer" parent="Body"]
 layout_mode = 2
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_right = 80
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
 
 [node name="WordScoring" type="HBoxContainer" parent="Body/Margin"]
 layout_mode = 2
@@ -109,12 +109,13 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_qlpxa")
 
 [node name="Timer" type="Timer" parent="Body/Margin/WordScoring"]
 
-[node name="Control" type="Control" parent="Body"]
+[node name="Continue" type="Control" parent="Body"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="Button" type="Button" parent="Body/Control"]
+[node name="Button" type="Button" parent="Body/Continue"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -133,5 +134,5 @@ text = "CONTINUE
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 timeout = 5.0
 
-[connection signal="pressed" from="Body/Control/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Body/Continue/Button" to="." method="_on_button_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

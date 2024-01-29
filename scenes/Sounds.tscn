@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://r4hacp4p8rc7"]
+[gd_scene load_steps=21 format=3 uid="uid://r4hacp4p8rc7"]
 
 [ext_resource type="AudioStream" uid="uid://caxflnblodcev" path="res://audio/button-tick.wav" id="1_4sdfq"]
 [ext_resource type="Script" path="res://scenes/Sounds.gd" id="1_mgxed"]
@@ -16,7 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://ev8p8jntdsrc" path="res://audio/hint.mp3" id="14_ceciv"]
 [ext_resource type="AudioStream" uid="uid://b23m716e66nw5" path="res://audio/error.mp3" id="15_cc03w"]
 [ext_resource type="AudioStream" uid="uid://cftynaiwkt7p8" path="res://audio/beep.mp3" id="16_qkkth"]
-[ext_resource type="AudioStream" uid="uid://cob5r1yd0b0bb" path="res://audio/shot-light-gun.wav" id="17_due8c"]
+[ext_resource type="AudioStream" uid="uid://d1oxhawoqejoc" path="res://audio/pencil-writing-on-paper.mp3" id="17_jblw0"]
+[ext_resource type="AudioStream" uid="uid://cdg8vvsbamcb7" path="res://audio/coinflic.mp3" id="18_tusfr"]
+[ext_resource type="AudioStream" uid="uid://cwxf50b5pcqt0" path="res://audio/coins-in-cloth.wav" id="19_8dodb"]
+[ext_resource type="AudioStream" uid="uid://ddmid1r4hi3q6" path="res://audio/cha_ching.mp3" id="20_nl2h8"]
 
 [node name="Sounds" type="Node"]
 script = ExtResource("1_mgxed")
@@ -66,5 +69,14 @@ stream = ExtResource("15_cc03w")
 [node name="Timer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_qkkth")
 
-[node name="GunShot" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_due8c")
+[node name="Writing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_jblw0")
+
+[node name="CoinFlip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_tusfr")
+
+[node name="CashIn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_8dodb")
+
+[node name="ChaChing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_nl2h8")

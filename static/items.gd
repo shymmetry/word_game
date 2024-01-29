@@ -12,7 +12,7 @@ func get_all_items():
 var hint = Item.new(
 	"Call Friend",
 	"Gain 1 extra hint",
-	10,
+	75,
 	-1,
 	func(): Globals.hints += 1,
 )
@@ -20,23 +20,23 @@ var hint = Item.new(
 var swap = Item.new(
 	"Refill Coffee",
 	"Increase swaps back to 3",
-	15,
+	100,
 	-1,
 	func(): Globals.swaps = 3,
 )
 
-var medium_word_bonus = Item.new(
-	"Medium Word Bonus",
-	"Gain 1 swap for 5 letter words",
-	200,
-	3,
+var wildcard_bonus = Item.new(
+	"Meditate",
+	"Increase likelihood of [?] tiles",
+	100,
+	-1,
 	Callable(),
 )
 
-var big_word_bonus = Item.new(
-	"Big Word Bonus",
-	"Gain 1 swap for 6+ letter words",
-	50,
-	3,
+var time_bonus = Item.new(
+	"Time Extensions",
+	"Add 3 more seconds for each poem",
+	125,
+	-1,
 	Callable(),
 )
