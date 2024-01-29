@@ -7,3 +7,8 @@ func _process(_delta):
 		self.text = Globals.matched_words[found_word_index].word
 	else:
 		self.text = ""
+	
+	if found_word_index >= Globals.round_data.word_cnt_goal:
+		self.hide()
+	else:
+		self.show()

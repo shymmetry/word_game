@@ -14,6 +14,7 @@ var seconds_left = 0
 # Game state
 var idle = true
 var paused = false
+var round_over = false
 
 # Tile state
 var selected_tile = null

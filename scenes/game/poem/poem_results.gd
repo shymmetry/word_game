@@ -48,8 +48,8 @@ func _get_poem() -> bool:
 
 func _on_http_request_request_completed(_result, _response_code, _headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
-	if json.has("error"):
-		print(json.error)
+	if json == null or json.has("error"):
+		print(body)
 		$Body/Poem.set_error()
 	else:
 		var poem = json.choices[0].message.content

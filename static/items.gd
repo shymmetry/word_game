@@ -12,7 +12,7 @@ func get_all_items():
 var hint = Item.new(
 	"Call Friend",
 	"Gain 1 extra hint",
-	75,
+	50,
 	-1,
 	func(): Globals.hints += 1,
 )
@@ -28,15 +28,15 @@ var swap = Item.new(
 var wildcard_bonus = Item.new(
 	"Meditate",
 	"Increase likelihood of [?] tiles",
-	100,
+	75,
 	-1,
-	Callable(),
+	func(): {},
 )
 
 var time_bonus = Item.new(
 	"Time Extensions",
-	"Add 3 more seconds for each poem",
-	125,
+	"Add 5 more seconds for each poem",
+	5,
 	-1,
-	Callable(),
+	func(): {},
 )

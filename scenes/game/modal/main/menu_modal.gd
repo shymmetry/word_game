@@ -13,5 +13,6 @@ func _on_button_middle_pressed():
 
 func _on_back_pressed():
 	Sounds.click()
-	Globals.paused = false
+	if !Globals.round_over:
+		Globals.paused = false
 	self.hide()

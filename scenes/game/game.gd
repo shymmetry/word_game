@@ -52,6 +52,7 @@ func _timed_out():
 func _round_over():
 	Globals.paused = true
 	Globals.idle = false
+	Globals.round_over = true
 	if Globals.current_round == Levels.total_rounds():
 		$WinModal.show()
 		return

@@ -18,19 +18,18 @@ func _score_words() -> void:
 	for word_score in Globals.matched_words:
 		total_score += word_score.score
 		
-		$WordList/Words.text = $WordList/Words.text + word_score.word + "\n"
+		$WordList/Words.text = "%s%s\n" % [$WordList/Words.text, word_score.word]
 		await $Timer.timeout
-		$ScoreList/Scores.text = $ScoreList/Scores.text + str(word_score.score) + "\n"
+		$ScoreList/Scores.text = "%s$%d\n" % [$ScoreList/Scores.text, word_score.score]
 		#Sounds.coin_flip()
 		await $Timer.timeout
 	
 	$WordList/Total.show()
-	await $Timer.timeout
-	$WordList/Total.text = "TOTAL"
-	await $Timer.timeout
 	$ScoreList/TotalScore.show()
 	await $Timer.timeout
-	$ScoreList/TotalScore.text = str(total_score)
+	$WordList/Total.text = "PAYMENT"
+	await $Timer.timeout
+	$ScoreList/TotalScore.text = "$%d" % total_score
 	Sounds.cash_in()
 	Globals.score += total_score
 	

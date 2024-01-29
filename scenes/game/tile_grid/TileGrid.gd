@@ -8,7 +8,8 @@ func _unhandled_input(event):
 	# Handle mouse for putting down a tile
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
-			and not event.pressed:
+			and not event.pressed \
+			and !Globals.round_over:
 		var end_tile = _get_tile_at_point(get_local_mouse_position())
 		
 		# A tile was selected already for swapping
@@ -42,7 +43,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed \
-			and (Globals.idle or Globals.selected_tile):
+			and (Globals.idle or Globals.selected_tile) \
+			and !Globals.round_over:
 		clicked_tile = _get_tile_at_point(get_local_mouse_position())
 		Globals.idle = false
 	
