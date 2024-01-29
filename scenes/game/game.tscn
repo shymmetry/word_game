@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=22 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scenes/game/ScoreHandler.gd" id="16_w0eha"]
 [ext_resource type="PackedScene" uid="uid://h6aot8mj52sl" path="res://scenes/game/modal/win/win_modal.tscn" id="17_0y53a"]
 [ext_resource type="PackedScene" uid="uid://5pbldm3dhxqv" path="res://scenes/game/shop/shop.tscn" id="17_cxo0i"]
+[ext_resource type="PackedScene" uid="uid://cmg3lbvb0f18f" path="res://scenes/game/modal/round_start/round_start_modal.tscn" id="17_msj4h"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over/game_over_modal.tscn" id="18_7d1n6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
@@ -152,6 +153,8 @@ visible = false
 
 [node name="WinModal" parent="." instance=ExtResource("17_0y53a")]
 visible = false
+
+[node name="RoundStartModal" parent="." instance=ExtResource("17_msj4h")]
 
 [node name="ScoreHandler" type="Node" parent="."]
 script = ExtResource("16_w0eha")

@@ -8,6 +8,8 @@ func _init():
 		Levels.set_current_round(1)
 	
 	# Init game state
+	Globals.paused = true
+	Globals.idle = false
 	Globals.score = 0
 	Globals.items = {}
 	Globals.swaps = Globals.round_data.swaps
@@ -17,8 +19,6 @@ func _init():
 	_init_round()
 
 func _init_round():
-	Globals.paused = false
-	Globals.idle = true
 	Globals.seconds_left = Globals.round_data.round_time_seconds + ItemUtil.get_time_bonus()
 	Globals.matched_words = []
 	LetterUtil.reset_letter_freq()
@@ -30,10 +30,6 @@ func _ready():
 	Signals.connect("NextRound", _next_round)
 	Signals.connect("ShowShop", _show_shop)
 	Signals.connect("BoardChanged", _on_board_changed)
-	
-	# TODO: Check to see if this actually triggers since its called from a _ready
-	# function. Could have issues since the connectors instantiate in ready functions too.
-	Signals.emit_signal("StartRound")
 
 func _on_board_changed():
 	# Every time the board state changes and a hint was present, remove the
@@ -94,6 +90,9 @@ func _next_round():
 	new_grid.hide()
 	$Page/PlayArea.add_child(new_grid, true)
 	
+	$RoundStartModal.reset()
+	$RoundStartModal.show()
+	
 	# Swap the Play Area content
 	var start_pos = $Page/PlayArea.position
 	var tween = create_tween()
@@ -102,10 +101,6 @@ func _next_round():
 	tween.tween_callback(func(): $Page/PlayArea/PoemResults.hide())
 	tween.tween_callback(func(): $Page/PlayArea/TileGrid.show())
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
-	tween.tween_callback(func(): 
-		Signals.emit_signal("StartRound")
-		Globals.paused = false
-	)
 
 func _game_over():
 	Sounds.lose()

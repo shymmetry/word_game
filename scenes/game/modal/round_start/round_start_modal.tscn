@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmg3lbvb0f18f"]
+
+[ext_resource type="PackedScene" uid="uid://4rwmb5gf6jqu" path="res://scenes/game/modal/modal.tscn" id="1_npxtj"]
+[ext_resource type="Script" path="res://scenes/game/modal/round_start/round_start_modal.gd" id="2_6pyvf"]
+
+[node name="RoundStartModal" instance=ExtResource("1_npxtj")]
+script = ExtResource("2_6pyvf")
+
+[node name="Label" parent="Background/VBox/Title/Margin" index="0"]
+text = "
+"
+
+[node name="Label" type="Label" parent="Background/VBox/Details/Margin" index="0"]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ButtonLeft" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="0"]
+text = "START
+"
+
+[node name="ButtonMiddle" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="1"]
+visible = false
+
+[node name="ButtonRight" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="2"]
+visible = false
+
+[connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
