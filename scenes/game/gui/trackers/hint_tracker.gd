@@ -42,7 +42,8 @@ func _find_all_words(min_letters: int, max_letters: int = 6):
 	for row in Globals.rows():
 		for col in Globals.cols():
 			var tile = Globals.tiles[row][col]
-			all_words += _find_all_words_recurse(tile.letter, [tile], min_letters, max_letters)
+			if tile:
+				all_words += _find_all_words_recurse(tile.letter, [tile], min_letters, max_letters)
 	return all_words
 
 func _find_all_words_recurse(word: String, tiles: Array, min_letters: int, max_letters: int = 6):
@@ -83,5 +84,7 @@ func _get_adjacent_tiles(tile):
 		var col = tile.col + adjust[1]
 		if col >= 0 and col < Globals.cols() \
 				and row >= 0 and row < Globals.rows():
-			tiles.append(Globals.tiles[row][col])
+			var new_tile = Globals.tiles[row][col]
+			if new_tile:
+				tiles.append(new_tile)
 	return tiles
