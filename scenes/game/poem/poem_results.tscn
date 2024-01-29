@@ -62,20 +62,35 @@ layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("3_4td08")
 
-[node name="Words" type="Label" parent="Body/WordScoring"]
+[node name="WordList" type="VBoxContainer" parent="Body/WordScoring"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Words" type="Label" parent="Body/WordScoring/WordList"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+horizontal_alignment = 2
+
+[node name="Total" type="Label" parent="Body/WordScoring/WordList"]
+layout_mode = 2
 horizontal_alignment = 2
 
 [node name="Control" type="Control" parent="Body/WordScoring"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="Scores" type="Label" parent="Body/WordScoring"]
+[node name="ScoreList" type="VBoxContainer" parent="Body/WordScoring"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Scores" type="Label" parent="Body/WordScoring/ScoreList"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+
+[node name="TotalScore" type="Label" parent="Body/WordScoring/ScoreList"]
+layout_mode = 2
 
 [node name="Timer" type="Timer" parent="Body/WordScoring"]
 

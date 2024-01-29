@@ -34,7 +34,7 @@ func _get_poem() -> bool:
 				},
 				{
 					"role": "user",
-					"content": "Write a short poem under 50 words that contains all of the words: %s" % word_string
+					"content": "Write a 4 line poem under 40 words that contains all of the words: %s" % word_string
 				}
 			]
 		}

@@ -6,11 +6,13 @@
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileCreator.gd" id="4_j8ip5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gcksj"]
-size = Vector2(430, 430)
+size = Vector2(420, 420)
 
 [node name="TileGrid" type="ReferenceRect"]
 clip_contents = true
 custom_minimum_size = Vector2(420, 420)
+offset_right = 420.0
+offset_bottom = 420.0
 mouse_filter = 2
 script = ExtResource("1_amwbp")
 
@@ -28,7 +30,7 @@ z_index = 2
 script = ExtResource("3_tcs8j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileArea"]
-position = Vector2(215, 215)
+position = Vector2(210, 210)
 shape = SubResource("RectangleShape2D_gcksj")
 
 [node name="TileCreator" type="Node" parent="TileArea"]
