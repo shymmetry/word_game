@@ -14,15 +14,15 @@ var hint = Item.new(
 	"Gain 1 extra hint",
 	100,
 	-1,
-	func(): Globals.hints += 1,
+	func(): Globals.hints = max(3, Globals.hints+1),
 )
 
 var swap = Item.new(
 	"Refill Coffee",
-	"Increase swaps back to 3",
+	"Increase swaps up to 5",
 	100,
 	-1,
-	func(): Globals.swaps = 3,
+	func(): Globals.swaps = 5,
 )
 
 var wildcard_bonus = Item.new(

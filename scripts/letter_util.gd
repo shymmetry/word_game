@@ -21,7 +21,6 @@ func _change_letter_freq_difficulty(letter_freq: Dictionary, difficulty: int) ->
 	for letter in letter_freq:
 		freq_total += letter_freq[letter]
 	var avg_freq = freq_total / letter_freq.size()
-	print(avg_freq)
 	
 	# The higher the difficulty the more evened out the distribution should be.
 	# The lower the difficulty the higher the probability of more common letters

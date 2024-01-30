@@ -22,6 +22,7 @@ func _unhandled_input(event):
 				Sounds.swap()
 			else:
 				if Globals.selected_tile != end_tile:
+					print('1')
 					Sounds.error()
 				Globals.idle = true
 			Globals.selected_tile = null

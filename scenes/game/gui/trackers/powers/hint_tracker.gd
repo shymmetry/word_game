@@ -2,7 +2,12 @@ extends Panel
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
-	$"Margins/HBox/Value".text = str(Globals.hints)
+	if Globals.hints >= 1: $Box/Margin/Ticks/PowerTick.on()
+	else: $Box/Margin/Ticks/PowerTick.off()
+	if Globals.hints >= 2: $Box/Margin/Ticks/PowerTick2.on()
+	else: $Box/Margin/Ticks/PowerTick2.off()
+	if Globals.hints >= 3: $Box/Margin/Ticks/PowerTick3.on()
+	else: $Box/Margin/Ticks/PowerTick3.off()
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton \
