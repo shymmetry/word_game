@@ -15,6 +15,7 @@ var hints = 0
 var min_word_length = 3
 var max_word_length = null
 var word_cnt_goal = 6
+var letter_difficulty = 0
 
 var board = [
 	['*','*','*','*','*','*'],
@@ -80,7 +81,6 @@ var letter_scores = {
 }
 
 var letter_freq = {
-	"?": 50,
 	"E": 1202,
 	"T": 910,
 	"A": 812,

@@ -30,9 +30,9 @@ func get_swap_bonus(word: String) -> int:
 
 func get_wildcard_bonus() -> int:
 	if Globals.items.has(_items.wildcard_bonus):
-		return Globals.items[_items.wildcard_bonus] * 100
+		return 50 + Globals.items[_items.wildcard_bonus] * 100
 	else: 
-		return 0
+		return 50
 
 func get_time_bonus() -> int:
 	if Globals.items.has(_items.time_bonus):
