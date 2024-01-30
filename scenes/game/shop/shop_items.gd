@@ -3,6 +3,7 @@ extends VBoxContainer
 var item_scene = preload("res://scenes/game/shop/shop_item.tscn")
 
 var items = []
+const DISPLAYED_ITEMS = 5
 
 func _ready():
 	Signals.connect("PurchaseItem", _purchase_item)
@@ -10,7 +11,7 @@ func _ready():
 
 func _init_shop():
 	_clear_shop()
-	items = ItemUtil.get_random_items(4, false)
+	items = ItemUtil.get_random_items(DISPLAYED_ITEMS, false)
 	for item in items:
 		var new_item = item_scene.instantiate()
 		new_item.set_item(item)

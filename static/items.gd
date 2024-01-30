@@ -12,9 +12,9 @@ func get_all_items():
 var hint = Item.new(
 	"Call Friend",
 	"Gain 1 extra hint",
-	100,
+	80,
 	-1,
-	func(): Globals.hints = max(3, Globals.hints+1),
+	func(): Globals.hints = min(3, Globals.hints+1),
 )
 
 var swap = Item.new(
@@ -28,7 +28,7 @@ var swap = Item.new(
 var wildcard_bonus = Item.new(
 	"Meditate",
 	"Increase likelihood of [?] tiles",
-	75,
+	70,
 	-1,
 	func(): {},
 )
@@ -36,7 +36,15 @@ var wildcard_bonus = Item.new(
 var time_bonus = Item.new(
 	"Time Extensions",
 	"Add 5 more seconds for each poem",
-	75,
+	90,
 	-1,
 	func(): {},
+)
+
+var new_board = Item.new(
+	"Cat Nap",
+	"Change all the letters on the board",
+	50,
+	-1,
+	func(): Globals.resets = min(3, Globals.resets+1),
 )

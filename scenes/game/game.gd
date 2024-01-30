@@ -15,6 +15,7 @@ func _init():
 	Globals.items = {}
 	Globals.swaps = Globals.round_data.swaps
 	Globals.hints = Globals.round_data.hints
+	Globals.resets = Globals.round_data.resets
 	Globals.seconds_left = 0
 	
 	_init_round()

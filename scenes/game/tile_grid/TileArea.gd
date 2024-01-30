@@ -9,6 +9,16 @@ func _ready():
 	Signals.connect('ExplodeFinished', _explode_finished)
 	Signals.connect('DropFinished', _drop_finished)
 	Signals.connect('WordGuess', _guess_word)
+	Signals.connect('ResetBoard', _reset_board)
+
+func _reset_board():
+	Globals.idle = false
+	var all_tiles = []
+	for row in Globals.tiles: 
+		for tile in row:
+			if tile: all_tiles.append(tile)
+	_remove_tiles(all_tiles)
+	Globals.idle = true
 
 func _init_tiles():
 	Globals.tiles = []
@@ -29,7 +39,7 @@ func _guess_word():
 	if word:
 		var word_tiles = WordTiles.new(word, Globals.dragged_tiles)
 		Signals.emit_signal("WordFound", word_tiles)
-		_remove_word(word_tiles)
+		_remove_tiles(word_tiles.tiles)
 	else:
 		Sounds.error()
 		Globals.idle = true
@@ -49,10 +59,10 @@ func _get_word(word: String, tiles: Array[Tile]):
 			return null
 	return word if Dict.is_word(word) else ""
 
-func _remove_word(word_tiles: WordTiles):
+func _remove_tiles(tiles: Array):
 	# Remove all the points that were matched
 	exploding_tiles = []; exploding_tiles_count = 0
-	for tile in word_tiles.tiles:
+	for tile in tiles:
 		exploding_tiles.append(tile)
 		exploding_tiles_count += 1
 		tile.explode()

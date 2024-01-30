@@ -6,10 +6,11 @@ const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for spee
 # Game data
 var tiles = [] # 2D array of all tiles in play
 var matched_words = []
-var score = null
-var swaps = null
-var hints = null
-var seconds_left = 0
+var score: int
+var swaps: int
+var hints: int
+var resets: int
+var seconds_left: int
 
 # Game state
 var idle = true

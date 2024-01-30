@@ -13,9 +13,9 @@ func _on_gui_input(event):
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed:
-		give_hint(Globals.round_data.min_word_length, 6)
+		_give_hint(Globals.round_data.min_word_length, 6)
 
-func give_hint(min_size: int, max_size: int) -> void:
+func _give_hint(min_size: int, max_size: int) -> void:
 	if Globals.hints > 0:
 		var hint_words = _find_all_words(min_size, max_size)
 		var hints_by_length = {}
