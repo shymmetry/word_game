@@ -53,9 +53,6 @@ func _round_over():
 	Globals.paused = true
 	Globals.idle = false
 	Globals.round_over = true
-	if Globals.current_round == Levels.total_rounds():
-		$WinModal.show()
-		return
 	
 	# Reset poem results and then trigger round over to start processing
 	$Page/PlayArea/PoemResults.reset()
@@ -70,6 +67,10 @@ func _round_over():
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
 
 func _show_shop():
+	if Globals.current_round == Levels.total_rounds():
+		$WinModal.show()
+		return
+	
 	var start_pos = $Page/PlayArea.position
 	var tween = create_tween()
 	tween.tween_property($Page/PlayArea, "position", start_pos + Vector2(0, 500), 1)
