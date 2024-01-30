@@ -9,7 +9,6 @@ func get_config_map():
 		config_map[property_name] = property_value
 	return config_map
 
-var round_time_seconds = 90
 var swaps = 3
 var hints = 0
 var min_word_length = 3
@@ -17,14 +16,7 @@ var max_word_length = null
 var word_cnt_goal = 6
 var letter_difficulty = 0
 
-var board = [
-	['*','*','*','*','*','*'],
-	['*','*','*','*','*','*'],
-	['*','*','*','*','*','*'],
-	['*','*','*','*','*','*'],
-	['*','*','*','*','*','*'],
-	['*','*','*','*','*','*'],
-]
+var board = Boards.sixbysix
 
 var swap_bonus = {
 	4: 0,

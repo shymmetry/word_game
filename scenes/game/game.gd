@@ -5,6 +5,7 @@ func _init():
 	# TODO: Only actually used for testing, figure out how to handle better
 	if Globals.current_round == 0:
 		Store.load_game()
+		Levels.set_difficulty(Difficulties.easy)
 		Levels.set_current_round(1)
 	
 	# Init game state
@@ -19,7 +20,7 @@ func _init():
 	_init_round()
 
 func _init_round():
-	Globals.seconds_left = Globals.round_data.round_time_seconds + ItemUtil.get_time_bonus()
+	Globals.seconds_left = Globals.difficulty.round_time_seconds + ItemUtil.get_time_bonus()
 	Globals.matched_words = []
 	LetterUtil.reset_letter_freq()
 

@@ -16,6 +16,9 @@ const round_order: Array[String] = [
 	"res://static/rounds/round10.gd",
 ]
 
+func set_difficulty(difficulty: Difficulty) -> void:
+	Globals.difficulty = difficulty
+
 func set_current_round(cur_round: int) -> void:
 	Globals.current_round = cur_round
 	

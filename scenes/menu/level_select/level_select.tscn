@@ -1,20 +1,51 @@
 [gd_scene load_steps=5 format=3 uid="uid://nn616i8ff1yd"]
 
+[ext_resource type="StyleBox" uid="uid://cko7armi4wlch" path="res://styles/button/button_disabled.tres" id="3_nqoeo"]
 [ext_resource type="StyleBox" uid="uid://d0r5f6321vjml" path="res://styles/button/button_icon.tres" id="3_r15j5"]
 [ext_resource type="Texture2D" uid="uid://bpuoacu0ngb1y" path="res://icons/ArrowLeft.png" id="4_jog58"]
-[ext_resource type="PackedScene" uid="uid://b04ttg4gifp4f" path="res://scenes/menu/level_select/survival_button.tscn" id="5_j57xi"]
 
 [sub_resource type="GDScript" id="GDScript_yc38d"]
 script/source = "extends Control
+
+var _selected_difficulty_index: int
+
+func _ready():
+	_selected_difficulty_index = 0
+	print(Difficulties.difficulty_progression)
+	_set_difficulty(Difficulties.difficulty_progression[_selected_difficulty_index])
+
+func _set_difficulty(difficulty: Difficulty):
+	if difficulty == Difficulties.difficulty_progression.front():
+		$Margin/Content/Selector/Left.disabled = true
+	else:
+		$Margin/Content/Selector/Left.disabled = false
+	
+	if difficulty == Difficulties.difficulty_progression.back():
+		$Margin/Content/Selector/Right.disabled = true
+	else:
+		$Margin/Content/Selector/Right.disabled = false
+	
+	print(difficulty)
+	$Margin/Content/Selector/Difficulty.text = difficulty.display_name
+	$Margin/Content/Description.text = difficulty.description
 
 func _on_back_pressed():
 	Sounds.click()
 	get_tree().change_scene_to_file(\"res://scenes/menu/main/menu.tscn\")
 
-func _on_survival_pressed():
+func _on_play_button_pressed():
 	Sounds.click()
 	Levels.set_current_round(1)
+	Levels.set_difficulty(Difficulties.difficulty_progression[_selected_difficulty_index])
 	get_tree().change_scene_to_file(\"res://scenes/game/game.tscn\")
+
+func _on_left_pressed():
+	_selected_difficulty_index = _selected_difficulty_index - 1
+	_set_difficulty(Difficulties.difficulty_progression[_selected_difficulty_index])
+
+func _on_right_pressed():
+	_selected_difficulty_index = _selected_difficulty_index + 1
+	_set_difficulty(Difficulties.difficulty_progression[_selected_difficulty_index])
 "
 
 [node name="LevelSelect" type="Control"]
@@ -42,22 +73,71 @@ text = "Back"
 icon = ExtResource("4_jog58")
 expand_icon = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 480.0
 offset_bottom = 720.0
 theme_override_constants/margin_left = 60
 theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_bottom = 60
 
-[node name="Levels" type="VBoxContainer" parent="MarginContainer"]
+[node name="Content" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
 theme_override_constants/separation = 20
-alignment = 1
 
-[node name="Survival" parent="MarginContainer/Levels" instance=ExtResource("5_j57xi")]
+[node name="Selector" type="HBoxContainer" parent="Margin/Content"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="Left" type="Button" parent="Margin/Content/Selector"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "<"
+
+[node name="Difficulty" type="Label" parent="Margin/Content/Selector"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = ExtResource("3_nqoeo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right" type="Button" parent="Margin/Content/Selector"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = ">"
+
+[node name="Description" type="Label" parent="Margin/Content"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("3_nqoeo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Control" parent="Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="PlayButton" type="Button" parent="Margin/Content/Play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -19.0
+offset_right = 37.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY
+"
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="MarginContainer/Levels/Survival" to="." method="_on_survival_pressed"]
+[connection signal="pressed" from="Margin/Content/Selector/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Margin/Content/Selector/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Margin/Content/Play/PlayButton" to="." method="_on_play_button_pressed"]

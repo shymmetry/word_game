@@ -29,6 +29,8 @@ Sounds="*res://scenes/Sounds.tscn"
 LetterUtil="*res://scripts/letter_util.gd"
 ItemUtil="*res://scripts/item_util.gd"
 Env="*res://scripts/env.gd"
+Boards="*res://static/boards.gd"
+Difficulties="*res://static/difficulties.gd"
 
 [display]
 

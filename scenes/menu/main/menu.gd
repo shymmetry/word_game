@@ -7,8 +7,7 @@ func _ready():
 
 func _on_start_pressed():
 	Sounds.click()
-	Levels.set_current_round(1)
-	get_tree().change_scene_to_file("res://scenes/game/game.tscn")
+	get_tree().change_scene_to_file("res://scenes/menu/level_select/level_select.tscn")
 
 func _on_settings_pressed():
 	Sounds.click()

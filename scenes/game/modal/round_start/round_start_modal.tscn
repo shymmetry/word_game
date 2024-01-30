@@ -11,6 +11,7 @@ text = "
 "
 
 [node name="Label" type="Label" parent="Background/VBox/Details/Margin" index="0"]
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 horizontal_alignment = 1
 autowrap_mode = 3
