@@ -12,7 +12,7 @@ func get_all_items():
 var hint = Item.new(
 	"Call Friend",
 	"Gain 1 extra hint",
-	50,
+	100,
 	-1,
 	func(): Globals.hints += 1,
 )
