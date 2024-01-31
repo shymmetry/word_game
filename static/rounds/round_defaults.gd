@@ -16,6 +16,7 @@ var min_word_length = 3
 var max_word_length = null
 var word_cnt_goal = 6
 var letter_difficulty = 0
+var win_type = E.WIN_TYPE.NORMAL
 
 var board = Boards.sixbysix
 
@@ -29,7 +30,7 @@ var swap_bonus = {
 
 var tile_type_chance = {
 	E.TILE_TYPE.NORMAL: 98,
-	E.TILE_TYPE.HARDENED: 0,
+	E.TILE_TYPE.SPECIAL: 0,
 	E.TILE_TYPE.MULTIPLIER: 2,
 }
 

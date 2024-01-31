@@ -44,6 +44,8 @@ func _guess_word():
 		Sounds.error()
 		Globals.idle = true
 
+# Returns the word starting with the given string and containing the given
+# letter tiles as its next letters. If there is no word an empty string is returned.
 func _get_word(word: String, tiles: Array[Tile]):
 	const is_word = false
 	for i in range(0, tiles.size()):

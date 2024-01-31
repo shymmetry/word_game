@@ -34,7 +34,19 @@ func _score_word(word_tiles: WordTiles):
 		Sounds.yay()
 	else:
 		Sounds.pop()
-		
-	Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
+	
+	if _is_select_win_type_valid(word_tiles.tiles):
+		Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
 	Signals.emit_signal("WordHandled", ScoreResults.new(word_tiles.word, word_tiles.tiles, score_up))
+
+func _is_select_win_type_valid(tiles: Array) -> bool:
+	# Check win types
+	if Globals.round_data.win_type == E.WIN_TYPE.CONTAINS_SPECIAL:
+		for tile in tiles:
+			if tile.tile_type == E.TILE_TYPE.SPECIAL:
+				return true
+		return false
+	elif Globals.round_data.win_type == E.WIN_TYPE.STARTS_SPECIAL:
+		return tiles.front().tile_type == E.WIN_TYPE.STARTS_SPECIAL
+	return true

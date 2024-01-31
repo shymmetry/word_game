@@ -11,7 +11,7 @@ var letter = "?"
 var score = ""
 
 var normal_base_style = preload("res://styles/tile/base/tile_normal.tres")
-var harden_base_style = preload("res://styles/tile/base/tile_harden.tres")
+var special_base_style = preload("res://styles/tile/base/tile_special.tres")
 var mult_base_style = preload("res://styles/tile/base/tile_multiplier.tres")
 var clicked_overlay_style = preload("res://styles/tile/overlay/tile_clicked_overlay.tres")
 var normal_overlay_style = preload("res://styles/tile/overlay/tile_normal_overlay.tres")
@@ -41,8 +41,8 @@ func _process(_delta):
 			base_style = normal_base_style
 		E.TILE_TYPE.MULTIPLIER:
 			base_style = mult_base_style
-		E.TILE_TYPE.HARDENED:
-			base_style = harden_base_style
+		E.TILE_TYPE.SPECIAL:
+			base_style = special_base_style
 	_update_stylebox($"Body/Base", base_style)
 	
 	# Handle animations

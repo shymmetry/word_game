@@ -6,7 +6,7 @@ func _init():
 	if Globals.current_round == 0:
 		Store.load_game()
 		Levels.set_difficulty(Difficulties.easy)
-		Levels.set_current_round(1)
+		Levels.set_current_round(6)
 	
 	# Init game state
 	Globals.paused = true
