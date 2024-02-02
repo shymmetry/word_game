@@ -12,6 +12,5 @@ func _on_button_pressed():
 	Signals.emit_signal("PurchaseItem", item)
 
 func _process(_delta):
-	if Globals.score < item.cost or \
-			(Globals.items.has(item) and Globals.items[item] >= item.max_owned and item.max_owned != -1):
+	if Globals.score < item.cost:
 		$Buy.disabled = true

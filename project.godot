@@ -31,6 +31,7 @@ ItemUtil="*res://scripts/item_util.gd"
 Env="*res://scripts/env.gd"
 Boards="*res://static/boards.gd"
 Difficulties="*res://static/difficulties.gd"
+GameTypes="*res://static/game_types.gd"
 
 [display]
 

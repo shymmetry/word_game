@@ -1,10 +1,14 @@
 extends Node
 
-const word_cnt_goal = 8
-const win_type = E.WIN_TYPE.STARTS_SPECIAL
+const word_cnt_goal = 6
 
-const tile_type_chance = {
-	E.TILE_TYPE.NORMAL: 73,
-	E.TILE_TYPE.SPECIAL: 25,
-	E.TILE_TYPE.MULTIPLIER: 2,
+const board = Boards.diagonal
+
+const dmg_probs = {
+	0: 0,
+	1: 20,
+	2: 40,
+	3: 30,
+	4: 10,
+	5: 0,
 }

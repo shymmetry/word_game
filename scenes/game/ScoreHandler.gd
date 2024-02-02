@@ -25,8 +25,21 @@ func _score_word(word_tiles: WordTiles):
 	for tile in word_tiles.tiles:
 		if tile.tile_type == E.TILE_TYPE.MULTIPLIER: tile_mult *= 2
 	
-	var score_up = letter_score * length_mult * tile_mult
+	var item_mult = ItemUtil.get_word_mult(word_tiles.word)
+	
+	var score_up = letter_score * length_mult * tile_mult * item_mult
 
+	# Handle matched words
+	if _is_select_win_type_valid(word_tiles.tiles):
+		Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
+	
+	# Handle life gain
+	if Globals.game_type == E.GAME_TYPE.ATTACK:
+		Globals.life = min(50, Globals.life + ItemUtil.get_word_heal(word_tiles.word))
+	
+	# Handle swap gain
+	Globals.swaps = min(5, Globals.swaps + ItemUtil.get_extra_swaps(word_tiles.word))
+	
 	# Handle sound
 	if score_up >= 100:
 		Sounds.congrats()
@@ -34,9 +47,6 @@ func _score_word(word_tiles: WordTiles):
 		Sounds.yay()
 	else:
 		Sounds.pop()
-	
-	if _is_select_win_type_valid(word_tiles.tiles):
-		Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
 	Signals.emit_signal("WordHandled", ScoreResults.new(word_tiles.word, word_tiles.tiles, score_up))
 

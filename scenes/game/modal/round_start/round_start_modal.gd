@@ -8,8 +8,8 @@ func _get_round_text() -> String:
 	var starting_text = "" if Globals.current_round != 1 else "What a beautiful morning. The sun is shining, 
 		you've got a full cup of coffee, and ... oh no ... its Friday and you've slacked 
 		off on your writing all week!!! You have 10 poems that you need to submit by the end of the day. 
-		You have %d hours to write each poem.\nBetter get to it!\n
-		------------------------------------------------------\n\n" % (Globals.difficulty.round_time_seconds / 60)
+		\nBetter get to it!\n
+		------------------------------------------------------\n\n"
 	
 	var word_cnt = "Find %d words of inspiration to write your poem\n\n" % Globals.round_data.word_cnt_goal
 	var word_length_min = "For this poem inspirational words must have at least %d letters" % Globals.round_data.min_word_length

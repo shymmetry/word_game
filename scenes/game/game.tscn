@@ -1,18 +1,20 @@
-[gd_scene load_steps=23 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=26 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
 [ext_resource type="Texture2D" uid="uid://786xx47uf4o3" path="res://icons/outline_menu_white_48dp.png" id="4_7r455"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://styles/hamburger.tres" id="4_f7i5n"]
-[ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/gui/trackers/stats/gold_tracker.tscn" id="5_dsuwl"]
+[ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/gui/trackers/stats/gold/gold_tracker.tscn" id="5_dsuwl"]
 [ext_resource type="Script" path="res://scenes/game/gui/FoundWords.gd" id="6_njilg"]
 [ext_resource type="Script" path="res://scenes/game/Timer.gd" id="6_px3rd"]
+[ext_resource type="PackedScene" uid="uid://dryx0r1hagx5u" path="res://scenes/game/gui/trackers/stats/life/life_tracker.tscn" id="7_p5cjy"]
 [ext_resource type="PackedScene" uid="uid://bdmqc5ye0ato" path="res://scenes/game/gui/trackers/powers/swap/swap_tracker.tscn" id="7_xphf4"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
-[ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/stats/time_tracker.tscn" id="10_yppx5"]
+[ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/stats/time/time_tracker.tscn" id="10_yppx5"]
 [ext_resource type="PackedScene" uid="uid://dn80i423pr3vl" path="res://scenes/game/gui/trackers/powers/reset/reset_tracker.tscn" id="11_7kalf"]
 [ext_resource type="PackedScene" uid="uid://x3851sxablmn" path="res://scenes/game/gui/trackers/powers/hint/hint_tracker.tscn" id="11_r30ax"]
 [ext_resource type="PackedScene" uid="uid://bmkyqgk7njv0" path="res://scenes/game/poem/poem_results.tscn" id="12_knjfb"]
+[ext_resource type="PackedScene" uid="uid://idfcg4rpcocn" path="res://scenes/game/gui/trackers/powers/wild/wild_tracker.tscn" id="13_ky0i5"]
 [ext_resource type="PackedScene" uid="uid://cp7wy71prqkky" path="res://scenes/game/tile_grid/tile_grid.tscn" id="13_myhjs"]
 [ext_resource type="PackedScene" uid="uid://bw6eh1qy8it4a" path="res://scenes/game/modal/main/menu_modal.tscn" id="15_occs8"]
 [ext_resource type="Script" path="res://scenes/game/ScoreHandler.gd" id="16_w0eha"]
@@ -20,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://5pbldm3dhxqv" path="res://scenes/game/shop/shop.tscn" id="17_cxo0i"]
 [ext_resource type="PackedScene" uid="uid://cmg3lbvb0f18f" path="res://scenes/game/modal/round_start/round_start_modal.tscn" id="17_msj4h"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over/game_over_modal.tscn" id="18_7d1n6"]
+[ext_resource type="Script" path="res://scenes/game/DamageHandler.gd" id="21_jr4nw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
 bg_color = Color(0.835294, 0.690196, 0.486275, 1)
@@ -95,6 +98,9 @@ layout_mode = 2
 [node name="TimeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("10_yppx5")]
 layout_mode = 2
 
+[node name="LifeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("7_p5cjy")]
+layout_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Page/HUD/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -138,6 +144,9 @@ layout_mode = 2
 [node name="ResetTracker" parent="Page/HUD/HBoxContainer/MarginContainer/Abilities" instance=ExtResource("11_7kalf")]
 layout_mode = 2
 
+[node name="WildTracker" parent="Page/HUD/HBoxContainer/MarginContainer/Abilities" instance=ExtResource("13_ky0i5")]
+layout_mode = 2
+
 [node name="PlayArea" type="MarginContainer" parent="Page"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
@@ -168,6 +177,12 @@ visible = false
 
 [node name="ScoreHandler" type="Node" parent="."]
 script = ExtResource("16_w0eha")
+
+[node name="DamageHandler" type="Node" parent="."]
+script = ExtResource("21_jr4nw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="DamageHandler"]
+layer = 3
 
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource("6_px3rd")

@@ -6,16 +6,19 @@ const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for spee
 # Game data
 var tiles = [] # 2D array of all tiles in play
 var matched_words = []
+var life: int
 var score: int
 var swaps: int
 var hints: int
 var resets: int
+var wilds: int
 var seconds_left: int
 
 # Game state
 var idle = true
 var paused = false
 var round_over = false
+var wild_selected = false
 
 # Tile state
 var selected_tile = null
@@ -26,6 +29,7 @@ var hint_tiles = []
 var current_round = 0
 var round_data = null
 var difficulty: Difficulty
+var game_type: E.GAME_TYPE
 
 func cols():
 	if round_data == null: return null

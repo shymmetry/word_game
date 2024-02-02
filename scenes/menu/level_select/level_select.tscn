@@ -8,26 +8,48 @@
 script/source = "extends Control
 
 var _selected_difficulty_index: int
+var _selected_game_type_index: int
 
 func _ready():
 	_selected_difficulty_index = 0
-	print(Difficulties.difficulty_progression)
 	_set_difficulty(Difficulties.difficulty_progression[_selected_difficulty_index])
+	_selected_game_type_index = 0
+	_set_game_type(GameTypes.game_type_progression[_selected_game_type_index])
 
 func _set_difficulty(difficulty: Difficulty):
 	if difficulty == Difficulties.difficulty_progression.front():
-		$Margin/Content/Selector/Left.disabled = true
+		$Margin/Content/DifficultySelector/DifficultyLeft.disabled = true
 	else:
-		$Margin/Content/Selector/Left.disabled = false
+		$Margin/Content/DifficultySelector/DifficultyLeft.disabled = false
 	
 	if difficulty == Difficulties.difficulty_progression.back():
-		$Margin/Content/Selector/Right.disabled = true
+		$Margin/Content/DifficultySelector/DifficultyRight.disabled = true
 	else:
-		$Margin/Content/Selector/Right.disabled = false
+		$Margin/Content/DifficultySelector/DifficultyRight.disabled = false
 	
-	print(difficulty)
-	$Margin/Content/Selector/Difficulty.text = difficulty.display_name
-	$Margin/Content/Description.text = difficulty.description
+	$Margin/Content/DifficultySelector/Difficulty.text = difficulty.display_name
+	$Margin/Content/DifficultyDescription.text = difficulty.description
+
+func _set_game_type(game_type: GameType):
+	if game_type == GameTypes.game_type_progression.front():
+		$Margin/Content/GameTypeSelector/GameTypeLeft.disabled = true
+	else:
+		$Margin/Content/GameTypeSelector/GameTypeLeft.disabled = false
+	
+	if game_type == GameTypes.game_type_progression.back():
+		$Margin/Content/GameTypeSelector/GameTypeRight.disabled = true
+	else:
+		$Margin/Content/GameTypeSelector/GameTypeRight.disabled = false
+	
+	$Margin/Content/GameTypeSelector/GameType.text = game_type.display_name
+	$Margin/Content/GameTypeDescription.text = game_type.description
+	
+	if game_type.game_type == E.GAME_TYPE.ATTACK:
+		$Margin/Content/DifficultySelector.hide()
+		$Margin/Content/DifficultyDescription.hide()
+	elif game_type.game_type == E.GAME_TYPE.TIMED:
+		$Margin/Content/DifficultySelector.show()
+		$Margin/Content/DifficultyDescription.show()
 
 func _on_back_pressed():
 	Sounds.click()
@@ -37,15 +59,24 @@ func _on_play_button_pressed():
 	Sounds.click()
 	Levels.set_current_round(1)
 	Levels.set_difficulty(Difficulties.difficulty_progression[_selected_difficulty_index])
+	Levels.set_game_type(GameTypes.game_type_progression[_selected_game_type_index].game_type)
 	get_tree().change_scene_to_file(\"res://scenes/game/game.tscn\")
 
-func _on_left_pressed():
+func _on_difficulty_left_pressed():
 	_selected_difficulty_index = _selected_difficulty_index - 1
 	_set_difficulty(Difficulties.difficulty_progression[_selected_difficulty_index])
 
-func _on_right_pressed():
+func _on_difficulty_right_pressed():
 	_selected_difficulty_index = _selected_difficulty_index + 1
 	_set_difficulty(Difficulties.difficulty_progression[_selected_difficulty_index])
+
+func _on_game_type_left_pressed():
+	_selected_game_type_index = _selected_game_type_index - 1
+	_set_game_type(GameTypes.game_type_progression[_selected_game_type_index])
+
+func _on_game_type_right_pressed():
+	_selected_game_type_index = _selected_game_type_index + 1
+	_set_game_type(GameTypes.game_type_progression[_selected_game_type_index])
 "
 
 [node name="LevelSelect" type="Control"]
@@ -86,33 +117,65 @@ theme_override_constants/margin_bottom = 60
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Selector" type="HBoxContainer" parent="Margin/Content"]
+[node name="GameTypeSelector" type="HBoxContainer" parent="Margin/Content"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
-[node name="Left" type="Button" parent="Margin/Content/Selector"]
+[node name="GameTypeLeft" type="Button" parent="Margin/Content/GameTypeSelector"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "<"
 
-[node name="Difficulty" type="Label" parent="Margin/Content/Selector"]
+[node name="GameType" type="Label" parent="Margin/Content/GameTypeSelector"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("3_nqoeo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Right" type="Button" parent="Margin/Content/Selector"]
+[node name="GameTypeRight" type="Button" parent="Margin/Content/GameTypeSelector"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = ">"
 
-[node name="Description" type="Label" parent="Margin/Content"]
-custom_minimum_size = Vector2(0, 140)
+[node name="GameTypeDescription" type="Label" parent="Margin/Content"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("3_nqoeo")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="DifficultySelector" type="HBoxContainer" parent="Margin/Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="DifficultyLeft" type="Button" parent="Margin/Content/DifficultySelector"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "<"
+
+[node name="Difficulty" type="Label" parent="Margin/Content/DifficultySelector"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_nqoeo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultyRight" type="Button" parent="Margin/Content/DifficultySelector"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = ">"
+
+[node name="DifficultyDescription" type="Label" parent="Margin/Content"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("3_nqoeo")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -138,6 +201,8 @@ text = "PLAY
 "
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Margin/Content/Selector/Left" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="Margin/Content/Selector/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Margin/Content/GameTypeSelector/GameTypeLeft" to="." method="_on_game_type_left_pressed"]
+[connection signal="pressed" from="Margin/Content/GameTypeSelector/GameTypeRight" to="." method="_on_game_type_right_pressed"]
+[connection signal="pressed" from="Margin/Content/DifficultySelector/DifficultyLeft" to="." method="_on_difficulty_left_pressed"]
+[connection signal="pressed" from="Margin/Content/DifficultySelector/DifficultyRight" to="." method="_on_difficulty_right_pressed"]
 [connection signal="pressed" from="Margin/Content/Play/PlayButton" to="." method="_on_play_button_pressed"]

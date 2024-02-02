@@ -9,9 +9,10 @@ func get_config_map():
 		config_map[property_name] = property_value
 	return config_map
 
-var swaps = 3
+var swaps = 5
 var hints = 0
 var resets = 0
+var wilds = 1
 var min_word_length = 3
 var max_word_length = null
 var word_cnt_goal = 6
@@ -19,6 +20,15 @@ var letter_difficulty = 0
 var win_type = E.WIN_TYPE.NORMAL
 
 var board = Boards.sixbysix
+
+var dmg_probs = {
+	0: 20,
+	1: 80,
+	2: 0,
+	3: 0,
+	4: 0,
+	5: 0,
+}
 
 var swap_bonus = {
 	4: 0,

@@ -6,16 +6,19 @@ func _init():
 	if Globals.current_round == 0:
 		Store.load_game()
 		Levels.set_difficulty(Difficulties.easy)
-		Levels.set_current_round(6)
+		Levels.set_game_type(E.GAME_TYPE.ATTACK)
+		Levels.set_current_round(1)
 	
 	# Init game state
 	Globals.paused = true
 	Globals.idle = false
 	Globals.score = 0
 	Globals.items = {}
+	Globals.life = 50
 	Globals.swaps = Globals.round_data.swaps
 	Globals.hints = Globals.round_data.hints
 	Globals.resets = Globals.round_data.resets
+	Globals.wilds = Globals.round_data.wilds
 	Globals.seconds_left = 0
 	
 	_init_round()
@@ -32,6 +35,14 @@ func _ready():
 	Signals.connect("NextRound", _next_round)
 	Signals.connect("ShowShop", _show_shop)
 	Signals.connect("BoardChanged", _on_board_changed)
+	
+	# Set up trackers
+	if Globals.game_type == E.GAME_TYPE.ATTACK:
+		$Page/HUD/HBoxContainer/Trackers/TimeTracker.hide()
+		$Page/HUD/HBoxContainer/MarginContainer/Abilities/HintTracker.hide()
+		$Page/HUD/HBoxContainer/MarginContainer/Abilities/ResetTracker.hide()
+	elif Globals.game_type == E.GAME_TYPE.TIMED:
+		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
 
 func _on_board_changed():
 	# Every time the board state changes and a hint was present, remove the
@@ -55,6 +66,15 @@ func _round_over():
 	Globals.paused = true
 	Globals.idle = false
 	Globals.round_over = true
+	
+	if Globals.game_type == E.GAME_TYPE.ATTACK:
+		var life_tracker = $Page/HUD/HBoxContainer/Trackers/LifeTracker
+		var tracker_pos = life_tracker.global_position + life_tracker.size / 2
+		await $DamageHandler.take_damage(tracker_pos)
+	
+	if Globals.life <= 0: 
+		_game_over()
+		return
 	
 	# Reset poem results and then trigger round over to start processing
 	$Page/PlayArea/PoemResults.reset()

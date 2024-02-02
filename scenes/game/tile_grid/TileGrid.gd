@@ -12,6 +12,13 @@ func _unhandled_input(event):
 			and !Globals.round_over:
 		var end_tile = _get_tile_at_point(get_local_mouse_position())
 		
+		print(Globals.wild_selected)
+		# Handle wild power
+		if Globals.wild_selected:
+			end_tile.letter = "?"
+			Globals.wild_selected = false
+			Globals.wilds -= 1
+		
 		# A tile was selected already for swapping
 		if Globals.selected_tile:
 			# Only handle if the tile to swap to was clicked and adjacent
@@ -22,7 +29,6 @@ func _unhandled_input(event):
 				Sounds.swap()
 			else:
 				if Globals.selected_tile != end_tile:
-					print('1')
 					Sounds.error()
 				Globals.idle = true
 			Globals.selected_tile = null
@@ -45,7 +51,8 @@ func _unhandled_input(event):
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed \
 			and (Globals.idle or Globals.selected_tile) \
-			and !Globals.round_over:
+			and !Globals.round_over \
+			and !Globals.wild_selected:
 		clicked_tile = _get_tile_at_point(get_local_mouse_position())
 		Globals.idle = false
 	

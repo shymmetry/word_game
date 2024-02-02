@@ -9,9 +9,14 @@ func _init():
 	for key in config_map:
 		_items[key] = config_map[key]
 
-func get_random_items(num: int, duplicates: bool) -> Array[Item]:
+func get_random_items(num: int, game_type: E.GAME_TYPE, duplicates: bool) -> Array[Item]:
 	var selected_items: Array[Item] = []
-	var items_left = _items.duplicate()
+	var items_left = {}
+	for item_name in _items:
+		var item = _items[item_name]
+		if item.game_types.has(game_type) and \
+				(!Globals.items.has(item) or item.max_owned == -1 or Globals.items[item] < item.max_owned):
+			items_left[item_name] = item
 	for i in range(0, num):
 		var rand = randi() % items_left.keys().size()
 		var rand_key = items_left.keys()[rand]
@@ -38,4 +43,24 @@ func get_time_bonus() -> int:
 	if Globals.items.has(_items.time_bonus):
 		return Globals.items[_items.time_bonus] * 5
 	else: 
+		return 0
+
+func get_word_mult(word: String) -> int:
+	if word.length() >= 6 and Globals.items.has(_items.score_mult_6):
+		return Globals.items[_items.score_mult_6] * 1.5
+	elif word.length() == 3 and Globals.items.has(_items.score_mult_3):
+		return Globals.items[_items.score_mult_3] * 2
+	else: 
+		return 1
+
+func get_word_heal(word: String) -> int:
+	if word.length() >= 5 and Globals.items.has(_items.word_heal):
+		return Globals.items[_items.word_heal] * 1
+	else:
+		return 0
+
+func get_extra_swaps(word: String) -> int:
+	if word.length() >= 5 and Globals.items.has(_items.extra_swaps):
+		return Globals.items[_items.extra_swaps] * 1
+	else:
 		return 0

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjn0ohfkaqqbp"]
+[gd_scene load_steps=11 format=3 uid="uid://cjn0ohfkaqqbp"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/tile.gd" id="2_1hfe7"]
 [ext_resource type="StyleBox" uid="uid://bvpdnl601inlb" path="res://styles/tile/underlay/tile_normal_underlay.tres" id="2_7j7c2"]
 [ext_resource type="StyleBox" uid="uid://b5k3ga3wpywrm" path="res://styles/tile/base/tile_normal.tres" id="3_h3nwy"]
+[ext_resource type="Texture2D" uid="uid://do8g6xmwgpax0" path="res://icons/gun_icon.png" id="5_1y8gr"]
 [ext_resource type="StyleBox" uid="uid://bwvtfmanm0ilu" path="res://styles/tile/overlay/tile_dragged_overlay.tres" id="5_xymu6"]
 
 [sub_resource type="FontVariation" id="FontVariation_ypwqj"]
@@ -132,6 +133,60 @@ offset_bottom = 20.0
 text = "?"
 label_settings = SubResource("LabelSettings_43hrm")
 horizontal_alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="Body"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -16.0
+offset_right = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = -9
+
+[node name="Gun1" type="TextureRect" parent="Body/Footer"]
+visible = false
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_1y8gr")
+expand_mode = 1
+
+[node name="Gun2" type="TextureRect" parent="Body/Footer"]
+visible = false
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_1y8gr")
+expand_mode = 1
+
+[node name="Gun3" type="TextureRect" parent="Body/Footer"]
+visible = false
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_1y8gr")
+expand_mode = 1
+
+[node name="Gun4" type="TextureRect" parent="Body/Footer"]
+visible = false
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_1y8gr")
+expand_mode = 1
+
+[node name="Gun5" type="TextureRect" parent="Body/Footer"]
+visible = false
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_1y8gr")
+expand_mode = 1
 
 [node name="Overlay" type="Panel" parent="Body"]
 layout_mode = 1
