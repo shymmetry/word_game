@@ -6,7 +6,6 @@ func _init():
 	if Globals.current_round == 0:
 		Store.load_game()
 		Levels.set_difficulty(Difficulties.easy)
-		Levels.set_game_type(E.GAME_TYPE.ATTACK)
 		Levels.set_current_round(1)
 	
 	# Init game state
@@ -14,32 +13,23 @@ func _init():
 	Globals.idle = false
 	Globals.score = 0
 	Globals.items = {}
-	Globals.life = 50
+	Globals.life = Globals.difficulty.starting_life
 	Globals.swaps = Globals.round_data.swaps
 	Globals.hints = Globals.round_data.hints
 	Globals.wilds = Globals.round_data.wilds
-	Globals.seconds_left = 0
 	
 	_init_round()
 
 func _init_round():
-	Globals.seconds_left = Globals.difficulty.round_time_seconds + ItemUtil.get_time_bonus()
 	Globals.matched_words = []
 	LetterUtil.reset_letter_freq()
 
 func _ready():
 	Signals.connect("ResetGame", _reset)
 	Signals.connect("GameOver", _game_over)
-	Signals.connect("TimedOut", _timed_out)
 	Signals.connect("NextRound", _next_round)
 	Signals.connect("ShowShop", _show_shop)
 	Signals.connect("BoardChanged", _on_board_changed)
-	
-	# Set up trackers
-	if Globals.game_type == E.GAME_TYPE.ATTACK:
-		$Page/HUD/HBoxContainer/Trackers/TimeTracker.hide()
-	elif Globals.game_type == E.GAME_TYPE.TIMED:
-		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
 
 func _on_board_changed():
 	# Every time the board state changes and a hint was present, remove the
@@ -55,19 +45,15 @@ func _reset():
 	Levels.set_current_round(1)
 	get_tree().reload_current_scene()
 
-func _timed_out():
-	Globals.idle = false
-	_game_over()
-
 func _round_over():
 	Globals.paused = true
 	Globals.idle = false
 	Globals.round_over = true
 	
-	if Globals.game_type == E.GAME_TYPE.ATTACK:
-		var life_tracker = $Page/HUD/HBoxContainer/Trackers/LifeTracker
-		var tracker_pos = life_tracker.global_position + life_tracker.size / 2
-		await $DamageHandler.take_damage(tracker_pos)
+	# Handle damage taking
+	var life_tracker = $Page/HUD/HBoxContainer/Trackers/LifeTracker
+	var tracker_pos = life_tracker.global_position + life_tracker.size / 2
+	await $DamageHandler.take_damage(tracker_pos)
 	
 	if Globals.life <= 0: 
 		_game_over()

@@ -16,7 +16,6 @@ signal BoardChanged
 signal ExplodeFinished
 signal DropFinished
 signal NotifyPlayer
-signal TimedOut
 signal ResetBoard
 
 # Poem

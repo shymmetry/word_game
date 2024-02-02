@@ -42,9 +42,6 @@ func notify():
 func hint():
 	$Hint.play()
 
-func timer():
-	$Timer.play()
-
 func writing():
 	$Writing.play()
 

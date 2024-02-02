@@ -25,8 +25,7 @@ func create_tile(row: int, col: int, initial: bool) -> Tile:
 	tile.position = Vector2(x, y)
 	
 	tile.tile_type = _resolve_tile_type()
-	if Globals.game_type == E.GAME_TYPE.ATTACK:
-		tile.damage = _resolve_damage(initial)
+	tile.damage = _resolve_damage(initial)
 	
 	var rand_char = LetterUtil.rand_char()
 	tile.set_letter(rand_char)

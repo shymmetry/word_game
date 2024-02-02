@@ -34,8 +34,7 @@ func _score_word(word_tiles: WordTiles):
 		Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
 	# Handle life gain
-	if Globals.game_type == E.GAME_TYPE.ATTACK:
-		Globals.life = min(50, Globals.life + ItemUtil.get_word_heal(word_tiles.word))
+	Globals.life = min(50, Globals.life + ItemUtil.get_word_heal(word_tiles.word))
 	
 	# Handle swap gain
 	Globals.swaps = min(5, Globals.swaps + ItemUtil.get_extra_swaps(word_tiles.word))

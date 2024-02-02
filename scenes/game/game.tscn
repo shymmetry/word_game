@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=23 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
@@ -6,11 +6,9 @@
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://styles/hamburger.tres" id="4_f7i5n"]
 [ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/gui/trackers/stats/gold/gold_tracker.tscn" id="5_dsuwl"]
 [ext_resource type="Script" path="res://scenes/game/gui/FoundWords.gd" id="6_njilg"]
-[ext_resource type="Script" path="res://scenes/game/Timer.gd" id="6_px3rd"]
 [ext_resource type="PackedScene" uid="uid://dryx0r1hagx5u" path="res://scenes/game/gui/trackers/stats/life/life_tracker.tscn" id="7_p5cjy"]
 [ext_resource type="PackedScene" uid="uid://bdmqc5ye0ato" path="res://scenes/game/gui/trackers/powers/swap/swap_tracker.tscn" id="7_xphf4"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
-[ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/stats/time/time_tracker.tscn" id="10_yppx5"]
 [ext_resource type="PackedScene" uid="uid://x3851sxablmn" path="res://scenes/game/gui/trackers/powers/hint/hint_tracker.tscn" id="11_r30ax"]
 [ext_resource type="PackedScene" uid="uid://bmkyqgk7njv0" path="res://scenes/game/poem/poem_results.tscn" id="12_knjfb"]
 [ext_resource type="PackedScene" uid="uid://idfcg4rpcocn" path="res://scenes/game/gui/trackers/powers/wild/wild_tracker.tscn" id="13_ky0i5"]
@@ -92,9 +90,6 @@ size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
 [node name="GoldTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("5_dsuwl")]
-layout_mode = 2
-
-[node name="TimeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("10_yppx5")]
 layout_mode = 2
 
 [node name="LifeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("7_p5cjy")]
@@ -183,8 +178,4 @@ script = ExtResource("21_jr4nw")
 [node name="CanvasLayer" type="CanvasLayer" parent="DamageHandler"]
 layer = 3
 
-[node name="Timer" type="Timer" parent="."]
-script = ExtResource("6_px3rd")
-
 [connection signal="pressed" from="Page/Title/InGameMenuButton" to="Page/Title" method="_on_in_game_menu_button_pressed"]
-[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]

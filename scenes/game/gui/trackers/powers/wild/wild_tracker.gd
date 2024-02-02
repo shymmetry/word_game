@@ -3,7 +3,6 @@ extends Panel
 var pressed_style = preload("res://styles/trackers/power_tracker_pressed.tres")
 var tracker_style = preload("res://styles/trackers/power_tracker.tres")
 
-# Called when the node enters the scene tree for the first time.
 func _process(_delta):
 	if Globals.wilds >= 1: $Box/Margin/Ticks/PowerTick.on()
 	else: $Box/Margin/Ticks/PowerTick.off()

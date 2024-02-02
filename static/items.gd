@@ -10,12 +10,11 @@ func get_all_items():
 	return config_map
 
 var hint = Item.new(
-	"Call Friend",
+	"Phone a Friend",
 	"Gain 1 extra hint",
 	80,
 	-1,
 	func(): Globals.hints = min(3, Globals.hints+1),
-	[E.GAME_TYPE.ATTACK, E.GAME_TYPE.TIMED],
 )
 
 var swap = Item.new(
@@ -24,7 +23,6 @@ var swap = Item.new(
 	100,
 	-1,
 	func(): Globals.swaps = 5,
-	[E.GAME_TYPE.ATTACK, E.GAME_TYPE.TIMED],
 )
 
 var wildcard_bonus = Item.new(
@@ -33,16 +31,6 @@ var wildcard_bonus = Item.new(
 	70,
 	-1,
 	func(): {},
-	[E.GAME_TYPE.ATTACK, E.GAME_TYPE.TIMED],
-)
-
-var time_bonus = Item.new(
-	"Time Extensions",
-	"Add 5 more seconds for each poem",
-	90,
-	-1,
-	func(): {},
-	[E.GAME_TYPE.TIMED],
 )
 
 var heal = Item.new(
@@ -51,7 +39,6 @@ var heal = Item.new(
 	50,
 	-1,
 	func(): Globals.life = min(50, Globals.life+10),
-	[E.GAME_TYPE.ATTACK],
 )
 
 var score_mult_3 = Item.new(
@@ -60,7 +47,6 @@ var score_mult_3 = Item.new(
 	50,
 	1,
 	func(): {},
-	[E.GAME_TYPE.ATTACK],
 )
 
 var score_mult_6 = Item.new(
@@ -69,7 +55,6 @@ var score_mult_6 = Item.new(
 	100,
 	1,
 	func(): {},
-	[E.GAME_TYPE.ATTACK],
 )
 
 var word_heal = Item.new(
@@ -78,7 +63,6 @@ var word_heal = Item.new(
 	50,
 	3,
 	func(): {},
-	[E.GAME_TYPE.ATTACK],
 )
 
 var extra_swaps = Item.new(
@@ -87,5 +71,4 @@ var extra_swaps = Item.new(
 	125,
 	1,
 	func(): {},
-	[E.GAME_TYPE.ATTACK],
 )

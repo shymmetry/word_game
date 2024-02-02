@@ -3,9 +3,9 @@ class_name Difficulty
 
 var display_name: String
 var description: String
-var round_time_seconds: int
+var starting_life: int
 
-func _init(_display_name: String, _description: String, _round_time_seconds: int):
+func _init(_display_name: String, _description: String, _starting_life: int):
 	display_name = _display_name
 	description = _description
-	round_time_seconds = _round_time_seconds
+	starting_life = _starting_life

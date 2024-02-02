@@ -11,7 +11,7 @@ func _ready():
 
 func _init_shop():
 	_clear_shop()
-	items = ItemUtil.get_random_items(DISPLAYED_ITEMS, Globals.game_type, false)
+	items = ItemUtil.get_random_items(DISPLAYED_ITEMS, false)
 	for item in items:
 		var new_item = item_scene.instantiate()
 		new_item.set_item(item)

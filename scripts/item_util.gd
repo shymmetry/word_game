@@ -9,13 +9,12 @@ func _init():
 	for key in config_map:
 		_items[key] = config_map[key]
 
-func get_random_items(num: int, game_type: E.GAME_TYPE, duplicates: bool) -> Array[Item]:
+func get_random_items(num: int, duplicates: bool) -> Array[Item]:
 	var selected_items: Array[Item] = []
 	var items_left = {}
 	for item_name in _items:
 		var item = _items[item_name]
-		if item.game_types.has(game_type) and \
-				(!Globals.items.has(item) or item.max_owned == -1 or Globals.items[item] < item.max_owned):
+		if !Globals.items.has(item) or item.max_owned == -1 or Globals.items[item] < item.max_owned:
 			items_left[item_name] = item
 	for i in range(0, num):
 		var rand = randi() % items_left.keys().size()
@@ -38,12 +37,6 @@ func get_wildcard_bonus() -> int:
 		return 50 + Globals.items[_items.wildcard_bonus] * 100
 	else: 
 		return 50
-
-func get_time_bonus() -> int:
-	if Globals.items.has(_items.time_bonus):
-		return Globals.items[_items.time_bonus] * 5
-	else: 
-		return 0
 
 func get_word_mult(word: String) -> int:
 	if word.length() >= 6 and Globals.items.has(_items.score_mult_6):

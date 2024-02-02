@@ -11,7 +11,6 @@ var score: int
 var swaps: int
 var hints: int
 var wilds: int
-var seconds_left: int
 
 # Game state
 var idle = true
@@ -28,7 +27,6 @@ var hint_tiles = []
 var current_round = 0
 var round_data = null
 var difficulty: Difficulty
-var game_type: E.GAME_TYPE
 
 func cols():
 	if round_data == null: return null

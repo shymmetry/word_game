@@ -1,6 +1,5 @@
 extends Panel
 
-# Called when the node enters the scene tree for the first time.
 func _process(_delta):
 	if Globals.hints >= 1: $Box/Margin/Ticks/PowerTick.on()
 	else: $Box/Margin/Ticks/PowerTick.off()
