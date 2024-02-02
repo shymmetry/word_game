@@ -10,7 +10,6 @@ var life: int
 var score: int
 var swaps: int
 var hints: int
-var resets: int
 var wilds: int
 var seconds_left: int
 

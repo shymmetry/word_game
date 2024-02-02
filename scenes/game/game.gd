@@ -17,7 +17,6 @@ func _init():
 	Globals.life = 50
 	Globals.swaps = Globals.round_data.swaps
 	Globals.hints = Globals.round_data.hints
-	Globals.resets = Globals.round_data.resets
 	Globals.wilds = Globals.round_data.wilds
 	Globals.seconds_left = 0
 	
@@ -39,8 +38,6 @@ func _ready():
 	# Set up trackers
 	if Globals.game_type == E.GAME_TYPE.ATTACK:
 		$Page/HUD/HBoxContainer/Trackers/TimeTracker.hide()
-		$Page/HUD/HBoxContainer/MarginContainer/Abilities/HintTracker.hide()
-		$Page/HUD/HBoxContainer/MarginContainer/Abilities/ResetTracker.hide()
 	elif Globals.game_type == E.GAME_TYPE.TIMED:
 		$Page/HUD/HBoxContainer/Trackers/LifeTracker.hide()
 

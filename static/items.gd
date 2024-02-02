@@ -15,7 +15,7 @@ var hint = Item.new(
 	80,
 	-1,
 	func(): Globals.hints = min(3, Globals.hints+1),
-	[E.GAME_TYPE.TIMED],
+	[E.GAME_TYPE.ATTACK, E.GAME_TYPE.TIMED],
 )
 
 var swap = Item.new(
@@ -42,15 +42,6 @@ var time_bonus = Item.new(
 	90,
 	-1,
 	func(): {},
-	[E.GAME_TYPE.TIMED],
-)
-
-var new_board = Item.new(
-	"Cat Nap",
-	"Change all the letters on the board",
-	50,
-	-1,
-	func(): Globals.resets = min(3, Globals.resets+1),
 	[E.GAME_TYPE.TIMED],
 )
 

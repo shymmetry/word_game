@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=25 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bdmqc5ye0ato" path="res://scenes/game/gui/trackers/powers/swap/swap_tracker.tscn" id="7_xphf4"]
 [ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
 [ext_resource type="PackedScene" uid="uid://bjq4hvslp367u" path="res://scenes/game/gui/trackers/stats/time/time_tracker.tscn" id="10_yppx5"]
-[ext_resource type="PackedScene" uid="uid://dn80i423pr3vl" path="res://scenes/game/gui/trackers/powers/reset/reset_tracker.tscn" id="11_7kalf"]
 [ext_resource type="PackedScene" uid="uid://x3851sxablmn" path="res://scenes/game/gui/trackers/powers/hint/hint_tracker.tscn" id="11_r30ax"]
 [ext_resource type="PackedScene" uid="uid://bmkyqgk7njv0" path="res://scenes/game/poem/poem_results.tscn" id="12_knjfb"]
 [ext_resource type="PackedScene" uid="uid://idfcg4rpcocn" path="res://scenes/game/gui/trackers/powers/wild/wild_tracker.tscn" id="13_ky0i5"]
@@ -48,7 +47,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
@@ -142,9 +140,6 @@ layout_mode = 2
 [node name="SwapTracker" parent="Page/HUD/HBoxContainer/MarginContainer/Abilities" instance=ExtResource("7_xphf4")]
 layout_mode = 2
 
-[node name="ResetTracker" parent="Page/HUD/HBoxContainer/MarginContainer/Abilities" instance=ExtResource("11_7kalf")]
-layout_mode = 2
-
 [node name="WildTracker" parent="Page/HUD/HBoxContainer/MarginContainer/Abilities" instance=ExtResource("13_ky0i5")]
 layout_mode = 2
 
@@ -175,6 +170,7 @@ visible = false
 visible = false
 
 [node name="RoundStartModal" parent="." instance=ExtResource("17_msj4h")]
+visible = false
 
 [node name="HelpBubbles" type="CanvasLayer" parent="."]
 

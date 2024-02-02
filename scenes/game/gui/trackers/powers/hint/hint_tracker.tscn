@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://budxfy50aek6x" path="res://scenes/game/gui/trackers/powers/power_tracker.tscn" id="1_pic7n"]
 [ext_resource type="Script" path="res://scenes/game/gui/trackers/powers/hint/hint_tracker.gd" id="2_kyhym"]
-[ext_resource type="Texture2D" uid="uid://cxktybqyp8mup" path="res://icons/help_outline.png" id="3_u5ny3"]
+[ext_resource type="Texture2D" uid="uid://cnnasb6bwtvfr" path="res://icons/info.png" id="3_k1hqr"]
 
 [node name="HintTracker" instance=ExtResource("1_pic7n")]
 script = ExtResource("2_kyhym")
 
 [node name="IconRect" parent="Box/Icon" index="0"]
 mouse_filter = 2
-texture = ExtResource("3_u5ny3")
+texture = ExtResource("3_k1hqr")
 
 [node name="PowerTick4" parent="Box/Margin/Ticks" index="3"]
 visible = false
