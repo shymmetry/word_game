@@ -12,7 +12,6 @@ func _unhandled_input(event):
 			and !Globals.round_over:
 		var end_tile = _get_tile_at_point(get_local_mouse_position())
 		
-		print(Globals.wild_selected)
 		# Handle wild power
 		if Globals.wild_selected:
 			end_tile.letter = "?"

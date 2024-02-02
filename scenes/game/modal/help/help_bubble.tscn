@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyx1sbsm04yvy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3woj8"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.333333, 0.333333, 0.333333, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hldg6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="HelpBubble" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_right = 1.0
+offset_bottom = 77.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3woj8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Here is a thing
+You should probably use it
+Actually you definitely need to in order to win"
+autowrap_mode = 2
+
+[node name="Control" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hldg6")
+
+[node name="Button" type="Button" parent="VBoxContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+text = "Continue"
