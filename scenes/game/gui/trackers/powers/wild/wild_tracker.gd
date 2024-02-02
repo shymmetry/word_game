@@ -1,5 +1,8 @@
 extends Panel
 
+var pressed_style = preload("res://styles/trackers/power_tracker_pressed.tres")
+var tracker_style = preload("res://styles/trackers/power_tracker.tres")
+
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
 	if Globals.wilds >= 1: $Box/Margin/Ticks/PowerTick.on()
@@ -8,6 +11,11 @@ func _process(_delta):
 	else: $Box/Margin/Ticks/PowerTick2.off()
 	if Globals.wilds >= 3: $Box/Margin/Ticks/PowerTick3.on()
 	else: $Box/Margin/Ticks/PowerTick3.off()
+	
+	var stylebox = get_theme_stylebox("panel")
+	var new_stylebox = pressed_style if Globals.wild_selected else tracker_style
+	if stylebox != new_stylebox:
+		add_theme_stylebox_override("panel", new_stylebox)
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton \
