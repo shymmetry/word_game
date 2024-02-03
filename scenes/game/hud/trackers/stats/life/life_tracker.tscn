@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dryx0r1hagx5u"]
 
-[ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/gui/trackers/stats/stat_tracker.tscn" id="1_a4esx"]
+[ext_resource type="PackedScene" uid="uid://4rveb6yybb8j" path="res://scenes/game/hud/trackers/stats/stat_tracker.tscn" id="1_a4esx"]
 [ext_resource type="Texture2D" uid="uid://col3vsvcgdrgt" path="res://icons/heart.png" id="2_8a8ie"]
-[ext_resource type="Script" path="res://scenes/game/gui/trackers/stats/life/life_tracker.gd" id="2_6386d"]
+[ext_resource type="Script" path="res://scenes/game/hud/trackers/stats/life/life_tracker.gd" id="2_6386d"]
 
 [node name="LifeTracker" instance=ExtResource("1_a4esx")]
 script = ExtResource("2_6386d")

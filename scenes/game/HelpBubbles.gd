@@ -22,17 +22,21 @@ var tutorial_steps = [
 		"node": "../Page/HUD/HBoxContainer/Trackers/LifeTracker",
 		"bubble_pos": Vector2(100, 75)
 	},{
-		"text": "Press this powerup to get shown a word on the board",
-		"node": "../Page/HUD/HBoxContainer/MarginContainer/Abilities/HintTracker",
-		"bubble_pos": Vector2(180, 45)
+		"text": "This is your energy bar\nUse your energy to perform actions that alter the board",
+		"node": "../Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/EnergyBar",
+		"bubble_pos": Vector2(170, 95)
 	},{
-		"text": "This powerup lets you swap two adjacent tiles by clicking them",
-		"node": "../Page/HUD/HBoxContainer/MarginContainer/Abilities/SwapTracker",
-		"bubble_pos": Vector2(180, 95)
+		"text": "This is an action\nIts energy cost is on the left\nThis action lets you swap two adjacent tiles by clicking them",
+		"node": "../Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/Abilities/SwapTracker",
+		"bubble_pos": Vector2(180, 25)
 	},{
-		"text": "Lets you change any letter on the board to a Wild\nPress this button to activate",
-		"node": "../Page/HUD/HBoxContainer/MarginContainer/Abilities/WildTracker",
-		"bubble_pos": Vector2(180, 145)
+		"text": "Press this action to get shown a word on the board",
+		"node": "../Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/Abilities/HintTracker",
+		"bubble_pos": Vector2(180, 80)
+	},{
+		"text": "Lets you change any letter on the board to a Wild\nPress this action to activate",
+		"node": "../Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/Abilities/WildTracker",
+		"bubble_pos": Vector2(180, 110)
 	}
 ]
 var current_step_i = 0

@@ -13,13 +13,13 @@ func _init_poem_results() -> void:
 	if response != OK:
 		$Body/Poem.set_error("Server responded with: %s" % response)
 
-func _get_poem() -> bool:
+func _get_poem() -> int:
 	var matched_words = []
 	for word_score in Globals.matched_words: matched_words.append(word_score.word)
 	var word_string = ", ".join(matched_words)
 	
 	var openai_api_key = Env.get_var("OPENAI_API_KEY")
-	if !openai_api_key: return false
+	if !openai_api_key: return 1
 	
 	var headers = [
 		"Content-Type: application/json",

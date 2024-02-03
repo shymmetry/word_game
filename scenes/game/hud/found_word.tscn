@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbkgbvubphujm"]
 
-[ext_resource type="Script" path="res://scenes/game/gui/found_word.gd" id="1_jvktu"]
+[ext_resource type="Script" path="res://scenes/game/hud/found_word.gd" id="1_jvktu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ac0j"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

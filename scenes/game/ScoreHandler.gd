@@ -34,10 +34,10 @@ func _score_word(word_tiles: WordTiles):
 		Globals.matched_words.append({"word": word_tiles.word, "score": score_up})
 	
 	# Handle life gain
-	Globals.life = min(50, Globals.life + ItemUtil.get_word_heal(word_tiles.word))
+	Globals.life = Globals.life + ItemUtil.get_word_heal(word_tiles.word)
 	
-	# Handle swap gain
-	Globals.swaps = min(5, Globals.swaps + ItemUtil.get_extra_swaps(word_tiles.word))
+	# Handle energy gain
+	Globals.energy = min(Globals.max_energy, Globals.energy + ItemUtil.get_word_energy(word_tiles.word))
 	
 	# Handle sound
 	if score_up >= 100:

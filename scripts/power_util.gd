@@ -1,44 +1,64 @@
-extends Panel
+extends Node
 
-func _process(_delta):
-	if Globals.hints >= 1: $Box/Margin/Ticks/PowerTick.on()
-	else: $Box/Margin/Ticks/PowerTick.off()
-	if Globals.hints >= 2: $Box/Margin/Ticks/PowerTick2.on()
-	else: $Box/Margin/Ticks/PowerTick2.off()
-	if Globals.hints >= 3: $Box/Margin/Ticks/PowerTick3.on()
-	else: $Box/Margin/Ticks/PowerTick3.off()
+func wild(tile: Tile) -> bool:
+	if Globals.energy < 5:
+		return false
+	
+	tile.letter = "?"
+	Globals.wild_selected = false
+	Globals.selected_tile = null
+	Globals.energy -= 5
+	return true
 
-func _on_gui_input(event):
-	if event is InputEventMouseButton \
-			and event.button_index == MOUSE_BUTTON_LEFT \
-			and event.pressed \
-			and !Globals.paused:
-		_give_hint(Globals.round_data.min_word_length, 6)
+func swap(tile1: Tile, tile2: Tile) -> bool:
+	if Globals.energy < 2:
+		return false
+	Globals.energy -= 2
+	
+	var tile1_col = tile1.col; var tile1_row = tile1.row
+	var tile1_position = tile1.position
+	Globals.tiles[tile1_row][tile1_col] = tile2
+	Globals.tiles[tile2.row][tile2.col] = tile1
+	tile1.col = tile2.col; tile1.row = tile2.row
+	tile2.col = tile1_col; tile2.row = tile1_row
+	
+	# Perform visual swap (prevent other actions while this is happening)
+	var tween = create_tween()
+	tween.tween_property(tile1, "position", tile2.position, 0.25)
+	tween.parallel().tween_property(tile2, "position", tile1_position, 0.25)
+	tween.tween_callback(func(): Globals.idle = true; Signals.emit_signal("BoardChanged"))
+	
+	return true
 
-func _give_hint(min_size: int, max_size: int) -> void:
-	if Globals.hints > 0:
-		var hint_words = _find_all_words(min_size, max_size)
-		var hints_by_length = {}
-		# Sort the found words by their length
-		for hint in hint_words:
-			var word_len = hint.word.length()
-			if hints_by_length.has(word_len):
-				hints_by_length[word_len].append(hint)
-			else:
-				hints_by_length[word_len] = [hint]
-		
-		# Get a random word from the largest size word set
-		var hint = null
-		for word_len in range(max_size, min_size - 1, -1):
-			if hints_by_length.has(word_len):
-				var rand_i = randi() % hints_by_length.get(word_len).size()
-				hint = hints_by_length.get(word_len)[rand_i]
-				break
-		
-		if hint:
-			Globals.hint_tiles = hint.tiles
-			Globals.hints -= 1
-			Signals.emit_signal("NotifyPlayer", "Hint: %s" % hint.word)
+func hint(min_size: int, max_size: int) -> bool:
+	if Globals.energy < 3:
+		return false
+	
+	var hint_words = _find_all_words(min_size, max_size)
+	var hints_by_length = {}
+	# Sort the found words by their length
+	for hint in hint_words:
+		var word_len = hint.word.length()
+		if hints_by_length.has(word_len):
+			hints_by_length[word_len].append(hint)
+		else:
+			hints_by_length[word_len] = [hint]
+	
+	# Get a random word from the largest size word set
+	var hint = null
+	for word_len in range(max_size, min_size - 1, -1):
+		if hints_by_length.has(word_len):
+			var rand_i = randi() % hints_by_length.get(word_len).size()
+			hint = hints_by_length.get(word_len)[rand_i]
+			break
+	
+	if hint:
+		Globals.hint_tiles = hint.tiles
+		Globals.energy -= 3
+		Signals.emit_signal("NotifyPlayer", "Hint: %s" % hint.word)
+		return true
+	else:
+		return false
 
 # Only finds words up to 6 characters for efficiency. I expect that if there is
 # a word with 7+ letters we could also find one with less.

@@ -15,19 +15,20 @@ func _unhandled_input(event):
 		
 		# Handle wild power
 		if Globals.wild_selected:
-			end_tile.letter = "?"
-			Globals.wild_selected = false
-			Globals.wilds -= 1
+			var done = PowerUtil.wild(end_tile)
+			if !done: Sounds.error()
 			return
 		
 		# A tile was selected already for swapping
 		if Globals.selected_tile:
 			# Only handle if the tile to swap to was clicked and adjacent
 			if end_tile and end_tile == clicked_tile \
-					and _is_adjacent(Globals.selected_tile, end_tile) \
-					and Globals.swaps > 0:
-				_swap_tiles(Globals.selected_tile, end_tile)
-				Sounds.swap()
+					and _is_adjacent(Globals.selected_tile, end_tile):
+				var swapped = PowerUtil.swap(Globals.selected_tile, end_tile)
+				if swapped: Sounds.swap()
+				else: 
+					Sounds.error()
+					Globals.idle = true
 			else:
 				if Globals.selected_tile != end_tile:
 					Sounds.error()
@@ -72,21 +73,6 @@ func _unhandled_input(event):
 			else:
 				# If dragged to an invalid tile, clear
 				Globals.dragged_tiles = []
-
-func _swap_tiles(tile1, tile2):
-	var tile1_col = tile1.col; var tile1_row = tile1.row
-	var tile1_position = tile1.position
-	Globals.tiles[tile1_row][tile1_col] = tile2
-	Globals.tiles[tile2.row][tile2.col] = tile1
-	tile1.col = tile2.col; tile1.row = tile2.row
-	tile2.col = tile1_col; tile2.row = tile1_row
-	Globals.swaps -= 1
-	
-	# Perform visual swap (prevent other actions while this is happening)
-	var tween = create_tween()
-	tween.tween_property(tile1, "position", tile2.position, 0.25)
-	tween.parallel().tween_property(tile2, "position", tile1_position, 0.25)
-	tween.tween_callback(func(): Globals.idle = true; Signals.emit_signal("BoardChanged"))
 
 func _is_adjacent(tile1, tile2):
 	if tile1 == null or tile2 == null: return false

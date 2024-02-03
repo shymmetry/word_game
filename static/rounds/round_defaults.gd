@@ -9,9 +9,6 @@ func get_config_map():
 		config_map[property_name] = property_value
 	return config_map
 
-var swaps = 5
-var hints = 1
-var wilds = 1
 var min_word_length = 3
 var max_word_length = null
 var word_cnt_goal = 6
@@ -27,14 +24,6 @@ var dmg_probs = {
 	3: 0,
 	4: 0,
 	5: 0,
-}
-
-var swap_bonus = {
-	4: 0,
-	5: 1,
-	6: 2,
-	7: 2,
-	8: 3,
 }
 
 var tile_type_chance = {

@@ -9,90 +9,82 @@ func get_all_items():
 		config_map[property_name] = property_value
 	return config_map
 
-var hint = Item.new(
-	"Phone a Friend",
-	"Gain 1 extra hint",
-	80,
-	-1,
-	func(): Globals.hints = min(3, Globals.hints+1),
-)
-
-var swap = Item.new(
-	"Refill Coffee",
-	"Fills swaps up to 5",
-	100,
-	-1,
-	func(): Globals.swaps = 5,
-)
-
 var wildcard_bonus = Item.new(
 	"Meditate",
 	"Increase likelihood of [?] tiles",
-	70,
+	50,
 	-1,
-	func(): {},
-)
-
-var wild_bonus = Item.new(
-	"Wildcard",
-	"Fills wild power up to 3",
-	100,
-	-1,
-	func(): Globals.wilds = 3,
+	Callable(),
 )
 
 var heal = Item.new(
 	"Mmmm Cheese",
-	"Heals back 10 health",
+	"Heal 10",
 	50,
 	-1,
-	func(): Globals.life = min(50, Globals.life+10),
+	func(): Globals.life = Globals.life+10,
 )
 
 var score_mult_3 = Item.new(
 	"Tiny Brained",
-	"2x money received from 3 letter words",
-	50,
+	"2x pay received from 3 letter words",
+	40,
 	1,
-	func(): {},
+	Callable(),
 )
 
 var score_mult_4 = Item.new(
-	"On a Roll",
-	"2x money received from 4 letter words",
-	100,
+	"Mass Appeal",
+	"2x pay received from 4 letter words",
+	80,
 	1,
-	func(): {},
+	Callable(),
 )
 
 var score_mult_6 = Item.new(
 	"Big Brained",
-	"1.5x money received from 6+ letter words",
-	100,
+	"1.5x pay received from 6+ letter words",
+	80,
 	1,
-	func(): {},
+	Callable(),
 )
 
 var word_heal_3 = Item.new(
-	"",
-	"Heal 1 every time a word with 3 letters is made",
+	"Feed the Weak",
+	"Heal 1 every time a word with 3 letters is found",
 	25,
 	3,
-	func(): {},
+	Callable(),
 )
 
 var word_heal_5 = Item.new(
 	"Creative Juices",
-	"Heal 1 every time a word with 5+ letters is made",
+	"Heal 1 every time a word with 5+ letters is found",
 	50,
 	3,
-	func(): {},
+	Callable(),
 )
 
-var extra_swaps = Item.new(
-	"Coffee Machine",
-	"Receive 1 swap every time a word with 5+ letters is made",
-	125,
+var extra_swaps_3 = Item.new(
+	"Procrastination",
+	"Recover 1 energy every time a word with 3 letters is found",
+	40,
 	1,
-	func(): {},
+	Callable(),
+)
+
+var extra_swaps_5 = Item.new(
+	"Creative Energy",
+	"Recover 1 energy every time a word with 5+ letters is found",
+	70,
+	1,
+	Callable(),
+)
+
+var max_energy = Item.new(
+	"Big Mug",
+	"Increase max energy by 2",
+	120,
+	5,
+	func(): Globals.max_energy += 2,
 )

@@ -28,7 +28,8 @@ func _purchase_item(purchase_item: Item):
 		for child in self.get_children():
 			if child.item == purchase_item:
 				Globals.score -= purchase_item.cost
-				purchase_item.effect.call()
+				if purchase_item.effect:
+					purchase_item.effect.call()
 				#Sounds.cha_ching()
 				
 				if Globals.items.has(purchase_item):

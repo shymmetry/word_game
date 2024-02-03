@@ -8,9 +8,8 @@ var tiles = [] # 2D array of all tiles in play
 var matched_words = []
 var life: int
 var score: int
-var swaps: int
-var hints: int
-var wilds: int
+var max_energy: int
+var energy: int
 
 # Game state
 var idle = true

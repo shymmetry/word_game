@@ -24,14 +24,6 @@ func get_random_items(num: int, duplicates: bool) -> Array[Item]:
 			items_left.erase(rand_key)
 	return selected_items
 
-func get_swap_bonus(word: String) -> int:
-	if word.length() == 5:
-		return Globals.items[_items.medium_word_bonus] if Globals.items.has(_items.medium_word_bonus) else 0
-	elif word.length() > 5:
-		return Globals.items[_items.big_word_bonus] if Globals.items.has(_items.big_word_bonus) else 0
-	else:
-		return 0
-
 func get_wildcard_bonus() -> int:
 	if Globals.items.has(_items.wildcard_bonus):
 		return 50 + Globals.items[_items.wildcard_bonus] * 100
@@ -56,8 +48,10 @@ func get_word_heal(word: String) -> int:
 	else:
 		return 0
 
-func get_extra_swaps(word: String) -> int:
-	if word.length() >= 5 and Globals.items.has(_items.extra_swaps):
-		return Globals.items[_items.extra_swaps] * 1
+func get_word_energy(word: String) -> int:
+	if word.length() >= 5 and Globals.items.has(_items.extra_swaps_5):
+		return Globals.items[_items.extra_swaps_5] * 1
+	elif word.length() == 3 and Globals.items.has(_items.extra_swaps_3):
+		return Globals.items[_items.extra_swaps_3] * 1
 	else:
 		return 0

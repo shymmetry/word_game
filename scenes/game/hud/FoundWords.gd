@@ -1,6 +1,6 @@
 extends GridContainer
 
-const found_word_scene = preload("res://scenes/game/gui/found_word.tscn")
+const found_word_scene = preload("res://scenes/game/hud/found_word.tscn")
 
 func _ready():
 	for i in range(0, 8):

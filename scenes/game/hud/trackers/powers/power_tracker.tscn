@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://budxfy50aek6x"]
+
+[ext_resource type="StyleBox" uid="uid://bd3u547gmhjw1" path="res://styles/trackers/power_tracker.tres" id="1_c833e"]
+[ext_resource type="Texture2D" uid="uid://cj2hyiu5gtaks" path="res://icons/outline_swap.png" id="2_okjkw"]
+
+[node name="PowerTracker" type="Panel"]
+custom_minimum_size = Vector2(64, 36)
+theme_override_styles/panel = ExtResource("1_c833e")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+
+[node name="Box" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="Cost" type="Label" parent="Margin/Box"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "5"
+
+[node name="IconRect" type="TextureRect" parent="Margin/Box"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("2_okjkw")
+expand_mode = 3
+stretch_mode = 4

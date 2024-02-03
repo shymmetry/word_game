@@ -14,13 +14,12 @@ func _init():
 	Globals.score = 0
 	Globals.items = {}
 	Globals.life = Globals.difficulty.starting_life
-	Globals.swaps = Globals.round_data.swaps
-	Globals.hints = Globals.round_data.hints
-	Globals.wilds = Globals.round_data.wilds
+	Globals.max_energy = Globals.difficulty.starting_energy
 	
 	_init_round()
 
 func _init_round():
+	Globals.energy = Globals.max_energy
 	Globals.matched_words = []
 	LetterUtil.reset_letter_freq()
 

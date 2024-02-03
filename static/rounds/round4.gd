@@ -3,7 +3,7 @@ extends Node
 const word_cnt_goal = 6
 const letter_difficulty = -1
 
-const board = Boards.plus
+const board = Boards.cross
 
 const dmg_probs = {
 	0: 40,
