@@ -24,3 +24,5 @@ signal StartWordScoring
 # Shop
 signal PurchaseItem
 
+# Tutorial
+signal TutorialNext

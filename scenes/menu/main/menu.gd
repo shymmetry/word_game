@@ -13,10 +13,6 @@ func _on_settings_pressed():
 	Sounds.click()
 	get_tree().change_scene_to_file("res://scenes/menu/settings/settings.tscn")
 
-func _on_how_to_pressed():
-	Sounds.click()
-	get_tree().change_scene_to_file("res://scenes/menu/how_to/how_to.tscn")
-
 func _on_quit_pressed():
 	Sounds.click()
 	get_tree().quit()

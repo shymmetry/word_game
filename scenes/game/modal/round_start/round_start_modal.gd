@@ -14,6 +14,7 @@ func _get_round_text() -> String:
 	var word_cnt = "Find %d words of inspiration to write your poem\n\n" % Globals.round_data.word_cnt_goal
 	var word_length_min = "For this poem inspirational words must have at least %d letters" % Globals.round_data.min_word_length
 	var word_length_max = " and at most %d letters" % Globals.round_data.max_word_length if Globals.round_data.max_word_length else ""
+	
 	var win_type = ""
 	if Globals.round_data.win_type == E.WIN_TYPE.CONTAINS_SPECIAL:
 		win_type = "\n\nWords will only be inspirational if they CONTAIN blue tiles"

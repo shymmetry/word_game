@@ -52,11 +52,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "SETTINGS"
 
-[node name="HowTo" type="Button" parent="Buttons"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "HOW TO PLAY"
-
 [node name="Quit" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
@@ -64,5 +59,4 @@ text = "QUIT"
 
 [connection signal="pressed" from="Buttons/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Buttons/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Buttons/HowTo" to="." method="_on_how_to_pressed"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]

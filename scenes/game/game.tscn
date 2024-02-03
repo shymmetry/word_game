@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=25 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://5pbldm3dhxqv" path="res://scenes/game/shop/shop.tscn" id="17_cxo0i"]
 [ext_resource type="PackedScene" uid="uid://cmg3lbvb0f18f" path="res://scenes/game/modal/round_start/round_start_modal.tscn" id="17_msj4h"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over/game_over_modal.tscn" id="18_7d1n6"]
+[ext_resource type="Script" path="res://scenes/game/HelpBubbles.gd" id="19_ltj62"]
+[ext_resource type="PackedScene" uid="uid://cyx1sbsm04yvy" path="res://scenes/game/modal/help/help_bubble.tscn" id="19_p0dji"]
 [ext_resource type="Script" path="res://scenes/game/DamageHandler.gd" id="21_jr4nw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
@@ -165,9 +167,22 @@ visible = false
 visible = false
 
 [node name="RoundStartModal" parent="." instance=ExtResource("17_msj4h")]
-visible = false
 
 [node name="HelpBubbles" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("19_ltj62")
+
+[node name="Polygon2D" type="Polygon2D" parent="HelpBubbles"]
+color = Color(0.133333, 0.133333, 0.133333, 0.866667)
+invert_enabled = true
+invert_border = 720.0
+polygon = PackedVector2Array(-255, 22, -253, 145, -55, 147, -56, 22)
+
+[node name="HelpBubble" parent="HelpBubbles" instance=ExtResource("19_p0dji")]
+offset_left = 171.0
+offset_top = 31.0
+offset_right = 371.0
+offset_bottom = 93.0
 
 [node name="ScoreHandler" type="Node" parent="."]
 script = ExtResource("16_w0eha")
