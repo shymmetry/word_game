@@ -41,13 +41,17 @@ func get_wildcard_bonus() -> int:
 func get_word_mult(word: String) -> int:
 	if word.length() >= 6 and Globals.items.has(_items.score_mult_6):
 		return Globals.items[_items.score_mult_6] * 1.5
+	elif word.length() == 4 and Globals.items.has(_items.score_mult_4):
+		return Globals.items[_items.score_mult_4] * 2
 	elif word.length() == 3 and Globals.items.has(_items.score_mult_3):
 		return Globals.items[_items.score_mult_3] * 2
-	else: 
+	else:
 		return 1
 
 func get_word_heal(word: String) -> int:
-	if word.length() >= 5 and Globals.items.has(_items.word_heal):
+	if word.length() >= 5 and Globals.items.has(_items.word_heal_5):
+		return Globals.items[_items.word_heal] * 1
+	elif word.length() == 3 and Globals.items.has(_items.word_heal_3):
 		return Globals.items[_items.word_heal] * 1
 	else:
 		return 0

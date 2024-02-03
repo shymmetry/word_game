@@ -49,6 +49,14 @@ var score_mult_3 = Item.new(
 	func(): {},
 )
 
+var score_mult_4 = Item.new(
+	"On a Roll",
+	"2x money received from 4 letter words",
+	100,
+	1,
+	func(): {},
+)
+
 var score_mult_6 = Item.new(
 	"Big Brained",
 	"1.5x money received from 6+ letter words",
@@ -57,7 +65,15 @@ var score_mult_6 = Item.new(
 	func(): {},
 )
 
-var word_heal = Item.new(
+var word_heal_3 = Item.new(
+	"",
+	"Heal 1 every time a word with 3 letters is made",
+	25,
+	3,
+	func(): {},
+)
+
+var word_heal_5 = Item.new(
 	"Creative Juices",
 	"Heal 1 every time a word with 5+ letters is made",
 	50,
