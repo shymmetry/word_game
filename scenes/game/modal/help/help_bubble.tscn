@@ -43,10 +43,19 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hldg6")
 
-[node name="Button" type="Button" parent="VBoxContainer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control"]
 layout_mode = 2
-size_flags_horizontal = 8
+
+[node name="Skip" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Skip"
+
+[node name="Continue" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 12
 text = "Continue"
 
-[connection signal="pressed" from="VBoxContainer/Control/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer/Skip" to="." method="_on_skip_pressed"]
+[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer/Continue" to="." method="_on_button_pressed"]

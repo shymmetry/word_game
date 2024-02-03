@@ -32,15 +32,14 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ButtonLeft" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="0"]
-text = "MAIN MENU"
+text = "TUTORIAL"
 
 [node name="ButtonMiddle" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="1"]
 text = "RESET
 "
 
 [node name="ButtonRight" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="2"]
-visible = false
-text = "BACK"
+text = "EXIT"
 
 [node name="Back" type="Button" parent="Background" index="1"]
 layout_mode = 0
@@ -60,4 +59,5 @@ expand_icon = true
 
 [connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonLeft" to="." method="_on_button_left_pressed"]
 [connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonMiddle" to="." method="_on_button_middle_pressed"]
+[connection signal="pressed" from="Background/VBox/Buttons/MarginContainer/HBoxContainer/ButtonRight" to="." method="_on_button_right_pressed"]
 [connection signal="pressed" from="Background/Back" to="." method="_on_back_pressed"]

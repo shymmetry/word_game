@@ -9,7 +9,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and not event.pressed \
-			and !Globals.round_over:
+			and !Globals.round_over \
+			and !Globals.paused:
 		var end_tile = _get_tile_at_point(get_local_mouse_position())
 		
 		# Handle wild power
@@ -51,7 +52,8 @@ func _unhandled_input(event):
 			and event.pressed \
 			and (Globals.idle or Globals.selected_tile) \
 			and !Globals.round_over \
-			and !Globals.wild_selected:
+			and !Globals.wild_selected \
+			and !Globals.paused:
 		clicked_tile = _get_tile_at_point(get_local_mouse_position())
 		Globals.idle = false
 	

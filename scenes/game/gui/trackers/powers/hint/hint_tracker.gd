@@ -11,7 +11,8 @@ func _process(_delta):
 func _on_gui_input(event):
 	if event is InputEventMouseButton \
 			and event.button_index == MOUSE_BUTTON_LEFT \
-			and event.pressed:
+			and event.pressed \
+			and !Globals.paused:
 		_give_hint(Globals.round_data.min_word_length, 6)
 
 func _give_hint(min_size: int, max_size: int) -> void:

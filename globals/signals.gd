@@ -26,3 +26,5 @@ signal PurchaseItem
 
 # Tutorial
 signal TutorialNext
+signal TutorialSkipped
+signal StartTutorial

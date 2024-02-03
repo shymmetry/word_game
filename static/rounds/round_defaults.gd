@@ -10,8 +10,7 @@ func get_config_map():
 	return config_map
 
 var swaps = 5
-var hints = 0
-var resets = 0
+var hints = 1
 var wilds = 1
 var min_word_length = 3
 var max_word_length = null

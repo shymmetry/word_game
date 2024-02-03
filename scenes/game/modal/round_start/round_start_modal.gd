@@ -27,8 +27,9 @@ func _ready():
 	reset()
 
 func _on_button_left_pressed():
-	Signals.emit_signal("StartRound")
 	Globals.paused = false
 	Globals.idle = true
 	Globals.round_over = false
+	# Important to call this after setting the above as some signal receivers might update them
+	Signals.emit_signal("StartRound")
 	self.hide()

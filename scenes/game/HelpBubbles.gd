@@ -39,19 +39,26 @@ var current_step_i = 0
 
 func _ready():
 	Signals.connect("StartRound", _start_tutorial)
+	Signals.connect("StartTutorial", _start_tutorial)
 	Signals.connect("TutorialNext", _next)
+	Signals.connect("TutorialSkipped", _done)
 
 func _next() -> void:
 	current_step_i += 1
 	if current_step_i == tutorial_steps.size():
-		UserData.seen_tutorial = true
-		UserData.save_data()
-		self.hide()
+		_done()
 	else:
 		_show_current_step()
 
+func _done() -> void:
+	UserData.seen_tutorial = true
+	UserData.save_data()
+	self.hide()
+	Globals.paused = false
+
 func _start_tutorial() -> void:
 	if !UserData.seen_tutorial:
+		Globals.paused = true
 		_show_current_step()
 		self.show()
 

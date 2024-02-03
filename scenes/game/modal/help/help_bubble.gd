@@ -5,3 +5,6 @@ func set_text(text: String) -> void:
 
 func _on_button_pressed():
 	Signals.emit_signal("TutorialNext")
+
+func _on_skip_pressed():
+	Signals.emit_signal("TutorialSkipped")

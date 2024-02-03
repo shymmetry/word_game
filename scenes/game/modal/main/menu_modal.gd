@@ -5,7 +5,9 @@ func _ready():
 
 func _on_button_left_pressed():
 	Sounds.click()
-	get_tree().change_scene_to_file("res://scenes/menu/main/menu.tscn")
+	UserData.seen_tutorial = false
+	self.hide()
+	Signals.emit_signal("StartTutorial")
 
 func _on_button_middle_pressed():
 	Sounds.click()
@@ -16,3 +18,7 @@ func _on_back_pressed():
 	if !Globals.round_over:
 		Globals.paused = false
 	self.hide()
+
+func _on_button_right_pressed():
+	Sounds.click()
+	get_tree().change_scene_to_file("res://scenes/menu/main/menu.tscn")
