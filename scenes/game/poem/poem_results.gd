@@ -9,9 +9,9 @@ func reset() -> void:
 	$Body/Continue/Button.hide()
 
 func _init_poem_results() -> void:
-	var success = _get_poem()
-	if !success:
-		$Body/Poem.set_error()
+	var response = _get_poem()
+	if response != OK:
+		$Body/Poem.set_error("Server responded with: %s" % response)
 
 func _get_poem() -> bool:
 	var matched_words = []
@@ -40,17 +40,13 @@ func _get_poem() -> bool:
 			]
 		}
 	)
-	var error = $HTTPRequest.request("https://api.openai.com/v1/chat/completions", headers, HTTPClient.METHOD_POST, data)
-	if error == OK:
-		return true
-	else:
-		return false
+	return $HTTPRequest.request("https://api.openai.com/v1/chat/completions", headers, HTTPClient.METHOD_POST, data)
 
 func _on_http_request_request_completed(_result, _response_code, _headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
 	if json == null or json.has("error"):
 		print(body)
-		$Body/Poem.set_error()
+		$Body/Poem.set_error(error)
 	else:
 		var poem = json.choices[0].message.content
 		$Body/Poem.set_poem(poem)

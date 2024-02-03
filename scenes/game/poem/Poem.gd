@@ -8,9 +8,9 @@ func reset():
 func _ready():
 	reset()
 
-func set_error():
+func set_error(error):
 	animation.stop()
-	self.text = "Oops, you're pen melted while writing your poem"
+	self.text = "Oops, we weren't able to write your poem at this time\nShow this to your developer\n%s" % error
 	Signals.emit_signal("StartWordScoring")
 
 func set_poem(poem: String):
