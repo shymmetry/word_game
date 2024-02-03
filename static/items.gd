@@ -33,6 +33,14 @@ var wildcard_bonus = Item.new(
 	func(): {},
 )
 
+var wild_bonus = Item.new(
+	"Wildcard",
+	"Fills wild power up to 3",
+	100,
+	-1,
+	func(): Globals.wilds = 3,
+)
+
 var heal = Item.new(
 	"Mmmm Cheese",
 	"Heals back 10 health",
