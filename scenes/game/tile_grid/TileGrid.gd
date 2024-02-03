@@ -18,6 +18,7 @@ func _unhandled_input(event):
 			end_tile.letter = "?"
 			Globals.wild_selected = false
 			Globals.wilds -= 1
+			return
 		
 		# A tile was selected already for swapping
 		if Globals.selected_tile:

@@ -21,6 +21,14 @@ func _on_gui_input(event):
 			and event.button_index == MOUSE_BUTTON_LEFT \
 			and event.pressed \
 			and !Globals.paused:
+		
+		if Globals.selected_tile:
+			Globals.selected_tile.letter = "?"
+			Globals.wild_selected = false
+			Globals.wilds -= 1
+			Globals.selected_tile = null
+			return
+		
 		if Globals.wilds > 0 and !Globals.wild_selected:
 			Globals.wild_selected = true
 		elif Globals.wild_selected:
