@@ -6,10 +6,10 @@ const letter_difficulty = -1
 const board = Boards.plus
 
 const dmg_probs = {
-	0: 0,
-	1: 80,
-	2: 20,
-	3: 0,
+	0: 40,
+	1: 30,
+	2: 15,
+	3: 15,
 	4: 0,
 	5: 0,
 }

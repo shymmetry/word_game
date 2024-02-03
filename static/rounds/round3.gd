@@ -6,10 +6,10 @@ const letter_difficulty = -2
 const board = Boards.donut
 
 const dmg_probs = {
-	0: 0,
-	1: 100,
-	2: 0,
-	3: 0,
+	0: 40,
+	1: 35,
+	2: 15,
+	3: 10,
 	4: 0,
 	5: 0,
 }
