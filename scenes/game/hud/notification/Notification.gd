@@ -1,6 +1,6 @@
 extends Panel
 
-var notification_message = preload("res://scenes/game/notification/notification_message.tscn")
+var notification_message = preload("res://scenes/game/hud/notification/notification_message.tscn")
 var current_message = null
 
 func _ready():

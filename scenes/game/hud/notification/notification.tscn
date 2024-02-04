@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwv7b8nakqpi4"]
 
-[ext_resource type="Script" path="res://scenes/game/notification/Notification.gd" id="1_brkq6"]
+[ext_resource type="Script" path="res://scenes/game/hud/notification/Notification.gd" id="1_brkq6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1ttg"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

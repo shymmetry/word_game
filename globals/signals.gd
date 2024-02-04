@@ -23,6 +23,7 @@ signal StartWordScoring
 
 # Shop
 signal PurchaseItem
+signal ItemPurchaseComplete
 
 # Tutorial
 signal TutorialNext

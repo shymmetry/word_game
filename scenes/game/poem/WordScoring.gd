@@ -19,7 +19,6 @@ func _score_words() -> void:
 		total_score += word_score.score
 		
 		$WordList/Words.text = "%s%s\n" % [$WordList/Words.text, word_score.word]
-		await $Timer.timeout
 		$ScoreList/Scores.text = "%s$%d\n" % [$ScoreList/Scores.text, word_score.score]
 		#Sounds.coin_flip()
 		await $Timer.timeout

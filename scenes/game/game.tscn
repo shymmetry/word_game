@@ -1,16 +1,17 @@
-[gd_scene load_steps=30 format=3 uid="uid://c44ljnngpj6ii"]
+[gd_scene load_steps=31 format=3 uid="uid://c44ljnngpj6ii"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_h6npk"]
 [ext_resource type="Script" path="res://scenes/game/title/Title.gd" id="2_mdss5"]
 [ext_resource type="Texture2D" uid="uid://786xx47uf4o3" path="res://icons/outline_menu_white_48dp.png" id="4_7r455"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://styles/hamburger.tres" id="4_f7i5n"]
 [ext_resource type="PackedScene" uid="uid://kia6jemrv1qs" path="res://scenes/game/hud/trackers/stats/gold/gold_tracker.tscn" id="5_dsuwl"]
+[ext_resource type="Texture2D" uid="uid://dhtbk7vmfad6i" path="res://icons/outline_backpack_white_48dp.png" id="5_vxdvx"]
 [ext_resource type="Script" path="res://scenes/game/hud/FoundWords.gd" id="6_njilg"]
 [ext_resource type="PackedScene" uid="uid://dryx0r1hagx5u" path="res://scenes/game/hud/trackers/stats/life/life_tracker.tscn" id="7_p5cjy"]
 [ext_resource type="PackedScene" uid="uid://bdmqc5ye0ato" path="res://scenes/game/hud/trackers/powers/swap/swap_tracker.tscn" id="7_xphf4"]
 [ext_resource type="Script" path="res://scenes/game/hud/EnergyBar.gd" id="9_ycsvp"]
 [ext_resource type="Script" path="res://scenes/game/hud/EnergyLabel.gd" id="10_nomft"]
-[ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/notification/notification.tscn" id="10_xxh0w"]
+[ext_resource type="PackedScene" uid="uid://cwv7b8nakqpi4" path="res://scenes/game/hud/notification/notification.tscn" id="10_xxh0w"]
 [ext_resource type="PackedScene" uid="uid://x3851sxablmn" path="res://scenes/game/hud/trackers/powers/hint/hint_tracker.tscn" id="11_r30ax"]
 [ext_resource type="PackedScene" uid="uid://bmkyqgk7njv0" path="res://scenes/game/poem/poem_results.tscn" id="12_knjfb"]
 [ext_resource type="PackedScene" uid="uid://idfcg4rpcocn" path="res://scenes/game/hud/trackers/powers/wild/wild_tracker.tscn" id="13_ky0i5"]
@@ -21,10 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://5pbldm3dhxqv" path="res://scenes/game/shop/shop.tscn" id="17_cxo0i"]
 [ext_resource type="PackedScene" uid="uid://cmg3lbvb0f18f" path="res://scenes/game/modal/round_start/round_start_modal.tscn" id="17_msj4h"]
 [ext_resource type="PackedScene" uid="uid://dwsfvvi3tj3q5" path="res://scenes/game/modal/game_over/game_over_modal.tscn" id="18_7d1n6"]
+[ext_resource type="PackedScene" uid="uid://djo21vbp1rq1s" path="res://scenes/game/inventory/inventory.tscn" id="18_d00x0"]
 [ext_resource type="Script" path="res://scenes/game/HelpBubbles.gd" id="19_ltj62"]
 [ext_resource type="PackedScene" uid="uid://cyx1sbsm04yvy" path="res://scenes/game/modal/help/help_bubble.tscn" id="19_p0dji"]
 [ext_resource type="Script" path="res://scenes/game/DamageHandler.gd" id="21_jr4nw"]
-[ext_resource type="Script" path="res://scenes/game/EnergyHandler.gd" id="23_gqhps"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvib1"]
 bg_color = Color(0.835294, 0.690196, 0.486275, 1)
@@ -86,26 +87,43 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tvib1")
 script = ExtResource("2_mdss5")
 
-[node name="InGameMenuButton" type="Button" parent="Page/Title"]
+[node name="TitleLabel" type="Label" parent="Page/Title"]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 60.0
+text = "TITLE"
+label_settings = SubResource("LabelSettings_fmmef")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Page/Title"]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_right = 58.0
+grow_horizontal = 2
 grow_vertical = 2
+
+[node name="InGameMenuButton" type="Button" parent="Page/Title/Buttons"]
+custom_minimum_size = Vector2(70, 60)
+layout_mode = 2
 theme_override_styles/normal = ExtResource("4_f7i5n")
 theme_override_styles/hover = ExtResource("4_f7i5n")
 theme_override_styles/pressed = ExtResource("4_f7i5n")
 theme_override_styles/focus = ExtResource("4_f7i5n")
 icon = ExtResource("4_7r455")
+icon_alignment = 1
 
-[node name="TitleLabel" type="Label" parent="Page/Title"]
-layout_mode = 0
-offset_right = 480.0
-offset_bottom = 60.0
-label_settings = SubResource("LabelSettings_fmmef")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Inventory" type="Button" parent="Page/Title/Buttons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_styles/normal = ExtResource("4_f7i5n")
+theme_override_styles/hover = ExtResource("4_f7i5n")
+theme_override_styles/pressed = ExtResource("4_f7i5n")
+theme_override_styles/focus = ExtResource("4_f7i5n")
+icon = ExtResource("5_vxdvx")
+icon_alignment = 1
 
 [node name="HUD" type="MarginContainer" parent="Page"]
 layout_mode = 2
@@ -222,6 +240,24 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="Inventory" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Inventory" parent="Inventory" instance=ExtResource("18_d00x0")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -320.0
+offset_right = 200.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="MenuModal" parent="." instance=ExtResource("15_occs8")]
 visible = false
 
@@ -258,7 +294,5 @@ script = ExtResource("21_jr4nw")
 [node name="CanvasLayer" type="CanvasLayer" parent="DamageHandler"]
 layer = 3
 
-[node name="EnergyHandler" type="Node" parent="."]
-script = ExtResource("23_gqhps")
-
-[connection signal="pressed" from="Page/Title/InGameMenuButton" to="Page/Title" method="_on_in_game_menu_button_pressed"]
+[connection signal="pressed" from="Page/Title/Buttons/InGameMenuButton" to="Page/Title" method="_on_in_game_menu_button_pressed"]
+[connection signal="pressed" from="Page/Title/Buttons/Inventory" to="Page/Title" method="_on_inventory_pressed"]

@@ -39,4 +39,6 @@ func _purchase_item(purchase_item: Item):
 				
 				self.remove_child(child)
 				child.queue_free()
+				
+				Signals.emit_signal("ItemPurchaseComplete")
 				break
