@@ -30,7 +30,7 @@ var tutorial_steps = [
 		"node": "../Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/Abilities/SwapTracker",
 		"bubble_pos": Vector2(180, 25)
 	},{
-		"text": "Press this action to get shown a word on the board",
+		"text": "Press this action to get shown a word on the board\nAlways shows a 6 letter word if available",
 		"node": "../Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/Abilities/HintTracker",
 		"bubble_pos": Vector2(180, 80)
 	},{

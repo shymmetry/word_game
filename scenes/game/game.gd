@@ -7,12 +7,15 @@ func _init():
 		Store.load_game()
 		Levels.set_difficulty(Difficulties.easy)
 		Levels.set_current_round(1)
+		for item in ItemUtil.get_all_items():
+			Globals.items[item] = 1
+	else:
+		Globals.items = {}
 	
 	# Init game state
 	Globals.paused = true
 	Globals.idle = false
 	Globals.score = 0
-	Globals.items = {}
 	Globals.life = Globals.difficulty.starting_life
 	Globals.max_energy = Globals.difficulty.starting_energy
 	

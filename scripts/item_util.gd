@@ -9,6 +9,12 @@ func _init():
 	for key in config_map:
 		_items[key] = config_map[key]
 
+func get_all_items() -> Array[Item]:
+	var items: Array[Item] = []
+	for item in _items:
+		items.append(_items[item])
+	return items
+
 func get_random_items(num: int, duplicates: bool) -> Array[Item]:
 	var selected_items: Array[Item] = []
 	var items_left = {}
@@ -42,9 +48,9 @@ func get_word_mult(word: String) -> int:
 
 func get_word_heal(word: String) -> int:
 	if word.length() >= 5 and Globals.items.has(_items.word_heal_5):
-		return Globals.items[_items.word_heal] * 1
+		return Globals.items[_items.word_heal_5] * 1
 	elif word.length() == 3 and Globals.items.has(_items.word_heal_3):
-		return Globals.items[_items.word_heal] * 1
+		return Globals.items[_items.word_heal_3] * 1
 	else:
 		return 0
 

@@ -19,7 +19,7 @@ func _get_poem() -> int:
 	var word_string = ", ".join(matched_words)
 	
 	var openai_api_key = Env.get_var("OPENAI_API_KEY")
-	if !openai_api_key: return 1
+	if !openai_api_key: return FAILED
 	
 	var headers = [
 		"Content-Type: application/json",
@@ -44,9 +44,10 @@ func _get_poem() -> int:
 
 func _on_http_request_request_completed(_result, _response_code, _headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
-	if json == null or json.has("error"):
-		print(body)
-		$Body/Poem.set_error(json["error"])
+	if json == null:
+		$Body/Poem.set_error(body)
+	elif json.has("error"):
+		$Body/Poem.set_error(json.error)
 	else:
 		var poem = json.choices[0].message.content
 		$Body/Poem.set_poem(poem)

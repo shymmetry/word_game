@@ -37,25 +37,25 @@ func hint(min_size: int, max_size: int) -> bool:
 	var hint_words = _find_all_words(min_size, max_size)
 	var hints_by_length = {}
 	# Sort the found words by their length
-	for hint in hint_words:
-		var word_len = hint.word.length()
+	for hint_word in hint_words:
+		var word_len = hint_word.word.length()
 		if hints_by_length.has(word_len):
-			hints_by_length[word_len].append(hint)
+			hints_by_length[word_len].append(hint_word)
 		else:
-			hints_by_length[word_len] = [hint]
+			hints_by_length[word_len] = [hint_word]
 	
 	# Get a random word from the largest size word set
-	var hint = null
+	var found_hint = null
 	for word_len in range(max_size, min_size - 1, -1):
 		if hints_by_length.has(word_len):
 			var rand_i = randi() % hints_by_length.get(word_len).size()
-			hint = hints_by_length.get(word_len)[rand_i]
+			found_hint = hints_by_length.get(word_len)[rand_i]
 			break
 	
-	if hint:
-		Globals.hint_tiles = hint.tiles
+	if found_hint:
+		Globals.hint_tiles = found_hint.tiles
 		Globals.energy -= 3
-		Signals.emit_signal("NotifyPlayer", "Hint: %s" % hint.word)
+		Signals.emit_signal("NotifyPlayer", "Hint: %s" % found_hint.word)
 		return true
 	else:
 		return false
