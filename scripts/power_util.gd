@@ -31,7 +31,7 @@ func swap(tile1: Tile, tile2: Tile) -> bool:
 	return true
 
 func hint(min_size: int, max_size: int) -> bool:
-	if Globals.energy < 3:
+	if Globals.energy < 3 or Globals.hint_tiles.size() > 0:
 		return false
 	
 	var hint_words = _find_all_words(min_size, max_size)
