@@ -54,6 +54,7 @@ text = "Skip"
 [node name="Continue" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+focus_mode = 0
 theme_override_font_sizes/font_size = 12
 text = "Continue"
 

@@ -31,12 +31,13 @@ theme_override_constants/separation = 10
 [node name="Refresh" type="Button" parent="MainCol/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+focus_mode = 0
 text = "Refresh ($5)"
 
 [node name="NextRound" type="Button" parent="MainCol/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
-text = "Round"
+text = "Next Round"
 
 [connection signal="pressed" from="MainCol/HBoxContainer/Refresh" to="." method="_on_refresh_pressed"]
 [connection signal="pressed" from="MainCol/HBoxContainer/NextRound" to="." method="_on_next_round_pressed"]
