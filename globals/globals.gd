@@ -10,6 +10,7 @@ var life: int
 var score: int
 var max_energy: int
 var energy: int
+var shop_refresh_cost: int
 
 # Game state
 var idle = true

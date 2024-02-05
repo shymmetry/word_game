@@ -18,6 +18,7 @@ func _init():
 	Globals.score = 0
 	Globals.life = Globals.difficulty.starting_life
 	Globals.max_energy = Globals.difficulty.starting_energy
+	Globals.shop_refresh_cost = Globals.round_data.shop_refresh_cost
 	
 	_init_round()
 

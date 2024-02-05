@@ -8,6 +8,7 @@ const DISPLAYED_ITEMS = 5
 func _ready():
 	Signals.connect("PurchaseItem", _purchase_item)
 	Signals.connect("ShowShop", _init_shop)
+	Signals.connect("RefreshShop", _refresh_shop)
 
 func _init_shop():
 	_clear_shop()
@@ -22,6 +23,15 @@ func _clear_shop():
 	for n in self.get_children():
 		remove_child(n)
 		n.queue_free()
+
+func _refresh_shop():
+	if Globals.score >= Globals.shop_refresh_cost:
+		Globals.score -= Globals.shop_refresh_cost
+		Globals.shop_refresh_cost += 1
+		_clear_shop()
+		_init_shop()
+	else:
+		Sounds.error()
 
 func _purchase_item(purchase_item: Item):
 	if Globals.score >= purchase_item.cost:

@@ -14,6 +14,7 @@ var max_word_length = null
 var word_cnt_goal = 6
 var letter_difficulty = 0
 var win_type = E.WIN_TYPE.NORMAL
+var shop_refresh_cost = 5
 
 var board = Boards.sixbysix
 
