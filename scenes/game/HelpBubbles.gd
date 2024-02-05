@@ -22,6 +22,10 @@ var tutorial_steps = [
 		"node": "../Page/HUD/HBoxContainer/Trackers/LifeTracker",
 		"bubble_pos": Vector2(100, 75)
 	},{
+		"text": "You can view your purchased items here",
+		"node": "../Page/Title/Buttons/Inventory",
+		"bubble_pos": Vector2(200, 10)
+	},{
 		"text": "This is your energy bar\nUse your energy to perform actions that alter the board",
 		"node": "../Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/EnergyBar",
 		"bubble_pos": Vector2(170, 95)

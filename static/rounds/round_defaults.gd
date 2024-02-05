@@ -27,9 +27,9 @@ var dmg_probs = {
 }
 
 var tile_type_chance = {
-	E.TILE_TYPE.NORMAL: 98,
+	E.TILE_TYPE.NORMAL: 100,
 	E.TILE_TYPE.SPECIAL: 0,
-	E.TILE_TYPE.MULTIPLIER: 2,
+	E.TILE_TYPE.MULTIPLIER: 0,
 }
 
 var word_length_score_multiplier = {
