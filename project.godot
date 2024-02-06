@@ -32,6 +32,8 @@ Env="*res://scripts/env.gd"
 Boards="*res://static/boards.gd"
 Difficulties="*res://static/difficulties.gd"
 PowerUtil="*res://scripts/power_util.gd"
+Items="*res://static/items.gd"
+Characters="*res://static/characters.gd"
 
 [display]
 

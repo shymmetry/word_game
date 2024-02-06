@@ -3,11 +3,11 @@ class_name Difficulty
 
 var display_name: String
 var description: String
-var starting_life: int
-var starting_energy: int
+var percent_life: int
+var percent_energy: int
 
-func _init(_display_name: String, _description: String, _starting_life: int, _starting_energy: int):
+func _init(_display_name: String, _description: String, _percent_life: int, _percent_energy: int):
 	display_name = _display_name
 	description = _description
-	starting_life = _starting_life
-	starting_energy = _starting_energy
+	percent_life = _percent_life
+	percent_energy = _percent_energy

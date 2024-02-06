@@ -5,6 +5,7 @@ func _init():
 	# TODO: Only actually used for testing, figure out how to handle better
 	if Globals.current_round == 0:
 		Store.load_game()
+		Levels.set_character(Characters.jester)
 		Levels.set_difficulty(Difficulties.easy)
 		Levels.set_current_round(1)
 		for item in ItemUtil.get_all_items():
@@ -16,9 +17,12 @@ func _init():
 	Globals.paused = true
 	Globals.idle = false
 	Globals.score = 0
-	Globals.life = Globals.difficulty.starting_life
-	Globals.max_energy = Globals.difficulty.starting_energy
+	Globals.life = floor(Globals.character.starting_life * (Globals.difficulty.percent_life / 100.0))
+	Globals.max_energy = floor(Globals.character.starting_energy * (Globals.difficulty.percent_energy / 100.0))
 	Globals.shop_refresh_cost = Globals.round_data.shop_refresh_cost
+	for item in Globals.character.starting_items:
+		if Globals.items.has(item): Globals.items[item] = Globals.items[item] + 1
+		else: Globals.items[item] = 1
 	
 	_init_round()
 

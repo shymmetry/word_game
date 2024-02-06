@@ -5,6 +5,7 @@ func wild(tile: Tile) -> bool:
 		return false
 	
 	tile.letter = "?"
+	tile.score = ""
 	Globals.wild_selected = false
 	Globals.selected_tile = null
 	Globals.energy -= 5

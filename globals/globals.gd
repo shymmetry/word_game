@@ -27,6 +27,7 @@ var hint_tiles = []
 var current_round = 0
 var round_data = null
 var difficulty: Difficulty
+var character: Character
 
 func cols():
 	if round_data == null: return null

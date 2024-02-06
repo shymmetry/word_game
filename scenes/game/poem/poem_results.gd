@@ -31,11 +31,11 @@ func _get_poem() -> int:
 			"messages": [
 				{
 					"role": "system",
-					"content": "You are a poetic assistant"
+					"content": Globals.character.gpt_system
 				},
 				{
 					"role": "user",
-					"content": "Write a 4 line poem under 40 words that contains all of the words: %s" % word_string
+					"content": Globals.character.gpt_prompt % word_string
 				}
 			]
 		}

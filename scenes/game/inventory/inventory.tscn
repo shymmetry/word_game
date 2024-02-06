@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://djo21vbp1rq1s"]
+[gd_scene load_steps=5 format=3 uid="uid://djo21vbp1rq1s"]
 
 [ext_resource type="Script" path="res://scenes/game/inventory/inventory.gd" id="1_0dvtr"]
 [ext_resource type="StyleBox" uid="uid://dxiqispj0ukgf" path="res://styles/hamburger.tres" id="2_avcsr"]
+[ext_resource type="PackedScene" uid="uid://drfspty2wmxhv" path="res://scenes/game/inventory/inventory_item.tscn" id="3_mb706"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbepo"]
 bg_color = Color(0.333333, 0.333333, 0.333333, 1)
@@ -23,24 +24,19 @@ custom_minimum_size = Vector2(400, 640)
 theme_override_styles/panel = SubResource("StyleBoxFlat_nbepo")
 script = ExtResource("1_0dvtr")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Contents" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
 
-[node name="Contents" type="VBoxContainer" parent="Margin"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="Margin/Contents"]
+[node name="Control" type="Control" parent="Contents"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="Back" type="Button" parent="Margin/Contents/Control"]
+[node name="Back" type="Button" parent="Contents/Control"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 offset_right = 50.0
@@ -51,7 +47,16 @@ theme_override_styles/pressed = ExtResource("2_avcsr")
 theme_override_styles/focus = ExtResource("2_avcsr")
 text = "x"
 
-[node name="Items" type="VBoxContainer" parent="Margin/Contents"]
+[node name="Margin" type="MarginContainer" parent="Contents"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="Items" type="VBoxContainer" parent="Contents/Margin"]
 layout_mode = 2
 
-[connection signal="pressed" from="Margin/Contents/Control/Back" to="." method="_on_back_pressed"]
+[node name="InventoryItem" parent="Contents/Margin/Items" instance=ExtResource("3_mb706")]
+layout_mode = 2
+
+[connection signal="pressed" from="Contents/Control/Back" to="." method="_on_back_pressed"]

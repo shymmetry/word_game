@@ -10,7 +10,7 @@ func _ready():
 
 func set_error(error):
 	animation.stop()
-	self.text = "Oops, we weren't able to write your poem at this time\nPlease show this to your developer\n%s" % error
+	self.text = "Oops, we weren't able to write at this time\nPlease show this to your developer\n%s" % error
 	Signals.emit_signal("StartWordScoring")
 
 func set_poem(poem: String):

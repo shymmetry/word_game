@@ -2,23 +2,23 @@ extends Node
 
 var easy = Difficulty.new(
 	"Easy",
-	"Start with 100 life and 10 energy",
+	"Start with 100% life and 100% energy",
 	100,
-	10,
+	100,
 )
 
 var medium = Difficulty.new(
 	"Medium",
-	"Start with 50 life and 6 energy",
-	50,
-	6,
+	"Start with 75% life and 75% energy",
+	75,
+	75,
 )
 
 var hard = Difficulty.new(
 	"Hard",
-	"Start with 30 life and 3 energy",
-	30,
-	3,
+	"Start with 50% life and 50% energy",
+	50,
+	50,
 )
 
 var difficulty_progression = [easy, medium, hard]

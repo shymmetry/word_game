@@ -19,6 +19,9 @@ const round_order: Array[String] = [
 func set_difficulty(difficulty: Difficulty) -> void:
 	Globals.difficulty = difficulty
 
+func set_character(character: Character) -> void:
+	Globals.character = character
+
 func set_current_round(cur_round: int) -> void:
 	Globals.current_round = cur_round
 	

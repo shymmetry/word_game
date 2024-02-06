@@ -88,3 +88,11 @@ var max_energy = Item.new(
 	5,
 	func(): Globals.max_energy += 2,
 )
+
+var poop_jokes = Item.new(
+	"Poop Jokes",
+	"2x pay on all turd related words",
+	50,
+	1,
+	Callable(),
+)
