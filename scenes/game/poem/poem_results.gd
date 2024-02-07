@@ -15,7 +15,7 @@ func _init_poem_results() -> void:
 
 func _get_poem() -> int:
 	var matched_words = []
-	for word_score in Globals.matched_words: matched_words.append(word_score.word)
+	for word_score in Globals.matched_words: matched_words.append(word_score.word.to_lower())
 	var word_string = ", ".join(matched_words)
 	
 	var openai_api_key = Env.get_var("OPENAI_API_KEY")

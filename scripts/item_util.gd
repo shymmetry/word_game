@@ -1,7 +1,10 @@
 extends Node
 
 const poop_words = [
-	"crap", "craps", "crapped", "dookie", "dung", "dungs", "excrement", "fecal", "feces", "excreta", "scat", "scats", "dropping", "soil", "dirt", "ordure", "poo", "pooed", "pooping", "poop", "poops", "poos", "stool", "manure", "waste", "shit", "shits", "turd", "turds", "shat"
+	"crap", "craps", "crapped", "dookie", "dung", "dungs", "excrement", "fecal", "feces", "excreta",
+	"scat", "scats", "dropping", "soil", "dirt", "ordure", "poo", "pooed", "pooping", "poop", "poops",
+	"poos", "stool", "manure", "waste", "shit", "shits", "turd", "turds", "shat", "fart", "shart",
+	"shitted", "shitting", "loo", "potty", "loos", "shitter", "pooper", "pooped"
 ]
 
 var _items: Dictionary = {}

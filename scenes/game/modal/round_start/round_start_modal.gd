@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func reset():
-	$Background/VBox/Title/Margin/Label.text = "Poem %d/%d" % [Globals.current_round, Levels.total_rounds()]
+	$Background/VBox/Title/Margin/Label.text = "Round %d/%d" % [Globals.current_round, Levels.total_rounds()]
 	$Background/VBox/Details/Margin/Label.text = _get_round_text()
 
 func _get_round_text() -> String:

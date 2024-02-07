@@ -92,7 +92,7 @@ var max_energy = Item.new(
 var poop_jokes = Item.new(
 	"Poop Jokes",
 	"2x pay on all turd related words",
-	50,
-	1,
+	45,
+	2,
 	Callable(),
 )

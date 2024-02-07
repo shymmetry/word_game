@@ -2,10 +2,10 @@ extends Node
 
 var poet = Character.new(
 	"Poet",
-	"Starts with Creative Juices\n80 Health and 7 Energy",
+	"Starts with Creative Energy\n80 Health and 7 Energy",
 	80,
-	7,
-	[Items.word_heal_5],
+	8,
+	[Items.extra_swaps_5],
 	"You are a poetic assistant",
 	"Write a 4 line poem under 40 words that contains all of the words: %s",
 )
@@ -20,4 +20,14 @@ var jester = Character.new(
 	"Write a joke under 40 words that contains all of the words: %s",
 )
 
-var character_progression = [poet, jester]
+var samurai = Character.new(
+	"Samurai",
+	"Starts with 3 Meditate\n60 Health and 10 Energy",
+	60,
+	10,
+	[Items.wildcard_bonus, Items.wildcard_bonus, Items.wildcard_bonus],
+	"You are a haiku creating assistant",
+	"Write a haiku that contains some of the words: %s",
+)
+
+var character_progression = [poet, jester, samurai]
