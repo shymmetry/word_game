@@ -1,16 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1br6la3jaxaa"]
 
 [ext_resource type="Script" path="res://scenes/game/shop/shop_item.gd" id="1_8ovy2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2gac"]
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[ext_resource type="StyleBox" uid="uid://dossshfbsxdr6" path="res://styles/items/shop_item.tres" id="2_16vbu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l71lx"]
 
@@ -19,14 +10,14 @@ offset_left = 2.0
 offset_top = 2.0
 offset_right = 273.0
 offset_bottom = 53.0
-size_flags_horizontal = 3
 theme_override_constants/separation = 15
 script = ExtResource("1_8ovy2")
 
 [node name="Item" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_b2gac")
+theme_override_styles/panel = ExtResource("2_16vbu")
 
 [node name="Margin" type="MarginContainer" parent="Item"]
 layout_mode = 2
@@ -40,6 +31,7 @@ layout_mode = 2
 
 [node name="VBox" type="VBoxContainer" parent="Item/Margin/HBox"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Name" type="Label" parent="Item/Margin/HBox/VBox"]
 layout_mode = 2
@@ -47,14 +39,16 @@ theme_override_font_sizes/font_size = 18
 text = "ITEM NAME"
 
 [node name="Description" type="Label" parent="Item/Margin/HBox/VBox"]
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "The item does some cool stuff
 "
+autowrap_mode = 2
 
 [node name="Cost" type="Label" parent="Item/Margin/HBox"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 12
 text = "$100"
 

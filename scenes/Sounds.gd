@@ -56,3 +56,6 @@ func cash_in():
 
 func cha_ching():
 	$ChaChing.play()
+
+func fart():
+	$Fart.play()

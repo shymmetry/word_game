@@ -10,9 +10,15 @@ func _ready():
 	Signals.connect("ShowShop", _init_shop)
 	Signals.connect("RefreshShop", _refresh_shop)
 
+func _sort_items(a: Item, b: Item):
+	if typeof(a) == typeof(b):
+		return a.cost < b.cost
+	return false
+
 func _init_shop():
 	_clear_shop()
 	items = ItemUtil.get_random_items(DISPLAYED_ITEMS, false)
+	items.sort_custom(_sort_items)
 	for item in items:
 		var new_item = item_scene.instantiate()
 		new_item.set_item(item)
@@ -42,13 +48,13 @@ func _purchase_item(purchase_item: Item):
 					purchase_item.effect.call()
 				#Sounds.cha_ching()
 				
+				# Add item to inventory
 				if Globals.items.has(purchase_item):
 					Globals.items[purchase_item] = Globals.items.get(purchase_item) + 1
 				else:
 					Globals.items[purchase_item] = 1
 				
-				self.remove_child(child)
-				child.queue_free()
+				child.disable()
 				
 				Signals.emit_signal("ItemPurchaseComplete")
 				break

@@ -40,7 +40,9 @@ func _score_word(word_tiles: WordTiles):
 	Globals.energy = min(Globals.max_energy, Globals.energy + ItemUtil.get_word_energy(word_tiles.word))
 	
 	# Handle sound
-	if score_up >= 100:
+	if Dict.is_poop_word(word_tiles.word):
+		Sounds.fart()
+	elif score_up >= 100:
 		Sounds.congrats()
 	elif score_up >= 50:
 		Sounds.yay()

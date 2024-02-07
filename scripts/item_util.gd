@@ -1,12 +1,5 @@
 extends Node
 
-const poop_words = [
-	"crap", "craps", "crapped", "dookie", "dung", "dungs", "excrement", "fecal", "feces", "excreta",
-	"scat", "scats", "dropping", "soil", "dirt", "ordure", "poo", "pooed", "pooping", "poop", "poops",
-	"poos", "stool", "manure", "waste", "shit", "shits", "turd", "turds", "shat", "fart", "shart",
-	"shitted", "shitting", "loo", "potty", "loos", "shitter", "pooper", "pooped"
-]
-
 var _items: Dictionary = {}
 
 func _ready():
@@ -50,7 +43,7 @@ func get_word_mult(word: String) -> int:
 	elif word.length() == 3 and Globals.items.has(Items.score_mult_3):
 		mult *= Globals.items[Items.score_mult_3] * 2
 	
-	if poop_words.has(word.to_lower()) and Globals.items.has(Items.poop_jokes):
+	if Dict.is_poop_word(word) and Globals.items.has(Items.poop_jokes):
 		mult *= Globals.items[Items.poop_jokes] * 2
 	
 	return mult

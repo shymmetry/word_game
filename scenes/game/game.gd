@@ -16,7 +16,7 @@ func _init():
 	# Init game state
 	Globals.paused = true
 	Globals.idle = false
-	Globals.score = 0
+	Globals.score = 100
 	Globals.life = floor(Globals.character.starting_life * (Globals.difficulty.percent_life / 100.0))
 	Globals.max_energy = floor(Globals.character.starting_energy * (Globals.difficulty.percent_energy / 100.0))
 	Globals.shop_refresh_cost = Globals.round_data.shop_refresh_cost

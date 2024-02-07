@@ -80,3 +80,6 @@ stream = ExtResource("19_8dodb")
 
 [node name="ChaChing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_nl2h8")
+
+[node name="Fart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_43wxx")

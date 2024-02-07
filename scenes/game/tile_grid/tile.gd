@@ -21,11 +21,11 @@ var clicked_underlay_style = preload("res://styles/tile/underlay/tile_clicked_un
 var normal_underlay_style = preload("res://styles/tile/underlay/tile_normal_underlay.tres")
 
 func _ready():
-	if damage >= 1: $Body/Footer/Power1.show()
-	if damage >= 2: $Body/Footer/Power2.show()
-	if damage >= 3: $Body/Footer/Power3.show()
-	if damage >= 4: $Body/Footer/Power4.show()
-	if damage >= 5: $Body/Footer/Power5.show()
+	if damage >= 1: $Body/MarginContainer/Footer/Power1.show()
+	if damage >= 2: $Body/MarginContainer/Footer/Power2.show()
+	if damage >= 3: $Body/MarginContainer/Footer/Power3.show()
+	if damage >= 4: $Body/MarginContainer/Footer/Power4.show()
+	if damage >= 5: $Body/MarginContainer/Footer/Power5.show()
 
 func _process(_delta):
 	$"Body/Letter".text = self.letter

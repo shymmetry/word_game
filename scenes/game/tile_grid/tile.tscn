@@ -153,6 +153,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Power1" type="TextureRect" parent="Body/MarginContainer/Footer"]
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -161,6 +162,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Power2" type="TextureRect" parent="Body/MarginContainer/Footer"]
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -169,6 +171,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Power3" type="TextureRect" parent="Body/MarginContainer/Footer"]
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -177,6 +180,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Power4" type="TextureRect" parent="Body/MarginContainer/Footer"]
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -185,6 +189,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Power5" type="TextureRect" parent="Body/MarginContainer/Footer"]
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
