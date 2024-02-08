@@ -22,12 +22,22 @@ var jester = Character.new(
 
 var samurai = Character.new(
 	"Samurai",
-	"Starts with 3 Meditate\n60 Health and 10 Energy",
+	"Starts with 1 Meditate\n60 Health and 10 Energy",
 	60,
 	10,
-	[Items.wildcard_bonus, Items.wildcard_bonus, Items.wildcard_bonus],
+	[Items.max_energy],
 	"You are a haiku creating assistant",
 	"Write a haiku that contains some of the words: %s",
 )
 
-var character_progression = [poet, jester, samurai]
+var leprechaun = Character.new(
+	"Leprechaun",
+	"Starts with 3 Dumb Luck\n77 Health and 7 Energy",
+	77,
+	7,
+	[Items.wildcard_bonus, Items.wildcard_bonus, Items.wildcard_bonus],
+	"You are a limerick creating assistant",
+	"Write a limerick that contains all of the words: %s",
+)
+
+var character_progression = [poet, jester, samurai, leprechaun]

@@ -10,7 +10,7 @@ func get_all_items():
 	return config_map
 
 var wildcard_bonus = Item.new(
-	"Meditate",
+	"Dumb Luck",
 	"Increase likelihood of [?] tiles",
 	50,
 	-1,
@@ -82,7 +82,7 @@ var extra_swaps_5 = Item.new(
 )
 
 var max_energy = Item.new(
-	"Big Mug",
+	"Meditate",
 	"Increase max energy by 2",
 	120,
 	5,
