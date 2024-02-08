@@ -1,6 +1,6 @@
 extends Node
 
-const word_cnt_goal = 1
+const word_cnt_goal = 6
 const letter_difficulty = -4
 
 const dmg_probs = {

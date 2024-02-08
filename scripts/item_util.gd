@@ -31,7 +31,7 @@ func get_random_items(num: int, duplicates: bool) -> Array[Item]:
 
 func get_wildcard_bonus() -> int:
 	if Globals.items.has(Items.wildcard_bonus):
-		return 50 + Globals.items[Items.wildcard_bonus] * 100
+		return 50 + Globals.items[Items.wildcard_bonus] * 200
 	else: 
 		return 50
 
@@ -44,7 +44,7 @@ func get_word_mult(word: String) -> int:
 	elif word.length() == 3 and Globals.items.has(Items.score_mult_3):
 		mult *= Globals.items[Items.score_mult_3] * 2
 	
-	if Dict.is_poop_word(word) and Globals.items.has(Items.poop_jokes):
+	if Globals.items.has(Items.poop_jokes) and Dict.is_poop_word(word):
 		mult *= Globals.items[Items.poop_jokes] * 2
 	
 	return mult

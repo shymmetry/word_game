@@ -13,7 +13,7 @@ var wildcard_bonus = Item.new(
 	"Dumb Luck",
 	"Increase likelihood of [?] tiles",
 	50,
-	-1,
+	5,
 	Callable(),
 )
 
@@ -99,7 +99,7 @@ var poop_jokes = Item.new(
 
 var second_job = Item.new(
 	"Second Job",
-	"Earn 5 more for each unspent energy",
+	"Earn $5 for each unspent energy",
 	50,
 	2,
 	Callable(),

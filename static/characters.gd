@@ -37,7 +37,7 @@ var leprechaun = Character.new(
 	7,
 	[Items.wildcard_bonus, Items.wildcard_bonus, Items.wildcard_bonus],
 	"You are a limerick creating assistant",
-	"Write a limerick that contains all of the words: %s",
+	"Write a limerick under 40 words that contains all of the words: %s",
 )
 
 var character_progression = [poet, jester, samurai, leprechaun]

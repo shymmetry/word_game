@@ -3,8 +3,8 @@ extends Node
 const poop_words = [
 	"crap", "craps", "crapped", "dookie", "dung", "dungs", "excrement", "fecal", "feces", "excreta",
 	"scat", "scats", "dropping", "soil", "dirt", "ordure", "poo", "pooed", "pooping", "poop", "poops",
-	"poos", "stool", "manure", "waste", "shit", "shits", "turd", "turds", "shat", "fart", "shart",
-	"shitted", "shitting", "loo", "potty", "loos", "shitter", "pooper", "pooped"
+	"poos", "stool", "manure", "waste", "shit", "shits", "turd", "turds", "shat", "fart", "farts", "shart", "sharts",
+	"shitted", "shitting", "loo", "potty", "loos", "shitter", "pooper", "poopers", "pooped", "potties"
 ]
 
 var words = {}
@@ -24,4 +24,4 @@ func is_word(word: String):
 	return words.has(word.to_upper())
 
 func is_poop_word(word: String):
-	poop_words.has(word.to_lower())
+	return poop_words.has(word.to_lower())

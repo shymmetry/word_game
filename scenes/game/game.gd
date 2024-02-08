@@ -8,7 +8,6 @@ func _init():
 		Levels.set_character(Characters.jester)
 		Levels.set_difficulty(Difficulties.easy)
 		Levels.set_current_round(1)
-		print(ItemUtil.get_all_items())
 		for item in ItemUtil.get_all_items():
 			Globals.items[item] = 1
 	else:
@@ -17,7 +16,7 @@ func _init():
 	# Init game state
 	Globals.paused = true
 	Globals.idle = false
-	Globals.score = 100
+	Globals.score = 0
 	Globals.life = floor(Globals.character.starting_life * (Globals.difficulty.percent_life / 100.0))
 	Globals.max_energy = floor(Globals.character.starting_energy * (Globals.difficulty.percent_energy / 100.0))
 	Globals.shop_refresh_cost = Globals.round_data.shop_refresh_cost
