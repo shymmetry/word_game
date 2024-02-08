@@ -8,7 +8,7 @@ func set_item(_item: Item):
 	item = _item
 	$Item/Margin/HBox/VBox/Name.text = item.item_name
 	$Item/Margin/HBox/VBox/Description.text = item.description
-	$Item/Margin/HBox/Cost.text = "$%s" % item.cost
+	$Item/Margin/HBox/Cost.text = "$%s" % ItemUtil.get_item_price(item.cost)
 
 func disable():
 	$Buy.disabled = true
@@ -20,3 +20,6 @@ func _on_button_pressed():
 func _process(_delta):
 	if Globals.score < item.cost:
 		$Buy.disabled = true
+	
+	if item:
+		$Item/Margin/HBox/Cost.text = "$%s" % ItemUtil.get_item_price(item.cost)

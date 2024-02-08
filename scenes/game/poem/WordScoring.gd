@@ -23,6 +23,14 @@ func _score_words() -> void:
 		#Sounds.coin_flip()
 		await $Timer.timeout
 	
+	# Handle extra cash from leftover energy
+	var energy_cash = ItemUtil.get_energy_cash(Globals.energy)
+	if energy_cash > 0:
+		$WordScores/Words.text = "%s%s\n" % [$WordScores/Words.text, "(SECOND JOB)"]
+		$WordScores/Scores.text = "%s$%d\n" % [$WordScores/Scores.text, energy_cash]
+		total_score += energy_cash
+		await $Timer.timeout
+	
 	await $Timer.timeout
 	$Results.show()
 	$Line.show()

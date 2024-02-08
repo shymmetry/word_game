@@ -53,10 +53,17 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 
-[node name="Items" type="VBoxContainer" parent="Contents/Margin"]
+[node name="Scroll" type="ScrollContainer" parent="Contents/Margin"]
+custom_minimum_size = Vector2(0, 560)
 layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
-[node name="InventoryItem" parent="Contents/Margin/Items" instance=ExtResource("3_mb706")]
+[node name="Items" type="VBoxContainer" parent="Contents/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InventoryItem" parent="Contents/Margin/Scroll/Items" instance=ExtResource("3_mb706")]
 layout_mode = 2
 
 [connection signal="pressed" from="Contents/Control/Back" to="." method="_on_back_pressed"]

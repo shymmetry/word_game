@@ -96,3 +96,19 @@ var poop_jokes = Item.new(
 	2,
 	Callable(),
 )
+
+var second_job = Item.new(
+	"Second Job",
+	"Earn 5 more for each unspent energy",
+	50,
+	2,
+	Callable(),
+)
+
+var coupon_book = Item.new(
+	"Coupon Book",
+	"Everything at the shop costs 10% less",
+	50,
+	3,
+	Callable(),
+)

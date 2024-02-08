@@ -9,8 +9,9 @@ func _ready():
 
 func get_all_items() -> Array[Item]:
 	var items: Array[Item] = []
-	for item in _items:
-		items.append(_items[item])
+	var all_items = Items.get_all_items()
+	for item in all_items:
+		items.append(all_items[item])
 	return items
 
 func get_random_items(num: int, duplicates: bool) -> Array[Item]:
@@ -63,3 +64,13 @@ func get_word_energy(word: String) -> int:
 		return Globals.items[Items.extra_swaps_3] * 1
 	else:
 		return 0
+
+func get_energy_cash(energy: int) -> int:
+	if Globals.items.has(Items.second_job):
+		return Globals.items[Items.second_job] * 5 * energy
+	return 0
+
+func get_item_price(base_price: int) -> int:
+	if Globals.items.has(Items.coupon_book):
+		return floor(base_price * (100 - Globals.items[Items.coupon_book] * 10) / 100.0)
+	return base_price

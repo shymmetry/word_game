@@ -13,11 +13,11 @@ func _update_inventory():
 		
 		var inv_item = inventory_item.instantiate()
 		inv_item.setup(item, quantity)
-		$Contents/Margin/Items.add_child(inv_item)
+		$Contents/Margin/Scroll/Items.add_child(inv_item)
 
 func _reset_inventory():
-	for n in $Contents/Margin/Items.get_children():
-		$Contents/Margin/Items.remove_child(n)
+	for n in $Contents/Margin/Scroll/Items.get_children():
+		$Contents/Margin/Scroll/Items.remove_child(n)
 		n.queue_free()
 
 func _on_back_pressed():
