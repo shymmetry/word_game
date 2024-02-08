@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmkyqgk7njv0"]
+[gd_scene load_steps=7 format=3 uid="uid://bmkyqgk7njv0"]
 
 [ext_resource type="Script" path="res://scenes/game/poem/poem_results.gd" id="1_jppfl"]
 [ext_resource type="Script" path="res://scenes/game/poem/Poem.gd" id="2_y8n33"]
@@ -26,11 +26,7 @@ _data = {
 "loading": SubResource("Animation_31y5h")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn8q"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_top = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlpxa"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcqmr"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_top = 1
 
@@ -52,7 +48,7 @@ grow_vertical = 2
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 bbcode_enabled = true
-text = "[center]Writing poem.[/center]"
+text = "[center]Writing.[/center]"
 script = ExtResource("2_y8n33")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Poem"]
@@ -68,44 +64,46 @@ layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_right = 100
 
-[node name="WordScoring" type="HBoxContainer" parent="Body/Margin"]
+[node name="WordScoring" type="VBoxContainer" parent="Body/Margin"]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_constants/separation = 0
 script = ExtResource("3_4td08")
 
-[node name="WordList" type="VBoxContainer" parent="Body/Margin/WordScoring"]
+[node name="WordScores" type="HBoxContainer" parent="Body/Margin/WordScoring"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
 
-[node name="Words" type="Label" parent="Body/Margin/WordScoring/WordList"]
+[node name="Words" type="Label" parent="Body/Margin/WordScoring/WordScores"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 horizontal_alignment = 2
 
-[node name="Total" type="Label" parent="Body/Margin/WordScoring/WordList"]
-visible = false
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn8q")
-horizontal_alignment = 2
-
-[node name="Control" type="Control" parent="Body/Margin/WordScoring"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="ScoreList" type="VBoxContainer" parent="Body/Margin/WordScoring"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Scores" type="Label" parent="Body/Margin/WordScoring/ScoreList"]
+[node name="Scores" type="Label" parent="Body/Margin/WordScoring/WordScores"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="TotalScore" type="Label" parent="Body/Margin/WordScoring/ScoreList"]
+[node name="Line" type="Panel" parent="Body/Margin/WordScoring"]
+visible = false
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fcqmr")
+
+[node name="Results" type="HBoxContainer" parent="Body/Margin/WordScoring"]
 visible = false
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_qlpxa")
+theme_override_constants/separation = 10
+
+[node name="Total" type="Label" parent="Body/Margin/WordScoring/Results"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="TotalScore" type="Label" parent="Body/Margin/WordScoring/Results"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Timer" type="Timer" parent="Body/Margin/WordScoring"]
 
