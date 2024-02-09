@@ -2,11 +2,11 @@ extends CanvasLayer
 
 var tutorial_steps = [
 	{
-		"text": "Find inspirational words to help you write your poem\nDrag in any direction to select a word",
+		"text": "Find inspirational words to help you write\nDrag in any direction to select a word",
 		"node": "../Page/PlayArea/TileGrid",
 		"bubble_pos": Vector2(140, 130)
 	},{
-		"text": "Each letter has the money it earns in the top left\nAt the end of the round letters will deal damage to you based on the number of guns on the bottom of the tile",
+		"text": "Each letter has the money it earns in the top left\nAt the end of the round letters will hurt you based on the number of stars on the bottom of the tile",
 		"node": "../Page/PlayArea/TileGrid/TileArea/Tile",
 		"bubble_pos": Vector2(115, 220)
 	},{
@@ -14,11 +14,11 @@ var tutorial_steps = [
 		"node": "../Page/HUD/HBoxContainer/VBoxContainer",
 		"bubble_pos": Vector2(140, 270)
 	},{
-		"text": "This is your money\nMoney is earned when the poem is submitted\nMore money is awarded for longer words with more difficult to use letters",
+		"text": "This is your money\nMoney is earned when a round is over\nMore money is awarded for longer words",
 		"node": "../Page/HUD/HBoxContainer/Trackers/GoldTracker",
 		"bubble_pos": Vector2(100, 45)
 	},{
-		"text": "This is your life total\nDon't let it get to 0 or you lose",
+		"text": "This is your life\nDon't let it get to 0 or you lose",
 		"node": "../Page/HUD/HBoxContainer/Trackers/LifeTracker",
 		"bubble_pos": Vector2(100, 75)
 	},{
