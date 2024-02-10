@@ -2,7 +2,7 @@ extends Node
 
 var dif1 = Difficulty.new(
 	"Aspiring Artisan",
-	"You got this",
+	"Beat this difficulty to unlock harder ones",
 )
 
 var dif2 = Difficulty.new(

@@ -1,6 +1,8 @@
 extends Node
 
 var seen_tutorial = false
+# Map of character to difficulty unlocked (NUMBER)
+var difficulty_unlocks = {}
 
 func save_data():
 	var data_map = {}

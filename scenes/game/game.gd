@@ -80,7 +80,7 @@ func _round_over():
 
 func _show_shop():
 	if Globals.current_round == Levels.total_rounds():
-		$WinModal.show()
+		_has_won()
 		return
 	
 	var start_pos = $Page/PlayArea.position
@@ -115,6 +115,20 @@ func _next_round():
 	tween.tween_callback(func(): $Page/PlayArea/PoemResults.hide())
 	tween.tween_callback(func(): $Page/PlayArea/TileGrid.show())
 	tween.tween_property($Page/PlayArea, "position", start_pos, 1)
+
+func _has_won():
+	if UserData.difficulty_unlocks.has(Globals.character.display_name):
+		var difficulty_unlock = UserData.difficulty_unlocks[Globals.character.display_name]
+		if DifficultyUtil.difficulty_number(Globals.difficulty) == difficulty_unlock:
+			UserData.difficulty_unlocks[Globals.character.display_name] = difficulty_unlock + 1
+			$WinModal.set_unlock(Difficulties.difficulty_progression[difficulty_unlock + 1])
+		else:
+			$WinModal.clear_unlock()
+	else:
+		UserData.difficulty_unlocks[Globals.character.display_name] = 1
+		$WinModal.set_unlock(Difficulties.difficulty_progression[1])
+	UserData.save_data()
+	$WinModal.show()
 
 func _game_over():
 	Sounds.lose()

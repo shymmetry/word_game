@@ -10,6 +10,12 @@ script = ExtResource("2_7xnlm")
 text = "You Won!
 "
 
+[node name="Label" type="Label" parent="Background/VBox/Details/Margin" index="0"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="ButtonLeft" parent="Background/VBox/Buttons/MarginContainer/HBoxContainer" index="0"]
 visible = false
 
