@@ -18,7 +18,7 @@ var shop_refresh_cost = 5
 
 var board = Boards.sixbysix
 
-var dmg_probs = {
+var star_freq = {
 	0: 20,
 	1: 80,
 	2: 0,

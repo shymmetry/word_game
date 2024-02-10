@@ -1,24 +1,58 @@
 extends Node
 
-var easy = Difficulty.new(
-	"Easy",
-	"Start with 100% life and 100% energy",
-	100,
-	100,
+var dif1 = Difficulty.new(
+	"Aspiring Artisan",
+	"You got this",
 )
 
-var medium = Difficulty.new(
-	"Medium",
-	"Start with 75% life and 75% energy",
-	75,
-	75,
+var dif2 = Difficulty.new(
+	"Beginning Bard",
+	"Increase frequency of stars",
 )
 
-var hard = Difficulty.new(
-	"Hard",
-	"Start with 50% life and 50% energy",
-	50,
-	50,
+var dif3 = Difficulty.new(
+	"Creative Composer",
+	"Remove initial level's letter frequency handicap",
 )
 
-var difficulty_progression = [easy, medium, hard]
+var dif4 = Difficulty.new(
+	"Daring Dabbler",
+	"Items cost 20% more",
+)
+
+var dif5 = Difficulty.new(
+	"Enchanting Elocutionist",
+	"Reduce total words to 6 on all levels",
+)
+
+var dif6 = Difficulty.new(
+	"Fabled Fabulist",
+	"Starting energy reduced by 30%",
+)
+
+var dif7 = Difficulty.new(
+	"Graceful Griot",
+	"Starting health reduced by 50%",
+)
+
+# Harmonious Haikuer
+# Ingenious Imaginer
+# Jovial Jester
+# Keen Kineteller
+# Lyric Luminary
+# Mystic Muse
+# Nimble Narrator
+# Opulent Orator
+# Pensive Poet
+# Quirky Quotemaster
+# Radiant Rhapsodist
+# Serene Scribe
+# Tranquil Troubadour
+# Unseen Wordsmith
+# Visionary Versifier
+# Whimsical Wordsmith
+# Xenial Xenogogue
+# Yearning Yarnspinner
+# Zephyr Zeugmatist
+
+var difficulty_progression = [dif1, dif2, dif3, dif4, dif5, dif6, dif7]

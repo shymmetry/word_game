@@ -7,7 +7,10 @@ func reset_letter_freq():
 	var letter_freq = Globals.round_data.letter_freq
 	
 	_letter_picker_freq_total = 0
-	_letter_freq = _change_letter_freq_difficulty(letter_freq, Globals.round_data.letter_difficulty)
+	if DifficultyUtil.use_normal_letter_freq():
+		_letter_freq = _change_letter_freq_difficulty(letter_freq, 0)
+	else:
+		_letter_freq = _change_letter_freq_difficulty(letter_freq, Globals.round_data.letter_difficulty)
 	
 	_letter_freq['?'] = ItemUtil.get_wildcard_bonus()
 	
@@ -50,10 +53,8 @@ func rand_char() -> String:
 	var allowed_letters = Globals.all_letters
 	var board_freq = _get_board_letter_frequencies()
 	for letter in board_freq:
-		print("%s: %d" % [letter, board_freq[letter]])
 		if board_freq[letter] >= Globals.max_letters:
 			allowed_letters = allowed_letters.replace(letter, "")
-	print(allowed_letters)
 	
 	var freq_total = 0
 	for letter in allowed_letters:

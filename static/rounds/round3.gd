@@ -5,7 +5,7 @@ const letter_difficulty = -2
 
 const board = Boards.donut
 
-const dmg_probs = {
+const star_freq = {
 	0: 40,
 	1: 35,
 	2: 15,

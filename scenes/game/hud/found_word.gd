@@ -8,7 +8,7 @@ func _process(_delta):
 	else:
 		self.text = ""
 	
-	if found_word_index >= Globals.round_data.word_cnt_goal:
+	if found_word_index >= RoundUtil.word_count_goal():
 		self.hide()
 	else:
 		self.show()

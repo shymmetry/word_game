@@ -47,9 +47,9 @@ func _resolve_damage(initial: bool):
 	if !initial: return 0
 	var rand_num = randi() % 100 + 1
 	var sum = 0
-	for dmg in Globals.round_data.dmg_probs:
-		sum += Globals.round_data.dmg_probs[dmg]
+	for dmg in Globals.round_data.star_freq:
+		sum += Globals.round_data.star_freq[dmg] * DifficultyUtil.star_freq_percent()
 		if sum >= rand_num:
 			return dmg
-	return null
+	return 0
 

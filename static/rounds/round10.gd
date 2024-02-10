@@ -4,7 +4,7 @@ const word_cnt_goal = 7
 
 const board = Boards.house
 
-const dmg_probs = {
+const star_freq = {
 	0: 40,
 	1: 0,
 	2: 0,

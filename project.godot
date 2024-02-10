@@ -34,6 +34,8 @@ Difficulties="*res://static/difficulties.gd"
 PowerUtil="*res://scripts/power_util.gd"
 Items="*res://static/items.gd"
 Characters="*res://static/characters.gd"
+DifficultyUtil="*res://scripts/difficulty_util.gd"
+RoundUtil="*res://scripts/round_util.gd"
 
 [display]
 

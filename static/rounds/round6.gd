@@ -4,7 +4,7 @@ const word_cnt_goal = 6
 
 const board = Boards.diagonal
 
-const dmg_probs = {
+const star_freq = {
 	0: 40,
 	1: 10,
 	2: 20,

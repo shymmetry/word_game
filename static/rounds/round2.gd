@@ -5,7 +5,7 @@ const letter_difficulty = -3
 
 const board = Boards.no_corners
 
-const dmg_probs = {
+const star_freq = {
 	0: 40,
 	1: 50,
 	2: 10,

@@ -5,7 +5,7 @@ const letter_difficulty = -1
 
 const board = Boards.cross
 
-const dmg_probs = {
+const star_freq = {
 	0: 40,
 	1: 30,
 	2: 15,

@@ -71,6 +71,7 @@ func get_energy_cash(energy: int) -> int:
 	return 0
 
 func get_item_price(base_price: int) -> int:
-	if Globals.items.has(Items.coupon_book):
-		return floor(base_price * (100 - Globals.items[Items.coupon_book] * 10) / 100.0)
-	return base_price
+	var percent_increase = DifficultyUtil.item_cost_percent_increase()
+	var num_item = Globals.items[Items.coupon_book] if Globals.items.has(Items.coupon_book) else 0
+	
+	return floor(base_price * (1.0 - num_item * 0.10 + percent_increase))

@@ -5,7 +5,7 @@ func reset():
 	$Background/VBox/Details/Margin/Label.text = _get_round_text()
 
 func _get_round_text() -> String:
-	var word_cnt = "Find %d words of inspiration\n\n" % Globals.round_data.word_cnt_goal
+	var word_cnt = "Find %d words of inspiration\n\n" % RoundUtil.word_count_goal()
 	var word_length_min = "For this poem inspirational words must have at least %d letters" % Globals.round_data.min_word_length
 	var word_length_max = " and at most %d letters" % Globals.round_data.max_word_length if Globals.round_data.max_word_length else ""
 	

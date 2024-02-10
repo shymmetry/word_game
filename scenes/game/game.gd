@@ -6,7 +6,7 @@ func _init():
 	if Globals.current_round == 0:
 		Store.load_game()
 		Levels.set_character(Characters.jester)
-		Levels.set_difficulty(Difficulties.easy)
+		Levels.set_difficulty(Difficulties.dif1)
 		Levels.set_current_round(1)
 		for item in ItemUtil.get_all_items():
 			Globals.items[item] = 1
@@ -17,8 +17,8 @@ func _init():
 	Globals.paused = true
 	Globals.idle = false
 	Globals.score = 0
-	Globals.life = floor(Globals.character.starting_life * (Globals.difficulty.percent_life / 100.0))
-	Globals.max_energy = floor(Globals.character.starting_energy * (Globals.difficulty.percent_energy / 100.0))
+	Globals.life = floor(Globals.character.starting_life * DifficultyUtil.health_percent())
+	Globals.max_energy = floor(Globals.character.starting_energy * DifficultyUtil.energy_percent())
 	Globals.shop_refresh_cost = Globals.round_data.shop_refresh_cost
 	for item in Globals.character.starting_items:
 		if Globals.items.has(item): Globals.items[item] = Globals.items[item] + 1
@@ -45,7 +45,7 @@ func _on_board_changed():
 		Globals.hint_tiles = []
 	
 	# Check if the round has been won
-	if Globals.matched_words.size() >= Globals.round_data.word_cnt_goal:
+	if Globals.matched_words.size() >= RoundUtil.word_count_goal():
 		_round_over()
 
 func _reset():
