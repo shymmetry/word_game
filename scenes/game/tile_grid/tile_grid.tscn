@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileGrid.gd" id="1_amwbp"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/PopWords.gd" id="2_rlrfr"]
 [ext_resource type="Script" path="res://scenes/game/tile_grid/TileArea.gd" id="3_tcs8j"]
-[ext_resource type="Script" path="res://scenes/game/tile_grid/TileCreator.gd" id="4_j8ip5"]
+[ext_resource type="Script" path="res://scenes/game/tile_grid/TileFactory.gd" id="4_j8ip5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gcksj"]
 size = Vector2(420, 420)

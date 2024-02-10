@@ -2,6 +2,7 @@ extends Node
 
 # Constants
 const all_letters = "ETAOINSRUDLHCMFYWGPBVKXQJZ" # ordered by frequency for speed
+const max_letters = 4
 
 # Game data
 var tiles = [] # 2D array of all tiles in play

@@ -42,14 +42,43 @@ func get_letter_probabilities():
 		probs[letter] = prob
 	return probs
 
-func rand_char():
-	var rand_num = randi() % _letter_picker_freq_total + 1
+# Returns a random character or "?". 
+# IS NOT COMPLETELY RANDOM - won't return a character if it is present
+# in the grid a significant number of times.
+func rand_char() -> String:
+	# Remove letters that appear too often
+	var allowed_letters = Globals.all_letters
+	var board_freq = _get_board_letter_frequencies()
+	for letter in board_freq:
+		print("%s: %d" % [letter, board_freq[letter]])
+		if board_freq[letter] >= Globals.max_letters:
+			allowed_letters = allowed_letters.replace(letter, "")
+	print(allowed_letters)
+	
+	var freq_total = 0
+	for letter in allowed_letters:
+		var freq = _letter_freq[letter]
+		freq_total += freq
+	
+	var rand_num = randi() % freq_total + 1
 	var sum = 0
 	var selected_letter = "?"
-	for letter in _letter_freq:
+	for letter in allowed_letters:
 		sum += _letter_freq[letter]
 		if sum >= rand_num:
 			selected_letter = letter
 			break
 	
 	return selected_letter
+
+func _get_board_letter_frequencies() -> Dictionary:
+	var board_freq = {}
+	for tile_row in Globals.tiles:
+		for tile in tile_row:
+			if tile:
+				var letter = tile.letter
+				if board_freq.has(letter):
+					board_freq[letter] = board_freq[letter] + 1
+				else:
+					board_freq[letter] = 1
+	return board_freq
