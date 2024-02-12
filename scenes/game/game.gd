@@ -127,7 +127,7 @@ func _has_won():
 	else:
 		UserData.difficulty_unlocks[Globals.character.display_name] = 1
 		$WinModal.set_unlock(Difficulties.difficulty_progression[1])
-	UserData.save_data()
+	Store.save_game()
 	$WinModal.show()
 
 func _game_over():

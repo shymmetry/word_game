@@ -60,7 +60,7 @@ func _next() -> void:
 
 func _done() -> void:
 	UserData.seen_tutorial = true
-	UserData.save_data()
+	Store.save_game()
 	self.hide()
 	Globals.paused = false
 
