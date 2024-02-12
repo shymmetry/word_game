@@ -17,14 +17,14 @@ var jester = Character.new(
 	10,
 	[Items.poop_jokes, Items.poop_jokes],
 	"You are a joke creating assistant",
-	"Write a joke under 40 words that contains all of the words: %s",
+	"Write a joke under 40 words that contains most of the words: %s",
 )
 
 var samurai = Character.new(
 	"Samurai",
 	"Starts with 1 Meditate\n60 Health and 10 Energy",
 	60,
-	10,
+	12,
 	[Items.max_energy],
 	"You are a haiku creating assistant",
 	"Write a haiku that contains some of the words: %s",

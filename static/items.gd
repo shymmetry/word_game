@@ -93,7 +93,7 @@ var poop_jokes = Item.new(
 	"Poop Jokes",
 	"2x pay on all turd related words",
 	45,
-	2,
+	0,
 	Callable(),
 )
 

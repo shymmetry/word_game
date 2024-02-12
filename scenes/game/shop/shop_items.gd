@@ -12,11 +12,10 @@ func _ready():
 
 func _sort_items(a: Item, b: Item):
 	if typeof(a) == typeof(b):
-		return a.cost < b.cost
+		return a.base_cost < b.base_cost
 	return false
 
 func _init_shop():
-	_clear_shop()
 	items = ItemUtil.get_random_items(DISPLAYED_ITEMS, false)
 	items.sort_custom(_sort_items)
 	for item in items:
@@ -40,10 +39,10 @@ func _refresh_shop():
 		Sounds.error()
 
 func _purchase_item(purchase_item: Item):
-	if Globals.score >= purchase_item.cost:
+	if Globals.score >= ItemUtil.get_item_price(purchase_item.base_cost):
 		for child in self.get_children():
 			if child.item == purchase_item:
-				Globals.score -= ItemUtil.get_item_price(purchase_item.cost)
+				Globals.score -= ItemUtil.get_item_price(purchase_item.base_cost)
 				if purchase_item.effect:
 					purchase_item.effect.call()
 				#Sounds.cha_ching()

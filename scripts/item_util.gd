@@ -22,6 +22,8 @@ func get_random_items(num: int, duplicates: bool) -> Array[Item]:
 		if !Globals.items.has(item) or item.max_owned == -1 or Globals.items[item] < item.max_owned:
 			items_left[item_name] = item
 	for i in range(0, num):
+		if items_left.size() == 0: break
+		
 		var rand = randi() % items_left.keys().size()
 		var rand_key = items_left.keys()[rand]
 		selected_items.append(items_left.get(rand_key))
