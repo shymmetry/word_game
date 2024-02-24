@@ -16,6 +16,7 @@ func _sort_items(a: Item, b: Item):
 	return false
 
 func _init_shop():
+	_clear_shop()
 	items = ItemUtil.get_random_items(DISPLAYED_ITEMS, false)
 	items.sort_custom(_sort_items)
 	for item in items:

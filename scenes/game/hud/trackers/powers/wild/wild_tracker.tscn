@@ -7,6 +7,9 @@
 [node name="WildTracker" instance=ExtResource("1_vsb0g")]
 script = ExtResource("2_xwiqh")
 
+[node name="Cost" parent="Margin/Box" index="0"]
+text = "?"
+
 [node name="IconRect" parent="Margin/Box" index="1"]
 texture = ExtResource("2_anow6")
 

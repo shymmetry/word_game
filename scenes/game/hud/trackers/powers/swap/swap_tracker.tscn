@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdmqc5ye0ato"]
+[gd_scene load_steps=3 format=3 uid="uid://bdmqc5ye0ato"]
 
 [ext_resource type="PackedScene" uid="uid://budxfy50aek6x" path="res://scenes/game/hud/trackers/powers/power_tracker.tscn" id="1_ye8y1"]
+[ext_resource type="Script" path="res://scenes/game/hud/trackers/powers/swap/swap_tracker.gd" id="2_ig5dx"]
 
 [node name="SwapTracker" instance=ExtResource("1_ye8y1")]
+script = ExtResource("2_ig5dx")
 
 [node name="Cost" parent="Margin/Box" index="0"]
-text = "2"
+text = "?"

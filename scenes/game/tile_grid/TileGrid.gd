@@ -22,8 +22,7 @@ func _unhandled_input(event):
 		# A tile was selected already for swapping
 		if Globals.selected_tile:
 			# Only handle if the tile to swap to was clicked and adjacent
-			if end_tile and end_tile == clicked_tile \
-					and _is_adjacent(Globals.selected_tile, end_tile):
+			if end_tile and end_tile == clicked_tile:
 				var swapped = PowerUtil.swap(Globals.selected_tile, end_tile)
 				if swapped: Sounds.swap()
 				else: 

@@ -8,8 +8,8 @@ func _init():
 		Levels.set_character(Characters.jester)
 		Levels.set_difficulty(Difficulties.dif1)
 		Levels.set_current_round(1)
-		for item in ItemUtil.get_all_items():
-			Globals.items[item] = 3
+		#for item in ItemUtil.get_all_items():
+		#	Globals.items[item] = 3
 	else:
 		Globals.items = {}
 	

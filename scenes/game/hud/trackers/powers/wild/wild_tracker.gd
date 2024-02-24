@@ -3,6 +3,9 @@ extends Panel
 var pressed_style = preload("res://styles/trackers/power_tracker_pressed.tres")
 var tracker_style = preload("res://styles/trackers/power_tracker.tres")
 
+func _ready():
+	$Margin/Box/Cost.text = str(Powers.wild.energy_cost)
+
 func _process(_delta):
 	var stylebox = get_theme_stylebox("panel")
 	var new_stylebox = pressed_style if Globals.wild_selected else tracker_style

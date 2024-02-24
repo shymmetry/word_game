@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func set_unlock(difficulty: Difficulty):
-	$Background/VBox/Details/Margin/Label.text = "Difficulty %s unlocked for character %s" % [difficulty.display_name, Globals.character.display_name]
+	$Background/VBox/Details/Margin/Label.text = "%s unlocked for %s" % [difficulty.display_name, Globals.character.display_name]
 
 func clear_unlock():
 	$Background/VBox/Details/Margin/Label.text = ""

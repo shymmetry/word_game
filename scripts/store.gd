@@ -23,6 +23,5 @@ func load_game():
 		
 		# Get the data from the JSON object
 		var node_data = json.get_data()
-		print(node_data)
 		UserData.load_data(node_data)
 		

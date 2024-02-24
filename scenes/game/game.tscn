@@ -144,11 +144,11 @@ layout_mode = 2
 [node name="LifeTracker" parent="Page/HUD/HBoxContainer/Trackers" instance=ExtResource("7_p5cjy")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Page/HUD/HBoxContainer"]
+[node name="FoundWords" type="VBoxContainer" parent="Page/HUD/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WordMargin" type="MarginContainer" parent="Page/HUD/HBoxContainer/VBoxContainer"]
+[node name="WordMargin" type="MarginContainer" parent="Page/HUD/HBoxContainer/FoundWords"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -156,7 +156,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="FoundWords" type="GridContainer" parent="Page/HUD/HBoxContainer/VBoxContainer/WordMargin"]
+[node name="FoundWords" type="GridContainer" parent="Page/HUD/HBoxContainer/FoundWords/WordMargin"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 30
@@ -164,23 +164,23 @@ theme_override_constants/v_separation = 10
 columns = 2
 script = ExtResource("6_njilg")
 
-[node name="Notification" parent="Page/HUD/HBoxContainer/VBoxContainer" instance=ExtResource("10_xxh0w")]
+[node name="Notification" parent="Page/HUD/HBoxContainer/FoundWords" instance=ExtResource("10_xxh0w")]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Page/HUD/HBoxContainer"]
+[node name="PowerMargin" type="MarginContainer" parent="Page/HUD/HBoxContainer"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Page/HUD/HBoxContainer/MarginContainer"]
+[node name="PowerContainer" type="HBoxContainer" parent="Page/HUD/HBoxContainer/PowerMargin"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Page/HUD/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Energy" type="VBoxContainer" parent="Page/HUD/HBoxContainer/PowerMargin/PowerContainer"]
 layout_mode = 2
 
-[node name="EnergyBar" type="ProgressBar" parent="Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="EnergyBar" type="ProgressBar" parent="Page/HUD/HBoxContainer/PowerMargin/PowerContainer/Energy"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -191,11 +191,11 @@ fill_mode = 3
 show_percentage = false
 script = ExtResource("9_ycsvp")
 
-[node name="Energy" type="Control" parent="Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Energy" type="Control" parent="Page/HUD/HBoxContainer/PowerMargin/PowerContainer/Energy"]
 custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
 
-[node name="EnergyLabel" type="Label" parent="Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Energy"]
+[node name="EnergyLabel" type="Label" parent="Page/HUD/HBoxContainer/PowerMargin/PowerContainer/Energy/Energy"]
 layout_mode = 2
 offset_left = -22.0
 offset_right = 38.0
@@ -206,20 +206,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("10_nomft")
 
-[node name="Abilities" type="VBoxContainer" parent="Page/HUD/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Powers" type="VBoxContainer" parent="Page/HUD/HBoxContainer/PowerMargin/PowerContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 4
 
-[node name="SwapTracker" parent="Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/Abilities" instance=ExtResource("7_xphf4")]
+[node name="SwapTracker" parent="Page/HUD/HBoxContainer/PowerMargin/PowerContainer/Powers" instance=ExtResource("7_xphf4")]
 custom_minimum_size = Vector2(72, 36)
 layout_mode = 2
 
-[node name="HintTracker" parent="Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/Abilities" instance=ExtResource("11_r30ax")]
+[node name="HintTracker" parent="Page/HUD/HBoxContainer/PowerMargin/PowerContainer/Powers" instance=ExtResource("11_r30ax")]
 custom_minimum_size = Vector2(72, 36)
 layout_mode = 2
 
-[node name="WildTracker" parent="Page/HUD/HBoxContainer/MarginContainer/HBoxContainer/Abilities" instance=ExtResource("13_ky0i5")]
+[node name="WildTracker" parent="Page/HUD/HBoxContainer/PowerMargin/PowerContainer/Powers" instance=ExtResource("13_ky0i5")]
 custom_minimum_size = Vector2(72, 36)
 layout_mode = 2
 
