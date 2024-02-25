@@ -28,6 +28,7 @@ func _score_word(word_tiles: WordTiles):
 	var item_mult = ItemUtil.get_word_mult(word_tiles.word)
 	
 	var score_up = letter_score * length_mult * tile_mult * item_mult
+	Globals.score += score_up
 
 	# Handle matched words
 	if _is_select_win_type_valid(word_tiles.tiles):

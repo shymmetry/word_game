@@ -37,6 +37,5 @@ func _score_words() -> void:
 	$Results/Total.text = "PAYMENT"
 	$Results/TotalScore.text = "$%d" % total_score
 	Sounds.cash_in()
-	Globals.score += total_score
 	
 	$"../../Continue/Button".show()
