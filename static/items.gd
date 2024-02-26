@@ -85,7 +85,7 @@ var max_energy = Item.new(
 	"Meditate",
 	"Increase max energy by 2",
 	120,
-	5,
+	3,
 	func(): Globals.max_energy += 2,
 )
 
@@ -110,5 +110,61 @@ var coupon_book = Item.new(
 	"Everything at the shop costs 10% less",
 	50,
 	3,
+	Callable(),
+)
+
+var swap_cost_reduc = Item.new(
+	"Master Swapper",
+	"Swap power costs 1 less energy",
+	150,
+	1,
+	Callable(),
+)
+
+var hint_cost_reduc = Item.new(
+	"Master Hinter",
+	"Hint power cost 1 less energy",
+	125,
+	1,
+	Callable(),
+)
+
+var wild_cost_reduc = Item.new(
+	"Master Wildcard",
+	"Wild power cost 1 less energy",
+	110,
+	1,
+	Callable(),
+)
+
+var extra_word = Item.new(
+	"Longer Literature",
+	"All rounds have 1 more word to complete",
+	160,
+	1,
+	Callable(),
+)
+
+var vowel_score = Item.new(
+	"Vocalic Visionary",
+	"AEIOU score 1 more",
+	50,
+	2,
+	Callable(),
+)
+
+var wild_score = Item.new(
+	"Random Acts of Kindness",
+	"Wildcard tiles score 2 more",
+	40,
+	3,
+	Callable(),
+)
+
+var all_tile_score = Item.new(
+	"Pay Raise",
+	"All letters score 1 more",
+	140,
+	2,
 	Callable(),
 )

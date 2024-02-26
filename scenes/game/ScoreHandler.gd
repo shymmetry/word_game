@@ -7,7 +7,7 @@ func _score_word(word_tiles: WordTiles):
 	# Update score
 	var letter_score = 0
 	for tile in word_tiles.tiles:
-		letter_score += Globals.round_data.letter_scores.get(tile.letter)
+		letter_score += LetterUtil.get_letter_score(tile.letter)
 	
 	var length_mult = Globals.round_data.word_length_score_multiplier.get(word_tiles.word.length())
 	if length_mult == null:

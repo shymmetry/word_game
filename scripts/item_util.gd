@@ -77,3 +77,30 @@ func get_item_price(base_price: int) -> int:
 	var num_item = Globals.items[Items.coupon_book] if Globals.items.has(Items.coupon_book) else 0
 	
 	return floor(base_price * (1.0 - num_item * 0.10 + percent_increase))
+
+func get_power_reduc(power: Power) -> int:
+	match power:
+		Powers.swap:
+			return 0 if !Globals.items.has(Items.swap_cost_reduc) else Globals.items[Items.swap_cost_reduc]
+		Powers.hint:
+			return 0 if !Globals.items.has(Items.hint_cost_reduc) else Globals.items[Items.hint_cost_reduc]
+		Powers.wild:
+			return 0 if !Globals.items.has(Items.wild_cost_reduc) else Globals.items[Items.wild_cost_reduc]
+	return 0
+
+func get_extra_words() -> int:
+	if Globals.items.has(Items.extra_word):
+		return Globals.items[Items.extra_word]
+	return 0
+
+func get_extra_letter_score(letter: String) -> int:
+	var extra_score = 0
+	
+	if letter.to_lower() in ['a', 'e', 'i', 'o', 'u'] and Globals.items.has(Items.vowel_score):
+		extra_score += Globals.items[Items.vowel_score]
+	if letter == '?' and Globals.items.has(Items.wild_score):
+		extra_score += Globals.items[Items.wild_score] * 2
+	if Globals.items.has(Items.all_tile_score):
+		extra_score += Globals.items[Items.all_tile_score]
+	
+	return extra_score

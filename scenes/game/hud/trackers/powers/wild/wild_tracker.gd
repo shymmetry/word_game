@@ -4,7 +4,7 @@ var pressed_style = preload("res://styles/trackers/power_tracker_pressed.tres")
 var tracker_style = preload("res://styles/trackers/power_tracker.tres")
 
 func _ready():
-	$Margin/Box/Cost.text = str(Powers.wild.energy_cost)
+	$Margin/Box/Cost.text = str(PowerUtil.energy_cost(Powers.wild))
 
 func _process(_delta):
 	var stylebox = get_theme_stylebox("panel")

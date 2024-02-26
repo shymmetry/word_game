@@ -1,7 +1,7 @@
 extends Panel
 
 func _ready():
-	$Margin/Box/Cost.text = str(Powers.hint.energy_cost)
+	$Margin/Box/Cost.text = str(PowerUtil.energy_cost(Powers.hint))
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton \

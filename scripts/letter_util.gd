@@ -3,6 +3,9 @@ extends Node
 var _letter_picker_freq_total = 0
 var _letter_freq = {}
 
+func get_letter_score(letter: String) -> int:
+	return Globals.round_data.letter_scores.get(letter) + ItemUtil.get_extra_letter_score(letter)
+
 func reset_letter_freq():
 	var letter_freq = Globals.round_data.letter_freq
 	

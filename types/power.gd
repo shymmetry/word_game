@@ -2,8 +2,8 @@ extends Node
 class_name Power
 
 var display_name: String
-var energy_cost: int
+var base_energy_cost: int
 
-func _init(_display_name: String, _energy_cost: int):
+func _init(_display_name: String, _base_energy_cost: int):
 	display_name = _display_name
-	energy_cost = _energy_cost
+	base_energy_cost = _base_energy_cost

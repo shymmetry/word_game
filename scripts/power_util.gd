@@ -1,20 +1,23 @@
 extends Node
 
+func energy_cost(power: Power) -> int:
+	var power_reduc = ItemUtil.get_power_reduc(power)
+	return power.base_energy_cost - power_reduc
+
 func wild(tile: Tile) -> bool:
-	if Globals.energy < Powers.wild.energy_cost:
+	if Globals.energy < energy_cost(Powers.wild):
 		return false
+	Globals.energy -= energy_cost(Powers.wild)
 	
-	tile.letter = "?"
-	tile.score = ""
+	tile.set_letter("?")
 	Globals.wild_selected = false
 	Globals.selected_tile = null
-	Globals.energy -= Powers.wild.energy_cost
 	return true
 
 func swap(tile1: Tile, tile2: Tile) -> bool:
-	if Globals.energy < Powers.swap.energy_cost:
+	if Globals.energy < energy_cost(Powers.swap):
 		return false
-	Globals.energy -= Powers.swap.energy_cost
+	Globals.energy -= energy_cost(Powers.swap)
 	
 	var tile1_col = tile1.col; var tile1_row = tile1.row
 	var tile1_position = tile1.position
@@ -32,7 +35,7 @@ func swap(tile1: Tile, tile2: Tile) -> bool:
 	return true
 
 func hint(min_size: int, max_size: int) -> bool:
-	if Globals.energy < Powers.hint.energy_cost or Globals.hint_tiles.size() > 0:
+	if Globals.energy < energy_cost(Powers.hint) or Globals.hint_tiles.size() > 0:
 		return false
 	
 	var hint_words = _find_all_words(min_size, max_size)
@@ -54,8 +57,8 @@ func hint(min_size: int, max_size: int) -> bool:
 			break
 	
 	if found_hint:
+		Globals.energy -= energy_cost(Powers.hint)
 		Globals.hint_tiles = found_hint.tiles
-		Globals.energy -= Powers.hint.energy_cost
 		Signals.emit_signal("NotifyPlayer", "Hint: %s" % found_hint.word)
 		return true
 	else:

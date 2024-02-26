@@ -8,8 +8,8 @@ func _init():
 		Levels.set_character(Characters.jester)
 		Levels.set_difficulty(Difficulties.dif1)
 		Levels.set_current_round(1)
-		#for item in ItemUtil.get_all_items():
-		#	Globals.items[item] = 3
+		for item in ItemUtil.get_all_items():
+			Globals.items[item] = 1
 	else:
 		Globals.items = {}
 	
@@ -19,7 +19,6 @@ func _init():
 	Globals.score = 0
 	Globals.life = floor(Globals.character.starting_life * DifficultyUtil.health_percent())
 	Globals.max_energy = floor(Globals.character.starting_energy * DifficultyUtil.energy_percent())
-	Globals.shop_refresh_cost = Globals.round_data.shop_refresh_cost
 	for item in Globals.character.starting_items:
 		if Globals.items.has(item): Globals.items[item] = Globals.items[item] + 1
 		else: Globals.items[item] = 1
@@ -29,6 +28,7 @@ func _init():
 func _init_round():
 	Globals.energy = Globals.max_energy
 	Globals.matched_words = []
+	Globals.shop_refresh_cost = Globals.round_data.shop_refresh_cost
 	LetterUtil.reset_letter_freq()
 
 func _ready():

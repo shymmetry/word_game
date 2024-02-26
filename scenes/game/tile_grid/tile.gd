@@ -61,7 +61,7 @@ func _process(_delta):
 
 func set_letter(new_letter: String):
 	self.letter = new_letter
-	var new_score = Globals.round_data.letter_scores.get(new_letter)
+	var new_score = LetterUtil.get_letter_score(new_letter)
 	self.score = str(new_score) if new_score > 0 else ""
 
 func explode():
