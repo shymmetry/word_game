@@ -1,16 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjn0ohfkaqqbp"]
+[gd_scene load_steps=10 format=3 uid="uid://cjn0ohfkaqqbp"]
 
 [ext_resource type="Script" path="res://scenes/game/tile_grid/tile.gd" id="2_1hfe7"]
 [ext_resource type="StyleBox" uid="uid://bvpdnl601inlb" path="res://styles/tile/underlay/tile_normal_underlay.tres" id="2_7j7c2"]
 [ext_resource type="StyleBox" uid="uid://b5k3ga3wpywrm" path="res://styles/tile/base/tile_normal.tres" id="3_h3nwy"]
-[ext_resource type="Texture2D" uid="uid://c84hpv48vqbxs" path="res://icons/star_black.png" id="4_aosef"]
+[ext_resource type="Texture2D" uid="uid://bemplroorx80w" path="res://icons/outline_star_black_24dp.png" id="4_jang4"]
 [ext_resource type="StyleBox" uid="uid://bwvtfmanm0ilu" path="res://styles/tile/overlay/tile_dragged_overlay.tres" id="5_xymu6"]
 
 [sub_resource type="FontVariation" id="FontVariation_ypwqj"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_43hrm"]
-font_size = 14
-font_color = Color(0.537255, 0.133333, 0.00392157, 1)
 
 [sub_resource type="Animation" id="Animation_at1xv"]
 resource_name = "explode"
@@ -119,7 +115,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(30, 30)
-theme_override_colors/font_color = Color(0.537255, 0.133333, 0.00392157, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_ypwqj")
 theme_override_font_sizes/font_size = 32
 text = "?"
@@ -128,10 +124,13 @@ vertical_alignment = 1
 
 [node name="Score" type="Label" parent="Body"]
 layout_mode = 0
-offset_right = 15.0
-offset_bottom = 20.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 17.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
 text = "?"
-label_settings = SubResource("LabelSettings_43hrm")
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Body"]
@@ -157,7 +156,7 @@ visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
-texture = ExtResource("4_aosef")
+texture = ExtResource("4_jang4")
 expand_mode = 1
 stretch_mode = 4
 
@@ -166,7 +165,7 @@ visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
-texture = ExtResource("4_aosef")
+texture = ExtResource("4_jang4")
 expand_mode = 1
 stretch_mode = 4
 
@@ -175,7 +174,7 @@ visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
-texture = ExtResource("4_aosef")
+texture = ExtResource("4_jang4")
 expand_mode = 1
 stretch_mode = 4
 
@@ -184,7 +183,7 @@ visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
-texture = ExtResource("4_aosef")
+texture = ExtResource("4_jang4")
 expand_mode = 1
 stretch_mode = 4
 
@@ -193,7 +192,7 @@ visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 6
-texture = ExtResource("4_aosef")
+texture = ExtResource("4_jang4")
 expand_mode = 1
 stretch_mode = 4
 

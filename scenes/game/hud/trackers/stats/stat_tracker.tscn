@@ -4,7 +4,7 @@
 [ext_resource type="SystemFont" uid="uid://b8ajidl1phcno" path="res://styles/fonts/bold_font.tres" id="2_6n31a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7n22"]
-bg_color = Color(0.776471, 0.596078, 0.454902, 1)
+bg_color = Color(0.501961, 0.501961, 0.501961, 1)
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1

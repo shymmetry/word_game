@@ -66,4 +66,4 @@ drag_word={
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.737255, 0.415686, 0.235294, 1)
+environment/defaults/default_clear_color=Color(0, 0.137255, 0.4, 1)
